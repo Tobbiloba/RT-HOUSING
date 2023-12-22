@@ -1,3 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2&family=Rubik+Lines&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+
+.exo {
+    font-family: 'Exo 2', sans-serif;
+  }
+  
+  /* Apply 'Rubik Lines' font to paragraphs */
+  .rubik {
+    font-family: 'Rubik Lines', sans-serif;
+  }
+
+
+  /* Slide-in Animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Apply the Animation to an Element */
+.slide-in {
+  animation: slideIn 0.5s ease-in-out;
+  width: 70vw;
+  height: 90vh;
+}
+
+.slide-out {
+  animation: slideOut 0.5s ease-in-out;
+  opacity: 1; /* Initially set opacity to 1 */
+}
