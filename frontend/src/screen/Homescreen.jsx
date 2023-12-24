@@ -8,7 +8,7 @@ import MenuBar from '../components/MenuBar';
 const Homescreen = () => {
   return (
     <div className=''>
-lol
+      Home
     </div>
   );
 }

@@ -32,7 +32,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="bg-white text-[14px] exo z-10 rounded-md overflow-hidden w-[27.5rem] h-[35rem]">
+          <div className="bg-white text-[14px] exo z-10 rounded-md overflow-hidden w-[90vw] md:w-[27.5rem] h-[35rem]">
             <div  className="flex flex-row rounded-md justify-between py-4 px-8 bg-gray-100 ">
                 {/* <div> */}
                     <p className="text-yellow-900 font-[600] text-[15px]">Login</p>

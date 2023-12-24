@@ -56,10 +56,11 @@ const MenuBar = () => {
     <div
       className={`flex flex-row relative md:border mt-3 exo px-3 md:px-[1rem] lg:px-[2rem] justify-between items-center `}
     >
-      <div className=" lg:hidden  bg-yellow-900 h-[3.5rem] pt-2  px-3 flex items-center rounded-xl cursor-pointer">
-        <motion.nav initial={false} animate={showMenu ? "open" : "closed"}>
+      <div className=" lg:hidden  bg-yellow-900 h-[3.5rem]  px-3 flex items-center rounded-xl cursor-pointer" onClick={() => setShowMenu(true)}>
+        {/* <motion.nav initial={false} animate={showMenu ? "open" : "closed"}>
           <MenuToggle toggle={() => setShowMenu()} />
-        </motion.nav>
+        </motion.nav> */}
+        <img src="/menu.png" className="w-7"/>
       </div>
       <div>
         <Logo />
