@@ -28,7 +28,7 @@ export const AnimatedTabs = () => {
           {activeTab === tab.id && (
             <motion.span
               layoutId="bubble"
-              className="absolute inset-0 z-10 bg-black mix-blend-difference"
+              className="absolute inset-0 z-10 bg-yellow-900 mix-blend-difference"
               style={{ borderRadius: 9999 }}
               transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
             />

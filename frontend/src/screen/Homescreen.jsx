@@ -7,11 +7,8 @@ import MenuBar from '../components/MenuBar';
 
 const Homescreen = () => {
   return (
-    <div className='h-[100vh] overflow-hidden'>
-      <TopBar />
-      <MenuBar />
-      {/* <Logo size='60'/> */}
-      {/* <NavTest /> */}
+    <div className=''>
+lol
     </div>
   );
 }
