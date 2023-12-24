@@ -5,7 +5,7 @@ import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 
 const Layout = ({children}) => {
-    const [showLogin, setShowLogin] = useState(true)
+    const [showLogin, setShowLogin] = useState(false)
     const [showRegister, setShowRegister] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
   return (
