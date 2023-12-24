@@ -1,6 +1,6 @@
 import React from "react";
 
-const TopBar = () => {
+const TopBar = ({setShowLogin, setShowRegister}) => {
   return (
     <div className="flex flex-wrap exo flex-row  justify-between md:items-center lg:flex-nowrap px-3 md:px-[1rem] pb-2 md:py-4">
     <div className="flex w-[35rem] flex-row items-center gap-x-5 md:gap-6 flex-wrap md:flex-nowrap">
@@ -19,8 +19,8 @@ const TopBar = () => {
       </div>
       <div className="flex w-[100%] flex-row flex-wrap md:flex-nowrap md:items-center  gap-x-8 gap-y-4 justify-end  md:gap-6">
         <div className="flex flex-row gap-7 md:my-0">
-          <h1 className="text-yellow-500 font-[600]">Login</h1>
-          <h1 className="text-yellow-900 font-[600]">Register</h1>
+          <h1 className="text-yellow-500 font-[600] cursor-pointer" onClick={() => setShowLogin(true)}>Login</h1>
+          <h1 className="text-yellow-900 font-[600] cursor-pointer" onClick={() => setShowRegister(true)}>Register</h1>
         </div>
 
         <div className="relative flex flex-row overflow-hidden w-[22rem] h-[3rem] border">

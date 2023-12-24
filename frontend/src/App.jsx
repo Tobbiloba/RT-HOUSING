@@ -1,3 +1,4 @@
+import Layout from './components/Layout'
 import Homescreen from './screen/Homescreen'
 import {
   createBrowserRouter,
@@ -10,7 +11,7 @@ import {
 function App() {
   
   const routes = [
-    <Route path="/" element={<Homescreen />} />,
+    <Route path="/" element={<Layout><Homescreen /></Layout>} />,
   ]
 
   const router = createBrowserRouter(createRoutesFromElements(routes))
