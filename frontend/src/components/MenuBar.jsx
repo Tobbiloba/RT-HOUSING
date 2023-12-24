@@ -54,9 +54,9 @@ const MenuBar = () => {
   }, [showMenu]);
   return (
     <div
-      className={`flex flex-row relative md:border mt-3 exo px-3 md:px-[1rem] lg:px-[2rem] justify-between items-center `}
+      className={`flex flex-row relative md:border mt-3 exo  md:px-[1rem] lg:px-[2rem] justify-between items-center `}
     >
-      <div className=" lg:hidden  bg-yellow-900 h-[3.5rem]  px-3 flex items-center rounded-xl cursor-pointer" onClick={() => setShowMenu(true)}>
+      <div className=" lg:hidden  bg-yellow-500 h-[3.5rem]  px-3 flex items-center rounded-none md:rounded-xl cursor-pointer" onClick={() => setShowMenu(true)}>
         {/* <motion.nav initial={false} animate={showMenu ? "open" : "closed"}>
           <MenuToggle toggle={() => setShowMenu()} />
         </motion.nav> */}
@@ -69,13 +69,13 @@ const MenuBar = () => {
       <div className="lg:flex hidden">
         <AnimatedTabs />
       </div>
-      <div className="flex flex-row gap-6 text-white bg-yellow-900 h-[3.5rem] md:h-[5rem] items-center py-2 px-2 rounded-xl md:rounded-none md:px-5">
+      <div className="flex flex-row gap-6 text-white bg-yellow-900 h-[3.5rem] md:h-[4rem] items-center py-2 px-2  md:rounded-none md:px-5">
         <div className="hidden lg:flex flex-col">
           <p className="">Initial Price:</p>
           <h1 className="text-[25px]">$668,456</h1>
         </div>
-        <div className="lg:w-14 lg:h-14 w-11 h-11 flex items-center justify-center border-4 border-slate-200 rounded-full bg-white">
-          <img src="/right.png" alt="arrow icon" className="lg:w-10 w-7" />
+        <div className="lg:w-12 lg:h-12 w-11 h-11 flex items-center justify-center border-4 border-slate-200 rounded-full bg-white">
+          <img src="/right.png" alt="arrow icon" className="lg:w-8 w-7" />
         </div>
       </div>
 
