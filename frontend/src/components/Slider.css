@@ -1,0 +1,22 @@
+.slider-container {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+  }
+  
+  .slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slider-item {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    /* Add your styling for each slide */
+  }
+  
+  /* Add this class for the sliding effect */
+  .sliding {
+    transform: translateX(-100%);
+  }

@@ -49,3 +49,14 @@
   animation: slideOut 0.5s ease-in-out;
   opacity: 1; /* Initially set opacity to 1 */
 }
+
+
+.width-out-in {
+  height: 140px;
+  transition: height 350ms ease-in-out;
+}
+
+.width-in {
+  height: 210px;
+  transition: height 350ms ease-out;
+}

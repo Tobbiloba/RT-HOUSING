@@ -9,7 +9,7 @@ const Layout = ({children}) => {
     const [showRegister, setShowRegister] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
   return (
-    <div className='h-[100vh] overflow-hidden'>
+    <div className='w-[100%] overflow-hidden'>
       <TopBar setShowLogin={setShowLogin} setShowRegister={setShowRegister} showRegister={showRegister}/>
       <MenuBar />
       {children}

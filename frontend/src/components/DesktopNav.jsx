@@ -18,7 +18,7 @@ export const AnimatedTabs = () => {
         <button
           key={tab.id}
           onClick={() => setActiveTab(tab.id)}
-          className={`${
+          className={`text-[15px] ${
             activeTab === tab.id ? "text-white" : "hover:text-black/60 text-black"
           } relative rounded-full px-3 py-1.5 font-medium  outline-sky-400 transition focus-visible:outline-2`}
           style={{
@@ -28,7 +28,7 @@ export const AnimatedTabs = () => {
           {activeTab === tab.id && (
             <motion.span
               layoutId="bubble"
-              className="absolute inset-0 z-10 bg-yellow-900 mix-blend-difference"
+              className="absolute inset-0 z-10 bg-yellow-900 mix-blend-soft-light"
               style={{ borderRadius: 9999 }}
               transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
             />
