@@ -38,7 +38,7 @@
   .dropdown-list li {
     padding: 8px;
     cursor: pointer;
-    &:hover {
+    /* &:hover {
       background-color: #f0f0f0;
-    }
+    } */
   }
