@@ -10,13 +10,15 @@ const Calendar = ({value, setValue}) => {
 
   return (
     <div className='z-[5s00] relative bg-white'>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DateCalendar', 'DateCalendar']}>
         <DemoItem >
-          <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
+          <DateCalendar value={value} 
+          onChange={(newValue) => setValue(newValue)} 
+          />
         </DemoItem>
       </DemoContainer>
-    </LocalizationProvider>
+    </LocalizationProvider> */}
     </div>
 
   );
