@@ -4,8 +4,8 @@ const FacilitiesCard = ({item}) => {
   return (
     <div className='flex flex-row items-center gap-4'>
         <div className='border-dashed border-4 p-2 rounded-full'>
-            <div className='bg-yellow-100 w-20 flex items-center justify-center rounded-full h-20  border-yellow-10'>
-        <img src={item.img} className='w-10 h-10'/>
+            <div className='bg-yellow-100 w-16 flex items-center justify-center rounded-full h-16  border-yellow-10'>
+        <img src={item.img} className='w-9 h-9'/>
       </div>
         </div>
       

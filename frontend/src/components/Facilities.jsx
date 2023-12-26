@@ -54,7 +54,7 @@ const Facilities = () => {
   return (
     <div className='flex exo flex-row my-24 gap-12 px-[2rem] sm:px-[1rem] items-center justify-center'>
         <div className='container flex-col flex lg:flex-row gap-12'>
-        <div className='relative lg:min-w-[20rem] bg-red-500 lg:w-[30%] lg:max-w-[25rem] md:w-[100%]'>
+        <div className='relative lg:min-w-[20rem] lg:w-[30%] lg:max-w-[25rem] md:w-[100%]'>
         <img src='/left-image.jpg' alt='wave' className='w-[100%] h-[100%]'/>
         <Wave />
       </div>
