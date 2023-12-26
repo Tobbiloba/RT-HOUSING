@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 
 const FloorPlans = () => {
-  const [currentTab, setCurrentTab] = useState(1);
+  const [currentTab, setCurrentTab] = useState({
+    id: 1,
+    floor: "BASEMENT",
+    ft: "2,537",
+    parking: "2",
+    half_bath: "3",
+    full_bath: "1",
+    bed_room: "3",
+    top: 1
+  });
   const [currentFloorPlac, setCurrentFloorPlan] = useState("");
 
   const floors = [
