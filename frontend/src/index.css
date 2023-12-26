@@ -82,3 +82,11 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555; /* Color of the scrollbar handle when hovered */
 }
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 30.6px solid #ca8a04; /* Adjust the color as needed */
+}
