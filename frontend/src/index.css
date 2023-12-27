@@ -90,3 +90,13 @@
   border-right: 20px solid transparent;
   border-bottom: 30.6px solid #ca8a04; /* Adjust the color as needed */
 }
+
+.overlay {
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  /* width: 100%;
+  height: 100%; */
+  background-color: rgba(0, 0, 0, 0.4); /* Adjust the last value (0.5) for opacity */
+  /* pointer-events: none; */
+}
