@@ -13,7 +13,7 @@ const CategoryCard = ({ item }) => {
         }}
       ></div> */}
 
-      <img src={item.img} className={`absolute top-0 left-0 w-[100%] h-auto  ${isHovered && 'rotate-1'}`}/>
+      <img src={item.img} className={`absolute top-0 left-0 w-[150%] h-auto  ${isHovered && 'rotate-1'}`}/>
       <div className={` bg-white relative h-[100%] z-10 overlay ${isHovered && 'scale-75'} h flex flex-col items-center text-white justify-center`}>
         <h1 className="text-xl">{item.name}</h1>
         <p>{item.buildings}</p>
