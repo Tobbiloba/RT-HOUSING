@@ -22,6 +22,7 @@ const Properties = () => {
       <Banner />
       <div className='hidden md:flex'>
         <FilterOption />
+        
       </div>
       <div>
         <MobileFilterOption state={showProperty} setState={setShowProperty}/>
