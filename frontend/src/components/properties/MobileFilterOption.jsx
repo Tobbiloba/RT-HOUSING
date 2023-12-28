@@ -3,9 +3,9 @@
 
 import React, { useState } from 'react';
 // import Button from '@material-ui/core/Button';
-import Drawer from '@material-ui/core/Drawer';
+// import Drawer from '@material-ui/core/Drawer';
 import FilterOption from './FilterOptions';
-
+import { Drawer } from '@mui/material';
 export default function MobileFilterOption({state, setState}) {
 //   const [state, setState] = useState({
 //     right: false,
