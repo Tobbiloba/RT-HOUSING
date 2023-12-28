@@ -74,7 +74,7 @@ const MenuBar = () => {
 
       {showMenu && (
         <div
-          className="w-[100%] flex flex-col h-[12.5rem] bg-white absolute -bottom-[13.5rem] z-[100]"
+          className="w-[100%] flex flex-col h-[12.5rem] bg-white absolute -bottom-[12.4rem] z-[100]"
           onMouseEnter={() => setShowMenu(true)}
           onMouseLeave={() => setShowMenu(false)}
         >
