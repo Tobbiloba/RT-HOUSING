@@ -26,7 +26,7 @@ const Banner = () => {
 
         <div className='grid shadow-md two-tone-background p-[.5rem] rounded-md mt-8 grid-cols-1 bg- md:grid-cols-2 lg:grid-cols-4 text-[15px] text-gray-500'>
             <div className='h-[4rem] bg-white lg:rounded-tl-md md:rounded-bl-md'>
-                <Dropdown data={places} state={place} setState={setPlace} height='4'/>
+                <Dropdown data={places} state={place} setState={setPlace} height='h-[4rem] border lg:rounded-l-md md:rounded-tl-md rounded-t-md'/>
             </div>
             
             <h1 className='flex items-center border bg-white md:rounded-tr-md lg:rounded-none px-[1rem] h-[4rem] justify-between cursor-pointer'>In <img src='/down-arrow.png' className='w-5 h-5'/></h1>

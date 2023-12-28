@@ -1,51 +1,3 @@
-// import React, { useState } from 'react';
-// import './Dropdown.css'; // Import your CSS file for styling
-
-// const DropDown = () => {
-//   const [selectedOption, setSelectedOption] = useState('Option 1');
-//   const [isDropdownOpen, setDropdownOpen] = useState(false);
-
-//   const options = ['Option 1', 'Option 2', 'Option 3'];
-
-//   const handleOptionChange = (option) => {
-//     setSelectedOption(option);
-//     setDropdownOpen(false);
-//   };
-
-//   return (
-//     <div className="dropdown-container">
-//       <label htmlFor="dropdown">Select an option:</label>
-//       <div className="dropdown">
-//         <div
-//           className="dropdown-header"
-//           onClick={() => setDropdownOpen(!isDropdownOpen)}
-//         >
-//           {selectedOption}
-//         </div>
-//         {isDropdownOpen && (
-//           <ul className="dropdown-list">
-//             {options.map((option) => (
-//               <li
-//                 key={option}
-//                 onClick={() => handleOptionChange(option)}
-//               >
-//                 {option}
-//               </li>
-//             ))}
-//           </ul>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DropDown;
-
-
-
-
-
-
 import React, { useState } from 'react';
 import './Dropdown.css'; // Import your CSS file for styling
 
@@ -60,12 +12,14 @@ const Dropdown = ({state, setState, data, height}) => {
     setDropdownOpen(false);
   };
 
+  // console.log(state)
+
   return (
     <div className="dropdown-container exo  w-[100%]">
       {/* <label htmlFor="dropdown">Select an option:</label> */}
       <div className="dropdown w-[100%] h-[100%]">
         <div
-          className={`dropdown-header border h-[${height}rem] items-center  flex flex-row justify-between text-gray-500 text-[14px]`}
+          className={`items-center px-3 cursor-pointer ${height ? `${height}` : 'h-10'}  flex flex-row justify-between text-gray-500 text-[14px]`}
           onClick={() => setDropdownOpen(!isDropdownOpen)}
         >
           {state}
