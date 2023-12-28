@@ -26,18 +26,9 @@ const MenuBar = () => {
     { name: "Contact", link: "/" },
   ];
   return (
-    <div className="flex relative exo items-center justify-center md:px-[1rem] mt-4 ">
+    <div className="flex relative border border-white border-t-gray-100 pt-4 exo items-center justify-center pl-[1rem] md:px-[1rem] mt-4 ">
       <div className="container flex flex-row justify-between items-center relative">
         {/* <Logo /> */}
-        <div
-          className=" md:hidden  bg-yellow-500 h-[3.5rem]  px-3 flex items-center cursor-pointer"
-          onClick={() => setShowMenu(true)}
-        >
-          {/* <motion.nav initial={false} animate={showMenu ? "open" : "closed"}>
-          <MenuToggle toggle={() => setShowMenu()} />
-        </motion.nav> */}
-          <img src="/menu.png" className="w-7" />
-        </div>
 
         <h1 className="tilli text-xl flex text-[30px] flex-row pt-3 capitalized">
           Fe
@@ -61,11 +52,18 @@ const MenuBar = () => {
                 </div> */}
         </div>
 
-        <div className="flex md:hidden flex-row gap-6 text-white bg-yellow-900 h-[3.5rem] md:h-[4rem] items-center py-2 px-2  md:rounded-none md:px-5">
-        <div className="lg:w-12 lg:h-12 w-11 h-11 flex items-center justify-center border-4 border-slate-200 rounded-full bg-white">
-          <img src="/right.png" alt="arrow icon" className="lg:w-8 w-7" />
+        {/* <div className="flex md:hidden flex-row gap-6 text-white bg-yellow-900 h-[3.5rem] md:h-[4rem] items-center py-2 px-2  md:rounded-none md:px-5">
+          <div className="lg:w-12 lg:h-12 w-11 h-11 flex items-center justify-center border-4 border-slate-200 rounded-full bg-white">
+            <img src="/right.png" alt="arrow icon" className="lg:w-8 w-7" />
+          </div>
+        </div> */}
+
+<div
+          className=" md:hidden  bg-yellow-500 h-[3.5rem]  px-3 flex items-center cursor-pointer"
+          onClick={() => setShowMenu(true)}
+        >
+          <img src="/menu.png" className="w-7" />
         </div>
-      </div>
 
         {/* <div className=" w-11 flex md:hidden cursor-pointer items-center justify-center bg-yellow-900 h-11 rounded-md" onMouseEnter={() => setShowMenu(true)}>
                   <img src="/menu.png" className="w-6 "/>
@@ -74,12 +72,12 @@ const MenuBar = () => {
 
       {showMenu && (
         <div
-          className="w-[100%] flex flex-col h-[12.5rem] bg-white absolute -bottom-[12.4rem] z-[100]"
+          className="w-[100%] left-0  flex flex-col h-[12.5rem] bg-white absolute -bottom-[12.4rem] z-[100]"
           onMouseEnter={() => setShowMenu(true)}
           onMouseLeave={() => setShowMenu(false)}
         >
           {links.map((item, index) => (
-            <Link key={index} to={item.link} onClick={() => setShowMenu(false)}>
+            <Link key={index} to={item.link} >
               <div className="px-[5%] cursor-pointer py-3 border border-white border-t-gray-500">
                 {item.name}
               </div>

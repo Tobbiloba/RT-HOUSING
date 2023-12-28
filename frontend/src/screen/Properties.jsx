@@ -2,7 +2,7 @@ import React from 'react';
 
 const Properties = () => {
   return (
-    <div>
+    <div className='h-[100vh]'>
       prop
     </div>
   );
