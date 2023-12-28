@@ -1,13 +1,13 @@
-import Articles from "../components/Articles";
-import AvailableCard from "../components/AvailableCard";
-import Categories from "../components/Categories";
-// import Discover from "../components/Discover";
-import Estimate from "../components/Estimate";
-import Facilities from "../components/Facilities";
-import FeaturedProp from "../components/FeaturedProp";
-import FloorPlans from "../components/FloorPlans";
-import Footer from "../components/Footer";
-import HomePage from "../components/HomePage";
+import Articles from "../components/home/Articles";
+import AvailableCard from "../components/home/AvailableCard";
+import Categories from "../components/home/Categories";
+// import Discover from "../components/home/Discover";
+import Estimate from "../components/home/Estimate";
+import Facilities from "../components/home/Facilities";
+import FeaturedProp from "../components/home/FeaturedProp";
+import FloorPlans from "../components/home/FloorPlans";
+import Footer from "../components/home/Footer";
+import HomePage from "../components/home/HomePage";
 
  const Homescreen = () => {
 

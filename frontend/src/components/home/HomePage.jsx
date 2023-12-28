@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import Logo from './Logo';
+// import Logo from './Logo';
 import TopBar from './TopBar';
 import MenuBar from './MenuBar';
-import Swiper from './Swiper'
+// import Swiper from './Swiper'
 import Slider from './slider';
 import DropDown from './Dropdown';
 import Calendar from './Calendar';

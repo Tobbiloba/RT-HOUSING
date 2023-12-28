@@ -2,7 +2,8 @@ import React from "react";
 
 const TopBar = ({setShowLogin, setShowRegister}) => {
   return (
-    <div className="flex flex-wrap exo flex-row  justify-between md:items-center lg:flex-nowrap px-3 md:px-[1rem] lg:px-[2rem] pb-2 md:py-4">
+    <div className="flex items-center justify-center">
+      <div className="flex flex-wrap exo flex-row  justify-between md:items-center lg:flex-nowrap px-[1rem]pb-2 md:py-4 container">
     <div className="flex w-[35rem] flex-row items-center gap-x-5 md:gap-6 flex-wrap md:flex-nowrap">
         <p className="text-[15px] text-blue-70">
           Call Us:{" "}
@@ -37,6 +38,7 @@ const TopBar = ({setShowLogin, setShowRegister}) => {
             OR
           </p>
         </div>
+      </div>
       </div>
     </div>
   );

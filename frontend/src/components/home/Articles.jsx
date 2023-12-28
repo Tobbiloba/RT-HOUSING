@@ -45,7 +45,7 @@ const Articles = () => {
 
         <div className="grid grid-cols-1  md:grid-cols-2 gap-x-5 gap-y-12 text-start lg:grid-cols-3 mt-12">
         {data.map((item) => (
-          <div className="border max-w-[25rem] mx-auto md:xm-0 cursor-pointer rounded-md overflow-hidden hover:shadow-md">
+          <div key={item.id} className="border max-w-[25rem] mx-auto md:xm-0 cursor-pointer rounded-md overflow-hidden hover:shadow-md">
             <div className="relative w-[100%] h-[15rem] p-3">
               <img src={item.img} className="absolute top-0 left-0 w-[100%] h-[100%]"/>
               {

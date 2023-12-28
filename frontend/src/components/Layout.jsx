@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import TopBar from './TopBar';
-import MenuBar from './MenuBar';
+import TopBar from './home/TopBar';
+import MenuBar from './home/MenuBar';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 

@@ -79,7 +79,7 @@ const Footer = () => {
                 <div className="max-w-12 min-w-4  h-1 bg-yellow-900"></div>
             </div>
 
-            <div className="md:flex grid grid-cols-4 flex-row gap-4 mt-6">
+            <div className="md:flex grid grid-cols-5 flex-row gap-4 mt-6">
                {
                 images.map((item, index) => (
                     <ImageCard key={index} item={item}/>
@@ -97,7 +97,7 @@ const Footer = () => {
           <img src="/instagram.png" alt="instagram icon" className="w-6" />
         </div>
 
-        <h1 className="mt-8 mb-4 text-center text-xl">COPYRIGHT &copy; <span>RT HOUSING</span> || ALL RIGHTS RESERVED</h1>
+        <h1 className="mt-8 mb-4 text-center text-[18px]">COPYRIGHT &copy; <span>RT HOUSING</span> || ALL RIGHTS RESERVED</h1>
         </div>
       </div>
     </div>

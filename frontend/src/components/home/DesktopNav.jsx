@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 let tabs = [
-  { id: "HOME", label: "HOME" },
-  { id: "ABOUT", label: "ABOUT" },
-  { id: "PROPERTIES", label: "PROPERTIES" },
-  { id: "PAGES", label: "PAGES" },
-  { id: "CONTACT", label: "CONTACT" },
+  { id: "HOME", label: "HOME", link: '/' },
+  { id: "PROPERTIES", label: "PROPERTIES", link: '/properties' },
+  { id: "ABOUT", label: "ABOUT", link: '/about' },
+
+  // { id: "PAGES", label: "PAGES" },
+  { id: "CONTACT", label: "CONTACT", link: '/contact' },
 ];
 
 export const AnimatedTabs = () => {
@@ -15,8 +16,9 @@ export const AnimatedTabs = () => {
   return (
     <div className="flex-row gap-5 font-[500]">
       {tabs.map((tab) => (
-        <button
-          key={tab.id}
+        <Link to={tab.link}  key={tab.id}>
+                <button
+         
           onClick={() => setActiveTab(tab.id)}
           className={`text-[15px] ${
             activeTab === tab.id ? "text-white" : "hover:text-black/60 text-black"
@@ -35,6 +37,8 @@ export const AnimatedTabs = () => {
           )}
           {tab.label}
         </button>
+        </Link>
+
       ))}
     </div>
   );

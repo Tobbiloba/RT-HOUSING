@@ -79,9 +79,9 @@ const Dropdown = ({state, setState, data}) => {
         </div>
         {isDropdownOpen && (
           <ul className="dropdown-list">
-            {data.map((option) => (
+            {data.map((option, index) => (
               <li
-                key={option}
+                key={index}
                 onClick={() => handleOptionChange(option)}
               >
                 {option}
