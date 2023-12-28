@@ -49,7 +49,7 @@
 import React, { useState } from 'react';
 import './Dropdown.css'; // Import your CSS file for styling
 
-const Dropdown = ({state, setState, data}) => {
+const Dropdown = ({state, setState, data, height}) => {
   const [selectedOption, setSelectedOption] = useState('Select an option');
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -61,11 +61,11 @@ const Dropdown = ({state, setState, data}) => {
   };
 
   return (
-    <div className="dropdown-container exo w-[100%]">
+    <div className="dropdown-container exo  w-[100%]">
       {/* <label htmlFor="dropdown">Select an option:</label> */}
-      <div className="dropdown w-[100%]">
+      <div className="dropdown w-[100%] h-[100%]">
         <div
-          className="dropdown-header border flex flex-row justify-between text-gray-500 text-[14px]"
+          className={`dropdown-header border h-[${height}rem] items-center  flex flex-row justify-between text-gray-500 text-[14px]`}
           onClick={() => setDropdownOpen(!isDropdownOpen)}
         >
           {state}
@@ -74,7 +74,7 @@ const Dropdown = ({state, setState, data}) => {
             options != '' &&
           
         //   <span className="down-button">&#9660;</span>
-        <img src='/down-arrow.png' className='w-5'/>
+        <img src='/down-arrow.png' className='w-5 h-5'/>
 }
         </div>
         {isDropdownOpen && (

@@ -100,3 +100,8 @@
   background-color: rgba(0, 0, 0, 0.4); /* Adjust the last value (0.5) for opacity */
   /* pointer-events: none; */
 }
+
+.two-tone-background {
+  /* height: 200px; Adjust the height as needed */
+  background: linear-gradient(to bottom, #d1d5db 50%, white 50%);
+}
