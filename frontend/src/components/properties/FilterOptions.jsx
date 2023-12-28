@@ -6,7 +6,7 @@ import FilterOptions from "../home/FilterOptions";
 const FilterBox = ({ children, title }) => {
   const [showChildren, setShowChildren] = useState(false);
   return (
-    <div className="border p-[1rem]">
+    <div className="border p-[1rem] text-[13px]">
       <div
         className="flex flex-row justify-between cursor-pointer"
         onClick={() => setShowChildren(!showChildren)}
@@ -161,7 +161,7 @@ const handleSizeChange = (event, newValue) => {
             <div className="flex flex-col">
               {
                 room.map((item) => (
-                  <div key={item.type} onClick={() => setRoomType(item.type)} className="flex border flex-row justify-between mt-4 hover:border cursor-pointer border-white border-b-yellow-500 hover:shadow-sm py-1 items-center">
+                  <div key={item.type} onClick={() => setRoomType(item.type)} className="flex text-[13px] border flex-row justify-between mt-4 hover:border cursor-pointer border-white border-b-yellow-500 hover:shadow-sm py-1 items-center">
                   <div className="flex flex-row gap-3 ">
                     <img src={item.img} alt="suitcase" className="w-8 mr-8" />
                     <h1>Private Room</h1>

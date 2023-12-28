@@ -15,11 +15,11 @@ const Dropdown = ({state, setState, data, height}) => {
   // console.log(state)
 
   return (
-    <div className="dropdown-container exo  w-[100%]">
+    <div className="dropdown-container exo text-[13px] w-[100%]">
       {/* <label htmlFor="dropdown">Select an option:</label> */}
       <div className="dropdown w-[100%] h-[100%]">
         <div
-          className={`items-center px-3 cursor-pointer ${height ? `${height}` : 'h-10'}  flex flex-row justify-between text-gray-500 text-[14px]`}
+          className={`items-center px-3 cursor-pointer ${height ? `${height}` : 'h-10'}  flex flex-row justify-between text-gray-500 text-[13px]`}
           onClick={() => setDropdownOpen(!isDropdownOpen)}
         >
           {state}

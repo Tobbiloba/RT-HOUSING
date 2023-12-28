@@ -14,7 +14,7 @@ const FilterOptions = ({type, value, setValue}) => {
     }
   }, [value])
   return (
-    <div className={`md:flex md:flex-row border   ${type !== '' ? 'justify-between flex-col' : 'flex justify-start  items-start flex-row'} `}>
+    <div className={`md:flex md:flex-row border text-[13px]  ${type !== '' ? 'justify-between flex-col' : 'flex justify-start  items-start flex-row'} `}>
       {
         type !== '' &&
       
@@ -23,7 +23,7 @@ const FilterOptions = ({type, value, setValue}) => {
       }</h1>
     }
       
-      <div className={`${type !== '' ? 'md:w-4/12' : 'w-[100%]'} w-[100%] border justify-between flex flex-row`}>
+      <div className={`${type !== '' ? 'md:w-4/12' : 'w-[100%]'} w-[100%]  border justify-between flex flex-row`}>
       <p className={`w-4/12 border border-y-0 border-l-0  h-10  cursor-pointer  flex items-center justify-center ${value === 1 ? 'bg-yellow-500  text-white' : 'hover:text-yellow-500 text-gray-400'}`} onClick={() => setValue(1)}>01</p>
       <p className={`w-4/12 border border-y-0 border-l-0  h-10 cursor-pointer   flex items-center justify-center ${value === 2 ? 'bg-yellow-500  text-white' : 'hover:text-yellow-500 text-gray-400'}`} onClick={() => setValue(2)}>02</p>
       <p className={`w-4/12 border border-y-0 border-l-0 h-10  cursor-pointer   flex items-center justify-center ${value === 3 ? 'bg-yellow-500  text-white' : 'hover:text-yellow-500 text-gray-400'}`} onClick={() => setValue(3)}>03</p>
