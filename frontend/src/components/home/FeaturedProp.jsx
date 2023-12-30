@@ -199,7 +199,10 @@ const FeaturedPropCard = ({ item }) => {
         <div className="flex flex-row items-center p-3 justify-between">
           <div className="flex flex-col gap-2 items-start justify-start">
             <p className="text-yellow-500 text-[14px]">{item.type}</p>
-            <h1 className="text-[17px] text-yellow-700">{item.name}</h1>
+            <Link to="/property-detail">
+              <h1 className="text-[17px] text-yellow-700 cursor-pointer">{item.name}</h1>
+            </Link>
+            
             <p className="text-slate-700">
               $240 <span className="text-[14px]">/ night</span>
             </p>

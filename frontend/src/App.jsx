@@ -7,6 +7,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import Properties from './screen/Properties'
+import PropertyDetails from './screen/PropertyDetails'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   const routes = [
     <Route path="/" element={<Layout><Homescreen /></Layout>} />,
     <Route path="/properties" element={<Layout><Properties /></Layout>} />,
+    <Route path="/property-detail" element={<Layout><PropertyDetails /></Layout>} />,
   ]
 
   const router = createBrowserRouter(createRoutesFromElements(routes))
