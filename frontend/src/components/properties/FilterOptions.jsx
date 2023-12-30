@@ -4,7 +4,7 @@ import Dropdown from "../home/Dropdown";
 import Slider from '@mui/material/Slider';
 import FilterOptions from "../home/FilterOptions";
 const FilterBox = ({ children, title }) => {
-  const [showChildren, setShowChildren] = useState(false);
+  const [showChildren, setShowChildren] = useState(true);
   return (
     <div className="border p-[1rem] text-[13px]">
       <div
@@ -145,7 +145,7 @@ const handleSizeChange = (event, newValue) => {
 
   return (
     <div className="">
-      <div className="w-[22.5rem] ml-4 exo mb-6 h-fit rounded-md overflow-hidden">
+      <div className="w-[22.5rem] exo mb-6 h-fit rounded-md overflow-hidden">
         <h1 className="border p-[1rem] text-yellow-900 font-[600] bg-slate-100">
           Narrow Your Search
         </h1>
@@ -161,8 +161,8 @@ const handleSizeChange = (event, newValue) => {
             <div className="flex flex-col">
               {
                 room.map((item) => (
-                  <div key={item.type} onClick={() => setRoomType(item.type)} className="flex text-[13px] border flex-row justify-between mt-4 hover:border cursor-pointer border-white border-b-yellow-500 hover:shadow-sm py-1 items-center">
-                  <div className="flex flex-row gap-3 ">
+                  <div key={item.type} onClick={() => setRoomType(item.type)} className="flex text-[13px] px-3 border border-t-gray-100 border-  flex-row justify-between mt-4 cursor-pointer  hover:shadow-sm py-3 items-center">
+                  <div className="flex flex-row gap-3">
                     <img src={item.img} alt="suitcase" className="w-8 mr-8" />
                     <h1>Private Room</h1>
                     <p>(58,150)</p>
