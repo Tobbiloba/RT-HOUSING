@@ -212,6 +212,7 @@ const Slider = ({ item, viewMode }) => {
 };
 
 
+
 // lg:h-[25rem] xl:h-[16rem] h-[20rem] md:h-[16rem]
 const FeaturedPropCard = ({ item, viewMode }) => {
   const [showMenu, setShowMenu] = useState(false);
