@@ -223,6 +223,7 @@ const PropertyDetails = () => {
       
 
      
+     
 
       <div className="flex mt-6 lg:mt-20 flex-row  justify-between px-[1rem]">
         <div className="">
