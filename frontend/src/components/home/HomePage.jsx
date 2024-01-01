@@ -89,11 +89,9 @@ const HomePage = () => {
           <div className="w-9/12  md:mt-0 md:w-4/6 border py-2 md:py-0 flex flex-col  justify-center">
             <p className="text-[13px] mx-4 text-gray-500" onClick={() => (setShowCheckInCalendar(false), setCheckOutDate(true))}>Check-Out:</p>
             <h1 className="text-[15px] text-gray-500 px-4 cursor-text" >
-              {/* {checkOutDate !== '' ? checkoutDate : 'Date'} */}
-              Date
+             Date
             </h1>
-            {/* <input placeholder='Date' className='w-[100%] placeholder:text-[16px]'/> */}
-          </div>
+         </div>
           <div className="w-3/12 md:w-2/6  md:mt-0 border py-2 md:py-0 flex items-center justify-center md:rounded-r-md">
             <img src="/calendar.png" className="w-6" />
           </div>

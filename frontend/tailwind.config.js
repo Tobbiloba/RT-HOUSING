@@ -6,6 +6,11 @@ export default {
   ],
   theme: {
     extend: {},
+    screens: {
+      'tablet': '999px',
+      // => @media (min-width: 640px) { ... }
+
+    },
   },
   plugins: [],
 }
