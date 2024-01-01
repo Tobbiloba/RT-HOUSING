@@ -21,7 +21,7 @@ const detail = [
 
     about:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempoer incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nrud exercitation ullamco laboris nisi ute aliquip ex ea commodo consequat duis auete irure dolor in reprehenderit in voluptate velit.",
-    guests: 4,
+    // guests: 4,
     bedrooms: 3,
     bathrooms: 3,
     children: 3,
@@ -223,7 +223,7 @@ const PropertyDetails = () => {
       
 
      
-     
+
 
       <div className="flex mt-6 lg:mt-20 flex-row  justify-between px-[1rem]">
         <div className="">
