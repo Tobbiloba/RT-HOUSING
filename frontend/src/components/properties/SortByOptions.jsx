@@ -34,7 +34,7 @@ const SortByOptions = ({filterState, toggleFilterOptions, viewMode, setViewMode}
         <div className={`${useLocation ? 'bg-yellow-500 text-white' : 'border text-gray-300'} text-xl cursor-pointer rounded-sm p-2`} onClick={() => setUseLocation(!useLocation)}>
            <HiLocationMarker /> 
         </div>
-        <div className={`${filterState.right ? 'bg-yellow-500 text-white' : 'border text-gray-300'} text-xl cursor-pointer rounded-sm p-2`} onClick={toggleFilterOptions(anchor, true)}>
+        <div className={`${filterState.right ? 'bg-yellow-500 text-white' : 'border text-gray-300'} text-xl cursor-pointer rounded-sm p-2 tablet:hidden`} onClick={toggleFilterOptions(anchor, true)}>
             <IoSettingsOutline />
         </div>
       </div>
