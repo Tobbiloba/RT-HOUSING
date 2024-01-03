@@ -23,7 +23,7 @@ const TopBar = ({setShowLogin, setShowRegister}) => {
       </div>
       <div className="flex w-[100%] items-center flex-row flex-wrap md:flex-nowrap md:items-center  gap-x-8 gap-y-4 justify-end  md:gap-6">
         {
-          data?.authentication?.salt &&
+          !data?.authentication?.salt &&
         
         <div className="flex flex-row gap-7 md:my-0">
           <h1 className="text-yellow-500 font-[600] cursor-pointer" onClick={() => setShowLogin(true)}>Login</h1>
