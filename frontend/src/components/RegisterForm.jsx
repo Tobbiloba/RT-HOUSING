@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Skeleton from "@mui/material/Skeleton";
 import CircularProgress from "@mui/material/CircularProgress";
+import Dropzone from "./ImageUploader";
 
 const style = {
   position: "absolute",
@@ -25,7 +26,7 @@ const RegisterForm = ({setShowRegister, showRegister}) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="bg-white text-[14px] exo z-10 rounded-md overflow-hidden w-[90vw] md:w-[27.5rem] h-[40rem]">
+          <div className="bg-white text-[14px] exo z-10 rounded-md overflow-hidden w-[90vw] md:w-[27.5rem] h-fit">
             <div  className="flex flex-row rounded-md justify-between py-4 px-8 bg-gray-100 ">
                 {/* <div> */}
                     <p className="text-yellow-900 font-[600] text-[15px]">Register</p>
@@ -36,7 +37,8 @@ const RegisterForm = ({setShowRegister, showRegister}) => {
             <div className="px-8 pt-8 flex flex-col">
             <input placeholder="Your Email*" className="border w-[100%] p-3 rounded-md"/>
             <input placeholder="Your Password*" className="border w-[100%] p-3 rounded-md mt-4"/>
-            <input placeholder="Retype Password*" className="border w-[100%] p-3 rounded-md mt-4"/>
+            {/* <input placeholder="Retype Password*" className="border w-[100%] p-3 rounded-md mt-4"/> */}
+            <Dropzone />
             <div className="mt-6 flex flex-row justify-between items-center w-[100%]">
               <button className="border-2 w-[40%] py-3 border-yellow-500 rounded-md">Register</button>
               <div className="flex flex-row gap-4">

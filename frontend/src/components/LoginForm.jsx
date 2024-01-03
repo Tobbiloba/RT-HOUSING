@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Skeleton from "@mui/material/Skeleton";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import {useSelector, useDispatch} from 'react-redux'
+import { login } from "../action/auth";
 const style = {
   position: "absolute",
   top: "50%",
@@ -13,15 +14,38 @@ const style = {
 };
 
 const LoginForm = ({ setShowLogin, showLogin }) => {
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const {loading, userInfo} = useSelector((state) => state.login)
+
+
+  // useEffect(() => {
+  //   console.log(loginState)
+  // }, [loginState])
+
+
+  useEffect(() => {
+    if(userInfo) {
+      console.log(userInfo)
+      setShowLogin(false)
+    }
+  }, [userInfo])
+  console.log(loading)
+
+  const handleLogin = () => {
+    if(!email || !password) {
+      return;
+    }
+
+    dispatch(login(email, password))
+  }
+
   const handleClose = () => {
     setShowLogin(false);
   };
   return (
-    // <div className='fixed w-[100vw] h-[100vh] z-[100] border top-0 left-0 flex items-center justify-center'>
-    //   <div>
 
-    //   </div>
-    // </div>
 
     <div>
       {/* {showDetails && */}
@@ -41,11 +65,11 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
             </div>
 
             <div className="px-8 pt-8 flex flex-col">
-            <input placeholder="Your Email*" className="border w-[100%] p-3 rounded-md"/>
-            <input placeholder="Your Password*" className="border w-[100%] p-3 rounded-md mt-4"/>
+            <input placeholder="Your Email*" className="border w-[100%] p-3 rounded-md" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <input placeholder="Your Password*" className="border w-[100%] p-3 rounded-md mt-4" value={password} onChange={(e) => setPassword(e.target.value)}/>
 
             <div className="mt-6 flex flex-row justify-between items-center w-[100%]">
-              <button className="border-2 w-[40%] py-3 border-yellow-500 rounded-md">Login</button>
+              <button className="border-2 w-[40%] py-3 border-yellow-500 rounded-md" onClick={handleLogin}>{!loading ? 'Login' : 'Loading...'}</button>
               <div className="flex flex-row gap-4">
                 <input type="checkbox" className="w-5 border outline-green-500"/>
                 <p className="text-gray-400 text-[15px]">Remember me here</p>

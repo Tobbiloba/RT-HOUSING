@@ -1,6 +1,9 @@
 import React from "react";
 
 const TopBar = ({setShowLogin, setShowRegister}) => {
+  const data = JSON.parse(sessionStorage.getItem("userInfo"));
+
+  // console.log(data)
   return (
     <div className="flex items-center justify-center">
       <div className="flex flex-wrap px-[1rem] exo flex-row  justify-between md:items-center lg:flex-nowrap px-[1rem]pb-2 md:py-4 container">
@@ -19,10 +22,14 @@ const TopBar = ({setShowLogin, setShowRegister}) => {
         </div>
       </div>
       <div className="flex w-[100%] items-center flex-row flex-wrap md:flex-nowrap md:items-center  gap-x-8 gap-y-4 justify-end  md:gap-6">
+        {
+          data.authentication.salt &&
+        
         <div className="flex flex-row gap-7 md:my-0">
           <h1 className="text-yellow-500 font-[600] cursor-pointer" onClick={() => setShowLogin(true)}>Login</h1>
           <h1 className="text-yellow-900 font-[600] cursor-pointer" onClick={() => setShowRegister(true)}>Register</h1>
         </div>
+}
 
         <div className="relative flex flex-row overflow-hidden w-[17.5rem] h-[2.75rem] border">
           <p className="flex-1 text-[15px] bg-yellow-500 items-center flex justify-center">
