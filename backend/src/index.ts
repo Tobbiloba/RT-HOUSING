@@ -25,7 +25,7 @@ const server = http.createServer(app)
 
 
 server.listen(8080, () => {
-    console.log('server running on http://localhostlocalhost:8080/')
+    console.log('server running on http://localhost:8080/')
 })
 
 
@@ -38,4 +38,4 @@ mongoose.connect(MONGO_URL);
 mongoose.connection.on('error', (error: Error) => console.log(error))
 
 
-app.use('/', router())
+app.use('/api/v1/users', router())

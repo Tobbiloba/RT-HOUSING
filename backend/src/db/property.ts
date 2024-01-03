@@ -76,7 +76,7 @@ const PropertySchema = new mongoose.Schema({
 
 export const PropertyModel = mongoose.model('Property', PropertySchema);
 
-export const getProperties = () => PropertyModel.find();
+export const getProperties = (no: any) => PropertyModel.find({}).limit(no);
 export const getPropertyById = (id: string) => PropertyModel.findOne({"property_id": id});
 export const getPropertyByOwner = (id: string) => PropertyModel.findOne({"owner_id": id});
 export const createProperty = (values: Record<string, any>) => new PropertyModel(values)

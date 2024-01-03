@@ -78,7 +78,9 @@ export const addProperty = async (req: express.Request, res: express.Response) =
 
 export const getAllProperties = async (req: express.Request, res: express.Response) => {
   try {
-    const properties = await getProperties();
+    // const num = req.query._end;
+    console.log(req.query._end)
+    const properties = await getProperties(req.query._end);
     console.log('get all properties')
     return res.status(200).json(properties);
   } catch (error) {
