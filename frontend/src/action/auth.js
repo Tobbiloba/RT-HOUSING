@@ -32,6 +32,17 @@ export const login = (email, password) => async (dispatch) => {
         });
     
         console.log(`${BASE_URL}/auth/login`)
+
+        toast.success('Successfully signed in', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
     
         // Saving the auth token to session storage
         sessionStorage.setItem("userInfo", JSON.stringify(data));
