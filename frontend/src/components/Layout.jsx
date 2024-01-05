@@ -13,7 +13,7 @@ const Layout = ({children}) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
-      // setIsLoading(true)
+      setIsLoading(true)
 
 
       setTimeout(() => {
