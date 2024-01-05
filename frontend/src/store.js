@@ -1,9 +1,10 @@
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import { thunk } from "redux-thunk";
-import { loginReducer } from "./reducer";
+import { loginReducer, registerReducer } from "./reducer";
 
 const rootReducer = combineReducers({
-    login: loginReducer
+    login: loginReducer,
+    register: registerReducer
 })
 
 

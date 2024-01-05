@@ -270,11 +270,11 @@ const PropertyOptionCard = ({ items }) => {
             <h1 className="text-yellow-900 font-[600]">When To Check In?</h1>
 
             <div className="flex flex-row">
-              <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckInCalendar(true), setShowCheckOutCalendar(false))}>
+              <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckInCalendar(true), setShowCheckOut(false))}>
                 <p className="text-[13px] text-slate-400">Check-In:</p>
                 <h1 className="text-[15px] text-slate-600 cursor-text">{checkInDate.toLocaleDateString()}</h1>
               </div>
-              <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckInCalendar(false), setShowCheckOutCalendar(true))}>
+              <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckIn(false), setShowCheckOutCalendar(true))}>
                 <p className="text-[13px] text-slate-400">Check-Out:</p>
                 <h1 className="text-[15px] text-slate-600 cursor-text">{checkOutDate.toLocaleDateString()}</h1>
               </div>

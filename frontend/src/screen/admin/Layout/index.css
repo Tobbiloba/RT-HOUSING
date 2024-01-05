@@ -1,0 +1,26 @@
+.sidebar-slide-out-in {
+    width: 100px;
+    transition: width 150ms ease-in-out;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .sidebar-slide-in {
+    width: 180px;
+    transition: width 150ms ease-out;
+    height: 100vh;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar-slide-out-in {
+      width: 0px;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .sidebar-slide-in {
+      width: 180px;
+      overflow: visible;
+      height: 100vh;
+    }
+  }

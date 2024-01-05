@@ -5,7 +5,10 @@
 
 
 
-
+body{
+  padding: 0;
+  margin: 0;
+}
 
 .exo {
     font-family: 'Exo 2', sans-serif;

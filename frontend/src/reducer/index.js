@@ -29,4 +29,32 @@ import {
         default:
           return state;
       }
-  }
+}
+
+
+
+
+
+export const registerReducer = (
+  state= {loading: false, error: null}, action
+) => {
+  switch (action.type) {
+      case REQUEST_REGISTER:
+        return {
+          loading: true,
+          error: null,
+        };
+      case REQUEST_REGISTER_SUCCESSFUL:
+        return {
+          loading: false,
+          userInfo: action.payload,
+        };
+      case REQUEST_REGISTER_FAILED:
+        return {
+          loading: false,
+          error: false,
+        };
+      default:
+        return state;
+    }
+}

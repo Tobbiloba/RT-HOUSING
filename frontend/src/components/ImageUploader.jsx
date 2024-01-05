@@ -22,7 +22,7 @@ const SingleImageUpload = ({ onSuccess }) => {
   };
 
   return (
-    <div className="flex p-3 rounded-md border items-center gap-4" onClick={openUploader}>
+    <div className="flex p-4 rounded-md border items-center gap-4" onClick={openUploader}>
       {/* <button
         onClick={openUploader}
         className="mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-primary rounded-md p-2 hover:bg-primary hover:text-white transition-colors"
@@ -35,7 +35,7 @@ const SingleImageUpload = ({ onSuccess }) => {
   );
 };
 
-const Dropzone = ({ product, updateVariant }) => {
+const Dropzone = ({ product, updateVariant, state, setState }) => {
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState('');
 
@@ -55,20 +55,21 @@ const Dropzone = ({ product, updateVariant }) => {
 
   const handleImageUpload = (image) => {
     setSelectedImage(image);
+    setState(image)
     uploadImage(image);
   };
 
   return (
-    <section className="mt-6 w-[100%]">
+    <section className="mt-4 bg-gray-200 w-[100%]">
       {/* Single Image Upload */}
       <SingleImageUpload onSuccess={handleImageUpload} />
 
       {/* Display Uploaded Image */}
-      {selectedImage && (
-        <div className="mt-6 w-[100%]">
+      {state && (
+        <div className="mt-6 w-[100%] px-4 pb-4">
           {/* <h3 className="title text-[8px] text-neutral-600 mb-3">{selectedImage}</h3> */}
           <img
-            src={selectedImage}
+            src={state}
             alt="Uploaded Product"
             className="w-[100%] max-h-60 object-contain rounded-md"
           />

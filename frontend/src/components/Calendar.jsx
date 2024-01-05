@@ -49,7 +49,7 @@ const Calendar = ({selectedDay, setSelectedDay, setShowCalendar}) => {
 // console.log(selectedDay)
 
   return (
-    <div className="w-[21rem]">
+    <div className="w-[21rem] bg-white rounded-md">
       <div className=" w-[100%]">
         <div className="">
           <div className="">
@@ -94,7 +94,7 @@ const Calendar = ({selectedDay, setSelectedDay, setShowCalendar}) => {
                 >
                   <button
                     type="button"
-                    onClick={() => (setSelectedDay(day), setShowCalendar(false))}
+                    onClick={() => (setSelectedDay(day), setShowCalendar(false), console.log(day))}
                     className={classNames(
                       isEqual(day, selectedDay) && 'text-white',
                       !isEqual(day, selectedDay) &&
