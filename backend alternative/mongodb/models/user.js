@@ -9,7 +9,6 @@ const UserSchema = new mongoose.Schema({
         password: {type: String, required: true, select: false},
         salt: {type: String, required: true, select: false},
     },
-    allProperties: [{ type: mongoose.Schema.Types.ObjectId, ref: "Property" }],
 });
 
 const userModel = mongoose.model("User", UserSchema);

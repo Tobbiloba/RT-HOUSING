@@ -1,10 +1,11 @@
-import Property from "../mongodb/models/property.js";
-import User from "../mongodb/models/user.js";
+import Property, { createPropertyAdmin, getPropertyByOwnerId, updatePropertyById } from "../mongodb/models/property.js";
+import User, { getUserById } from "../mongodb/models/user.js";
 
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 import { random } from "../helpers/index.js";
+import { getAdminUserById } from "../mongodb/models/admin.js";
 dotenv.config();
 
 cloudinary.config({
@@ -49,6 +50,20 @@ const getAllProperties = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+const getPropertyByOwner = async (req, res) => {
+    const { id } = req.params;
+
+    console.log(id)
+    const propertyExists = await getPropertyByOwnerId({ _id: id })
+
+
+    console.log(propertyExists)
+    if (propertyExists) {
+        res.status(200).json(propertyExists);
+    } else {
+        res.status(404).json({ message: "Property not found" });
+    }
+};
 
 const getPropertyDetail = async (req, res) => {
     const { id } = req.params;
@@ -63,37 +78,85 @@ const getPropertyDetail = async (req, res) => {
     }
 };
 
+
+
+
+
+
+
+
+
+
 const createProperty = async (req, res) => {
     try {
+        // const { id } = req.params;
+
         const {
-            user_id,
+            id,
             property_information
         } = req.body;
 
-        const session = await mongoose.startSession();
-        session.startTransaction();
+        console.log(id, property_information)
 
-        const user = await User.findOne({ email }).session(session);
+        if(!id || !property_information) {
+            return res.status(500).json({message: "Pass in the necessary parameters"})
+        }
 
-        if (!user) throw new Error("User not found");
+        console.log(id)
 
-        // Assuming property_image is an array of image objects
-const propertyImages = property_information?.propery_information.property_image;
+        // const session = await mongoose.startSession();
+        // session.startTransaction();
 
-// if (propertyImages && propertyImages.length > 0) {
-  // Use Promise.all to upload all images concurrently
-  const uploadedImages = await Promise.all(
-    propertyImages.map(async (image) => {
-      const { url } = await cloudinary.uploader.upload(image);
-      return url;
+        const user = await getAdminUserById(id);
+        console.log(user)
+
+        if (!user) {throw new Error("User not found")
+        return res.status(500).end()
+    };
+
+    console.log({
+        property_id: random(),
+        owner_id: id,
+        property_information: {
+            property_name: property_information?.property_name,
+            property_type: property_information?.property_type,
+            property_description: property_information?.property_description,
+            property_no_bedrooms: property_information?.property_no_bedrooms,
+            property_no_bathroom: property_information?.property_no_bathroom,
+            property_size: property_information?.property_size,
+            property_amenities: property_information?.property_amenities,
+            property_images: property_information?.property_images,
+            property_review: property_information?.property_review,
+            property_avg_ratings: property_information?.property_avg_ratings,
+            property_location: {
+              country: property_information?.property_location?.country,
+              state: property_information?.property_location?.state,
+              city: property_information?.property_location?.city,
+            },
+            property_policy: {
+                pet_policy: property_information?.property_policy?.pet_policy,
+                smoking_policy: property_information?.property_policy?.smoking_policy,
+              },
+              pricing: property_information.pricing,
+              availability: {
+                available_date_from: property_information?.availability?.available_date_from,
+                available_date_till: property_information?.availability?.available_date_till,
+                unavailable_date_from: property_information?.availability?.available_date_from,
+                unavailable_date_till: property_information?.availability?.available_date_till,
+                occupied_date_from: property_information?.availability?.occupied_date_from,
+                occupied_date_till: property_information?.availability?.occupied_date_till,
+              },
+              guest: {
+                maximum_children: property_information?.guest?.maximum_children,
+                maximum_adults: property_information?.guest?.maximum_adults,
+                maximum_infants: property_information?.guest?.maximum_infants,
+              },
+              booking_status: property_information?.booking_status,
+        }
     })
-  );
-console.log(uploadedImages)
-// }
-
-        const newProperty = await Property.create({
+        const newProperty = await createPropertyAdmin({
             property_id: random(),
-            owner_id: user_id,
+            owner_id: id,
             property_information: {
                 property_name: property_information?.property_name,
                 property_type: property_information?.property_type,
@@ -102,13 +165,11 @@ console.log(uploadedImages)
                 property_no_bathroom: property_information?.property_no_bathroom,
                 property_size: property_information?.property_size,
                 property_amenities: property_information?.property_amenities,
-                property_images: uploadedImages,
-                property_review: property_information?.property_review,
-                property_avg_ratings: property_information?.property_avg_ratings,
+                property_images: property_information?.property_images,
                 property_location: {
                   country: property_information?.property_location?.country,
                   state: property_information?.property_location?.state,
-                  zip_code: property_information?.property_location?.zip_code,
+                  city: property_information?.property_location?.city,
                 },
                 property_policy: {
                     pet_policy: property_information?.property_policy?.pet_policy,
@@ -118,53 +179,114 @@ console.log(uploadedImages)
                   availability: {
                     available_date_from: property_information?.availability?.available_date_from,
                     available_date_till: property_information?.availability?.available_date_till,
-                    unavailable_date_from: property_information?.availability?.available_date_from,
-                    unavailable_date_till: property_information?.availability?.available_date_till,
-                    occupied_date_from: property_information?.availability?.occupied_date_from,
-                    occupied_date_till: property_information?.availability?.occupied_date_till,
+                    unavailable_date_from: property_information?.availability?.available_date_from || [],
+                    unavailable_date_till: property_information?.availability?.available_date_till || [],
+                    occupied_date_from: property_information?.availability?.occupied_date_from || [],
+                    occupied_date_till: property_information?.availability?.occupied_date_till || [],
                   },
                   guest: {
                     maximum_children: property_information?.guest?.maximum_children,
                     maximum_adults: property_information?.guest?.maximum_adults,
                     maximum_infants: property_information?.guest?.maximum_infants,
                   },
-                  booking_status: property_information?.booking_status,
-            }
+                  booking_status: property_information?.booking_status || 'available',
+                  
+            },
+            status: 'Successful'
         });
 
-        user.allProperties.push(newProperty._id);
-        await user.save({ session });
+        // user.allProperties.push(newProperty._id);
+        // await user.save({ session });
 
-        await session.commitTransaction();
+        // await session.commitTransaction();
 
         res.status(200).json({ message: "Property created successfully" });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: error.message });
     }
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const updateProperty = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { title, description, propertyType, location, price, photo } =
-            req.body;
+        const {
+            id,
+            property_information
+        } = req.body;
 
-        const photoUrl = await cloudinary.uploader.upload(photo);
 
-        await Property.findByIdAndUpdate(
+        await updatePropertyById(
             { _id: id },
             {
-                title,
-                description,
-                propertyType,
-                location,
-                price,
-                photo: photoUrl.url || photo,
+                property_information: {
+                    property_name: property_information?.property_name || null,
+                    property_type: property_information?.property_type || null,
+                    property_description: property_information?.property_description || null,
+                    property_no_bedrooms: property_information?.property_no_bedrooms || null,
+                    property_no_bathroom: property_information?.property_no_bathroom || null,
+                    property_size: property_information?.property_size || null,
+                    property_amenities: property_information?.property_amenities || null,
+                    property_images: property_information?.property_images || null,
+                    property_review: property_information?.property_review || null,
+                    property_avg_ratings: property_information?.property_avg_ratings || null,
+                    property_location: {
+                      country: property_information?.property_location?.country || null,
+                      state: property_information?.property_location?.state || null,
+                      zip_code: property_information?.property_location?.zip_code || null,
+                    },
+                    property_policy: {
+                        pet_policy: property_information?.property_policy?.pet_policy || null,
+                        smoking_policy: property_information?.property_policy?.smoking_policy || null,
+                      },
+                      pricing: property_information.pricing || null,
+                      availability: {
+                        available_date_from: property_information?.availability?.available_date_from || null,
+                        available_date_till: property_information?.availability?.available_date_till || null,
+                        unavailable_date_from: property_information?.availability?.available_date_from || null,
+                        unavailable_date_till: property_information?.availability?.available_date_till || null,
+                        occupied_date_from: property_information?.availability?.occupied_date_from || null,
+                        occupied_date_till: property_information?.availability?.occupied_date_till || null,
+                      },
+                      guest: {
+                        maximum_children: property_information?.guest?.maximum_children || null,
+                        maximum_adults: property_information?.guest?.maximum_adults || null,
+                        maximum_infants: property_information?.guest?.maximum_infants || null,
+                      },
+                      booking_status: property_information?.booking_status || null,
+                }
             },
         );
 
         res.status(200).json({ message: "Property updated successfully" });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: error.message });
     }
 };
@@ -194,10 +316,34 @@ const deleteProperty = async (req, res) => {
     }
 };
 
+
+
+
+
+
+const deletePropertyById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const propertyToDelete = await findPropertyById(id)
+
+        if(!propertyToDelete) {
+            return res.status(500).json({message: "Property doesn't exist"})
+        }
+
+        // const deleteProperty= await deletePropertyId
+
+        res.status(200).json({ message: "Property deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 export {
     getAllProperties,
     getPropertyDetail,
     createProperty,
     updateProperty,
     deleteProperty,
+    getPropertyByOwner
 };

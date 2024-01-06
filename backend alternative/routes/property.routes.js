@@ -6,6 +6,7 @@ import {
     getAllProperties,
     getPropertyDetail,
     updateProperty,
+    getPropertyByOwner
 } from "../controllers/property.controller.js";
 
 const router = express.Router();
@@ -15,5 +16,5 @@ router.route("/:id").get(getPropertyDetail);
 router.route("/").post(createProperty);
 router.route("/:id").patch(updateProperty);
 router.route("/:id").delete(deleteProperty);
-
+router.route("/owner/:id").get(getPropertyByOwner);
 export default router;

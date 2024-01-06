@@ -1,10 +1,13 @@
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import { thunk } from "redux-thunk";
 import { loginReducer, registerReducer } from "./reducer";
-
+import { fetchAllPropertiesReducer, fetchMyPropertiesReducer, createPropertyReducer } from "./reducer/properties";
 const rootReducer = combineReducers({
     login: loginReducer,
-    register: registerReducer
+    register: registerReducer,
+    myProperties: fetchMyPropertiesReducer,
+    allProperties: fetchAllPropertiesReducer,
+    createProperty: createPropertyReducer
 })
 
 
