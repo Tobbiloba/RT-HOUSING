@@ -144,12 +144,12 @@ const createProperty = async (req, res) => {
             property_size: property_information?.property_size,
             property_amenities: property_information?.property_amenities,
             property_images: property_information?.property_images,
-            property_review: property_information?.property_review,
-            property_avg_ratings: property_information?.property_avg_ratings,
             property_location: {
               country: property_information?.property_location?.country,
               state: property_information?.property_location?.state,
               city: property_information?.property_location?.city,
+              latitude: property_information?.property_location?.latitude,
+              longitude: property_information?.property_location?.longitude,
             },
             property_policy: {
                 pet_policy: property_information?.property_policy?.pet_policy,
@@ -163,6 +163,7 @@ const createProperty = async (req, res) => {
                 unavailable_date_till: property_information?.availability?.available_date_till,
                 occupied_date_from: property_information?.availability?.occupied_date_from,
                 occupied_date_till: property_information?.availability?.occupied_date_till,
+                unavailability_reason: property_information?.availability?.unavailability_reason,
               },
               guest: {
                 maximum_children: property_information?.guest?.maximum_children,

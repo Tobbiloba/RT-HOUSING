@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Input from "../../../components/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginAdmin } from "../../../action/auth";
 const AdminLoginScreen = () => {
   const dispatch = useDispatch()
@@ -108,7 +108,10 @@ useEffect(() => {
 
       
 
-        <p className="text-slate-600">Don't have an account? <span className="text-slate-400 cursor-pointer">Sign Up</span></p>
+    <Link to="/admin/register">
+    <p className="text-slate-600">Don't have an account? <span className="text-slate-400 cursor-pointer">Sign Up</span></p>
+    </Link>
+       
       </div>
     </div>
   );

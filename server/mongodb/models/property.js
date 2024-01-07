@@ -3,19 +3,22 @@ import mongoose from "mongoose";
 const PropertySchema = new mongoose.Schema({
     property_id: { type: String, required: true },
     owner_id: {type: String, required: true},
+    isActive: {type: Boolean, enum: [true, false], default: false},
     property_information: {
         property_name: {type: String, required: true},
         property_type: {type: String, required: true},
         property_description: {type: String, required: true},
         property_no_bedrooms: {type: String, required: true},
-        property_no_bathroom: {type: String, required: true},
+        property_no_bathrooms: {type: String, required: true},
         property_size: {type: [String], required: false},
         property_amenities: {type: [String], required: false},
         property_images: {type: [String], required: true},
         property_location: {
             country: {type: String, required: true},
             state: {type: String, required: true},
-            city: {type: String, required: true}
+            city: {type: String, required: true},
+            latitude: {type: String, required: false},
+            longitude: {type: String, required: false}
         },
         property_policy: {
             pet_policy: {type: Boolean, required: false},
@@ -25,10 +28,11 @@ const PropertySchema = new mongoose.Schema({
         availability: {
             available_date_from: {type: [String], required: true},
             available_date_till: {type: [String], required: true},
-            unavailable_date_from: {type: [String], required: true},
-            unavailable_date_till: {type: [String], required: true},
-            occupied_date_from: {type: [String], required: true},
-            occupied_date_till: {type: [String], required: true},
+            unavailable_date_from: {type: [String], required: false},
+            unavailable_date_till: {type: [String], required: false},
+            occupied_date_from: {type: [String], required: false},
+            occupied_date_till: {type: [String], required: false},
+            unavailability_reason: {type: String, required: false}
         },
         guest: {
             maximum_adults: {type: String, required: true},

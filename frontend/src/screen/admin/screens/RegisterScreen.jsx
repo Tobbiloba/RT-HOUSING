@@ -3,7 +3,7 @@ import Input from "../../../components/Input";
 import Dropzone from "../../../components/ImageUploader";
 import { useDispatch, useSelector } from "react-redux";
 import { registerAdmin } from "../../../action/auth";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 const AdminRegisterScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -199,8 +199,10 @@ const AdminRegisterScreen = () => {
         
 
       
-
-        <p className="text-slate-600 mt-10 ">Don't have an account? <span className="text-slate-400 cursor-pointer">Sign Up</span></p>
+    <Link to="/admin/login">
+      <p className="text-slate-600 mt-10 ">Don't have an account? <span className="text-slate-400 cursor-pointer">Sign In</span></p>
+    </Link>
+        
       </div>
     </div>
   );
