@@ -9,6 +9,9 @@ import {
     FETCH_PROPERTIES,
     FETCH_PROPERTIES_FAILED,
     FETCH_PROPERTIES_SUCCESSFUL,
+    FETCH_PROPERTY_DETAILS,
+    FETCH_PROPERTY_DETAILS_FAILED,
+    FETCH_PROPERTY_DETAILS_SUCCESSFUL
   } from "../constant/property";
   
 
@@ -87,3 +90,27 @@ export const createPropertyReducer = (
       }
 }
 
+export const getPropertyDetailsById = (
+  state= {loading: true, error: null}, action
+) => {
+  switch (action.type) {
+      case FETCH_PROPERTY_DETAILS:
+        return {
+          loading: true,
+          error: null,
+        };
+      case FETCH_PROPERTY_DETAILS_SUCCESSFUL:
+        return {
+          loading: false,
+          details: action.payload,
+          status: 'succeessful'
+        };
+      case FETCH_PROPERTY_DETAILS_FAILED:
+        return {
+          loading: false,
+          error: true,
+        };
+      default:
+        return state;
+    }
+}

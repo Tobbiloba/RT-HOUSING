@@ -115,7 +115,7 @@ const RegisterForm = ({setShowRegister, showRegister}) => {
 
 
             {/* <input placeholder="Retype Password*" className="border w-[100%] p-3 rounded-md mt-4"/> */}
-            <Dropzone state={avatar} setState={setAvatar}/>
+            <Dropzone state={avatar} setState={setAvatar} showImage/>
             <div className="mt-6 flex flex-row justify-between items-center w-[100%]">
               <button className="border-2 w-[40%] py-3 border-yellow-500 rounded-md" onClick={handleCreateAccount}>Register</button>
               <div className="flex flex-row gap-4">

@@ -14,6 +14,10 @@ import AdminLayout from './screen/admin/Layout'
 import Home from './screen/admin/screens/HomeScreen'
 import AdminProperties from './screen/admin/screens/Properties'
 import AddProperty from './screen/admin/screens/AddProperty'
+import PropertyDetail from './screen/admin/screens/PropertyDetail'
+import AdminLoginScreen from './screen/admin/screens/LoginScreen'
+import AdminRegisterScreen from './screen/admin/screens/RegisterScreen'
+import NotFound from './screen/NotFound'
 function App() {
   
   const routes = [
@@ -23,6 +27,10 @@ function App() {
     <Route path="/admin" element={<AdminLayout><Home /></AdminLayout>} />,
     <Route path="/admin-properties" element={<AdminLayout><AdminProperties /></AdminLayout>} />,
     <Route path="/admin-add-property" element={<AdminLayout><AddProperty /></AdminLayout>} />,
+    <Route path="/admin/property-detail/:id" element={<AdminLayout><PropertyDetail /></AdminLayout>} />,
+    <Route path="/admin/login" element={<AdminLoginScreen />} />,
+    <Route path="/admin/register" element={<AdminRegisterScreen />} />,
+    <Route path="*" element={<Layout><NotFound /></Layout>} />,
   ]
 
   const router = createBrowserRouter(createRoutesFromElements(routes))

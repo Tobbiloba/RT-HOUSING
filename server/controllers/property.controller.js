@@ -1,4 +1,4 @@
-import Property, { createPropertyAdmin, getPropertyByOwnerId, updatePropertyById } from "../mongodb/models/property.js";
+import Property, { createPropertyAdmin, getPropertyById, getPropertyByOwnerId, updatePropertyById } from "../mongodb/models/property.js";
 import User, { getUserById } from "../mongodb/models/user.js";
 
 import mongoose from "mongoose";
@@ -55,6 +55,24 @@ const getPropertyByOwner = async (req, res) => {
 
     console.log(id)
     const propertyExists = await getPropertyByOwnerId({ _id: id })
+
+
+    console.log(propertyExists)
+    if (propertyExists) {
+        res.status(200).json(propertyExists);
+    } else {
+        res.status(404).json({ message: "Property not found" });
+    }
+};
+
+
+
+const getPropertyDetailById = async (req, res) => {
+    const { id } = req.params;
+
+    console.log(id)
+    decodeURIComponent(id)
+    const propertyExists = await getPropertyById({ _id: decodeURIComponent(id) })
 
 
     console.log(propertyExists)
@@ -345,5 +363,6 @@ export {
     createProperty,
     updateProperty,
     deleteProperty,
-    getPropertyByOwner
+    getPropertyByOwner,
+    getPropertyDetailById
 };

@@ -11,18 +11,17 @@ import {
   FETCH_PROPERTIES,
   FETCH_PROPERTIES_FAILED,
   FETCH_PROPERTIES_SUCCESSFUL,
+  FETCH_PROPERTY_DETAILS,
+  FETCH_PROPERTY_DETAILS_FAILED,
+  FETCH_PROPERTY_DETAILS_SUCCESSFUL
 } from "../constant/property";
 
 
-const BASE_URL = 'https://febtos-housing.onrender.com/api/v1'
-// const BASE_URL = 'https://rt-housing-api.vercel.app/api/v1'
+const BASE_URL = import.meta.env.VITE_APP_BASE_URL
+
 const customId = "custom-id-yes";
 
 console.log(BASE_URL)
-
-
-
-
 
 export const getAllProperties = () => async (dispatch) => {
     dispatch({
@@ -141,4 +140,52 @@ export const createProperty = (id, property_information) => async (dispatch) => 
           }
         );
       }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const getPropertyDetailById = (id) => async (dispatch) => {
+  dispatch({
+      type: FETCH_PROPERTY_DETAILS
+  })
+console.log(id)
+  try {
+      const { data } = await Axios.get(`${BASE_URL}/properties/property-details/${encodeURIComponent(id)}`);
+      dispatch({
+        type: FETCH_PROPERTY_DETAILS_SUCCESSFUL,
+        payload: data,
+      });
+  
+console.log(data)
+  
+    } catch (error) {
+      dispatch({
+        type: FETCH_PROPERTY_DETAILS_FAILED,
+        payload:
+          error.response && error.response.data[0]
+            ? error.response.data.message
+            : error.message,
+      });
+  
+      toast.error(
+        error.response && error.response.data[0]
+          ? error.response.data[0]
+          : error.message,
+        {
+          toastId: customId,
+          position: "bottom-right",
+          theme: "colored",
+        }
+      );
+    }
 }

@@ -34,8 +34,8 @@ const Carousel = ({images}) => {
           // console.log(image) 
           return (
             <div key={index} className="slide relative
-              gap-4 grid grid-cols-2 grid-flow-cols md:grid-rows-3 md:grid-flow-col
-             w-[100%]  bg-gray-200 h-[40rem]">
+              gap-4 grid grid-cols-2 grid-flow-cols md:grid-rows-2 md:grid-flow-col
+             w-[100%]   h-[40rem]">
               {
                 image.map((img, index) => {
                     // console.log(index)
@@ -44,7 +44,7 @@ const Carousel = ({images}) => {
                     key={index}
                   src={img}
                   alt={`Slide ${index + 1}`}
-                  className={`w-[100%] h-[100%] rounded-md object-cover ${index === 0 ? 'col-span-2 md:row-span-3' : index === 1 ? 'md:col-span-2' : 'md:row-span-2'}`}
+                  className={`w-[100%] min-w-[10rem] h-[100%] rounded-md object-cover ${index === 0 ? 'col-span-2 md:row-span-3' : index === 1 ? 'md:col-span-1' : 'md:row-span-1 '}`}
                 />
                 // <p>{img}</p>
                   )

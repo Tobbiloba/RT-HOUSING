@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 // import { createProductVarint, updateProductVarint } from '../actions/vendor/product';
 
 const SingleImageUpload = ({ onSuccess }) => {
   const dispatch = useDispatch();
+  const imageUploader = useRef()
+  useEffect(() => {
+    imageUploader.current = window.cloudinary
+  }, [])
 
   const myCropWidget = window.cloudinary.createUploadWidget(
     {
@@ -35,7 +39,7 @@ const SingleImageUpload = ({ onSuccess }) => {
   );
 };
 
-const Dropzone = ({ product, updateVariant, state, setState }) => {
+const Dropzone = ({ product, updateVariant, state, setState, showImage }) => {
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState('');
 
@@ -65,7 +69,7 @@ const Dropzone = ({ product, updateVariant, state, setState }) => {
       <SingleImageUpload onSuccess={handleImageUpload} />
 
       {/* Display Uploaded Image */}
-      {state && (
+      {state && showImage && (
         <div className="mt-6 w-[100%] px-4 pb-4">
           {/* <h3 className="title text-[8px] text-neutral-600 mb-3">{selectedImage}</h3> */}
           <img
@@ -75,6 +79,12 @@ const Dropzone = ({ product, updateVariant, state, setState }) => {
           />
         </div>
       )}
+
+      {
+        state && !showImage && <div className='bg-white px-3'>
+          <p className='text-slate-500 text-[14px]'>{state}</p>
+        </div>
+      }
     </section>
   );
 };

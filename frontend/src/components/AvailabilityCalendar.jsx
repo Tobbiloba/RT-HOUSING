@@ -85,6 +85,7 @@ const AvailabilityCalendar = ({availableFromDate, availableToDate, unavailableFr
    }
  }
 
+//  console.log('lol')
  return 'gray';
   };
 

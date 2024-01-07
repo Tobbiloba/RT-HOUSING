@@ -9,7 +9,8 @@ import { getMyProperties } from "../../../action/property";
 const AdminProperties = () => {
   const dispatch = useDispatch()
 
-  
+  const encode = encodeURIComponent('fieubfeiwub/elwukbekwnkeudkeu')
+  console.log(encode)
     const [option, setOption] = useState('All')
     const [sortBy, setSortBy] = useState(true)
 
@@ -29,7 +30,7 @@ const AdminProperties = () => {
     }, [])
 
     const myProperties = useSelector((state) => state?.myProperties)
-    console.log(myProperties.properties)
+    console.log(myProperties)
   return (
     <div className="exo p-4 md:px-[5%]">
       <h1 className="text-white text-xl">All Properties</h1>
@@ -61,8 +62,8 @@ const AdminProperties = () => {
               myProperties?.properties?.map((item, index) => {
                   console.log(item)
                 return(
-                  <div key={index}>
-                    <div className="relative">
+                  <div key={index} className="border p-1 border-slate-600 rounded-md">
+                    <div className="relative ">
                       <img src={item.property_information.property_images[0]}
                        className="rounded-sm min-h-[15rem]"/>
                       <h1 className="absolute top-4 right-4 text-[12px] bg-slate-600 text-white px-2 py-1">{item.property_information.peoperty_bedrooms} BEDROOMS</h1>
@@ -76,7 +77,10 @@ const AdminProperties = () => {
 
 
                         <div className="mt-10 flex justify-center">
-                        <button className="bg-gray-700 text-[14px] px-4 py-2 text-white font-[400]">VIEW DETAILS</button>
+                          <Link to={`/admin/property-detail/${encodeURIComponent(item.property_id)}`}>
+                            <button className="bg-gray-700 text-[14px] px-4 py-2 text-white font-[400]">VIEW DETAILS</button>
+                          </Link>
+                        
                         </div>
                       </div>
                     </div>
