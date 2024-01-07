@@ -14,7 +14,7 @@ import {
 } from "../constant/property";
 
 
-const BASE_URL = 'http://localhost:8080/api/v1'
+const BASE_URL = 'https://febtos-housing.onrender.com/api/v1'
 // const BASE_URL = 'https://rt-housing-api.vercel.app/api/v1'
 const customId = "custom-id-yes";
 
