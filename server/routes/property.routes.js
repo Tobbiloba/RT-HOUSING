@@ -16,5 +16,5 @@ router.route("/:id").get(getPropertyDetail);
 router.route("/").post(createProperty);
 router.route("/:id").patch(updateProperty);
 router.route("/:id").delete(deleteProperty);
-router.route("/owner/:id").get(getPropertyByOwner);
+router.route("/api/v1/properties/owner/:id").get(getPropertyByOwner);
 export default router;
