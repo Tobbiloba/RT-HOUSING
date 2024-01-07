@@ -47,7 +47,7 @@ const AdminRegisterScreen = () => {
   }, [registerAdmin])
   
   return (
-    <div className="flex exo flex-row w-[100vw] h-fit overflow-hidden justify-end bg-[#e9e9e9] p-12 relative">
+    <div className="flex exo flex-row w-[100vw] h-fit overflow-hidden justify-end bg-[#e9e9e9] p-[1rem] md:p-12 relative">
       {/* <div className="w-8/12 bg-[#2d3133] flex flex-col p-[2rem] justify-evenly"></div> */}
 
       <div className="absolute left-0 border border--500 top-[20%]">
@@ -73,7 +73,7 @@ const AdminRegisterScreen = () => {
 
 
         <div className="w-[100%] mt-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Input
               placeholder="Type in your firstname"
               type="text"

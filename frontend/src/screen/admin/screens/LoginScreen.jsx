@@ -31,14 +31,14 @@ useEffect(() => {
 }, [adminLogin])
   
   return (
-    <div className="flex exo flex-row w-[100vw] h-[100vh] overflow-hidden justify-end bg-[#e9e9e9] p-12 relative">
+    <div className="flex exo flex-row w-[100vw] h-[100vh] overflow-hidden justify-end bg-[#e9e9e9] p-[1rem] md:p-12 relative">
       {/* <div className="w-8/12 bg-[#2d3133] flex flex-col p-[2rem] justify-evenly"></div> */}
 
       <div className="absolute left-0 border border--500 top-[20%]">
         <img src="https://cdn.dribbble.com/userupload/8432950/file/original-0c14504bd291054d76548cb015dff89a.png?resize=1024x768&vertical=center"/>
       </div>
       <div 
-      className="w-[32rem] relative z-10 bg-[#ffffff] p-[2rem] flex flex-col justify-between rounded-xl">
+      className="w-[32rem] relative z-10 bg-[#ffffff] p-[1rem] md:p-[2rem] flex flex-col justify-between rounded-xl">
     <div></div>
         <div className="items-center flex flex-col">
             <h1 className=" flex text-[28px] text-slate-400 flex-row pt-3 capitalized">
