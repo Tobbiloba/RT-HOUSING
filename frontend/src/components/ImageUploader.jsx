@@ -4,10 +4,8 @@ import { useDispatch } from 'react-redux';
 
 const SingleImageUpload = ({ onSuccess }) => {
   const dispatch = useDispatch();
-  const imageUploader = useRef()
-  useEffect(() => {
-    imageUploader.current = window.cloudinary
-  }, [])
+ 
+  
 
   const myCropWidget = window.cloudinary.createUploadWidget(
     {
@@ -42,6 +40,14 @@ const SingleImageUpload = ({ onSuccess }) => {
 const Dropzone = ({ product, updateVariant, state, setState, showImage }) => {
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState('');
+  const imageUploader = useRef()
+
+
+  useEffect(() => {
+    imageUploader.current = window.cloudinary
+  }, [])
+
+
 
   const uploadImage = (image) => {
     if (product?.data?.id) {
@@ -81,7 +87,7 @@ const Dropzone = ({ product, updateVariant, state, setState, showImage }) => {
       )}
 
       {
-        state && !showImage && <div className='bg-white px-3'>
+        state && !showImage && <div className='bg-white px-3 w-[100%] overflow-hidden'>
           <p className='text-slate-500 text-[14px]'>{state}</p>
         </div>
       }
