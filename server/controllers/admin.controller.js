@@ -13,7 +13,6 @@ const getAllAdminUsers = async (req, res) => {
       }
 }
 
-
 const createAdminUser = async (req, res) => {
   try {
     const { username, firstname, lastname, email, phone_no, password, profile_img, country, state, city } = req.body;

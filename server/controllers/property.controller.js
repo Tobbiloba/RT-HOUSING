@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 import { random } from "../helpers/index.js";
-import { getAdminUserById } from "../mongodb/models/admin.js";
+import { getAdminUserById, updateAdminUser } from "../mongodb/models/admin.js";
 dotenv.config();
 
 cloudinary.config({
@@ -116,6 +116,8 @@ const createProperty = async (req, res) => {
 
         console.log(id, property_information)
 
+        
+
         if(!id || !property_information) {
             return res.status(500).json({message: "Pass in the necessary parameters"})
         }
@@ -126,62 +128,23 @@ const createProperty = async (req, res) => {
         // session.startTransaction();
 
         const user = await getAdminUserById(id);
-        console.log(user)
+        // console.log(user)
 
         if (!user) {throw new Error("User not found")
         return res.status(500).end()
     };
+    const property_id = random()
 
-    console.log({
-        property_id: random(),
-        owner_id: id,
-        property_information: {
-            property_name: property_information?.property_name,
-            property_type: property_information?.property_type,
-            property_description: property_information?.property_description,
-            property_no_bedrooms: property_information?.property_no_bedrooms,
-            property_no_bathroom: property_information?.property_no_bathroom,
-            property_size: property_information?.property_size,
-            property_amenities: property_information?.property_amenities,
-            property_images: property_information?.property_images,
-            property_location: {
-              country: property_information?.property_location?.country,
-              state: property_information?.property_location?.state,
-              city: property_information?.property_location?.city,
-              latitude: property_information?.property_location?.latitude,
-              longitude: property_information?.property_location?.longitude,
-            },
-            property_policy: {
-                pet_policy: property_information?.property_policy?.pet_policy,
-                smoking_policy: property_information?.property_policy?.smoking_policy,
-              },
-              pricing: property_information.pricing,
-              availability: {
-                available_date_from: property_information?.availability?.available_date_from,
-                available_date_till: property_information?.availability?.available_date_till,
-                unavailable_date_from: property_information?.availability?.available_date_from,
-                unavailable_date_till: property_information?.availability?.available_date_till,
-                occupied_date_from: property_information?.availability?.occupied_date_from,
-                occupied_date_till: property_information?.availability?.occupied_date_till,
-                unavailability_reason: property_information?.availability?.unavailability_reason,
-              },
-              guest: {
-                maximum_children: property_information?.guest?.maximum_children,
-                maximum_adults: property_information?.guest?.maximum_adults,
-                maximum_infants: property_information?.guest?.maximum_infants,
-              },
-              booking_status: property_information?.booking_status,
-        }
-    })
         const newProperty = await createPropertyAdmin({
-            property_id: random(),
+            property_id: property_id,
             owner_id: id,
+            isActive: false,
             property_information: {
                 property_name: property_information?.property_name,
                 property_type: property_information?.property_type,
                 property_description: property_information?.property_description,
                 property_no_bedrooms: property_information?.property_no_bedrooms,
-                property_no_bathroom: property_information?.property_no_bathroom,
+                property_no_bathrooms: property_information?.property_no_bathroom,
                 property_size: property_information?.property_size,
                 property_amenities: property_information?.property_amenities,
                 property_images: property_information?.property_images,
@@ -202,6 +165,7 @@ const createProperty = async (req, res) => {
                     unavailable_date_till: property_information?.availability?.available_date_till || [],
                     occupied_date_from: property_information?.availability?.occupied_date_from || [],
                     occupied_date_till: property_information?.availability?.occupied_date_till || [],
+                    unavailability_reason: property_information?.availability?.unavailability_reason || '',
                   },
                   guest: {
                     maximum_children: property_information?.guest?.maximum_children,
@@ -214,12 +178,14 @@ const createProperty = async (req, res) => {
             status: 'Successful'
         });
 
-        // user.allProperties.push(newProperty._id);
-        // await user.save({ session });
 
-        // await session.commitTransaction();
+        user.allProperties.push(newProperty._id);
+        console.log(newProperty._id)
 
-        res.status(200).json({ message: "Property created successfully" });
+        await user.save();
+
+
+        res.status(200).json(newProperty);
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: error.message });
@@ -357,6 +323,9 @@ const deletePropertyById = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+
+
 
 export {
     getAllProperties,

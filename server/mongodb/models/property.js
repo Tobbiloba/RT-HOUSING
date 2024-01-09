@@ -39,6 +39,7 @@ const PropertySchema = new mongoose.Schema({
             maximum_children: {type: String, required: true},
             maximum_infants: {type: String, required: true},
         },
+        
         booking_status: { type: String, enum: ['available', 'booked', 'under maintenance', 'unavailable'], default: 'available' },
     },
     creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
@@ -49,13 +50,13 @@ const PropertySchema = new mongoose.Schema({
 const PropertyModel = mongoose.model("Property", PropertySchema);
 
 export const getProperties = (no) => PropertyModel.find({}).limit(no);
-export const getPropertyById = (id) => PropertyModel.findOne({"property_id": id});
+export const getPropertyById = (id) => PropertyModel.findOne({"_id": id});
 export const getPropertyByOwnerId = (id) => PropertyModel.find({"owner_id": id}).populate(
     "creator",
 );
 export const createPropertyAdmin = (values) => new PropertyModel(values)
     .save().then((user) => user.toObject())
 export const updatePropertyById = (id, property) => PropertyModel.findByIdAndUpdate(id, property);
-
+export const deletePropertyById = (id) => PropertyModel.findByIdAndDelete(id);
 
 export default PropertyModel;

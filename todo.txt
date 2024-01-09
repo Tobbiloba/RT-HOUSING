@@ -1,0 +1,40 @@
+order for user
+    User should be able to create order
+        Parameters:
+            user_id
+            order_id
+            property_id
+            order_information {
+                check in Date
+                check out Date
+                total expenses
+                additional expenses[]
+                name,
+                image,
+                location,
+                type
+            }
+            status: pending as default
+
+    User should be able to delete orders
+        Parameters:
+            user_id
+            order_id
+
+
+
+Order for admin
+    admin should be able to accept or decline order if they are the owner 
+        Parameters:
+            user_id
+            property_id
+
+How it should work:
+    after fetching the orders for their properties
+    then once they accept it the order should be updated to accepted and in the property detail the status should be also be updated 
+
+
+
+add a function that when the admin adds a new property it then also save the property id in the user info
+
+and how can i do it that i will be able to list all the order under all the properties owned by 1 person that is all orders under the person property should be listed

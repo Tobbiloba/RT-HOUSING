@@ -6,6 +6,8 @@ import connectDB from "./mongodb/connect.js";
 import userRouter from "./routes/user.routes.js";
 import propertyRouter from "./routes/property.routes.js";
 import adminRouter from "./routes/admin.routes.js"
+import orderRouter from "./routes/order.routes.js"
+import ratingRouter from "./routes/rating.routes.js"
 dotenv.config();
 
 const app = express();
@@ -20,6 +22,8 @@ app.get("/", (req, res) => {
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/properties", propertyRouter);
 app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/order", orderRouter);
+app.use("/api/v1/rating", ratingRouter);
 const startServer = async () => {
     try {
         connectDB(process.env.MONGODB_URL);

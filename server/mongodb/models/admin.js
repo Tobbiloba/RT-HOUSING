@@ -22,9 +22,9 @@ const adminUserModel = mongoose.model("AdminUser", AdminUserSchema);
 
 export const getAllAdmins = () => adminUserModel.find();
 export const getAdminUserByEmail = (email) => adminUserModel.findOne({email})
-export const getAdminUserByUsername = (username) => adminUserModel.findOne({username})
+// export const getAdminUserByUsername = (username) => adminUserModel.findOne({username})
 export const getAdminUserById = (id) => adminUserModel.findOne({_id: id}).populate("allProperties");
 export const registerAdminUser = (values) => new adminUserModel(values).save().then((user) => user.toObject())
-
+export const updateAdminUser = (id, values) => adminUserModel.findByIdAndUpdate(id, values, { new: true });
 
 export default adminUserModel
