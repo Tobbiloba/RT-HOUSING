@@ -1,115 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2&family=Rubik+Lines&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-
-body{
-  padding: 0;
-  margin: 0;
-}
-
-.exo {
-    font-family: 'Exo 2', sans-serif;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+ 
+    --radius: 0.5rem;
   }
-  
-  /* Apply 'Rubik Lines' font to paragraphs */
-  .rubik {
-    font-family: 'Rubik Lines', sans-serif;
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
-
-
-  /* Slide-in Animation */
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
   }
-  to {
-    transform: translateX(0);
+  body {
+    @apply bg-background text-foreground;
   }
-}
-
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
-
-/* Apply the Animation to an Element */
-.slide-in {
-  animation: slideIn 0.5s ease-in-out;
-  width: 70vw;
-  height: 90vh;
-}
-
-.slide-out {
-  animation: slideOut 0.5s ease-in-out;
-  opacity: 1; /* Initially set opacity to 1 */
-}
-
-
-.width-out-in {
-  height: 140px;
-  transition: height 350ms ease-in-out;
-}
-
-.width-in {
-  height: 210px;
-  transition: height 350ms ease-out;
-}
-
-
-/* Width and Height */
-::-webkit-scrollbar {
-  width: 12px; /* Width of the entire scrollbar */
-  height: 8px; /* Height of the entire scrollbar */
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of the scrollbar track */
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; /* Color of the scrollbar handle */
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color of the scrollbar handle when hovered */
-}
-
-.triangle {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 30.6px solid #ca8a04; /* Adjust the color as needed */
-}
-
-.overlay {
-  /* position: absolute;
-  top: 0;
-  left: 0; */
-  /* width: 100%;
-  height: 100%; */
-  background-color: rgba(0, 0, 0, 0.4); /* Adjust the last value (0.5) for opacity */
-  /* pointer-events: none; */
-}
-
-.two-tone-background {
-  /* height: 200px; Adjust the height as needed */
-  background: linear-gradient(to bottom, #d1d5db 50%, white 50%);
-}
-
-
-.MuiSlider-valueLabelOpen {
-  visibility: hidden;
 }

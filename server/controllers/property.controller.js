@@ -69,18 +69,27 @@ const getPropertyByOwner = async (req, res) => {
 
 const getPropertyDetailById = async (req, res) => {
     const { id } = req.params;
-
-    console.log(id)
-    decodeURIComponent(id)
-    const propertyExists = await getPropertyById({ _id: decodeURIComponent(id) })
-
-
-    console.log(propertyExists)
-    if (propertyExists) {
-        res.status(200).json(propertyExists);
-    } else {
-        res.status(404).json({ message: "Property not found" });
+    try{
+        console.log(id)
+        decodeURIComponent(id)
+        const propertyExists = await getPropertyById( id )
+    
+    
+        console.log(propertyExists)
+        if (propertyExists) {
+            console.log(propertyExists)
+            res.status(200).json(propertyExists);
+        } else {
+            
+            res.status(404).json({ message: "Property not found" });
+        }
     }
+
+    catch(error) {
+        console.log(error)
+        return res.status(500).json(error.message)
+    }
+   
 };
 
 const getPropertyDetail = async (req, res) => {

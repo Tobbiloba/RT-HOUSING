@@ -15,6 +15,7 @@ const Sidebar = ({showSlide, setShowSlide}) => {
   const location = useLocation()
   const dispatch = useDispatch()
   const pathname = location.pathname.split('/')
+  console.log(pathname[2])
     // const [showSlide, setShowSlide] = useState(false);
     const [showOptions, setShowOptions] = useState(false)
 
@@ -28,31 +29,31 @@ const Sidebar = ({showSlide, setShowSlide}) => {
         {
             id: 2,
             title: 'Properties',
-            link: '/admin-properties',
+            link: '/admin/properties',
             icon: <HiOutlineHomeModern />
         },
         {
             id: 3,
             title: 'Orders',
-            link: '/admin-orders',
+            link: '/admin/orders',
             icon: <AiOutlineTags />
         },
         {
             id: 4,
             title: 'Reviews',
-            link: '/admin-reviews',
+            link: '/admin/reviews',
             icon: <RiStarSLine />
         },
         {
             id: 5,
             title: 'Messages',
-            link: '/admin-messaged',
+            link: '/admin/messaged',
             icon: <BsChatSquareDots />
         },
         {
             id: 6,
             title: 'My Profile',
-            link: '/admin-profile',
+            link: '/admin/profile',
             icon: <RxAvatar />
         },
     ]
@@ -99,8 +100,10 @@ const Sidebar = ({showSlide, setShowSlide}) => {
         </Link>
         <div className='w-[80%] mt-[3rem] flex flex-col items-center gap-3'>
             {
-            navLinks.map((nav) => (
-                <Link to={nav.link} key={nav.id} className={`flex flex-row  items-center ${nav.link === `/${pathname[1]}` ? 'bg-[#355CA8] text-white' : ''} text-white rounded-full ${!showSlide ? 'h-[4rem] w-[4rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}>
+            navLinks.map((nav) => {
+              console.log(`${nav.link.split('/')[2] || 'admin'}`, pathname[2])
+              return(
+                <Link to={nav.link} key={nav.id} className={`flex flex-row  items-center ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[2]}` ? 'bg-[#355CA8] text-white' : ''} text-white rounded-full ${!showSlide ? 'h-[4rem] w-[4rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}>
                     
                     <div className='text-[28px] '>
                         {nav.icon}
@@ -108,7 +111,8 @@ const Sidebar = ({showSlide, setShowSlide}) => {
                     
                     <h1 className={`font-roboto ${!showSlide ? 'hidden' : 'block'} text-[16px]`}>{nav.title}</h1>
                 </Link>
-            ))
+            )
+            })
         }
         </div>
         
