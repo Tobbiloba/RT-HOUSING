@@ -52,7 +52,7 @@ const AdminProperties = () => {
         </div>
       </div>
 
-          <Link to="/admin-add-property">
+          <Link to="/admin/add-property">
             <button className="mt-10 rounded-md text-[18px] gap-5 flex text-white bg-slate-500 px-8 py-5 items-center"><IoMdAdd className="text-[22px]"/> Add Property</button>
           </Link>
 
@@ -60,12 +60,12 @@ const AdminProperties = () => {
           <div className="grid grid-cols-1 gap-x-12 mt-20 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
             {
               myProperties?.properties?.map((item, index) => {
-                  console.log(item)
+                  // console.log(item)
                 return(
                   <div key={index} className="border p-1 border-slate-600 rounded-md">
                     <div className="relative ">
                       <img src={item.property_information.property_images[0]}
-                       className="rounded-sm min-h-[15rem]"/>
+                       className="rounded-sm min-h-[15rem] w-[100%]"/>
                       <h1 className="absolute top-4 right-4 text-[12px] bg-slate-600 text-white px-2 py-1">{item.property_information.peoperty_bedrooms} BEDROOMS</h1>
                     </div>
                     <div className="bg-slate-600 text-white p-8">

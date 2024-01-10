@@ -382,15 +382,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPropertyDetailById } from "../../../action/property";
 const PropertyDetail = () => {
   const { id } = useParams();
+  console.log(id)
   const dispatch = useDispatch();
   // console.log(encodeURIComponent(id));
-  const { loading, error } = useSelector((state) => state?.propertyDetail);
+  const { 
+    loading,
+     error } = useSelector((state) => state?.propertyDetail);
   // console.log(error)
   const propertyDetails = useSelector((state) => state?.propertyDetail);
   console.log(propertyDetails);
   // const loading = true
   useEffect(() => {
-    // dispatch(getPropertyDetailById(id));
+    dispatch(getPropertyDetailById(id));
   }, []);
   return (
     <div className="text-white  p-[1rem] md:p-[2rem] exo w-[100%] overflow-hidden">

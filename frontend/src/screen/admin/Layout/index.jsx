@@ -15,7 +15,7 @@ const AdminLayout = ({ children }) => {
 
   const data = sessionStorage.getItem("adminInfo");
 
-  console.log(data);
+  // console.log(data);
 
   // encodeURI('woienweubwiuebwpiueb')
   useEffect(() => {
@@ -36,7 +36,6 @@ const AdminLayout = ({ children }) => {
   // useEffect((toggleOpen))
 
   useEffect(() => {
-    console.log(toggleOpen);
   }, [toggleOpen]);
 
   const handleToggleOpen = () => {};
@@ -47,7 +46,7 @@ const AdminLayout = ({ children }) => {
         <div>
           <Loading />
         </div>
-      ) : (
+      ) : data ? (
         <div className="flex flex-row">
           <div
             className={`${
@@ -64,11 +63,11 @@ const AdminLayout = ({ children }) => {
             <BsMenuButton className="text-white text-[24px]" />
           </div>
 
-          <div className={`w-[100%] h-fit bg-slate-900 p-2 min-h-[100vh]`}>
+          <div className={`w-[100%] h-fit bg-slate-900  min-h-[100vh]`}>
             {children}
           </div>
         </div>
-      )}
+      ) : ''}
     </div>
   );
 };
