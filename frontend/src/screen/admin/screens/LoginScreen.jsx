@@ -22,13 +22,13 @@ const handleLoginAdmin = () => {
   dispatch(loginAdmin(email,password))
 }
 
-const adminLogin = useSelector((state) => state.adminLogin)
+const {adminInfo, loading} = useSelector((state) => state.adminLogin)
 
 useEffect(() => {
-  if(adminLogin.adminInfo) {
+  if(adminInfo) {
     navigate('/admin')
   }
-}, [adminLogin])
+}, [adminInfo])
   
   return (
     <div className="flex exo flex-row w-[100vw] min-h-[100vh] overflow-hidden justify-end bg-[#e9e9e9] p-[1rem] md:p-12 relative">
@@ -92,7 +92,7 @@ useEffect(() => {
             <p className="text-slate-400 cursor-pointer">Forgot password?</p>
           </div>
             <div className="flex flex-col px-[10%] mt-12 gap-6">
-               <button  onClick={handleLoginAdmin} disabled={!isActive} className={`border ${!isActive ? 'bg-gray-300 cursor-not-allowed' : 'bg-slate-900'} py-4 text-white rounded-full`}>Log In</button>
+               <button  onClick={handleLoginAdmin} disabled={!isActive} className={`border ${!isActive ? 'bg-gray-300 cursor-not-allowed' : 'bg-slate-900'} py-4 text-white rounded-full`}>{loading ? 'Please wait...' : 'Log In'}</button>
           <button className="flex flex-row border justify-center gap-4 items-center py-4 rounded-full text-slate-600">
             <img
               src="https://cdn-icons-png.flaticon.com/128/2702/2702602.png"

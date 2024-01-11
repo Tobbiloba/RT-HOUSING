@@ -65,7 +65,7 @@ export const getMyProperties = () => async (dispatch) => {
     dispatch({
         type: FETCH_MY_PROPERTIES
     })
-
+    console.log('called')
     try {
         const { data } = await Axios.get(`${BASE_URL}/properties/owner/6596e220f0dcce3853b161c3`);
         dispatch({
@@ -73,7 +73,7 @@ export const getMyProperties = () => async (dispatch) => {
           payload: data,
         });
     
-
+        console.log(data)
     
       } catch (error) {
         dispatch({
@@ -83,7 +83,7 @@ export const getMyProperties = () => async (dispatch) => {
               ? error.response.data.message
               : error.message,
         });
-    
+        console.log(error)
         toast.error(
           error.response && error.response.data[0]
             ? error.response.data[0]

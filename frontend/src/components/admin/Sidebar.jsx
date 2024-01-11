@@ -11,6 +11,7 @@ import { AiOutlineTags } from "react-icons/ai";
 import { RiStarSLine } from "react-icons/ri";
 import { BsChatSquareDots } from "react-icons/bs";
 import { RxAvatar } from "react-icons/rx";
+import { FaMoneyBillAlt } from "react-icons/fa";
 const Sidebar = ({showSlide, setShowSlide}) => {
   const location = useLocation()
   const dispatch = useDispatch()
@@ -40,16 +41,16 @@ const Sidebar = ({showSlide, setShowSlide}) => {
         },
         {
             id: 4,
-            title: 'Reviews',
-            link: '/admin/reviews',
-            icon: <RiStarSLine />
+            title: 'Payments',
+            link: '/admin/payments',
+            icon: <FaMoneyBillAlt />
         },
-        {
-            id: 5,
-            title: 'Messages',
-            link: '/admin/messaged',
-            icon: <BsChatSquareDots />
-        },
+        // {
+        //     id: 5,
+        //     title: 'Messages',
+        //     link: '/admin/messaged',
+        //     icon: <BsChatSquareDots />
+        // },
         {
             id: 6,
             title: 'My Profile',

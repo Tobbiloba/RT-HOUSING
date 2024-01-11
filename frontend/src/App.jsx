@@ -1,3 +1,4 @@
+import React from 'react'
 import Layout from './components/Layout'
 import Homescreen from './screen/Homescreen'
 import {
@@ -19,6 +20,8 @@ import AdminLoginScreen from './screen/admin/screens/LoginScreen'
 import AdminRegisterScreen from './screen/admin/screens/RegisterScreen'
 import NotFound from './screen/NotFound'
 import Orders from './screen/admin/screens/Orders'
+import Payments from './screen/admin/screens/Payments'
+import AdminProfile from './screen/admin/screens/AdminProfile'
 function App() {
   
   const routes = [
@@ -28,8 +31,10 @@ function App() {
     <Route path="/admin" element={<AdminLayout><Home /></AdminLayout>} />,
     <Route path="/admin/properties" element={<AdminLayout><AdminProperties /></AdminLayout>} />,
     <Route path="/admin/add-property" element={<AdminLayout><AddProperty /></AdminLayout>} />,
+    <Route path="/admin/payments" element={<AdminLayout><Payments /></AdminLayout>} />,
     <Route path="/admin/property-detail/:id" element={<AdminLayout><PropertyDetail /></AdminLayout>} />,
     <Route path="/admin/orders" element={<AdminLayout><Orders /></AdminLayout>} />,
+    <Route path="/admin/profile" element={<AdminLayout><AdminProfile /></AdminLayout>} />,
     <Route path="/admin/login" element={<AdminLoginScreen />} />,
     <Route path="/admin/register" element={<AdminRegisterScreen />} />,
     <Route path="*" element={<Layout><NotFound /></Layout>} />,
