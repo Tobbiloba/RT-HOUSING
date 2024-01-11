@@ -57,7 +57,7 @@ const AdminLayout = ({ children }) => {
           </div>
 
           <div
-            className="md:hidden fixed bottom-6 left-6 shadow-md h-fit cursor-pointer bg-slate-800 p-3 rounded-md"
+            className="md:hidden fixed bottom-6 z-100 left-6 shadow-md h-fit cursor-pointer bg-slate-800 p-3 rounded-md"
             onClick={() => setToggleOpen(!toggleOpen)}
           >
             <BsMenuButton className="text-white text-[24px]" />
