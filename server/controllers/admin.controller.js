@@ -15,10 +15,10 @@ const getAllAdminUsers = async (req, res) => {
 
 const createAdminUser = async (req, res) => {
   try {
-    const { username, firstname, lastname, email, phone_no, password, profile_img, country, state, city } = req.body;
+    const { username, firstname, lastname, email, phone_no, password, profile_img, country, state, city, socials } = req.body;
 
     console.log(username);
-    if (!email || !password || !username) {
+    if (!email || !password || !username || !firstname || !lastname || !profile_img || !state || !country || !city  || !phone_no) {
       return res.status(500).json({ message: "Pass necessary parameters" });
     }
 
@@ -40,6 +40,7 @@ const createAdminUser = async (req, res) => {
       country: country || null,
       state: state || null,
       city: city || null,
+      socials: socials || null,
       authentication: {
         password: authentication(salt, password),
         salt,
@@ -55,6 +56,7 @@ const createAdminUser = async (req, res) => {
       country: country || null,
       state: state || null,
       city: city || null,
+      socials: socials || null,
       authentication: {
         salt, password: authentication(salt, password)
     }

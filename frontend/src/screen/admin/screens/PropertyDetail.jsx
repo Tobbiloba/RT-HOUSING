@@ -87,11 +87,11 @@ const DetailTopCard = ({ detail }) => {
   console.log(detail?.property_no_bathroom);
   return (
     <div className="mb-6">
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center px-[1.25rem] sm:px-[10%]">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center px-[1.25rem] sm:px-[5%] ">
         <div className="flex flex-col sm:flex-row gap-5">
           <img
             src={detail?.avatar}
-            className="w-48 h-48 rounded-full bg-slate-600"
+            className="w-40 h-40 rounded-full bg-slate-600"
           />
           <div>
             {/* <div className="relative z-10 gap-4 flex items-start text-[12px] text-white">
@@ -107,10 +107,10 @@ const DetailTopCard = ({ detail }) => {
                 </h1>
               )}
             </div> */}
-            <p className="mt-3 text-sky-500 font-[600] text-[17px]">
+            <p className="mt-3 text-sky-500 font-[600] text-[15px]">
               {detail?.property_type}
             </p>
-            <h1 className="text-slate-400 text-[26px] font-[600]">
+            <h1 className="text-sky-200 text-[28px] font-[600]">
               {detail?.property_name}
             </h1>
 
@@ -125,7 +125,7 @@ const DetailTopCard = ({ detail }) => {
           </div>
         </div>
         <div className="mt-12 lg:mt-0">
-          <p className="text-[26px] font-[600] text-slate-400">
+          <p className="text-[24px] font-[600] text-slate-400">
             {detail.pricing}{" "}
             <span className="text-[16px] font-[500] text-slate-500">
               / night
@@ -160,8 +160,8 @@ const AboutProperty = ({propertyDetails}) => {
   console.log(propertyDetails)
   return (
     <div className="py-6 px-[5%]">
-      <h1 className="text-slate-400 text-xl font-[600]">About Property</h1>
-      <p className="mt-3 text-slate-500 text-[15px] leading-6">
+      <h1 className="text-slate-400 text-[17px] font-[600]">About Property</h1>
+      <p className="mt-3 text-slate-500 text-[14px] leading-6">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempoer incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nrud exercitation ullamco laboris nisi ute aliquip ex ea
@@ -169,7 +169,7 @@ const AboutProperty = ({propertyDetails}) => {
         velit.
       </p>
       <div className=" mt-7">
-        <h1 className="text-slate-400 text-[22px] font-[600]">
+        <h1 className="text-slate-400 text-[17px] font-[600]">
           Property Details
         </h1>
 
@@ -177,10 +177,10 @@ const AboutProperty = ({propertyDetails}) => {
           <table class="border-collapse w-full text-start ...">
             <thead>
               <tr className="bg-slate-600">
-                <th className="border border-slate-900 border-r-gray-300 pl-5 text-start  text-slate-100 py-3 w-6/12">
+                <th className="border border-slate-900 text-[15px] border-r-gray-300 pl-5 text-start  text-slate-100 py-3 w-6/12">
                   Accommodation
                 </th>
-                <th className="text-start pl-5 text-gray-100 font-[500]">
+                <th className="text-start pl-5 text-gray-100 text-[15px] font-[500]">
                   {detail[0].guests < 10 && "0"}
                   {detail[0].guests} Guests
                   {/* {propertyDetails} */}
@@ -190,42 +190,42 @@ const AboutProperty = ({propertyDetails}) => {
             </thead>
             <tbody>
               <tr>
-                <td className="border border-slate-900 border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600]">
+                <td className="border border-slate-900 border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600] text-[15px]">
                   Bedrooms
                 </td>
-                <td className="text-start pl-5 text-gray-100 font-[500]">
+                <td className="text-start pl-5 text-[15px] text-gray-100 font-[500]">
                   {propertyDetails?.property_no_bedrooms}
                 </td>
               </tr>
               <tr className="bg-slate-100">
-                <td className="border border-white border-r-gray-300 pl-5 text-start  text-slate-600 py-3 font-[600]">
+                <td className="border border-white  border-r-gray-300 pl-5 text-start text-[15px] text-slate-600 py-3 font-[600]">
                   Bathrooms
                 </td>
-                <td className="text-start pl-5 text-gray-500 font-[500]">
-                {propertyDetails?.property_no_bathroom}
+                <td className="text-start pl-5 text-gray-500 text-[15px] font-[500]">
+                {propertyDetails?.property_no_bathrooms}
                 </td>
               </tr>
               <tr>
-                <td className="border border-slate-900 border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600]">
+                <td className="border border-slate-900 text-[15px]  border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600]">
                   Dimension
                 </td>
-                <td className="text-start pl-5 text-gray-100 font-[500]">
+                <td className="text-start pl-5 text-[15px] text-gray-100 font-[500]">
                   {propertyDetails?.property_size[0] || ''} x {propertyDetails?.property_size[1] || ''}Sq Ft
                 </td>
               </tr>
               <tr className="bg-slate-100">
-                <td className="border border-white border-r-gray-300 pl-5 text-start  text-slate-600 py-3 font-[600]">
+                <td className="border border-white text-[15px] border-r-gray-300 pl-5 text-start  text-slate-600 py-3 font-[600]">
                   Type
                 </td>
-                <td className="text-start pl-5 text-gray-500 font-[500]">
+                <td className="text-start pl-5 text-[15px] text-gray-500 font-[500]">
                   {detail[0].type}
                 </td>
               </tr>
               <tr>
-                <td className="border border-slate-900 border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600]">
+                <td className="border border-slate-900 text-[15px] border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600]">
                   Check-In Start @
                 </td>
-                <td className="text-start pl-5 text-gray-100 font-[500]">
+                <td className="text-start pl-5 text-[15px] text-gray-100 font-[500]">
                   {detail[0].check_in}
                 </td>
               </tr>
@@ -241,9 +241,9 @@ const Amenities = ({ amenities }) => {
   // console.log(amenities)
   return (
     <div className="my-6 px-[5%]">
-      <h1 className="text-slate-400 text-xl font-[600]">Amenities</h1>
+      <h1 className="text-slate-400 text-[17px] font-[600]">Amenities</h1>
 
-      <div className="grid grid-cols-1 mt-5 sm:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 text-[15px] mt-5 sm:grid-cols-2 gap-8">
         {amenities.map((item, index) => (
           // <AmenitiesCard key={index} detail={item}/>itemitem
           <h1 key={index}>{item}</h1>
@@ -256,9 +256,9 @@ const Amenities = ({ amenities }) => {
 const Nearby = () => {
   return (
     <div className="my-12">
-      <h1 className="text-slate-400 text-xl font-[600]">Nearby Locations</h1>
+      <h1 className="text-slate-400 text-[17px] font-[600]">Nearby Locations</h1>
       <div className="w-[100%] bg-gray-600 h-[30rem] my-3 flex items-center justify-center">
-        <h1 className="text-xl">Feature Not Available...</h1>
+        <h1 className="text-[17px]">Feature Not Available...</h1>
       </div>
     </div>
   );
@@ -290,8 +290,8 @@ const Availability = ({ dates }) => {
   // console.log(dateFormat(dates.unavailable_date_from[0]))
   return (
     <div className="w-[100%] my-12">
-      <h1 className="text-slate-400 text-xl font-[600]">Availability</h1>
-      <p className="mt-3 text-slate-500 text-[15px] leading-6">
+      <h1 className="text-slate-400 text-[17px] font-[600]">Availability</h1>
+      <p className="mt-3 text-slate-500 text-[14px] leading-6">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempoer incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nrud exercitation ullamco laboris nisi ute aliquip ex ea
@@ -331,9 +331,9 @@ const Availability = ({ dates }) => {
 const Reviews = () => {
   return (
     <div className="w-[100%] my-10 ">
-      <h1 className="text-slate-400 text-xl font-[600]">100 Comments</h1>
+      <h1 className="text-slate-400 text-[17px] font-[600]">100 Comments</h1>
       <div className="w-[100%] bg-gray-600 h-[30rem] my-3 flex items-center justify-center">
-        <h1 className="text-xl">In Progress...</h1>
+        <h1 className="text-[17px]">In Progress...</h1>
       </div>
     </div>
   );
@@ -385,15 +385,16 @@ const PropertyDetail = () => {
   console.log(id)
   const dispatch = useDispatch();
   // console.log(encodeURIComponent(id));
+  const loading = false
   const { 
-    loading,
+    // loading,
      error } = useSelector((state) => state?.propertyDetail);
   // console.log(error)
   const propertyDetails = useSelector((state) => state?.propertyDetail);
   console.log(propertyDetails);
   // const loading = true
   useEffect(() => {
-    dispatch(getPropertyDetailById(id));
+    // dispatch(getPropertyDetailById(id));
   }, []);
   return (
     <div className="text-white  p-[1rem] md:p-[2rem] exo w-[100%] overflow-hidden">
@@ -402,13 +403,13 @@ const PropertyDetail = () => {
       ) : propertyDetails ? (
         <div>
           <div className="flex flex-row flex-wrap gap-8 justify-end">
-            <button className="border border-slate-600 px-6 py-4 text--600 bg-slate-800">
+            <button className="border border-slate-600 px-4 text-[15px] py-2 h-fit text--600 bg-slate-800">
               De Activate Property
             </button>
-            <button className="border border-sky-600 px-6 py-4 text--600 bg-sky-800">
+            <button className="border border-sky-600 px-4 text-[15px] py-2 h-fit text--600 bg-sky-800">
               Edit Property
             </button>
-            <button className="border border-red-600 px-6 py-4 text--600 bg-red-800">
+            <button className="border border-red-600 px-4 text-[15px] py-2 h-fit text--600 bg-red-800">
               Delete Property
             </button>
           </div>
@@ -432,7 +433,7 @@ const PropertyDetail = () => {
                     offset={20}
                     duration={500}
                   >
-                    <span className="text-slate-300 text-xl hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
                       About
                     </span>
                   </Link>
@@ -442,12 +443,12 @@ const PropertyDetail = () => {
                     offset={-70}
                     duration={500}
                   >
-                    <span className="text-slate-300 text-xl hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
                       Amenities Others
                     </span>
                   </Link>
                   <Link to="nearby" smooth={true} offset={-70} duration={500}>
-                    <span className="text-slate-300 text-xl hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
                       Nearby
                     </span>
                   </Link>
@@ -457,24 +458,24 @@ const PropertyDetail = () => {
                     offset={-70}
                     duration={500}
                   >
-                    <span className="text-slate-300 text-xl hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
                       Availability
                     </span>
                   </Link>
                   <Link to="terms" smooth={true} offset={-70} duration={500}>
-                    <span className="text-slate-300 text-xl hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
                       Terms & Rules
                     </span>
                   </Link>
                   <Link to="reviews" smooth={true} offset={-70} duration={500}>
-                    <span className="text-slate-300 text-xl hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
                       Reviews
                     </span>
                   </Link>
                 </div>
 
                 <div className="flex flex-col">
-                  <div className="flex flex-col md:grid md:grid-cols-2 w-[100%] mt-16 gap-x-12 gap-y-6">
+                  <div className="flex flex-col md:grid md:grid-cols-2 w-[100%] mt-6 gap-x-12 gap-y-6">
                     <Element name="about-property" className="element">
                       <AboutProperty id="about-property" propertyDetails={propertyDetails?.details?.property_information}/>
                     </Element>

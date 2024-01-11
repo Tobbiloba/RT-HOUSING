@@ -26,11 +26,12 @@ const AdminProperties = () => {
   ];
 
   useEffect(() => {
-    dispatch(getMyProperties());
+    // dispatch(getMyProperties());
   }, []);
 
-  const {properties, loading} = useSelector((state) => state?.myProperties);
-  // console.log(myProperties);
+  const {properties,loading} = useSelector((state) => state?.myProperties);
+  console.log(properties);
+  // const loading  = true
   return (
     <div className="exo">
       <div className="pt-6 items-center flex-wrap gap-y-6 pb-4 px-4 bg-slate-800 mt-0  md:px-[5%] flex flex-row justify-between">
@@ -78,32 +79,64 @@ const AdminProperties = () => {
         {
           loading ? <div></div> : properties?.length ?
         
-      <div className="grid grid-cols-1 gap-x-12 mt-20 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-x-12 mt-20 p-[1rem] sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
         {properties?.map((item, index) => {
           // console.log(item)
           return (
-            <div key={index} className="border p-1 border-slate-600 rounded-md">
+            <div key={index} className="max-w-[25rem] bg-slate-600 rounded-md border border-slate-600 overflow-hidden">
               <div className="relative ">
                 <img
                   src={item.property_information.property_images[0]}
-                  className="rounded-sm min-h-[15rem] w-[100%]"
+                  className=" min-h-[15rem] rounded-md m w-[100%]"
                 />
-                <h1 className="absolute top-4 right-4 text-[12px] bg-slate-600 text-white px-2 py-1">
-                  {item.property_information.peoperty_bedrooms} BEDROOMS
+                <h1 className="absolute top-4 right-4 text-[11px] bg-black/60 border border-slate-500 text-white px-2 py-1">
+                  {item.property_information.peoperty_bedrooms} For Rent
                 </h1>
-              </div>
-              <div className="bg-slate-600 text-white p-8">
-                <h1 className="text-xl">
-                  {item.property_information.property_name}
-                </h1>
-                <p>
+
+                <p className="absolute top-4 border border-slate-600 text-[11px] left-4  bg-white/10 text-white px-2 py-1">
                   {item.property_information.property_location.country},{" "}
                   {item.property_information.property_location.state}
                 </p>
+              </div>
 
-                <div className="mt-8 pt-4 border-2 border-slate-600 border-t-slate-400">
-                  <p>#{item.property_information.pricing},000</p>
 
+
+              <div className="bg-white/10 text-black mt-2 p-4">
+                <div className="flex flex-row items-center justify-between">
+                <h1 className="text-xl">
+                  {item.property_information.property_name}
+                </h1>
+                <h1 className="text-[15px]">
+                  ${item.property_information.pricing},000
+                </h1>
+                </div>
+
+                <p className="mt-2 text-[13px] h-[4rem] overflow-hidden overflow-ellipsis">
+  {item.property_information.property_description}
+</p>
+
+            <div className="flex flex-row gap-8 mt-4">
+              <div className="flex flex-row gap-3 items-center">
+                <img src="https://cdn-icons-png.flaticon.com/128/2642/2642268.png" className="w-8 h-8"/>
+                <p className="text-black/75 text-[14px]">{item.property_information.property_no_bedrooms} rooms</p>
+              </div>
+            {/*  */}
+            <div className="flex flex-row gap-3 items-center">
+            <img src="https://cdn-icons-png.flaticon.com/128/1018/1018552.png" className="w-8 h-8"/>
+            <p className="text-black/75 text-[14px]">{item.property_information.property_no_bathrooms} baths</p>
+            </div>
+
+
+            <div className="flex flex-row gap-3 items-center">
+              <img src="https://cdn-icons-png.flaticon.com/128/9823/9823123.png" className="w-8 h-8"/>
+              <p className="text-black/75 text-[14px]">{item.property_information.property_size[0]} baths</p>
+            </div>
+              
+             
+            </div>
+                
+
+                <div className="mt-2">
                   <div className="mt-10 flex justify-center">
                     <Link
                       to={`/admin/property-detail/${encodeURIComponent(

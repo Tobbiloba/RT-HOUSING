@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const PropertySchema = new mongoose.Schema({
     property_id: { type: String, required: true },
-    owner_id: {type: String, required: true},
     isActive: {type: Boolean, enum: [true, false], default: false},
     property_information: {
         property_name: {type: String, required: true},
@@ -42,15 +41,16 @@ const PropertySchema = new mongoose.Schema({
         
         booking_status: { type: String, enum: ['available', 'booked', 'under maintenance', 'unavailable'], default: 'available' },
     },
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    created_by: {type: String, required: false},
     created_at: { type: Date, default: Date.now },
-    status: {type: String, required: true}
+    activated: {type: Boolean, required: true}
 });
 
 const PropertyModel = mongoose.model("Property", PropertySchema);
 
 export const getProperties = (no) => PropertyModel.find({}).limit(no);
-export const getPropertyById = (id) => PropertyModel.findOne({"property_id": id});
+export const getActivatedProperties = () => PropertyModel.find({"activated": true});
+export const getPropertyById = (id) => PropertyModel.find({id});
 export const getPropertyByOwnerId = (id) => PropertyModel.find({"owner_id": id}).populate(
     "creator",
 );

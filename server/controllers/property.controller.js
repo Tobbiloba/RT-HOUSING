@@ -1,4 +1,4 @@
-import Property, { createPropertyAdmin, getPropertyById, getPropertyByOwnerId, updatePropertyById } from "../mongodb/models/property.js";
+import Property, { createPropertyAdmin, getActivatedProperties, getPropertyById, getPropertyByOwnerId, updatePropertyById } from "../mongodb/models/property.js";
 import User, { getUserById } from "../mongodb/models/user.js";
 
 import mongoose from "mongoose";
@@ -8,11 +8,6 @@ import { random } from "../helpers/index.js";
 import { getAdminUserById, updateAdminUser } from "../mongodb/models/admin.js";
 dotenv.config();
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 const getAllProperties = async (req, res) => {
     const {
@@ -50,6 +45,19 @@ const getAllProperties = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+
+
+const getAllPropertiesUser = async (req, res) => {
+    try {
+        const properties = await getActivatedProperties(); // Add await here
+
+        res.status(200).json(properties);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 const getPropertyByOwner = async (req, res) => {
     const { id } = req.params;
 
@@ -64,9 +72,6 @@ const getPropertyByOwner = async (req, res) => {
         res.status(404).json({ message: "Property not found" });
     }
 };
-
-
-
 const getPropertyDetailById = async (req, res) => {
     const { id } = req.params;
     try{
@@ -116,7 +121,6 @@ const getPropertyDetail = async (req, res) => {
 
 const createProperty = async (req, res) => {
     try {
-        // const { id } = req.params;
 
         const {
             id,
@@ -131,7 +135,7 @@ const createProperty = async (req, res) => {
             return res.status(500).json({message: "Pass in the necessary parameters"})
         }
 
-        console.log(id)
+        // console.log(id)
 
         // const session = await mongoose.startSession();
         // session.startTransaction();
@@ -142,11 +146,11 @@ const createProperty = async (req, res) => {
         if (!user) {throw new Error("User not found")
         return res.status(500).end()
     };
+    // console.log(user)
     const property_id = random()
 
         const newProperty = await createPropertyAdmin({
             property_id: property_id,
-            owner_id: id,
             isActive: false,
             property_information: {
                 property_name: property_information?.property_name,
@@ -184,14 +188,16 @@ const createProperty = async (req, res) => {
                   booking_status: property_information?.booking_status || 'available',
                   
             },
-            status: 'Successful'
+            activated: false,
+            created_by: id
         });
 
 
         user.allProperties.push(newProperty._id);
         console.log(newProperty._id)
-
+        // newProperty.creator.push(newProperty.owner_id)
         await user.save();
+        // await newProperty.save()
 
 
         res.status(200).json(newProperty);
@@ -202,32 +208,6 @@ const createProperty = async (req, res) => {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const updateProperty = async (req, res) => {
     try {
         const {
@@ -236,45 +216,57 @@ const updateProperty = async (req, res) => {
         } = req.body;
 
 
+        const existingPropertyInformation = getPropertyById(id)
+
+        if(!existingPropertyInformation) {
+            return res.status(500).json({message: "property doesn't exist"})
+        }
+
+
         await updatePropertyById(
             { _id: id },
             {
                 property_information: {
-                    property_name: property_information?.property_name || null,
-                    property_type: property_information?.property_type || null,
-                    property_description: property_information?.property_description || null,
-                    property_no_bedrooms: property_information?.property_no_bedrooms || null,
-                    property_no_bathroom: property_information?.property_no_bathroom || null,
-                    property_size: property_information?.property_size || null,
-                    property_amenities: property_information?.property_amenities || null,
-                    property_images: property_information?.property_images || null,
-                    property_review: property_information?.property_review || null,
-                    property_avg_ratings: property_information?.property_avg_ratings || null,
+                    ...existingPropertyInformation, // Copy existing properties
+                    property_name: property_information?.property_name,
+                    property_type: property_information?.property_type,
+                    property_description: property_information?.property_description,
+                    property_no_bedrooms: property_information?.property_no_bedrooms,
+                    property_no_bathroom: property_information?.property_no_bathroom,
+                    property_size: property_information?.property_size,
+                    property_amenities: property_information?.property_amenities,
+                    property_images: property_information?.property_images,
+                    property_review: property_information?.property_review,
+                    property_avg_ratings: property_information?.property_avg_ratings,
                     property_location: {
-                      country: property_information?.property_location?.country || null,
-                      state: property_information?.property_location?.state || null,
-                      zip_code: property_information?.property_location?.zip_code || null,
+                      ...existingPropertyInformation?.property_location, // Copy existing location properties
+                      country: property_information?.property_location?.country,
+                      state: property_information?.property_location?.state,
+                      zip_code: property_information?.property_location?.zip_code,
                     },
                     property_policy: {
-                        pet_policy: property_information?.property_policy?.pet_policy || null,
-                        smoking_policy: property_information?.property_policy?.smoking_policy || null,
-                      },
-                      pricing: property_information.pricing || null,
-                      availability: {
-                        available_date_from: property_information?.availability?.available_date_from || null,
-                        available_date_till: property_information?.availability?.available_date_till || null,
-                        unavailable_date_from: property_information?.availability?.available_date_from || null,
-                        unavailable_date_till: property_information?.availability?.available_date_till || null,
-                        occupied_date_from: property_information?.availability?.occupied_date_from || null,
-                        occupied_date_till: property_information?.availability?.occupied_date_till || null,
-                      },
-                      guest: {
-                        maximum_children: property_information?.guest?.maximum_children || null,
-                        maximum_adults: property_information?.guest?.maximum_adults || null,
-                        maximum_infants: property_information?.guest?.maximum_infants || null,
-                      },
-                      booking_status: property_information?.booking_status || null,
-                }
+                      ...existingPropertyInformation?.property_policy, // Copy existing policy properties
+                      pet_policy: property_information?.property_policy?.pet_policy,
+                      smoking_policy: property_information?.property_policy?.smoking_policy,
+                    },
+                    pricing: property_information?.pricing,
+                    availability: {
+                      ...existingPropertyInformation?.availability, // Copy existing availability properties
+                      available_date_from: property_information?.availability?.available_date_from,
+                      available_date_till: property_information?.availability?.available_date_till,
+                      unavailable_date_from: property_information?.availability?.unavailable_date_from,
+                      unavailable_date_till: property_information?.availability?.unavailable_date_till,
+                      occupied_date_from: property_information?.availability?.occupied_date_from,
+                      occupied_date_till: property_information?.availability?.occupied_date_till,
+                    },
+                    guest: {
+                      ...existingPropertyInformation?.guest, // Copy existing guest properties
+                      maximum_children: property_information?.guest?.maximum_children,
+                      maximum_adults: property_information?.guest?.maximum_adults,
+                      maximum_infants: property_information?.guest?.maximum_infants,
+                    },
+                    booking_status: property_information?.booking_status,
+                  }
             },
         );
 
@@ -284,6 +276,142 @@ const updateProperty = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+
+
+// const activateProperty = async (req, res) => {
+//     const {id} = req.params;
+//     // const {mode} = r
+
+//     console.log(id)
+//     const  existingPropertyInformation = await getPropertyById(id)
+//     console.log(existingPropertyInformation)
+//     try {
+
+//         if(!existingPropertyInformation) {
+//             return res.status(500).json({message: "property doesn't exist"})
+//         }
+
+//         const updatedProperty = {
+//             ...existingPropertyInformation,
+//             activated: true
+//           };
+
+          
+
+         
+
+//     const activated = await updatePropertyById(id, updatedProperty)
+//     console.log(activated)
+
+//     return res.status(201).json({message: "Successfully activated"})
+//     } catch (error) {
+//         return res.status(500).json(error.message)
+//     }
+// }
+
+
+const activateProperty = async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+
+    try {
+        const existingPropertyInformation = await getPropertyById(id);
+        console.log(existingPropertyInformation);
+
+        if (!existingPropertyInformation) {
+            return res.status(404).json({ message: "Property doesn't exist" });
+        }
+
+        const updatedProperty = {
+            ...existingPropertyInformation.toObject(), // Use toObject() to convert Mongoose document to a plain object
+            activated: true,
+        };
+
+        const activated = await updatePropertyById(id, updatedProperty);
+        console.log(activated);
+
+        return res.status(201).json({ message: "Successfully activated" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+
+
+const deActivateProperty = async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+
+    try {
+        const existingPropertyInformation = await getPropertyById(id);
+        console.log(existingPropertyInformation);
+
+        if (!existingPropertyInformation) {
+            return res.status(404).json({ message: "Property doesn't exist" });
+        }
+
+        const updatedProperty = {
+            ...existingPropertyInformation.toObject(), // Use toObject() to convert Mongoose document to a plain object
+            activated: false,
+        };
+
+        const activated = await updatePropertyById(id, updatedProperty);
+        console.log(activated);
+
+        return res.status(201).json({ message: "Successfully deactivated" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+
+
+const filterProperty = async (req, res) => {
+    try {
+        console.log('lol')
+    //   Fetch all activated properties
+      const activatedProperties = await getActivatedProperties();
+      const filterObject = req.query
+      console.log(filterObject)
+
+      // Filter the activated properties based on dynamic criteria in filterObject
+    //   const result = activatedProperties.filter(property => {
+    //     // Check each filter criteria
+    //     for (const key in filterObject) {
+    //       if (Object.hasOwnProperty.call(filterObject, key)) {
+    //         const filterValue = filterObject[key];
+  
+    //         // Handle array of amenities
+    //         if (key === 'property_amenities' && filterValue instanceof Array) {
+    //           const propertyAmenities = property[key] || [];
+    //           const matchingAmenities = filterValue.filter(amenity => propertyAmenities.includes(amenity));
+    //           if (matchingAmenities.length === 0) {
+    //             return false; // No matching amenities, skip this property
+    //           }
+    //         } else if (property[key] !== filterValue) {
+    //           return false; // Criteria doesn't match, skip this property
+    //         }
+    //       }
+    //     }
+  
+    //     return true; // All criteria match, include this property
+    //   });
+
+    //   console.log(result)
+  
+    //   return result;
+
+
+      
+      } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+    
+}
 
 const deleteProperty = async (req, res) => {
     try {
@@ -343,5 +471,9 @@ export {
     updateProperty,
     deleteProperty,
     getPropertyByOwner,
-    getPropertyDetailById
+    getPropertyDetailById,
+    activateProperty,
+    getAllPropertiesUser,
+    deActivateProperty,
+    filterProperty
 };

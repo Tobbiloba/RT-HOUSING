@@ -10,6 +10,7 @@ const AdminUserSchema = new mongoose.Schema({
     country: {type: String, required: false},
     state: {type: String, required: false},
     city: {type: String, required: false},
+    socials: {type: [String], required: false},
     authentication: {
         password: {type: String, required: true, select: false},
         salt: {type: String, required: true, select: false},

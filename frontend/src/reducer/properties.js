@@ -53,6 +53,7 @@ export const fetchMyPropertiesReducer = (
         case FETCH_MY_PROPERTIES_SUCCESSFUL:
           return {
             loading: false,
+            
             properties: action.payload,
           };
         case FETCH_MY_PROPERTIES_FAILED:

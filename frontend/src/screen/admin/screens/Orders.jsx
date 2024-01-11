@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import OrderTable from '../../../components/admin/table/Table';
-import  {DataTableDemo2}  from '@/components/admin/table/Table2';
+import  {DataTableDemo2}  from '@/components/admin/table/Table';
 
 
 
