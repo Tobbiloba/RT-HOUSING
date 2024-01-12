@@ -49,7 +49,7 @@ const PropertySchema = new mongoose.Schema({
 const PropertyModel = mongoose.model("Property", PropertySchema);
 
 export const getProperties = (no) => PropertyModel.find({}).limit(no);
-export const getActivatedProperties = () => PropertyModel.find({"activated": true});
+export const getActivatedProperties = (query) => PropertyModel.find({"activated": true, query});
 export const getPropertyById = (id) => PropertyModel.find({id});
 export const getPropertyByOwnerId = (id) => PropertyModel.find({"owner_id": id}).populate(
     "creator",

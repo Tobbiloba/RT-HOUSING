@@ -50,7 +50,8 @@ const getAllProperties = async (req, res) => {
 
 const getAllPropertiesUser = async (req, res) => {
     try {
-        const properties = await getActivatedProperties(); // Add await here
+        console.log(req.query)
+        const properties = await getActivatedProperties(req.query); // Add await here
 
         res.status(200).json(properties);
     } catch (error) {
