@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 
+// const CompanySchema = new mongoose.Schema({
+//     company_name: {type: String, required: true},
+//     company_id: {type: String, required: true},
+//     c
+// })
 const PropertySchema = new mongoose.Schema({
     property_id: { type: String, required: true },
     isActive: {type: Boolean, enum: [true, false], default: false},
@@ -41,9 +46,10 @@ const PropertySchema = new mongoose.Schema({
         
         booking_status: { type: String, enum: ['available', 'booked', 'under maintenance', 'unavailable'], default: 'available' },
     },
+    company_id: {type: String, required: true},
+    company_name: {type: String, required: true},
     created_by: {type: String, required: false},
     created_at: { type: Date, default: Date.now },
-    activated: {type: Boolean, required: true}
 });
 
 const PropertyModel = mongoose.model("Property", PropertySchema);

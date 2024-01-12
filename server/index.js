@@ -8,6 +8,8 @@ import propertyRouter from "./routes/property.routes.js";
 import adminRouter from "./routes/admin.routes.js"
 import orderRouter from "./routes/order.routes.js"
 import ratingRouter from "./routes/rating.routes.js"
+import companyRouter from "./routes/company.routes.js"
+import couponRouter from "./routes/coupon.routes.js"
 dotenv.config();
 
 const app = express();
@@ -24,6 +26,8 @@ app.use("/api/v1/properties", propertyRouter);
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/order", orderRouter);
 app.use("/api/v1/rating", ratingRouter);
+app.use("/api/v1/company", companyRouter);
+app.use("/api/v1/coupon", couponRouter);
 const startServer = async () => {
     try {
         connectDB(process.env.MONGODB_URL);

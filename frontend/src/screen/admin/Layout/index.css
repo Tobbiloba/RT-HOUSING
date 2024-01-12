@@ -3,12 +3,14 @@
     transition: width 150ms ease-in-out;
     height: 100vh;
     overflow: hidden;
+    position: relative;
   }
   
   .sidebar-slide-in {
-    width: 180px;
+    width: 220px;
     transition: width 150ms ease-out;
     height: 100vh;
+    position: relative;
   }
 
   @media (max-width: 768px) {
@@ -16,11 +18,45 @@
       width: 0px;
       overflow: hidden;
       height: 100vh;
+      position: absolute;
     }
 
     .sidebar-slide-in {
       width: 250px;
       overflow: visible;
       height: 100vh;
+      position: absolute;
+    }
+  }
+
+
+
+  .sidebar-slide-out-in-topbar {
+    width: calc(100vw - 100px);
+    transition: width 150ms ease-in-out;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .sidebar-slide-in-topbar {
+    width: calc(100vw - 180px);
+    transition: width 150ms ease-out;
+    height: 100vh;
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar-slide-out-in-topbar {
+      width: 100vw;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .sidebar-slide-in-topbar {
+      width: 100vw;
+      overflow: visible;
+      height: 100vh;
+      z-index: 100;
     }
   }

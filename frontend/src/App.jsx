@@ -22,6 +22,12 @@ import NotFound from './screen/NotFound'
 import Orders from './screen/admin/screens/Orders'
 import Payments from './screen/admin/screens/Payments'
 import AdminProfile from './screen/admin/screens/AdminProfile'
+import Transactions from './screen/admin/screens/Transactions'
+import AddCoupon from './screen/admin/screens/AddCoupon'
+import Profile from './screen/admin/screens/Profile'
+import Coupon from './screen/admin/screens/Coupon'
+import Employees from './screen/admin/screens/Employees'
+import AddEmployee from './screen/admin/screens/AddEmployee'
 function App() {
   
   const routes = [
@@ -33,6 +39,12 @@ function App() {
     <Route path="/admin/add-property" element={<AdminLayout><AddProperty /></AdminLayout>} />,
     <Route path="/admin/payments" element={<AdminLayout><Payments /></AdminLayout>} />,
     <Route path="/admin/property-detail/:id" element={<AdminLayout><PropertyDetail /></AdminLayout>} />,
+    <Route path="/admin/transactions" element={<AdminLayout><Transactions /></AdminLayout>} />,
+    <Route path="/admin/coupon/add" element={<AdminLayout><AddCoupon /></AdminLayout>} />,
+    <Route path="/admin/profile" element={<AdminLayout><Profile /></AdminLayout>} />,
+    <Route path="/admin/coupon" element={<AdminLayout><Coupon /></AdminLayout>} />,
+    <Route path="/admin/employees" element={<AdminLayout><Employees /></AdminLayout>} />,
+    <Route path="/admin/employees/add" element={<AdminLayout><AddEmployee /></AdminLayout>} />,
     <Route path="/admin/orders" element={<AdminLayout><Orders /></AdminLayout>} />,
     <Route path="/admin/profile" element={<AdminLayout><AdminProfile /></AdminLayout>} />,
     <Route path="/admin/login" element={<AdminLoginScreen />} />,

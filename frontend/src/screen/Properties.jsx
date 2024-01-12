@@ -7,6 +7,7 @@ import PropertiesList from '../components/properties/PropertiesList';
 import SortByOptions from '../components/properties/SortByOptions';
 import Footer from '../components/home/Footer';
 import { useMediaQuery } from 'react-responsive';
+import BreadCrumb from '@/components/admin/breadcrumb/BreadCrumb';
 const Properties = () => {
   useEffect(() => {
     // Scroll to the top of the page when the component mounts
@@ -37,6 +38,7 @@ const Properties = () => {
           <SortByOptions viewMode={viewMode} setViewMode={setViewMode} toggleFilterOptions={toggleDrawer} filterState={showProperty} />
           <PropertiesList viewMode={viewMode}/>
         </div>
+        
         <div className='hidden lg:flex flex-col pl-4'>
           {
             isDesktop &&

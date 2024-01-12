@@ -41,6 +41,11 @@ const createAdminUser = async (req, res) => {
       state: state || null,
       city: city || null,
       socials: socials || null,
+      company_information: {
+        company_id: null,
+        company_name: null,
+        role: null
+      },
       authentication: {
         password: authentication(salt, password),
         salt,
@@ -57,6 +62,11 @@ const createAdminUser = async (req, res) => {
       state: state || null,
       city: city || null,
       socials: socials || null,
+      company_information: {
+        company_id: null,
+        company_name: null,
+        role: null
+      },
       authentication: {
         salt, password: authentication(salt, password)
     }

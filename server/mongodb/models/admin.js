@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
-
+const CompanySchema = new mongoose.Schema({
+    
+})
 const AdminUserSchema = new mongoose.Schema({
     username: {type: String, required: true},
     firstname: {type: String, required: false},
@@ -11,11 +13,16 @@ const AdminUserSchema = new mongoose.Schema({
     state: {type: String, required: false},
     city: {type: String, required: false},
     socials: {type: [String], required: false},
+    company_information: {
+        company_id: {type: String, required: false},
+    company_name: {type: String, required: false},
+    role: {type: String, required: false}
+    },
     authentication: {
         password: {type: String, required: true, select: false},
         salt: {type: String, required: true, select: false},
     },
-    allProperties: [{ type: mongoose.Schema.Types.ObjectId, ref: "Property" }],
+    
 })
 
 const adminUserModel = mongoose.model("AdminUser", AdminUserSchema);

@@ -311,8 +311,8 @@ export function DataTableDemo2() {
   });
 
   return (
-    <div className="w-full exo">
-      <div className="flex items-center py-4">
+    <div className="w-[100%] exo">
+      <div className="flex items-center flex-wrap gap-y-4 py-4">
         <Input
           placeholder="Filter Property name..."
           value={(table.getColumn("property_name")?.getFilterValue() as string) ?? ""}

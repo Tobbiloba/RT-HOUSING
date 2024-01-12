@@ -6,6 +6,7 @@ import * as dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 import { random } from "../helpers/index.js";
 import { getAdminUserById, updateAdminUser } from "../mongodb/models/admin.js";
+import { getCompanyByIdSchema } from "../mongodb/models/company.js";
 dotenv.config();
 
 
@@ -122,9 +123,9 @@ const getPropertyDetail = async (req, res) => {
 
 const createProperty = async (req, res) => {
     try {
+        const {id} = req.params;
 
         const {
-            id,
             property_information
         } = req.body;
 
@@ -141,10 +142,11 @@ const createProperty = async (req, res) => {
         // const session = await mongoose.startSession();
         // session.startTransaction();
 
-        const user = await getAdminUserById(id);
-        // console.log(user)
+        // const user = await getAdminUserById(id);
+        const company = await getCompanyByIdSchema(id)
+        console.log(company)
 
-        if (!user) {throw new Error("User not found")
+        if (!company) {throw new Error("Company not found")
         return res.status(500).end()
     };
     // console.log(user)
@@ -189,15 +191,17 @@ const createProperty = async (req, res) => {
                   booking_status: property_information?.booking_status || 'available',
                   
             },
-            activated: false,
+        company_name: company.company_name,
+        company_id: company._id,
             created_by: id
         });
 
 
-        user.allProperties.push(newProperty._id);
-        console.log(newProperty._id)
+        console.log(newProperty)
+        // company.allProperties.push(newProperty._id);
+        // console.log(newProperty._id)
         // newProperty.creator.push(newProperty.owner_id)
-        await user.save();
+        // await company.save();
         // await newProperty.save()
 
 
@@ -211,8 +215,9 @@ const createProperty = async (req, res) => {
 
 const updateProperty = async (req, res) => {
     try {
+        const {id} = req.params;
         const {
-            id,
+            
             property_information
         } = req.body;
 

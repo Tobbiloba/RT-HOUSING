@@ -64,14 +64,14 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className={`capitalize text-[14px] text-start ${row.getValue("status") == "active" ? "text-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-yellow-500" : "text-red-500"}`}>{row.getValue("status")}</div>
+      <div className={`capitalize text-[14px] text-start ${row.getValue("status") == "active" ? "text-green-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-yellow-500" : "text-red-500"}`}>{row.getValue("status")}</div>
     ),
   },
   {
     accessorKey: "price",
     header: () => <div className="">Total Price</div>,
     cell: ({ row }) => (
-      <div className={`capitalize text-[14px] text-start ${row.getValue("status") == "active" ? "text-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-yellow-500" : "text-red-500"}`}>$ {row.getValue("price")}</div>
+      <div className={`capitalize text-[14px] text-start ${row.getValue("status") == "active" ? "text-green-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-yellow-500" : "text-red-500"}`}>$ {row.getValue("price")}</div>
     ),
   },
 
@@ -80,7 +80,7 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className={`capitalize border text-center py-3 text-[14px] rounded-xl ${row.getValue("status") == "active" ? "text-sky-400 border-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500 border-slate-500" : row.getValue("status") === "pending" ? "text-yellow-500 border-yellow-500" : "text-red-500 border-red-500"}`}>{row.getValue("status")}</div>
+      <div className={`capitalize border text-center py-3 text-[14px] rounded-xl ${row.getValue("status") == "active" ? "text-green-400 border-green-400" : row.getValue("status") === "inactive" ? "text-slate-500 border-slate-500" : row.getValue("status") === "pending" ? "text-yellow-500 border-yellow-500" : "text-red-500 border-red-500"}`}>{row.getValue("status")}</div>
     ),
   },
 
@@ -157,7 +157,7 @@ export function PaymentTable({data}) {
 
   return (
     <div className="w-full exo">
-      <div className="flex items-center py-4">
+      <div className="flex flex-wrap gap-y-4 items-center py-4">
         <Input
           placeholder="Filter Property name..."
           value={(table.getColumn("property_name")?.getFilterValue() as string) ?? ""}
@@ -220,10 +220,10 @@ export function PaymentTable({data}) {
           <h1>
             Rent Due Within 3 Days
           </h1> */}
-           <h1>
+           {/* <h1>
             Rent Due Within 3 Days
           </h1>
-          
+           */}
 
 
           <TableBody className="">
@@ -308,9 +308,9 @@ export function PaymentTable({data}) {
           <h1>
             Rent Due Later
           </h1> */}
-          <h1>
+          {/* <h1>
             Rent Due Later
-          </h1>
+          </h1> */}
           <TableBody className="">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row, index) => (

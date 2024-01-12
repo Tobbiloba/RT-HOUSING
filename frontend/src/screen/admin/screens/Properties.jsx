@@ -6,11 +6,12 @@ import { IoMdAdd } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyProperties } from "../../../action/property";
+import BreadCrumb from "@/components/admin/breadcrumb/BreadCrumb";
 const AdminProperties = () => {
   const dispatch = useDispatch();
 
   const encode = encodeURIComponent("fieubfeiwub/elwukbekwnkeudkeu");
-  console.log(encode);
+  // console.log(encode);
   const [option, setOption] = useState("All");
   const [sortBy, setSortBy] = useState(true);
 
@@ -35,7 +36,7 @@ const AdminProperties = () => {
   return (
     <div className="exo">
       <div className="pt-6 items-center flex-wrap gap-y-6 pb-4 px-4 bg-slate-800 mt-0  md:px-[5%] flex flex-row justify-between">
-        <h1 className="text-white text-xl">All Orders</h1>
+        {/* <h1 className="text-white text-xl">All Orders</h1> */}
 
 
         <div className="flex flex-row  gap-6 flex-wrap">
@@ -71,7 +72,9 @@ const AdminProperties = () => {
 
         
       </div>
-
+      {/* <div className="px-4 w-[100%]">
+      <BreadCrumb />
+      </div> */}
       {/* "https://v5.airtableusercontent.com/v2/24/24/1704571200000/wWnepiJ4SV_LGiaIS8NRXg/JdcOGaY7VTODbSsDjd7mvHl8x7Hc4soDwO3H-byFSROpvIiERio_3lOSbpfPv1SU6s2h1ixS6AIOvmBuP5VUAZp56oIcXAixUXXZEeOq7ZQa4DRwOGAXVhWvDLEznYQOhuhu-FgWBI-ug8UKNDMUaf4tjGeo5SWlolmuVrpsjqdbsI3jGDVSwrnff1ogsSUk/DrpLtaP1WkBDoT0Auiq4pJL7c0Xp6Cfb0zw6DeVl_FY" */}
 
 

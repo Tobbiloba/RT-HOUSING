@@ -103,10 +103,10 @@ import { PaymentTable } from '@/components/admin/table/PaymentTable';
 
 const Payments = () => {
   return (
-    <div className="exo">
-      <div className="pt-6 items-center flex-wrap gap-y-6 pb-4 px-4 bg-slate-800 mt-0  md:px-[5%] flex flex-row justify-">
+    <div className="exo w-[100%] flex flex-col justify-end px-[1rem] md:px-[2rem] bg-slate-900">
+      <div className=" items-center flex-wrap gap-y-6 pb-4 px-4  mt-0  md:px-[5%] flex flex-row justify-">
         {/* <LuWarehouse className='text-white mr-3'/> */}
-        <h1 className="text-white text-[17px]">All Payments</h1>
+        {/* <h1 className="text-white text-[17px]">All Payments</h1> */}
       </div>
       {/* <div className='container border'>
         <div className='border'>
@@ -129,7 +129,7 @@ const Payments = () => {
       </div>
 
 
-      <div className='p-6'>
+      <div className='py-6 px-1'>
       <PaymentTable data={data}/>
       </div>
     </div>

@@ -11,7 +11,9 @@ import { AiOutlineTags } from "react-icons/ai";
 import { RiStarSLine } from "react-icons/ri";
 import { BsChatSquareDots } from "react-icons/bs";
 import { RxAvatar } from "react-icons/rx";
+import { RiCoupon2Line } from "react-icons/ri";
 import { FaMoneyBillAlt } from "react-icons/fa";
+import { IoMdPersonAdd } from "react-icons/io";
 const Sidebar = ({showSlide, setShowSlide}) => {
   const location = useLocation()
   const dispatch = useDispatch()
@@ -41,18 +43,30 @@ const Sidebar = ({showSlide, setShowSlide}) => {
         },
         {
             id: 4,
-            title: 'Payments',
-            link: '/admin/payments',
+            title: 'Transactions',
+            link: '/admin/transactions',
             icon: <FaMoneyBillAlt />
         },
-        // {
-        //     id: 5,
-        //     title: 'Messages',
-        //     link: '/admin/messaged',
-        //     icon: <BsChatSquareDots />
-        // },
         {
-            id: 6,
+          id: 8,
+          title: 'Payments',
+          link: '/admin/payments',
+          icon: <FaMoneyBillAlt />
+      },
+        {
+            id: 5,
+            title: 'Coupons',
+            link: '/admin/coupon',
+            icon: <RiCoupon2Line />
+        },
+        {
+          id: 6,
+          title: 'Employees',
+          link: '/admin/employees',
+          icon: <IoMdPersonAdd />
+      },
+        {
+            id: 7,
             title: 'My Profile',
             link: '/admin/profile',
             icon: <RxAvatar />
@@ -86,11 +100,11 @@ const Sidebar = ({showSlide, setShowSlide}) => {
 
     
   return (
-    <div className={`h-[100vh] exo top-0 fixed z-[999] ${!showSlide ? 'sidebar-slide-out-in' : 'sidebar-slide-in'} py-4  bg-slate-700 flex flex-col justify-between`}>
+    <div className={`h-[100vh] exo top-0 fixed z-[199] ${!showSlide ? 'sidebar-slide-out-in' : 'sidebar-slide-in'} py-4  bg-slate-700 flex flex-col justify-between`}>
 
 <div className='flex flex-col items-center'>
         <Link to="/admin" className='flex justify-center'>
-        <h1 className=" flex text-[28px] text-slate-400 flex-row pt-3 capitalized">
+        <h1 className=" flex text-[28px] text-slate-400 flex-row pt-0 capitalized">
           Fe
           <div className="rotate-12 w-[30px] h-[60px] flex flex-col items-center justify-center">
             <div className="w-[10px] h-[10px] rounded-full bg-white"></div>
@@ -104,13 +118,13 @@ const Sidebar = ({showSlide, setShowSlide}) => {
             navLinks.map((nav) => {
               console.log(`${nav.link.split('/')[2] || 'admin'}`, pathname[2])
               return(
-                <Link to={nav.link} key={nav.id} className={`flex flex-row  items-center ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[2]}` ? 'bg-[#355CA8] text-white' : ''} text-white rounded-full ${!showSlide ? 'h-[4rem] w-[4rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}>
+                <Link to={nav.link} key={nav.id} className={`flex flex-row  items-center ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[pathname.length - 1]}` ? 'bg-[#355CA8] text-white' : ''} text-white rounded-full ${!showSlide ? 'h-[4rem] w-[4rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}>
                     
-                    <div className='text-[28px] '>
+                    <div className='text-[24px] '>
                         {nav.icon}
                     </div>
                     
-                    <h1 className={`font-roboto ${!showSlide ? 'hidden' : 'block'} text-[16px]`}>{nav.title}</h1>
+                    <h1 className={`font-roboto ${!showSlide ? 'hidden' : 'block'} text-[14px]`}>{nav.title}</h1>
                 </Link>
             )
             })
@@ -126,17 +140,17 @@ const Sidebar = ({showSlide, setShowSlide}) => {
 </h1>
           </div> */}
            
-            {
+            {/* {
               showOptions && <Link to="/login" className='fixed z-[999] mt-2 flex flex-row items-center gap-2 p-2 text-red-500 border bg-gray-200 drop-shadow-xl w-fit ml-[4rem]' onClick={handleLogOut}>
                 <FiLogOut className='text-[22px]' />
                 <p>Log Out</p>
             </Link>
-            }
+            } */}
             
         </div>
-        {
+        {/* {
           showSlide ? <MdOutlineKeyboardArrowLeft className='text-[32px] text-white cursor-pointer' onClick={() => setShowSlide(!showSlide)}/> : <MdOutlineKeyboardArrowRight className='text-[32px] text-white cursor-pointer' onClick={() => setShowSlide(!showSlide)}/>
-        }
+        } */}
         
       </div>
 

@@ -25,7 +25,8 @@ const OrderSchema = new mongoose.Schema({
     reason: {type: String,
         required: function() {
           return this.booking_status === 'declined';
-        }}
+        }},
+        created_at: { type: Date, default: Date.now },
 })
 
 const OrderModel = mongoose.model("Order", OrderSchema);

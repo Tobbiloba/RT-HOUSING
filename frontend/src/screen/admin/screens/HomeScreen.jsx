@@ -4,8 +4,8 @@ import TotalRevenue from '../../../components/admin/chart/TotalRevenue';
 import PropertyReferrals from '../../../components/admin/chart/PropertyReferrals';
 const Home = () => {
   return (
-    <div className='p-4 md:px-[5%] min-h-[100vh] exo overflow-hidden  w-[100%] h-fit'>
-      <h1 className='text-white text-xl mt-6'>Dashboard</h1>
+    <div className='md:py-4 px-[1rem] py-1  md:px-[5%] min-h-[100vh] exo overflow-hidden  w-[100%] h-fit'>
+      <h1 className='text-white text-xl md:mt-6'>Dashboard</h1>
 
       <div className='mt-12 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         <div className=' w-[100%]'>
