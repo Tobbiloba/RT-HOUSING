@@ -44,7 +44,7 @@ const AdminLayout = ({ children }) => {
   const handleToggleOpen = () => {};
 console.log(pathname[pathname.length - 1])
   return (
-    <div>
+    <div className="max-w-[100vw] overflow-x-hidden">
       {loading ? (
         <div>
           <Loading />
@@ -59,7 +59,7 @@ console.log(pathname[pathname.length - 1])
             <Sidebar setShowSlide={setToggleOpen} showSlide={toggleOpen} />
           </div>
 
-          <div className={`w-[100%] h-fit bg-slate-900  min-h-[100vh] ${
+          <div className={`h-fit bg-slate-900 flex flex-col items-end  min-h-[100vh] ${
               toggleOpen ? "sidebar-slide-in-topbar" : "sidebar-slide-out-in-topbar "
             }`}>
             {/* <div> */}

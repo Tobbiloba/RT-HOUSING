@@ -118,7 +118,7 @@ const Sidebar = ({showSlide, setShowSlide}) => {
             navLinks.map((nav) => {
               console.log(`${nav.link.split('/')[2] || 'admin'}`, pathname[2])
               return(
-                <Link to={nav.link} key={nav.id} className={`flex flex-row  items-center ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[pathname.length - 1]}` ? 'bg-[#355CA8] text-white' : ''} text-white rounded-full ${!showSlide ? 'h-[4rem] w-[4rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}>
+                <Link to={nav.link} key={nav.id} className={`flex flex-row  items-center ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[2]}` ? 'bg-[#355CA8] text-white' : ''} text-white rounded-full ${!showSlide ? 'h-[4rem] w-[4rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}>
                     
                     <div className='text-[24px] '>
                         {nav.icon}

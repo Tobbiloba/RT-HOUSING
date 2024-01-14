@@ -18,7 +18,9 @@
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
     "@tanstack/react-table": "^8.11.3",
+    "add": "^2.0.6",
     "axios": "^1.6.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -27,6 +29,7 @@
     "dotenv": "^16.3.1",
     "framer-motion": "^10.16.16",
     "lucide-react": "^0.308.0",
+    "npx": "^10.2.2",
     "owl.carousel": "^2.3.4",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
@@ -40,9 +43,11 @@
     "react-table": "^7.8.0",
     "react-toastify": "^9.1.3",
     "redux-thunk": "^3.1.0",
+    "shadcn-ui": "^0.6.0",
     "swiper": "^11.0.5",
     "tailwind-merge": "^2.2.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "toast": "^0.5.4"
   },
   "devDependencies": {
     "@types/node": "^20.10.8",

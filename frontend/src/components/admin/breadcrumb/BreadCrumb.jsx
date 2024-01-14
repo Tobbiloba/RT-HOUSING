@@ -6,15 +6,15 @@ const BreadCrumb = (showSlide) => {
     const location = useLocation()
     const pathname = location.pathname.split('/')
 
-    console.log(pathname.length)
+    console.log(pathname[pathname.length - 1])
     // const data = sessionStorage.getItem("adminInfo");
     // const adminInfoObject = JSON.parse(data);
 
     // console.log(adminInfoObject)
   return (
     <div className={`w-[100%] bg-slate-700 z-[999] border-t border-slate-500 md:z-[0] exo ml-auto px-[1rem] md:px-[3rem] md:relative shadow-md h-[3rem] justify-center md:h-[5rem] flex flex-col md:flex-row md:items-center md:justify-between  `}>
-      <div className='text-slate-400 hidden md:flex'>
-        <h1 className='text-2xl font-[600] uppercase'>{pathname[pathname.length - 1]}</h1>
+      <div className='text-slate-400 hidden md:flex flex-col'>
+        <h1 className='text-2xl font-[600] uppercase'>{pathname[pathname.length - 1].split('-').join(' ')}</h1>
         <p className='text-[14px]'>Multikar Admin Panel</p>
       </div>
 

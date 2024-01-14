@@ -7,7 +7,7 @@
   }
   
   .sidebar-slide-in {
-    width: 220px;
+    width: 250px;
     transition: width 150ms ease-out;
     height: 100vh;
     position: relative;
@@ -32,7 +32,7 @@
 
 
   .sidebar-slide-out-in-topbar {
-    width: calc(100vw - 100px);
+    width: calc(100vw - 120px);
     transition: width 150ms ease-in-out;
     height: 100vh;
     overflow: hidden;
@@ -40,7 +40,7 @@
   }
   
   .sidebar-slide-in-topbar {
-    width: calc(100vw - 180px);
+    width: calc(100vw - 260px);
     transition: width 150ms ease-out;
     height: 100vh;
     position: relative;

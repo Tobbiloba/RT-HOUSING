@@ -32,7 +32,7 @@ const Dropdown = ({state, setState, data, height}) => {
 }
         </div>
         {isDropdownOpen && (
-          <ul className="dropdown-list">
+          <ul className="dropdown-list text-black">
             {data.map((option, index) => (
               <li
                 key={index}

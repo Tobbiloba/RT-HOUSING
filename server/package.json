@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "add": "^2.0.6",
     "axios": "^1.6.3",
     "body-parser": "^1.20.2",
     "cloudinary": "^1.33.0",
@@ -20,6 +21,9 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.12.4",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "npx": "^10.2.2",
+    "shadcn-ui": "^0.6.0",
+    "toast": "^0.5.4"
   }
 }

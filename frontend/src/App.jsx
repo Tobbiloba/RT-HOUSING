@@ -7,6 +7,7 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom'
+import { Toaster } from './~/components/ui/toaster'
 import Properties from './screen/Properties'
 import PropertyDetails from './screen/PropertyDetails'
 import { ToastContainer } from "react-toastify";
@@ -40,7 +41,7 @@ function App() {
     <Route path="/admin/payments" element={<AdminLayout><Payments /></AdminLayout>} />,
     <Route path="/admin/property-detail/:id" element={<AdminLayout><PropertyDetail /></AdminLayout>} />,
     <Route path="/admin/transactions" element={<AdminLayout><Transactions /></AdminLayout>} />,
-    <Route path="/admin/coupon/add" element={<AdminLayout><AddCoupon /></AdminLayout>} />,
+    <Route path="/admin/coupon/create-coupon" element={<AdminLayout><AddCoupon /></AdminLayout>} />,
     <Route path="/admin/profile" element={<AdminLayout><Profile /></AdminLayout>} />,
     <Route path="/admin/coupon" element={<AdminLayout><Coupon /></AdminLayout>} />,
     <Route path="/admin/employees" element={<AdminLayout><Employees /></AdminLayout>} />,
@@ -56,6 +57,7 @@ function App() {
   return (
     <>
      <ToastContainer />
+     <Toaster />
        <RouterProvider router={router} />
     </>
   )
