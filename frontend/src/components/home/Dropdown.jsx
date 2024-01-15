@@ -32,11 +32,12 @@ const Dropdown = ({state, setState, data, height}) => {
 }
         </div>
         {isDropdownOpen && (
-          <ul className="dropdown-list text-black">
+          <ul className="dropdown-list text-black border max-h-[14rem] overflow-y-scroll">
             {data.map((option, index) => (
               <li
                 key={index}
                 onClick={() => handleOptionChange(option)}
+                className='hover:bg-slate-200'
               >
                 {option}
               </li>

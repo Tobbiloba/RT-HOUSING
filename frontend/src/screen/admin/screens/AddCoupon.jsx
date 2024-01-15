@@ -12,7 +12,7 @@ const Input = ({ state, setState, label, placeholder }) => {
       </label>
 
       <input
-        className="border flex-1 bg-transparent h-[3rem] md:min-w-[30rem] md:max-w-[35rem] border-slate-500 rounded-sm outline-none pl-3 text-white"
+        className="border flex-1 bg-transparent h-[3rem] md:min-w-[10rem] md:max-w-[35rem] border-slate-500 rounded-sm outline-none pl-3 text-white"
         onChange={(e) => setState(e.target.value)}
         value={state}
       />
@@ -28,7 +28,7 @@ const DateSelect = ({ state, setState, label }) => {
         <span className="text-white h-4">*</span>
         {label}
       </p>
-      <div className="h-[3rem] relative flex-1  md:min-w-[25rem] md:max-w-[35rem] flex flex-row">
+      <div className="h-[3rem] relative flex-1  md:min-w-[10rem] md:max-w-[35rem] flex flex-row">
         <input
           className="border w-[100%] h-[100%] bg-transparent  border-slate-500 rounded-l-sm outline-none pl-3 text-white"
           // onChange={(e) => setState(e.target.value)}
@@ -89,7 +89,7 @@ const AddCoupon = () => {
   
   return (
     <div className="p-[1rem] md:p-[2rem] exo">
-      <div className="h-[60vh] bg-slate-700 p-[1rem] md:p-[2rem]  ">
+      <div className=" bg-slate-700 p-[1rem] md:p-[2rem]  ">
         <h1 className="text-3xl text-slate-400">Discount Coupon Details</h1>
 
         <div className="flex flex-row gap-4 mt-5 text-slate-400 border-b">
@@ -99,7 +99,7 @@ const AddCoupon = () => {
           <h1 className="p-2 cursor-not-allowed">Restriction</h1>
           <h1 className="p-2 cursor-not-allowed">Usage</h1>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 mt-12  justify-between gap-y-16 gap-x-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 mt-12  justify-between gap-y-16 gap-x-12">
           <Input
             state={title}
             setState={setTitle}
@@ -124,7 +124,7 @@ const AddCoupon = () => {
               Free Shipping
             </p>
 
-            <div className="h-[3rem] relative flex-1  md:min-w-[25rem] md:max-w-[35rem] flex flex-row gap-5 items-center text-white">
+            <div className="h-[3rem] relative flex-1  md:min-w-[10rem] md:max-w-[35rem] flex flex-row gap-5 items-center text-white">
               <input type="checkbox" className=""/>
 
               <h1>Allow Free Shipping</h1>
@@ -138,7 +138,7 @@ const AddCoupon = () => {
               Discount Type
             </p>
 
-            <div className="h-[3rem] relative flex-1  md:min-w-[25rem] md:max-w-[35rem] flex flex-row gap-5 items-center text-white">
+            <div className="h-[3rem] relative flex-1  md:min-w-[10rem] md:max-w-[35rem] flex flex-row gap-5 items-center text-white">
             <Dropdown
               data={options}
               state={discountType}

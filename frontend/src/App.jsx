@@ -45,7 +45,7 @@ function App() {
     <Route path="/admin/profile" element={<AdminLayout><Profile /></AdminLayout>} />,
     <Route path="/admin/coupon" element={<AdminLayout><Coupon /></AdminLayout>} />,
     <Route path="/admin/employees" element={<AdminLayout><Employees /></AdminLayout>} />,
-    <Route path="/admin/employees/add" element={<AdminLayout><AddEmployee /></AdminLayout>} />,
+    <Route path="/admin/employees/add-employee" element={<AdminLayout><AddEmployee /></AdminLayout>} />,
     <Route path="/admin/orders" element={<AdminLayout><Orders /></AdminLayout>} />,
     <Route path="/admin/profile" element={<AdminLayout><AdminProfile /></AdminLayout>} />,
     <Route path="/admin/login" element={<AdminLoginScreen />} />,
