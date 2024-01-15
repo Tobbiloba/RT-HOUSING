@@ -11,9 +11,9 @@ const Layout = ({children}) => {
     const [showLogin, setShowLogin] = useState(false)
     const [showRegister, setShowRegister] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
-      setIsLoading(true)
+      // setIsLoading(true)
 
 
       setTimeout(() => {

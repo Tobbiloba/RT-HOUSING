@@ -15,7 +15,7 @@ import {
 } from "../controllers/property.controller.js";
 
 const router = express.Router();
-
+router.route("/property-details/:id").get(getPropertyDetailById);
 router.route("/").get(getAllProperties);
 router.route("/user").get(getAllPropertiesUser);
 router.route("/:id").get(getPropertyDetail);
@@ -26,6 +26,6 @@ router.route("/activate/:id").post(activateProperty);
 router.route("/deactivate/:id").post(deActivateProperty);
 router.route("/owner/:id").get(getPropertyByOwner);
 router.route("/fsearch").get(filterProperty);
-router.route("/property-details/:id").get(getPropertyDetailById);
+
 
 export default router;

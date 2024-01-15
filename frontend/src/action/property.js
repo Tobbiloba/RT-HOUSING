@@ -21,7 +21,7 @@ const BASE_URL = import.meta.env.VITE_APP_BASE_URL
 
 const customId = "custom-id-yes";
 
-console.log(BASE_URL)
+// console.log(BASE_URL)
 
 export const getAllProperties = () => async (dispatch) => {
     dispatch({

@@ -4,7 +4,7 @@ import Dropdown from "../home/Dropdown";
 import Slider from '@mui/material/Slider';
 import FilterOptions from "../home/FilterOptions";
 const FilterBox = ({ children, title }) => {
-  const [showChildren, setShowChildren] = useState(true);
+  const [showChildren, setShowChildren] = useState(false);
   return (
     <div className="border p-[1rem] text-[13px]">
       <div

@@ -44,7 +44,7 @@ const Carousel = ({images}) => {
                     key={index}
                   src={img}
                   alt={`Slide ${index + 1}`}
-                  className={`w-[100%] min-w-[10rem] h-[100%] rounded-md object-cover ${index === 0 ? 'col-span-2 md:row-span-3' : index === 1 ? 'md:col-span-1' : 'md:row-span-1 '}`}
+                  className={`w-[100%] min-w-[10rem] h-[100%] object-cover ${index === 0 ? 'col-span-2 md:row-span-3' : index === 1 ? 'md:col-span-1' : 'md:row-span-1 '}`}
                 />
                 // <p>{img}</p>
                   )

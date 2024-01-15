@@ -51,7 +51,7 @@ const getAllProperties = async (req, res) => {
 
 const getAllPropertiesUser = async (req, res) => {
     try {
-        console.log(req.query)
+        // console.log(req.query)
         const properties = await getActivatedProperties(req.query); // Add await here
 
         res.status(200).json(properties);
@@ -63,11 +63,11 @@ const getAllPropertiesUser = async (req, res) => {
 const getPropertyByOwner = async (req, res) => {
     const { id } = req.params;
 
-    console.log(id)
+    // console.log(id)
     const propertyExists = await getPropertyByOwnerId({ _id: id })
 
 
-    console.log(propertyExists)
+    // console.log(propertyExists)
     if (propertyExists) {
         res.status(200).json(propertyExists);
     } else {
@@ -77,14 +77,14 @@ const getPropertyByOwner = async (req, res) => {
 const getPropertyDetailById = async (req, res) => {
     const { id } = req.params;
     try{
-        console.log(id)
+        console.log(decodeURIComponent(id))
         decodeURIComponent(id)
-        const propertyExists = await getPropertyById( id )
+        const propertyExists = await getPropertyById(id)
     
     
         console.log(propertyExists)
         if (propertyExists) {
-            console.log(propertyExists)
+            // console.log(propertyExists)
             res.status(200).json(propertyExists);
         } else {
             
@@ -93,7 +93,7 @@ const getPropertyDetailById = async (req, res) => {
     }
 
     catch(error) {
-        console.log(error)
+        // console.log(error)
         return res.status(500).json(error.message)
     }
    
@@ -101,10 +101,8 @@ const getPropertyDetailById = async (req, res) => {
 
 const getPropertyDetail = async (req, res) => {
     const { id } = req.params;
-    const propertyExists = await Property.findOne({ _id: id }).populate(
-        "creator",
-    );
-
+    const propertyExists = await getPropertyById(id)
+console.log(id)
     if (propertyExists) {
         res.status(200).json(propertyExists);
     } else {
@@ -129,7 +127,7 @@ const createProperty = async (req, res) => {
             property_information
         } = req.body;
 
-        console.log(id, property_information)
+        // console.log(id, property_information)
 
         
 
@@ -144,7 +142,7 @@ const createProperty = async (req, res) => {
 
         // const user = await getAdminUserById(id);
         const company = await getCompanyByIdSchema(id)
-        console.log(company)
+        // console.log(company)
 
         if (!company) {throw new Error("Company not found")
         return res.status(500).end()
@@ -197,7 +195,7 @@ const createProperty = async (req, res) => {
         });
 
 
-        console.log(newProperty)
+        // console.log(newProperty)
         // company.allProperties.push(newProperty._id);
         // console.log(newProperty._id)
         // newProperty.creator.push(newProperty.owner_id)
@@ -207,7 +205,7 @@ const createProperty = async (req, res) => {
 
         res.status(200).json(newProperty);
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         res.status(500).json({ message: error.message });
     }
 };
@@ -278,7 +276,7 @@ const updateProperty = async (req, res) => {
 
         res.status(200).json({ message: "Property updated successfully" });
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         res.status(500).json({ message: error.message });
     }
 };
@@ -319,11 +317,11 @@ const updateProperty = async (req, res) => {
 
 const activateProperty = async (req, res) => {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
 
     try {
         const existingPropertyInformation = await getPropertyById(id);
-        console.log(existingPropertyInformation);
+        // console.log(existingPropertyInformation);
 
         if (!existingPropertyInformation) {
             return res.status(404).json({ message: "Property doesn't exist" });
@@ -335,11 +333,11 @@ const activateProperty = async (req, res) => {
         };
 
         const activated = await updatePropertyById(id, updatedProperty);
-        console.log(activated);
+        // console.log(activated);
 
         return res.status(201).json({ message: "Successfully activated" });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         return res.status(500).json({ message: error.message });
     }
 };
@@ -348,11 +346,11 @@ const activateProperty = async (req, res) => {
 
 const deActivateProperty = async (req, res) => {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
 
     try {
         const existingPropertyInformation = await getPropertyById(id);
-        console.log(existingPropertyInformation);
+        // console.log(existingPropertyInformation);
 
         if (!existingPropertyInformation) {
             return res.status(404).json({ message: "Property doesn't exist" });
@@ -364,11 +362,11 @@ const deActivateProperty = async (req, res) => {
         };
 
         const activated = await updatePropertyById(id, updatedProperty);
-        console.log(activated);
+        // console.log(activated);
 
         return res.status(201).json({ message: "Successfully deactivated" });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         return res.status(500).json({ message: error.message });
     }
 };
@@ -377,11 +375,11 @@ const deActivateProperty = async (req, res) => {
 
 const filterProperty = async (req, res) => {
     try {
-        console.log('lol')
+        // console.log('lol')
     //   Fetch all activated properties
       const activatedProperties = await getActivatedProperties();
       const filterObject = req.query
-      console.log(filterObject)
+    //   console.log(filterObject)
 
       // Filter the activated properties based on dynamic criteria in filterObject
     //   const result = activatedProperties.filter(property => {
@@ -413,7 +411,7 @@ const filterProperty = async (req, res) => {
 
       
       } catch (error) {
-        console.error(error.message);
+        // console.error(error.message);
         res.status(500).json({ message: 'Internal Server Error' });
       }
     

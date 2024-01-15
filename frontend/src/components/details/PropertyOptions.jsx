@@ -38,6 +38,7 @@ function valuetext(value) {
 }
 
 const PropertyOptionCard = ({ items }) => {
+  console.log(items)
   let today = startOfToday()
   let tomorrow = startOfTomorrow()
   const [adults, setAdults] = useState("No. Of Adults");
@@ -182,7 +183,7 @@ const PropertyOptionCard = ({ items }) => {
 
 
   const calculateTotalPrice = () => {
-    return addOns.reduce((total, addOn) => total + addOn.price, 0) + (items.price * calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString()));
+    return addOns.reduce((total, addOn) => total + addOn.price, 0) + (items.pricing * calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString()));
   };
 
   return (
@@ -191,14 +192,14 @@ const PropertyOptionCard = ({ items }) => {
         <div>
           <FilterBox title="Pricing">
             <div>
-              <h1 className="text-[26px] font-[600] text-slate-500">${calculateTotalPrice()} <span className="text-[16px] text-slate-500 font-[500]">/ for 03 nights</span></h1>
+              <h1 className="text-[26px] font-[600] text-slate-500">${calculateTotalPrice()} <span className="text-[16px] text-slate-500 font-[500]">/ for 0{calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString())} nights</span></h1>
 
               <div className="flex flex-row justify-between items-center mt-5">
                       <p className="text-slate-600 text-[13px]">
                         {items.price} x {calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString())} nights
                       </p>
       
-                      <p className="font-[600] text-slate-600 text-[14px]">${items.price * calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString())}</p>
+                      <p className="font-[600] text-slate-600 text-[14px]">${items.pricing * calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString())}</p>
                     </div>
               <div className="">
                 {
@@ -219,7 +220,7 @@ const PropertyOptionCard = ({ items }) => {
 
                 <div className="flex flex-row justify-between items-center mt-6 border border-x-slate-50 py-3">
                   <p className="text-slate-600 text-[13px]">Taxes & Fees</p>
-                  <p className="font-[600] text-slate-600 text-[14px]">$320</p>
+                  <p className="font-[600] text-slate-600 text-[14px]">${calculateTotalPrice() * 0.05}</p>
                 </div>
 
                 <div className="flex flex-row justify-between items-center mt-4 mb-2">
@@ -270,11 +271,11 @@ const PropertyOptionCard = ({ items }) => {
             <h1 className="text-yellow-900 font-[600]">When To Check In?</h1>
 
             <div className="flex flex-row">
-              <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckInCalendar(true), setShowCheckOut(false))}>
+              <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckInCalendar(true), setShowCheckOutCalendar(false))}>
                 <p className="text-[13px] text-slate-400">Check-In:</p>
                 <h1 className="text-[15px] text-slate-600 cursor-text">{checkInDate.toLocaleDateString()}</h1>
               </div>
-              <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckIn(false), setShowCheckOutCalendar(true))}>
+              <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckOutCalendar(true), setShowCheckInCalendar(false))}>
                 <p className="text-[13px] text-slate-400">Check-Out:</p>
                 <h1 className="text-[15px] text-slate-600 cursor-text">{checkOutDate.toLocaleDateString()}</h1>
               </div>
@@ -346,8 +347,8 @@ const PropertyOptionCard = ({ items }) => {
                     type="checkbox"
                     className="bg-blue-500"
                     // onChange={() => handleAmmenitiesCheckboxChange(item)}
-                    checked={items.amenities.includes(item)}
-                    disabled={!items.amenities.includes(item)}
+                    checked={items.property_amenities.includes(item)}
+                    disabled={!items.property_amenities.includes(item)}
                   />
                   <p className="text-[13px]">{item}</p>
                 </div>

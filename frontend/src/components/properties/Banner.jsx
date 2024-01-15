@@ -24,7 +24,7 @@ const Banner = () => {
             <p className='text-white mt-4'>Main Search &gt; Result</p>
         </div>
 
-        <div className='grid shadow-md two-tone-background p-[.5rem] rounded-md mt-8 grid-cols-1 bg- md:grid-cols-2 lg:grid-cols-4 text-[15px] text-gray-500'>
+        <div style={{background: 'linear-gradient(to bottom, white 50%, #cbd5e1 50%)'}} className='grid shadow-md two-tone-background p-[.5rem] rounded-md mt-8 grid-cols-1 bg- md:grid-cols-2 lg:grid-cols-4 text-[15px] text-gray-500'>
             <div className='h-[3.5rem] bg-white lg:rounded-tl-md md:rounded-bl-md text-[14px]'>
                 <Dropdown data={places} state={place} setState={setPlace} height='h-[3.5rem] border lg:rounded-l-md md:rounded-tl-md rounded-t-md'/>
             </div>

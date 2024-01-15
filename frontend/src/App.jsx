@@ -29,12 +29,21 @@ import Profile from './screen/admin/screens/Profile'
 import Coupon from './screen/admin/screens/Coupon'
 import Employees from './screen/admin/screens/Employees'
 import AddEmployee from './screen/admin/screens/AddEmployee'
+import Dashboard from './screen/profile/Dashboard'
+import UserOrders from './screen/profile/Orders'
+import ChangePassword from './screen/profile/ChangePassword'
+import UpdateProfile from './screen/profile/UpdateProfile'
+import ProfileLayout from './components/userLayout/ProfileLayout'
 function App() {
   
   const routes = [
     <Route path="/" element={<Layout><Homescreen /></Layout>} />,
     <Route path="/properties" element={<Layout><Properties /></Layout>} />,
-    <Route path="/property-detail" element={<Layout><PropertyDetails /></Layout>} />,
+    <Route path="/user/dashboard" element={<Layout><ProfileLayout><Dashboard /></ProfileLayout></Layout>} />,
+    <Route path="/user/orders" element={<Layout><ProfileLayout><UserOrders /></ProfileLayout></Layout>} />,
+    <Route path="/user/change-password" element={<Layout><ProfileLayout><ChangePassword /></ProfileLayout></Layout>} />,
+    <Route path="/user/update-profile" element={<Layout><ProfileLayout><UpdateProfile /></ProfileLayout></Layout>} />,
+    <Route path="/property-detail/:id" element={<Layout><PropertyDetails /></Layout>} />,
     <Route path="/admin" element={<AdminLayout><Home /></AdminLayout>} />,
     <Route path="/admin/properties" element={<AdminLayout><AdminProperties /></AdminLayout>} />,
     <Route path="/admin/add-property" element={<AdminLayout><AddProperty /></AdminLayout>} />,
