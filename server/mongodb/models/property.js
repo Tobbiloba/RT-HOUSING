@@ -6,7 +6,6 @@ import mongoose from "mongoose";
 //     c
 // })
 const PropertySchema = new mongoose.Schema({
-    property_id: { type: String, required: true },
     isActive: {type: Boolean, enum: [true, false], default: false},
     property_information: {
         property_name: {type: String, required: true},
@@ -56,10 +55,8 @@ const PropertyModel = mongoose.model("Property", PropertySchema);
 
 export const getProperties = (no) => PropertyModel.find({}).limit(no);
 export const getActivatedProperties = (query) => PropertyModel.find({"activated": true, query});
-export const getPropertyById = (id) => PropertyModel.find({"property_id": id});
-export const getPropertyByOwnerId = (id) => PropertyModel.find({"owner_id": id}).populate(
-    "creator",
-);
+export const getPropertyById = (id) => PropertyModel.find({"_id": id});
+export const getPropertyByCompanyId = (id) => PropertyModel.find({"company_id": id})
 export const createPropertyAdmin = (values) => new PropertyModel(values)
     .save().then((user) => user.toObject())
 export const updatePropertyById = (id, property) => PropertyModel.findByIdAndUpdate(id, property);

@@ -35,7 +35,7 @@ const AdminProperties = () => {
   // const loading  = true
   return (
     <div className="exo">
-      <div className="pt-6 items-center flex-wrap gap-y-6 pb-4 px-4 bg-slate-800 mt-0  md:px-[5%] flex flex-row justify-between">
+      <div className="pt-6 items-center flex-wrap gap-y-6 pb-4 px-4 bg-slate-600 mt-0  md:px-[2%] flex flex-row justify-between">
         {/* <h1 className="text-white text-xl">All Orders</h1> */}
 
 
@@ -82,21 +82,24 @@ const AdminProperties = () => {
         {
           loading ? <div></div> : properties?.length ?
         
-      <div className="grid grid-cols-1 gap-x-12 mt-20 p-[1rem] sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-x-12 mt-20 p-[1rem] sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-12">
         {properties?.map((item, index) => {
           // console.log(item)
           return (
-            <div key={index} className="max-w-[25rem] bg-slate-600 rounded-md border border-slate-600 overflow-hidden">
+            <div key={index} className="max-w-[25rem] h-fit bg-slate-600 rounded-md border border-slate-600 overflow-hidden">
               <div className="relative ">
+
+                <div className="max-h-[20rem] overflow-hidden">
                 <img
                   src={item.property_information.property_images[0]}
                   className=" min-h-[15rem] rounded-md m w-[100%]"
                 />
+                </div>
                 <h1 className="absolute top-4 right-4 text-[11px] bg-black/60 border border-slate-500 text-white px-2 py-1">
                   {item.property_information.peoperty_bedrooms} For Rent
                 </h1>
 
-                <p className="absolute top-4 border border-slate-600 text-[11px] left-4  bg-white/10 text-white px-2 py-1">
+                <p className="absolute top-4 border bg-black/60 border-slate-600 text-[11px] left-4  text-white px-2 py-1">
                   {item.property_information.property_location.country},{" "}
                   {item.property_information.property_location.state}
                 </p>
@@ -110,7 +113,7 @@ const AdminProperties = () => {
                   {item.property_information.property_name}
                 </h1>
                 <h1 className="text-[15px]">
-                  ${item.property_information.pricing},000
+                  ${item.property_information.pricing}.00
                 </h1>
                 </div>
 
@@ -132,7 +135,7 @@ const AdminProperties = () => {
 
             <div className="flex flex-row gap-3 items-center">
               <img src="https://cdn-icons-png.flaticon.com/128/9823/9823123.png" className="w-8 h-8"/>
-              <p className="text-black/75 text-[14px]">{item.property_information.property_size[0]} baths</p>
+              <p className="text-black/75 text-[14px]">{item.property_information.property_size[0]}</p>
             </div>
               
              
@@ -162,7 +165,7 @@ const AdminProperties = () => {
     <h1 className="text-2xl md:text-3xl lg:text-4xl font-mono text-slate-300">No property</h1>
     <p className="text-[15px] mt-3 text-slate-500 text-center">Seems like you haven't added any properties yet. Ready to begin? <br /> Click the button below to start adding your first property.</p>
     <Link to="/admin/add-property">
-          <button className="rounded-md mt-6 text-[15px] gap-5 flex text-white bg-slate-600 px-5 py-3 items-center">
+          <button className="rounded-md mt-6 text-[15px] gap-5 flex text-white bg-slate-900 px-5 py-3 items-center">
             <IoMdAdd className="text-[22px]" /> Add Property
           </button>
         </Link>

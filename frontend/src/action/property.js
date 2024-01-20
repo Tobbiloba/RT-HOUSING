@@ -67,7 +67,7 @@ export const getMyProperties = () => async (dispatch) => {
     })
     console.log('called')
     try {
-        const { data } = await Axios.get(`${BASE_URL}/properties/owner/6596e220f0dcce3853b161c3`);
+        const { data } = await Axios.get(`${BASE_URL}/properties/company/65a0fc46a3cd4f366e7a3c52`);
         dispatch({
           type: FETCH_MY_PROPERTIES_SUCCESSFUL,
           payload: data,
@@ -106,11 +106,11 @@ export const createProperty = (id, property_information) => async (dispatch) => 
         type: CREATE_PROPERTIES
     })
 
-    console.log(id, property_information)
+    // console.log(id, property_information)
 
     try {
-        const { data } = await Axios.post(`${BASE_URL}/properties`, {
-            id,
+        const { data } = await Axios.post(`${BASE_URL}/properties/${id}`, {
+            // id,
             property_information: property_information
         });
         dispatch({

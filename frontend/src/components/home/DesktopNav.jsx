@@ -6,6 +6,7 @@ let tabs = [
   { id: "HOME", label: "HOME", link: "/" },
   { id: "PROPERTIES", label: "PROPERTIES", link: "/properties" },
   { id: "ABOUT", label: "ABOUT", link: "/about" },
+  { id: "HOW IT WORKS?", label: "HOW IT WORKS", link: "/how-it-works" },
 
   // { id: "PAGES", label: "PAGES" },
   { id: "CONTACT", label: "CONTACT", link: "/contact" },
@@ -15,7 +16,7 @@ export const AnimatedTabs = () => {
   let [activeTab, setActiveTab] = useState(tabs[0].id);
 
   return (
-    <div className="flex-row gap-5 font-[500]">
+    <div className="flex-row gap-5 font-[500] exo">
       {tabs.map((tab) => (
         <Link to={tab.link} key={tab.id}>
           <button

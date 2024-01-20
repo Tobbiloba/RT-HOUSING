@@ -236,7 +236,7 @@ export function CouponTable({data}) {
       </div> */}
       <div className="rounded-md ">
         <Table >
-          <TableHeader className="text-[17px] bg-slate-900 border border-slate-900">
+          <TableHeader className="text-[17px] bg-slate-900  border-slate-900">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="border  hover:bg-slate-800 border-slate-900">
                 {headerGroup.headers.map((header, index) => {

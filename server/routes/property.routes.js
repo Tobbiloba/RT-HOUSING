@@ -6,7 +6,7 @@ import {
     getAllProperties,
     getPropertyDetail,
     updateProperty,
-    getPropertyByOwner,
+    getPropertyByCompany,
     getPropertyDetailById,
     activateProperty,
     getAllPropertiesUser,
@@ -24,7 +24,7 @@ router.route("/:id").patch(updateProperty);
 router.route("/:id").delete(deleteProperty);
 router.route("/activate/:id").post(activateProperty);
 router.route("/deactivate/:id").post(deActivateProperty);
-router.route("/owner/:id").get(getPropertyByOwner);
+router.route("/company/:id").get(getPropertyByCompany);
 router.route("/fsearch").get(filterProperty);
 
 

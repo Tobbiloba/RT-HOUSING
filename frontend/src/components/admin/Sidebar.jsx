@@ -26,7 +26,7 @@ const Sidebar = ({showSlide, setShowSlide}) => {
         {
             id: 1,
             title: 'Home',
-            link: '/admin',
+            link: '/admin/dashboard',
             icon: <BsFillGrid1X2Fill />
         },
         {
@@ -41,12 +41,12 @@ const Sidebar = ({showSlide, setShowSlide}) => {
             link: '/admin/orders',
             icon: <AiOutlineTags />
         },
-        {
-            id: 4,
-            title: 'Transactions',
-            link: '/admin/transactions',
-            icon: <FaMoneyBillAlt />
-        },
+        // {
+        //     id: 4,
+        //     title: 'Transactions',
+        //     link: '/admin/transactions',
+        //     icon: <FaMoneyBillAlt />
+        // },
         {
           id: 8,
           title: 'Payments',
@@ -80,29 +80,12 @@ const Sidebar = ({showSlide, setShowSlide}) => {
     sessionStorage.clear();
   };
 
-//   useEffect(() => {
-//     setToggleOpen(showSlide);
-//   }, [showSlide, setToggleOpen]);
-
-//   useEffect(() => {
-//     // Get the sidebar state from local storage.
-//     const localStorageSidebarState = localStorage.getItem('sidebarIsOpen');
-//     if (localStorageSidebarState) {
-//       setShowSlide(JSON.parse(localStorageSidebarState));
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     // Update local storage with the sidebar state.
-//     localStorage.setItem('sidebarIsOpen', JSON.stringify(showSlide));
-//   }, [showSlide]);
-
 
     
   return (
-    <div className={`h-[100vh] exo top-0 fixed z-[199] ${!showSlide ? 'sidebar-slide-out-in' : 'sidebar-slide-in'} py-4  bg-slate-700 flex flex-col justify-between`}>
+    <div className={`h-[100vh] exo top-0 fixed z-[199] ${!showSlide ? 'sidebar-slide-out-in' : 'sidebar-slide-in'} py-4  bg-slate-900 flex flex-col justify-between`}>
 
-<div className='flex flex-col items-center'>
+<div className='flex flex-col items-center mt-3'>
         <Link to="/admin" className='flex justify-center'>
         <h1 className=" flex text-[28px] text-slate-400 flex-row pt-0 capitalized">
           Fe
@@ -116,9 +99,9 @@ const Sidebar = ({showSlide, setShowSlide}) => {
         <div className='w-[80%] mt-[3rem] flex flex-col items-center gap-3'>
             {
             navLinks.map((nav) => {
-              console.log(`${nav.link.split('/')[2] || 'admin'}`, pathname[2])
+              // console.log(`${nav.link.split('/')[2] || 'admin'}`, pathname[2])
               return(
-                <Link to={nav.link} key={nav.id} className={`flex flex-row  items-center ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[2]}` ? 'bg-[#355CA8] text-white' : ''} text-white rounded-full ${!showSlide ? 'h-[4rem] w-[4rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}>
+                <Link to={nav.link} key={nav.id} className={`flex flex-row  items-center ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[2]}` ? 'bg-slate-600 text-white' : ''} text-white rounded-full ${!showSlide ? 'h-[4rem] w-[4rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}>
                     
                     <div className='text-[24px] '>
                         {nav.icon}

@@ -36,7 +36,7 @@ export const getAdminOrder = (id) => async (dispatch) => {
     })
 
     try {
-        const { data } = await Axios.get(`${BASE_URL}/admin/${id}/orders`);
+        const { data } = await Axios.get(`${BASE_URL}/order/admin/${id}/orders`);
         dispatch({
           type: FETCH_ADMIN_ORDER_SUCCESSFUL,
           payload: data,
@@ -79,7 +79,7 @@ export const getUserOrder = (id) => async (dispatch) => {
     })
 
     try {
-        const { data } = await Axios.get(`${BASE_URL}/user/${id}/orders`);
+        const { data } = await Axios.get(`${BASE_URL}/order/user/${id}/orders`);
         dispatch({
           type: FETCH_USER_ORDER_SUCCESSFUL,
           payload: data,
@@ -124,7 +124,7 @@ export const createUserOrder = (id, property_id, order_information) => async (di
     })
 
     try {
-        const { data } = await Axios.get(`${BASE_URL}/create-order/${id}`, {
+        const { data } = await Axios.get(`${BASE_URL}/order/create-order/${id}`, {
             property_id: property_id,
             order_information: order_information
         });

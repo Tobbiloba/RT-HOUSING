@@ -94,3 +94,15 @@
 .salsa{
   font-family: 'Salsa', cursive;
 }
+
+@media (max-width: 1220px) { 
+  .search_lg{
+    flex-direction: column;
+  }
+ }
+
+@media (min-width: 1220px) { 
+  .search_lg{
+    flex-direction: row;
+  }
+ }

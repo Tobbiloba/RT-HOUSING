@@ -132,7 +132,7 @@ const Coupon = () => {
   const navigate = useNavigate()
   return (
     <div className="exo  pb-8 w-[100%] p-[1rem] md:p-[2rem] flex">
-      <div className='rounded hif-t w-[100%] bg-slate-700'>
+      <div className='rounded h-fit w-[100%]'>
         <div className='flex p-4 text-slate-100 flex-row gap-x-7 gap-y-4 text-[15px] justify-end'>
           <button className='px-5 py-2 border' onClick={() => navigate('/admin/coupon/create-coupon')}>ADD COUPON</button>
           <button className='px-5 py-2 border cursor-not-allowed'>DELETE</button>

@@ -38,3 +38,18 @@ How it should work:
 add a function that when the admin adds a new property it then also save the property id in the user info
 
 and how can i do it that i will be able to list all the order under all the properties owned by 1 person that is all orders under the person property should be listed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+List the api's

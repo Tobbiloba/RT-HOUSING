@@ -32,7 +32,7 @@ const TopBar = ({setShowLogin, setShowRegister}) => {
 }
 
         <div className="relative flex flex-row overflow-hidden w-[17.5rem] h-[2.75rem] border">
-          <Link to="/admin" className="flex-1 text-[15px] bg-yellow-500 items-center flex justify-center"><
+          <Link to="/admin/dashboard" className="flex-1 text-[15px] bg-yellow-500 items-center flex justify-center"><
             p >
             Become A Host
           </p>

@@ -26,7 +26,7 @@ const {adminInfo, loading} = useSelector((state) => state.adminLogin)
 
 useEffect(() => {
   if(adminInfo) {
-    navigate('/admin')
+    navigate('/admin/dashboard')
   }
 }, [adminInfo])
   

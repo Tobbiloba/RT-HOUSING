@@ -1,6 +1,6 @@
 import mgongoose from "mongoose"
 import { random } from "../helpers/index.js"
-import { getAllCouponSchema, getCompanyCouponByIdSchema, getCompanyCouponByNameSchema, createCouponSchema, deleteCouponSchema, getCouponByCodeSchema } from "../mongodb/models/coupon.js"
+import { getAllCouponSchema, getCompanyCouponByIdSchema, createCouponSchema, deleteCouponSchema, getCouponByCodeSchema, getCouponById } from "../mongodb/models/coupon.js"
 import { getCompanyByIdSchema } from "../mongodb/models/company.js"
 
 
@@ -13,7 +13,7 @@ const getAllCouponsModel = async(req, res) => {
         return res.status(200).json(coupons)
     } catch(error) {
         console.log(error)
-        return res.status(500).json(error.message)
+        return res.status(500).json(error.message) 
     }
 }
 
@@ -32,86 +32,13 @@ const getCompanyCouponByIdModel = async (req, res) => {
     }
 }
 
-const getCompanyCouponByNameModel = async (req, res) => {
-    try {
-        const {name} = req.body;
-
-        const coupons = getCompanyCouponByNameSchema(name)
-
-        console.log(coupons)
-
-        return res.status(200).json(coupons)
-    } catch (error) {
-        console.log(error.message)
-        return res.status(500).json(error.message)
-    }
-}
-
-
-// const createCouponModel = async (req, res) => {
-//     try {
-//         const {id} = req.params
-//         const {coupon_title, coupon_code, free_shipping, quantity, discount_type, status} = req.body
-
-//         if(!id || !coupon_title || !coupon_code ||  !free_shipping || !discount_type || !status || !quantity ) {
-//             return res.status(500).json({message: "Pass in all params"})
-//         }
-
-//         const companyExists = await getCompanyByIdSchema(id)
-
-//         if(!companyExists) {
-//             return res.status(500).json({message: "Company doesn't exist"})
-//         }
-
-//         // console.log(coupon_code)
-//         const couponExist = await getCouponByCodeSchema(coupon_code)
-//         console.log(couponExist)
-//         if(couponExist) {
-//             console.log(couponExist)
-//             return res.status(500).json({message: "Coupon code already used"})
-//         }
-//         const coupon = createCouponSchema({
-//             company_id: id,
-//             company_name: companyExists.company_name,
-//             coupon_title: coupon_title,
-//             coupon_code: coupon_code,
-//             free_shipping: free_shipping,
-//             quantity: quantity,
-//             discount_type: discount_type,
-//             status: 'active'
-//         })
-
-//         // console.log(coupons)
-
-//         return res.status(200).json(coupon)
-//     } catch (error) {
-//         console.log(error)
-//         return res.status(500).json(error.message)
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const createCouponModel = async (req, res) => {
     try {
         const { id } = req.params;
-        const { coupon_title, coupon_code, free_shipping, quantity, discount_type, status } = req.body;
+        const { coupon_title, coupon_code, free_shipping, quantity, min_purchase, discount_type, status } = req.body;
 
-        if (!id || !coupon_title || !coupon_code || !free_shipping || !discount_type || !status || !quantity) {
+        if (!id || !coupon_title || !coupon_code || !free_shipping || !min_purchase || !discount_type || !status || !quantity) {
             return res.status(400).json({ message: "Pass in all required parameters" });
         }
 
@@ -134,9 +61,11 @@ const createCouponModel = async (req, res) => {
             coupon_code: coupon_code,
             free_shipping: free_shipping,
             quantity: quantity,
+            min_purchase: min_purchase,
             discount_type: discount_type,
             status: 'active',
         });
+        console.log(coupon)
 
         return res.status(201).json(coupon);
     } catch (error) {
@@ -159,18 +88,29 @@ const createCouponModel = async (req, res) => {
 const verifyCouponModel = async (req, res) => {
     try {
         const {id} = req.params;
+        const {amount} = req.body;
 
-        const isCoupon = getCompanyCouponByIdSchema(id)
+        const isCoupon =  await getCouponById(id)
 
         if(!isCoupon) {
-            return res.status(500).json({message: "Coupon doesn'e exist"})
+            return res.status(500).json({message: "Coupon doesn't exist"})
         }
 
         if(isCoupon.status === "inactive") {
             return res.status(500).json({message: "Coupon already used"})
         }
 
-        isCoupon.status === "inactive"
+        if(!amount) {
+            return res.status(500).json({message: "Amount not found"})
+        }
+
+        if(amount < isCoupon.min_purchase) {
+            return res.status(500).json({message: `Purchase has to be atleast #${isCoupon.min_purchase}`})
+        }
+
+
+        console.log(isCoupon)
+        isCoupon.status = "inactive"
 
         await isCoupon.save()
 
@@ -182,4 +122,4 @@ const verifyCouponModel = async (req, res) => {
     }
 }
 
-export {getAllCouponsModel, getCompanyCouponByIdModel, getCompanyCouponByNameModel, createCouponModel, verifyCouponModel}
+export {getAllCouponsModel, getCompanyCouponByIdModel, createCouponModel, verifyCouponModel}

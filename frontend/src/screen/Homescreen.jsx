@@ -1,3 +1,4 @@
+import Tip from "@/components/home/Tip";
 import Articles from "../components/home/Articles";
 import AvailableCard from "../components/home/AvailableCard";
 import Categories from "../components/home/Categories";
@@ -14,13 +15,13 @@ import HomePage from "../components/home/HomePage";
   return (
    <div className="">
     <HomePage />
-    <AvailableCard />
+    <Categories />
     <Facilities />
     <FloorPlans />
     <Estimate />
-    <Categories />
-    <FeaturedProp />
-    <Articles />
+    <Tip />
+    {/* <FeaturedProp />
+    <Articles /> */}
     <Footer />
    </div>
   );

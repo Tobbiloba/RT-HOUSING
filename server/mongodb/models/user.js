@@ -18,5 +18,5 @@ export const getUsers = () => userModel.find();
 export const getUserByEmail = (email) => userModel.findOne({email});
 export const getUserUsername = (username) => userModel.findOne({username})
 export const registerUser = (values) => new userModel(values).save().then((user) => user.toObject())
-export const getUserById = (id) => userModel.findOne({_id: id}).populate("allProperties");
+export const getUserById = (id) => userModel.findOne({_id: id});
 export default userModel;

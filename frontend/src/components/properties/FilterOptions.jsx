@@ -3,6 +3,7 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Dropdown from "../home/Dropdown";
 import Slider from '@mui/material/Slider';
 import FilterOptions from "../home/FilterOptions";
+import {useNavigate} from 'react-router-dom'
 const FilterBox = ({ children, title }) => {
   const [showChildren, setShowChildren] = useState(false);
   return (
@@ -50,6 +51,7 @@ const FilterOption = () => {
   const [amenities, setAmenities] = useState([]);
   const [facilities, setFacilities] = useState([]);
 
+  const navigate = useNavigate()
 
 
 
@@ -141,6 +143,24 @@ const handleFacilitiesCheckboxChange = (item) => {
 const handleSizeChange = (event, newValue) => {
   setAreaSize(newValue);
   console.log(newValue)
+};
+
+
+
+
+const handleApplyFilters = () => {
+  console.log('called')
+  // Check if at least one option is selected in the required fields
+  if (adults || children || infants || roomType || accomodationType.length > 0 || areaSize.length === 2 || bedroom || bathrooms || priceRange.length === 2 || amenities.length > 0 || facilities.length > 0) {
+    // Constructing the query string
+    const queryString = `?adults=${adults}&children=${children}&infants=${infants}&roomType=${roomType}&accomodationType=${accomodationType.join(',')}&areaSize=${areaSize.join(',')}&bedroom=${bedroom}&bathrooms=${bathrooms}&priceRange=${priceRange.join(',')}&amenities=${amenities.join(',')}&facilities=${facilities.join(',')}`;
+    
+    // Pushing the updated URL to history
+    navigate.push(`/${queryString}`);
+  } else {
+    // Handle case when no options are selected
+    alert("Please select at least one option before applying filters.");
+  }
 };
 
   return (
@@ -246,7 +266,7 @@ const handleSizeChange = (event, newValue) => {
 
           <div className="px-4 py-10 bg-gray-100 text-center items-center justify-center flex flex-col">
             <p className="text-[15px] text-gray-500">Click "Apply Filter" button to get <br /> desired search result</p>
-            <button className="mt-4 border-[3px] text-yellow-500 cursor-pointer border-yellow-500 hover:text-white hover:bg-yellow-500 px-10 py-3 rounded-md w-fit">Apply Filters</button>
+            <button className="mt-4 border-[3px] text-yellow-500 cursor-pointer border-yellow-500 hover:text-white hover:bg-yellow-500 px-10 py-3 rounded-md w-fit" onClick={handleApplyFilters}>Apply Filters</button>
             <button className="mt-4 text-sky-400">Reset All</button>
           </div>
         </div>

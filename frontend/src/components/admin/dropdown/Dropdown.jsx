@@ -17,7 +17,7 @@ const Dropdown = ({state, setState, data, height, label}) => {
   return (
     <div className="relative exo text-[13px] w-[100%]">
       <label className="absolute z-10 -top-3 left-4 px-2 bg-slate-900 text-white">{label}:</label>
-      <div className="dropdown w-[100%] border-[2px] border-white h-[3rem]">
+      <div className="dropdown w-[100%] border-[2px] rounded-md border-white h-[3rem]">
         <div
           className={`items-center px-3 cursor-pointer text-white  h-[100%] flex flex-row justify-between text-[13px]`}
           onClick={() => setDropdownOpen(!isDropdownOpen)}

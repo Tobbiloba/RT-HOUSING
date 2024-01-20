@@ -7,7 +7,9 @@ import React, { useState } from 'react';
 import FilterOption from './FilterOptions';
 import { Drawer } from '@mui/material';
 import TopRated from './TopRated';
+import { useLocation } from 'react-router-dom';
 export default function MobileFilterOption({state, setState}) {
+  
 //   const [state, setState] = useState({
 //     right: false,
 //   });

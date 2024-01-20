@@ -87,7 +87,7 @@ const DetailTopCard = ({ detail }) => {
   console.log(detail?.property_no_bathroom);
   return (
     <div className="mb-6">
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center px-[1.25rem] sm:px-[5%] ">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center px-[1.25rem] sm:px-[5%] md:px-[2%] ">
         <div className="flex flex-col sm:flex-row gap-5">
           <img
             src={detail?.avatar}

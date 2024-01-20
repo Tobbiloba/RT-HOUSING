@@ -1,4 +1,4 @@
-import Property, { createPropertyAdmin, getActivatedProperties, getPropertyById, getPropertyByOwnerId, updatePropertyById } from "../mongodb/models/property.js";
+import Property, { createPropertyAdmin, getActivatedProperties, getPropertyById, getPropertyByCompanyId, updatePropertyById } from "../mongodb/models/property.js";
 import User, { getUserById } from "../mongodb/models/user.js";
 
 import mongoose from "mongoose";
@@ -32,7 +32,7 @@ const getAllProperties = async (req, res) => {
 
     try {
         const count = await Property.countDocuments({ query });
-
+        console.log(count)
         const properties = await Property.find(query)
             .limit(_end)
             .skip(_start)
@@ -60,11 +60,11 @@ const getAllPropertiesUser = async (req, res) => {
     }
 };
 
-const getPropertyByOwner = async (req, res) => {
+const getPropertyByCompany = async (req, res) => {
     const { id } = req.params;
 
     // console.log(id)
-    const propertyExists = await getPropertyByOwnerId({ _id: id })
+    const propertyExists = await getPropertyByCompanyId(id)
 
 
     // console.log(propertyExists)
@@ -135,7 +135,7 @@ const createProperty = async (req, res) => {
             return res.status(500).json({message: "Pass in the necessary parameters"})
         }
 
-        // console.log(id)
+        console.log(property_information)
 
         // const session = await mongoose.startSession();
         // session.startTransaction();
@@ -148,10 +148,8 @@ const createProperty = async (req, res) => {
         return res.status(500).end()
     };
     // console.log(user)
-    const property_id = random()
 
         const newProperty = await createPropertyAdmin({
-            property_id: property_id,
             isActive: false,
             property_information: {
                 property_name: property_information?.property_name,
@@ -474,7 +472,7 @@ export {
     createProperty,
     updateProperty,
     deleteProperty,
-    getPropertyByOwner,
+    getPropertyByCompany,
     getPropertyDetailById,
     activateProperty,
     getAllPropertiesUser,

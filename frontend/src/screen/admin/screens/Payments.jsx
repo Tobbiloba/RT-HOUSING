@@ -103,7 +103,7 @@ import { PaymentTable } from '@/components/admin/table/PaymentTable';
 
 const Payments = () => {
   return (
-    <div className="exo w-[100%] flex flex-col justify-end px-[1rem] md:px-[2rem] bg-slate-900">
+    <div className="exo w-[100%] flex flex-col justify-end px-[1rem] md:px-[2%]">
       <div className=" items-center flex-wrap gap-y-6 pb-4 px-4  mt-0  md:px-[5%] flex flex-row justify-">
         {/* <LuWarehouse className='text-white mr-3'/> */}
         {/* <h1 className="text-white text-[17px]">All Payments</h1> */}
@@ -122,7 +122,7 @@ const Payments = () => {
 
 
       <div className='flex flex-row justify-end gap-x-8 gap-y-2 px-[1rem] items-center text-[14px] my-3 text-white flex-wrap'>
-        <h1 className='border-2 border-slate-900 py-2 cursor-pointer border-b-slate-300'>Rent Due(15)</h1>
+        <h1 className='border-b-2 py-2 cursor-pointer border-b-slate-300'>Rent Due(15)</h1>
         <h1 className='cursor-not-allowed'>Multi-Unit Properties(2)</h1>
         <h1 className='cursor-not-allowed'>Vacant Properties (3)</h1>
         <h1 className='cursor-not-allowed'>Archived Properties (1)</h1>
