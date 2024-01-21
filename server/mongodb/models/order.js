@@ -57,9 +57,9 @@ const OrderModel = mongoose.model("Order", OrderSchema);
 
 export const getOrders = (no) => OrderModel.find({}).limit(no);
 export const getOrderByProperty = (id) =>
-  OrderModel.findOne({ property_id: id });
+  OrderModel.find({ property_id: id });
   export const getOrderByCompany = (id) =>
-  OrderModel.findOne({ company_id: id });
+  OrderModel.find({ company_id: id });
 export const getOrderByUserId = (id) =>
   OrderModel.find({ user_id: id }).populate("creator");
 export const getOrderById = (id) => OrderModel.findOne({ _id: id });

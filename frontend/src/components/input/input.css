@@ -55,6 +55,7 @@ Color variables
     transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
     background-color: #334155;
     z-index: 0;
+    font-size: 14px;
   }
   
   .form__input:focus ~ .form__label,

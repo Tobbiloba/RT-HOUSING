@@ -30,7 +30,7 @@ const AdminProperties = () => {
     // dispatch(getMyProperties());
   }, []);
 
-  const {properties,loading} = useSelector((state) => state?.myProperties);
+  const {properties, loading} = useSelector((state) => state?.myProperties);
   console.log(properties);
   // const loading  = true
   return (
@@ -63,7 +63,7 @@ const AdminProperties = () => {
           </div>
         </div>
 
-        <Link to="/admin/add-property">
+        <Link to="/admin/properties/create">
           <button className="rounded-md text-[15px] gap-5 flex text-white bg-slate-900 px-5 py-3 items-center">
             <IoMdAdd className="text-[22px]" /> Add Property
           </button>
@@ -164,7 +164,7 @@ const AdminProperties = () => {
   <img src="/empty.png" className="w-[40rem] object-contain"/>
     <h1 className="text-2xl md:text-3xl lg:text-4xl font-mono text-slate-300">No property</h1>
     <p className="text-[15px] mt-3 text-slate-500 text-center">Seems like you haven't added any properties yet. Ready to begin? <br /> Click the button below to start adding your first property.</p>
-    <Link to="/admin/add-property">
+    <Link to="/admin/properties/create">
           <button className="rounded-md mt-6 text-[15px] gap-5 flex text-white bg-slate-900 px-5 py-3 items-center">
             <IoMdAdd className="text-[22px]" /> Add Property
           </button>

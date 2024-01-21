@@ -1,5 +1,6 @@
 
 import {
+  CLEAR,
     CREATE_PROPERTIES,
     CREATE_PROPERTIES_FAILED,
     CREATE_PROPERTIES_SUCCESSFUL,
@@ -78,14 +79,18 @@ export const createPropertyReducer = (
         case CREATE_PROPERTIES_SUCCESSFUL:
           return {
             loading: false,
-            properties: action.payload,
-            status: 'succeessful'
+            property: action.payload,
+            status: 'successful'
           };
         case CREATE_PROPERTIES_FAILED:
           return {
             loading: false,
             error: false,
           };
+        case CLEAR:
+          return {
+
+          }
         default:
           return state;
       }
@@ -115,3 +120,4 @@ export const getPropertyDetailsById = (
         return state;
     }
 }
+

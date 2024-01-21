@@ -682,13 +682,18 @@ import Box from "../../../components/admin/box/Box";
 import Dropzone from "../../../components/admin/dropzone/Dropzone";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createProperty } from "../../../action/property";
+import { Clear, createProperty } from "../../../action/property";
 import { IoMdCloseCircle } from "react-icons/io";
 import { styled } from "@mui/system";
 import DragDropFiles from "@/components/dropzone/Dropzone";
 import { useMediaQuery } from "react-responsive";
+
+
+
+
 const AddProperty = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   let today = startOfToday();
   let tomorrow = startOfTomorrow();
   const [property_name, setProperty_name] = useState("");
@@ -891,7 +896,7 @@ const AddProperty = () => {
     return `${value}°C`;
   }
 
-  const validateStepOne = () => {
+  const validateForm = () => {
     const requiredFields = [
       "property_amenities",
       "property_bathroom",
@@ -905,132 +910,94 @@ const AddProperty = () => {
       "property_state",
       "property_pricing",
     ];
-
-    if (currentStep === 1 && requiredFields.some((field) => !eval(field))) {
+  
+    if (requiredFields.some((field) => !eval(field))) {
       toast.info("You must fill in all forms", {
         /* toast options */
       });
       return;
     }
-
-    // @ts-ignore
-    if (currentStep === 1 && property_amenities <= 2) {
+  
+    if (property_amenities <= 2) {
       toast.info("You must select at least 3 amenities", {
         /* toast options */
       });
       return;
     }
-
-    if (currentStep === 1) {
-      // Additional validation logic if needed
-      setCurrentStep((prev) => prev + 1);
-      toast.info("You have successfully added property information", {
+  
+    if (!isUnavailable && !reason) {
+      toast.info("You need to have a reason", {
         /* toast options */
       });
+      return;
     }
-  };
-
-  const validateStepTwo = () => {
-    if (currentStep === 2) {
-      if (!isUnavailable && !reason) {
-        toast.info("You need to have a reason", {
-          /* toast options */
-        });
-        return;
-      } else {
-        setCurrentStep((prev) => prev + 1);
-        toast.info("You have successfully added property availability date", {
-          /* toast options */
-        });
-        return;
-      }
+  
+    if (!property_images || property_images.length < 3) {
+      console.log("Image not enough");
+      toast.info("You need to upload at least 5 images", {
+        /* toast options */
+      });
+      return;
     }
+  
+    // Additional validation logic if needed
+  
+    const id = "65a0fc46a3cd4f366e7a3c52";
+    const property_information = {
+      property_name: property_name,
+      property_type: property_type,
+      property_description: property_description,
+      property_no_bedrooms: property_bedrooms,
+      property_no_bathroom: property_bathroom,
+      property_size: property_size,
+      property_amenities: property_amenities,
+      property_images: property_images,
+      property_location: {
+        country: property_country,
+        state: property_state,
+        city: property_city,
+      },
+      pricing: property_pricing,
+      property_policy: {
+        pet_policy: property_dog_policy,
+        smoking_policy: property_smoking_policy,
+      },
+      availability: {
+        available_date_from: property_availability_from_date,
+        available_date_till: property_availability_till_date,
+        unavailable_date_from: isUnavailable
+          ? ""
+          : property_unavailability_from_date,
+        unavailable_date_till: isUnavailable
+          ? ""
+          : property_occupied_till_date,
+        occupied_date_from: property_occupied_from_date || [],
+        occupied_date_till: property_occupied_till_date || [],
+      },
+      guest: {
+        maximum_adults: property_adults,
+        maximum_children: property_children,
+        maximum_infants: property_infants,
+      },
+    };
+  
+    // Dispatch action to create property
+    // @ts-ignore
+    dispatch(createProperty(id, property_information));
+    console.log('all check passed')
+    // toast.success("You have successfully added your property", { /* toast options */ });
   };
+  
 
-  const validateStepThree = () => {
-    if (currentStep === 3) {
-      if (!property_images || property_images.length < 3) {
-        console.log("Image not enough");
-        toast.info("You need to upload at least 5 images", {
-          /* toast options */
-        });
-        return;
-      } else {
-        const id = "65a0fc46a3cd4f366e7a3c52";
-        const property_information = {
-          property_name: property_name,
-          property_type: property_type,
-          property_description: property_description,
-          property_no_bedrooms: property_bedrooms,
-          property_no_bathroom: property_bathroom,
-          property_size: property_size,
-          property_amenities: property_amenities,
-          property_images: property_images,
-          property_location: {
-            country: property_country,
-            state: property_state,
-            city: property_city,
-          },
-          pricing: property_pricing,
-          property_policy: {
-            pet_policy: property_dog_policy,
-            smoking_policy: property_smoking_policy,
-          },
-          availability: {
-            available_date_from: property_availability_from_date,
-            available_date_till: property_availability_till_date,
-            unavailable_date_from: isUnavailable
-              ? ""
-              : property_unavailability_from_date,
-            unavailable_date_till: isUnavailable
-              ? ""
-              : property_occupied_till_date,
-            occupied_date_from: property_occupied_from_date || [],
-            occupied_date_till: property_occupied_till_date || [],
-          },
-          guest: {
-            maximum_adults: property_adults,
-            maximum_children: property_children,
-            maximum_infants: property_infants,
-          },
-        };
+  const {status, property} = useSelector((state) => state.createProperty)
 
-        // console.log(id, property_information)
-        // @ts-ignore
-        dispatch(createProperty(id, property_information));
-        // toast.success("You have successfully added your property", { /* toast options */ });
-        return;
-      }
-    }
-  };
-
-  const handleNext = () => {
-    if (currentStep === 1) {
-      validateStepOne();
-    } else if (currentStep === 2) {
-      validateStepTwo();
-    } else if (currentStep === 3) {
-      validateStepThree();
-    }
-  };
-
-  const navigate = useNavigate();
-  // @ts-ignore
-  const createProduct = useSelector((state) => state?.createProperty);
-  // console.log(createProduct)
   useEffect(() => {
-    if (
-      createProduct.status == "succeessful" &&
-      !property_images &&
-      property_images.length < 3 &&
-      !isUnavailable &&
-      !reason &&
-      currentStep === 1 &&
-      requiredFields.some((field) => !eval(field))
-    ) {
-      navigate("/admin/properties");
+    if(status == 'successful') {
+      dispatch(Clear())
+      navigate('/admin/properties')
     }
-  }, [createProduct]);
+  }, [status])
+
 
   const DarkSlider = styled(Slider)({
     color: "#0f172a", // Change 'red' to your desired color
@@ -1312,7 +1279,7 @@ const AddProperty = () => {
 
         <div>
         {!isUnavailable && (
-          <div className="col-span-2 border gap-8 grid grid-cols-1">
+          <div className="col-span-2 gap-8 grid grid-cols-1">
             <div className="relative">
               <div>
                 <Box
@@ -1389,7 +1356,7 @@ const AddProperty = () => {
 
         <div className="mt-12 flex flex-row justify-between">
           <button className="w-5/12 bg-slate-700 text-white rounded-xl">Discard</button>
-          <button className="w-6/12 py-3 bg-slate-400 text-white rounded-xl">Create Property</button>
+          <button className="w-6/12 py-3 bg-slate-400 text-white rounded-xl" onClick={validateForm}>Create Property</button>
         </div>
       </div>
       </div>

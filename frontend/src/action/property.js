@@ -2,6 +2,7 @@ import Axios from "axios";
 import { toast } from "react-toastify";
 
 import {
+  CLEAR,
   CREATE_PROPERTIES,
   CREATE_PROPERTIES_FAILED,
   CREATE_PROPERTIES_SUCCESSFUL,
@@ -149,7 +150,11 @@ export const createProperty = (id, property_information) => async (dispatch) => 
 
 
 
-
+export const Clear = () => async (dispatch) => {
+  dispatch({
+      type: CLEAR
+  })
+}
 
 
 
