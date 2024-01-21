@@ -18,7 +18,7 @@ const CouponModel = mongoose.model("Coupon", CouponSchema)
 export const getAllCouponSchema = (no) => CouponModel.find().limit(no)
 export const getCouponById = (id) => CouponModel.findOne({"_id": id})
 export const getCouponByCodeSchema = (code) => CouponModel.findOne({"coupon_code": code})
-export const getCompanyCouponByIdSchema = (id) => CouponModel.findOne({"company_id": id})
+export const getCompanyCouponByIdSchema = (id) => CouponModel.find({"company_id": id})
 export const createCouponSchema = (values) => new CouponModel(values)
     .save().then((user) => user.toObject())
 // export const updateCouponSchema = (id, value) => CouponModel.findByIdAndUpdate(id, value);

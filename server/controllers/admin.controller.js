@@ -4,10 +4,7 @@ import { authentication, random } from "../helpers/index.js";
 const getAllAdminUsers = async (req, res) => {
     try {
         const users = await AdminUser.find({}).limit(req.query._end);
-    
         res.status(200).json(users);
-
-        // console.log('working')
       } catch (error) {
         res.status(500).json({ message: error.message });
       }
@@ -21,15 +18,11 @@ const createAdminUser = async (req, res) => {
     if (!email || !password || !username || !firstname || !lastname || !profile_img || !state || !country || !city  || !phone_no) {
       return res.status(500).json({ message: "Pass necessary parameters" });
     }
-
     const userExists = await getAdminUserByEmail(email);
-
     if (userExists) {
       return res.status(500).json({ message: "User already exists" });
     }
-
     const salt = random();
-
     console.log({
       username,
       email,
@@ -71,7 +64,6 @@ const createAdminUser = async (req, res) => {
         salt, password: authentication(salt, password)
     }
     });
-    console.log(newUser);
     res.status(200).json({ newUser }).end();
   } catch (error) {
     console.log(error);

@@ -4,20 +4,20 @@ import {
   ChevronDownIcon,
   DotsHorizontalIcon,
 } from "@radix-ui/react-icons";
-import { ColumnDef, ColumnFiltersState,
-    SortingState,
-    VisibilityState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable, } from "@tanstack/react-table";
-
-// import { Button } from "@/components/ui/button"
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import { Button } from "@/~/components/ui/button";
 import { Checkbox } from "@/~/components/ui/checkbox";
-// import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -27,7 +27,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import { Input } from "@/components/ui/input"
 import { Input } from "@/~/components/ui/input";
 import {
   Table,
@@ -37,79 +36,57 @@ import {
   TableHeader,
   TableRow,
 } from "@/~/components/ui/table";
-
 import { BsClipboard } from "react-icons/bs";
 import { ToastButton } from "@/components/toast/Toast";
 
-
-
-export const columns= [
+export const columns = [
   {
     accessorKey: "action",
     header: "Action",
     cell: ({ row }) => (
-      <div className="capitalize">lol</div>
+      <div className="capitalize">
+        <input type="checkbox" className="" />
+      </div>
     ),
   },
-
   {
     accessorKey: "avatar",
     header: "Avatar",
     cell: ({ row }) => (
-      <div className="capitalize"><img src={row.getValue("avatar")} className="w-10 rounded-full h-10"/></div>
+      <div className="capitalize">
+        <img src={row.getValue("avatar")} className="w-10 rounded-full h-10" />
+      </div>
     ),
   },
-  
   {
     accessorKey: "first_name",
     header: "Firstname",
-    cell: ({ row }) => (
-      <h1>{row.getValue("first_name")}</h1>
-    ),
+    cell: ({ row }) => <h1>{row.getValue("first_name")}</h1>,
   },
-  
   {
     accessorKey: "last_name",
     header: "Lastname",
-    cell: ({ row }) => (
-      <div className="">{row.getValue("last_name")}</div>
-    ),
+    cell: ({ row }) => <div className="">{row.getValue("last_name")}</div>,
   },
-
 
   {
     accessorKey: "email",
     header: "Email",
-    cell: ({ row }) => (
-      <div className="">
-      {row.getValue("email")}
-      </div>
-    ),
+    cell: ({ row }) => <div className="">{row.getValue("email")}</div>,
   },
-
   {
     accessorKey: "last_login",
     header: "Last login",
-    cell: ({ row }) => (
-      <div className="">
-      {row.getValue("last_login")}
-      </div>
-    ),
+    cell: ({ row }) => <div className="">{row.getValue("last_login")}</div>,
   },
 
   {
     accessorKey: "role",
     header: "Role",
-    cell: ({ row }) => (
-      <div className="">
-      {row.getValue("role")}
-      </div>
-    ),
+    cell: ({ row }) => <div className="">{row.getValue("role")}</div>,
   },
- 
 ];
-
-export function EmployeeTable({data}) {
+export function EmployeeTable({ data }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -117,7 +94,6 @@ export function EmployeeTable({data}) {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
-
   const table = useReactTable({
     data,
     columns,
@@ -136,13 +112,14 @@ export function EmployeeTable({data}) {
       rowSelection,
     },
   });
-
   return (
     <div className="w-full exo">
-          <div className="flex flex-wrap gap-y-4 items-center py-4 px-[1rem] md:px-[2rem]">
+      <div className="flex flex-wrap gap-y-4 items-center py-4 ">
         <Input
           placeholder="Filter First name..."
-          value={(table.getColumn("first_name")?.getFilterValue() as string) ?? ""}
+          value={
+            (table.getColumn("first_name")?.getFilterValue() as string) ?? ""
+          }
           onChange={(event) =>
             table.getColumn("property_name")?.setFilterValue(event.target.value)
           }
@@ -150,7 +127,10 @@ export function EmployeeTable({data}) {
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto text-white bg-slate-900 border-slate-600">
+            <Button
+              variant="outline"
+              className="ml-auto text-white bg-slate-900 border-slate-600"
+            >
               Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -174,12 +154,15 @@ export function EmployeeTable({data}) {
               })}
           </DropdownMenuContent>
         </DropdownMenu>
-      </div> 
+      </div>
       <div className="rounded-md ">
-        <Table >
+        <Table>
           <TableHeader className="text-[17px] bg-slate-900 border border-slate-900">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="border  hover:bg-slate-800 border-slate-900">
+              <TableRow
+                key={headerGroup.id}
+                className="border  hover:bg-slate-800 border-slate-900"
+              >
                 {headerGroup.headers.map((header, index) => {
                   return (
                     <TableHead key={header.id} className={`text-white `}>
@@ -195,75 +178,73 @@ export function EmployeeTable({data}) {
               </TableRow>
             ))}
           </TableHeader>
-          
-
-
-          {/* <div>
-          <h1>
-            Rent Due Within 3 Days
-          </h1> */}
-           {/* <h1>
-            Rent Due Within 3 Days
-          </h1>
-           */}
-
-
           <TableBody className="">
-  {table.getRowModel().rows?.length ? (
-    table.getRowModel().rows.map((row, index) => {
-      // console.log(row.original);
-      if (row.original !== "active") {
-        return null; // Return null to skip rendering this row
-      }
-      return (
-        <TableRow
-          key={row.id}
-          data-state={row.getIsSelected() && "selected"}
-          className={`${index % 2 === 0 ? 'bg-slate-800 hover:bg-slate-800' : 'bg-slate-900 hover:bg-slate-900'} border-0 py-8 bg-black `}
-        >
-          {row.getVisibleCells().map((cell) => (
-            <TableCell key={cell.id} className={`mt-3 text-slate-600 ${index % 2 === 0 ? 'text-white' : 'text-slate-400'} bg-black`}>
-              {flexRender(
-                cell.column.columnDef.cell,
-                cell.getContext()
-              )}
-            </TableCell>
-          ))}
-        </TableRow>
-      );
-    })
-  ) : (
-    <TableRow>
-      <TableCell
-        colSpan={columns.length}
-        className="h-24 text-center"
-      >
-        No results.
-      </TableCell>
-    </TableRow>
-  )}
-</TableBody>
-
-       
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row, index) => {
+                if (row.original !== "active") {
+                  return null; 
+                }
+                return (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    className={`${
+                      index % 2 === 0
+                        ? "bg-slate-800 hover:bg-slate-800"
+                        : "bg-slate-900 hover:bg-slate-900"
+                    } border-0 py-8 bg-black `}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell
+                        key={cell.id}
+                        className={`mt-3 text-slate-600 ${
+                          index % 2 === 0 ? "text-white" : "text-slate-400"
+                        } bg-black`}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
           <TableBody className="">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row, index) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className={`${index % 2 === 0 ? 'bg-slate-800' : 'bg-slate-950'} border-0 py-8`}
+                  className={`${
+                    index % 2 === 0 ? "bg-slate-800" : "bg-slate-950"
+                  } border-0 py-8`}
                 >
                   {row.getVisibleCells().map((cell) => {
-                    // console.log(cell)
                     return (
-                        <TableCell key={cell.id } className={` text-slate-600 ${index % 2 === 0 ? 'text-white' : 'text-slate-400'} `}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                          
-                        </TableCell>
-                      )
+                      <TableCell
+                        key={cell.id}
+                        className={` text-slate-600 ${
+                          index % 2 === 0 ? "text-white" : "text-slate-400"
+                        } `}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    );
                   })}
                 </TableRow>
               ))
@@ -278,9 +259,6 @@ export function EmployeeTable({data}) {
               </TableRow>
             )}
           </TableBody>
-          {/* </div> */}
-
-
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4 px-[1rem]">

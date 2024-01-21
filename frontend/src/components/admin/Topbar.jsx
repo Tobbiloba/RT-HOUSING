@@ -21,7 +21,6 @@ const Topbar = ({ setShowSlide, showSlide }) => {
         >
           <HiOutlineMenuAlt2 className="text-white text-[28px]" />
         </div>
-
         <div
           className="md:hidden"
           onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -29,9 +28,8 @@ const Topbar = ({ setShowSlide, showSlide }) => {
           <CiMenuKebab className="text-white text-[28px]" />
         </div>
       </div>
-
       {showMobileMenu && (
-        <div className="flex md:hidden  mb-4 mt-2 justify-end flex-col px-[1rem]  items-center text-slate-500">
+        <div className="flex md:hidden  mb-4 mt-2 justify-end flex-col px-[1rem]  items-center text-slate-100">
           <input
             placeholder="search"
             className="bg-slate-700 w-[100%] border-slate-500 border px-6 py-2 rounded-md"
@@ -55,24 +53,17 @@ const Topbar = ({ setShowSlide, showSlide }) => {
           </div>
         </div>
       )}
-
-      <div className="hidden md:flex flex-row  items-center text-slate-500">
-        {/* </div> */}
-
+      <div className="hidden md:flex flex-row  items-center text-slate-300">
         <div className="border-l-2  text-[15px] py-1 px-4 border-slate-500">
           EN
         </div>
         <div className="border-l-2 relative border-r-2 text-[18px] py-1 px-4 border-slate-500">
           <span className="absolute bottom-0 right-1 flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-800 opacity-80"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-100 opacity-80"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-500"></span>
           </span>
-          <FaRegBell />
-
-          {/* <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-slate-800 opacity-75 top-0 right-0"></span> */}
+          <FaRegBell className="text-[15px]" />
         </div>
-
-
         <div className="ml-4">
           <img
             src="https://angular.pixelstrap.com/multikart-admin/assets/images/dashboard/man.png"

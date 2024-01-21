@@ -7,6 +7,7 @@ import { v2 as cloudinary } from "cloudinary";
 import { random } from "../helpers/index.js";
 import { getAdminUserById, updateAdminUser } from "../mongodb/models/admin.js";
 import { getCompanyByIdSchema } from "../mongodb/models/company.js";
+import { createNotificationModel } from "./notification.controller.js";
 dotenv.config();
 
 
@@ -135,7 +136,7 @@ const createProperty = async (req, res) => {
             return res.status(500).json({message: "Pass in the necessary parameters"})
         }
 
-        console.log(property_information)
+        // console.log(property_information)
 
         // const session = await mongoose.startSession();
         // session.startTransaction();
@@ -192,13 +193,8 @@ const createProperty = async (req, res) => {
             created_by: id
         });
 
-
-        // console.log(newProperty)
-        // company.allProperties.push(newProperty._id);
-        // console.log(newProperty._id)
-        // newProperty.creator.push(newProperty.owner_id)
-        // await company.save();
-        // await newProperty.save()
+        
+notifyEmployees(company)
 
 
         res.status(200).json(newProperty);
@@ -206,6 +202,42 @@ const createProperty = async (req, res) => {
         // console.log(error)
         res.status(500).json({ message: error.message });
     }
+};
+
+
+
+
+// Assuming createNotificationModel is a function that creates a notification for a given userId
+// const createNotificationModel = async (userId, title, message) => {
+//     try {
+//         // Implementation of createNotificationModel
+//         // ...
+//         console.log(`Notification created for userId: ${userId}`);
+//     } catch (error) {
+//         console.error(error.message);
+//     }
+// };
+
+// Function to map over company.employees and call createNotificationModel for each employee_id
+const notifyEmployees = async (company) => {
+    if (!company || !company.employees || !Array.isArray(company.employees)) {
+        console.error('Invalid company object or employees array.');
+        return;
+    }
+
+    // Assuming you have title and message for the notification
+    const title = 'Notification Title';
+    const message = 'Notification Message';
+
+    // Map over employees and call createNotificationModel for each employee_id
+    await Promise.all(company.employees.map(async (employee) => {
+        if (employee && employee.employee_id) {
+            // console.log(employee.employee_id)
+            await createNotificationModel({id: employee.employee_id, title:title, message:message});
+        }
+    }));
+
+    console.log('Notification process completed for all employees.');
 };
 
 
