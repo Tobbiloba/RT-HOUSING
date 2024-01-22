@@ -1,143 +1,204 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import { getPropertyByType } from "@/action/property";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+import { FaBath } from "react-icons/fa";
+import { IoBedSharp } from "react-icons/io5";
+import { SlSizeActual } from "react-icons/sl";
 const properties = [
   {
     id: 1,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'sale',
-    paymentPlan: 'month',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2'
+    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
+    price: "$100,000",
+    purpose: "sale",
+    paymentPlan: "month",
+    city: "Tranquil Countryside Estate",
+    state: "New York",
+    bedroom: "4",
+    bathroom: "3",
+    size: "78 m2",
   },
   {
     id: 2,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'rent',
-    paymentPlan: 'week',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2'
+    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
+    price: "$100,000",
+    purpose: "rent",
+    paymentPlan: "week",
+    city: "Tranquil Countryside Estate",
+    state: "New York",
+    bedroom: "4",
+    bathroom: "3",
+    size: "78 m2",
   },
   {
     id: 3,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'sale',
-    paymentPlan: 'night',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2'
+    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
+    price: "$100,000",
+    purpose: "sale",
+    paymentPlan: "night",
+    city: "Tranquil Countryside Estate",
+    state: "New York",
+    bedroom: "4",
+    bathroom: "3",
+    size: "78 m2",
   },
   {
     id: 4,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'rent',
-    paymentPlan: 'month',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2'
+    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
+    price: "$100,000",
+    purpose: "rent",
+    paymentPlan: "month",
+    city: "Tranquil Countryside Estate",
+    state: "New York",
+    bedroom: "4",
+    bathroom: "3",
+    size: "78 m2",
   },
   {
     id: 5,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'sale',
-    paymentPlan: 'night',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2'
+    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
+    price: "$100,000",
+    purpose: "sale",
+    paymentPlan: "night",
+    city: "Tranquil Countryside Estate",
+    state: "New York",
+    bedroom: "4",
+    bathroom: "3",
+    size: "78 m2",
   },
   {
     id: 6,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'sale',
-    paymentPlan: 'month',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2'
+    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
+    price: "$100,000",
+    purpose: "sale",
+    paymentPlan: "month",
+    city: "Tranquil Countryside Estate",
+    state: "New York",
+    bedroom: "4",
+    bathroom: "3",
+    size: "78 m2",
   },
-]
-const categories = [
-  'Residential', 'Commercial', 'Apartments', 'Office Space'
-]
+];
+const categories = ["Residential", "Commercial", "Apartments", "Office Space"];
 
-const CategoryCard = ({property}) => {
+const CategoryCard = ({ property }) => {
+  return <div className="w-[100%] rounded-xl p-2 bg-white"></div>;
+};
+import { useRef } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
+
+import { FaLocationDot } from "react-icons/fa6";
+
+// import required modules
+import { FreeMode, Pagination } from "swiper/modules";
+import { Item } from "@radix-ui/react-dropdown-menu";
+
+const SwiperContainer = () => {
+  const one = useMediaQuery({ maxWidth: 508 });
+  const two = useMediaQuery({ maxWidth: 788 });
+  const three = useMediaQuery({ maxWidth: 920 });
+  const four = useMediaQuery({ minWidth: 1024 });
   return (
-    <div className="w-[100%] rounded-xl p-2 bg-white">
-      <div className="w-[100%] rounded-xl max-h-[20rem] relative overflow-hidden">
-        <img src={property.img} className=" "/>
+    <>
+      <Swiper
+        slidesPerView={one ? 1 : two ? 2 : three ? 3 : four && 4}
+        spaceBetween={30}
+        freeMode={false}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[FreeMode, Pagination]}
+        className="mySwiper"
+      >
+        {/* <SwiperSlide className="border">Slide 1</SwiperSlide>
+        <SwiperSlide className="border">Slide 1</SwiperSlide>
+        <SwiperSlide className="border">Slide 1</SwiperSlide>
+        <SwiperSlide className="border">Slide 1</SwiperSlide>
+        <SwiperSlide className="border">Slide 1</SwiperSlide> */}
 
-        <p className={`absolute top-4 left-4 px-3 py-1 rounded-full text-[14px] ${property.purpose == 'sale' ? 'bg-white text-slate-500' : 'bg-slate-500 text-white'}`}>{property.purpose == 'sale' ? 'For Sale' : 'For rent'}</p>
-      </div>
-      <div className="mt-8 px-[1.5rem]">
-        <h1 className="text-2xl font-[600] text-slate-600">{property.price} <span className="text-[17px] text-slate-500 font-[500]">/ per {property.duration}</span></h1>
-        <p className="mt-3 text-slate-500 font-[600]">{property.city}</p>
-        <p className="mt-3 text-slate-400 font-[600]">{property.state}</p>
+        {properties.map((property, index) => {
+          console.log(property);
+          return (
+            <SwiperSlide key={index} className="hover:border-b hover:shadow-md border-yellow-500 rounded-xl">
+              <div className="relative  max-h-[15rem] rounded-xl overflow-hidden">
+                <img src={property.img} className="w-[100%] h-auto" />
+                <div className="w-[100%] h-[100%] z-[50] bg-black/50 absolute top-0 left-0"></div>
+              </div>
 
-        <div className="flex flex-wrap gap-y-5 border-t py-6 mt-6 flex-row justify-between items-center">
-          <p className="border py-2 px-4 bg-slate-200 rounded-full text-[14px]">{property.bathroom} bathrooms</p>
-          <p className="border py-2 px-4 bg-slate-200 rounded-full text-[14px]">{property.bedroom} bedroom</p>
-          <p className="border py-2 px-4 bg-slate-200 rounded-full text-[14px]">{property.size}</p>
-        </div>
-      </div>
-    </div>
-  )
-}
+              <div className=" p-[1.25rem] py-[2rem]">
+                <p className="text-[18px] font-[600]">
+                  {property.price}{" "}
+                  <span className="text-slate-500 text-[13px]">
+                    / {property.paymentPlan}
+                  </span>
+                </p>
+
+                <div className="flex flex-row mt-3 gap-4 items-center justify-between">
+                  <p className="text-[16px] gap-3 items-center  flex flex-row">
+                    <FaBath className="text-yellow-500" />
+                    {property.bathroom}
+                  </p>
+                  <p className="text-[16px] gap-3 items-center  flex flex-row">
+                    <IoBedSharp className="text-yellow-500" />
+                    {property.bedroom}
+                  </p>
+                  <p className="text-[16px] gap-3 items-center  flex flex-row">
+                    <SlSizeActual className="text-yellow-500" />
+                    {property.size}
+                  </p>
+                </div>
+
+                <div className="flex mt-4 flex-row items-center gap-3">
+                  <FaLocationDot className="text-yellow-500"/>
+                  <h1 className="text-[16px]">{property.city}</h1>
+                </div>
+              </div>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </>
+  );
+};
 
 const Categories = () => {
-  const [selectedCategory, setSelectedCategory] = useState('Residential');
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const [selectedCategory, setSelectedCategory] = useState("Residential");
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPropertyByType("lol"));
+  }, []);
+
+  const property = useSelector((state) => state.propertyType);
 
   return (
-    <div className="flex exo bg-gray-100 h-fit py-6 lg:py-12">
-      <div className="mt-24 flex-col b container mx-auto md:items-center exo justify-center flex">
-        <h1 className="text-4xl text-slate-700 font-[600]">Find the category for you</h1>
-        <p className="mt-4 text-[15px] text-center text-slate-400">
-          Lorem ipsum dolor sit amet consecteur adipsinfr fieowineod  dwoidnw dweodinwejkw edowidewdeodn
-        </p>
-
-        <div className="border-[1rem] w-fit rounded-xl border-white bg-white mt-16 flex flex-col md:flex-row flex-wrap gap-[1rem] ">
-          {categories.map((category, index) => (
-            <p
-              key={index}
-              className={`px-16 py-4 rounded-xl ${category === selectedCategory ? 'bg-black text-white' : 'bg-slate-100'}`}
-            >
-              {category}
+    <div className="flex items-center justify-center exo bg-gray-100 h-fit py-6 lg:py-12 ">
+      <div className="container flex-col flex">
+        <div className="flex flex-row justify-between items-center">
+          <div>
+            <h1 className="font-[600] lg:text-5xl text-yellow-500 md:tex-4xl text-3xl">
+              Discover Our Featured <br /> Properties
+            </h1>
+            <p className="mt-2 text-[15px] font-[600] text-yellow-700">
+              Discover best deals for your future house
             </p>
-          ))}
+          </div>
+
+          <button className="border px-8 py-2 text-yellow-700 rounded-full border-yellow-700 text-[15px]">
+            See More
+          </button>
         </div>
 
-        <div className="grid grid-cols-1 mt-12 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-10">
-          {isMobile
-            ? properties.slice(0, 3).map((property) => (
-                <div key={property.id} className="">
-                  <CategoryCard property={property} />
-                </div>
-              ))
-            : properties.map((property) => (
-                <div key={property.id} className="">
-                  <CategoryCard property={property} />
-                </div>
-              ))}
+        <div className="mt-7">
+          <SwiperContainer />
         </div>
       </div>
     </div>

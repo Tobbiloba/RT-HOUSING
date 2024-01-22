@@ -16,10 +16,10 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const { username, email, avatar, password, phoneNo, socials } = req.body;
-
-    console.log(username);
-    if (!email || !password || !username || !phoneNo) {
+    const { name, email, avatar, password, phoneNo, socials } = req.body;
+    console.log(name, email, avatar, password, phoneNo, socials)
+    // console.log(name);
+    if (!email || !password || !name || !phoneNo) {
       return res.status(500).json({ message: "Pass all parameters" });
     }
 
@@ -32,7 +32,7 @@ const createUser = async (req, res) => {
     const salt = random();
 
     const newUser = await registerUser({
-      username,
+      username: name,
       email,
       avatar: avatar ? avatar : null,
       phoneNo,
@@ -44,7 +44,7 @@ const createUser = async (req, res) => {
     });
     res.status(200).json({ newUser }).end();
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     res.status(400).json({ message: error.message });
   }
 };
@@ -52,6 +52,7 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email, password)
 
     const userExists = await getUserByEmail(email).select(
       "+authentication.salt +authentication.password"

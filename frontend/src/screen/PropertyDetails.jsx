@@ -267,15 +267,15 @@ const Nearby = () => {
   );
 };
 
-const Availability = ({detail}) => {
-  console.log(detail.availability.available_date_from[0].split(''))
+const Availability = ({ detail }) => {
+  console.log(detail.availability.available_date_from[0].split(""));
   const convertDate = (dateString) => {
     const dateObject = new Date(dateString);
 
-const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-const formattedDate = dateObject.toLocaleDateString('en-GB', options);
-return formattedDate
-  }
+    const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+    const formattedDate = dateObject.toLocaleDateString("en-GB", options);
+    return formattedDate;
+  };
 
   // console.log(convertDate(detail.availability.available_date_from[0]))
   return (
@@ -291,12 +291,24 @@ return formattedDate
 
       <div className="mt-8">
         <AvailabilityCalendar
-          availableFromDate={convertDate(detail.availability.available_date_from[0])}
-          availableToDate={convertDate(detail.availability.available_date_till[0])}
-          unavailableFromDate={convertDate(detail.availability.unavailable_date_from[0])}
-          unavailableToDate={convertDate(detail.availability.unavailable_date_till[0])}
-          occupiedDateFrom={convertDate(detail.availability.occupied_date_from[0])}
-          occupiedDateTill={convertDate(detail.availability.occupied_date_till[0])}
+          availableFromDate={convertDate(
+            detail.availability.available_date_from[0]
+          )}
+          availableToDate={convertDate(
+            detail.availability.available_date_till[0]
+          )}
+          unavailableFromDate={convertDate(
+            detail.availability.unavailable_date_from[0]
+          )}
+          unavailableToDate={convertDate(
+            detail.availability.unavailable_date_till[0]
+          )}
+          occupiedDateFrom={convertDate(
+            detail.availability.occupied_date_from[0]
+          )}
+          occupiedDateTill={convertDate(
+            detail.availability.occupied_date_till[0]
+          )}
         />
       </div>
 
@@ -368,10 +380,14 @@ import Footer from "../components/home/Footer";
 import { getPropertyDetailById } from "@/action/property";
 import { useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { IoIosArrowDown } from "react-icons/io";
+import Input from "@/components/input/Input";
+import Textarea from "@/components/textarea/Textarea";
+import { IoIosArrowRoundForward } from "react-icons/io";
 const PropertyDetails = () => {
   useEffect(() => {
     // Scroll to the top of the page when the component mounts
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, []);
   const images = [
     "http://amentotech.com/htmls/tenanto/images/property-single/img-01.jpg",
@@ -403,7 +419,7 @@ const PropertyDetails = () => {
 
   const anchor = "right";
 
-  const {id} = useParams();
+  const { id } = useParams();
   // console.log(id)
   const dispatch = useDispatch();
   const { details, loading, error } = useSelector(
@@ -413,20 +429,32 @@ const PropertyDetails = () => {
   console.log(details);
   useEffect(() => {
     // if(id) {
-    dispatch(getPropertyDetailById(id))
+    // dispatch(getPropertyDetailById(id))
     // }
   }, []);
 
+  // const [name, setName] = useState("");
+  const [tourName, setTourName] = useState('')
+  const [tourEmail, setTourEmail] = useState('')
+  const [tourMessage, setTourMessage] = useState('')
+  const [tourPhone, setTourPhone] = useState('')
+  const [tourTime, setTourTime] = useState('10:00 am')
+
+
+
+  const [contactName, setContactName] = useState('')
+  const [contactEmail, setContactEmail] = useState('')
+  const [contactMessage, setContactMessage] = useState('')
+  const [contactPhone, setContactPhone] = useState('')
   return (
-    <div className="bg-slate-50 pt-16 exo">
+    <div className="bg-slate-50 pt-16 font-mono">
       {loading ? (
         <div className="h-[100vh] flex justify-center">
           <CircularProgress />
         </div>
       ) : !loading && details ? (
         <div>
-          <DetailTopCard detail={details[0]?.property_information} />
-          <Carousel images={details[0]?.property_information.property_images} />
+          <Carousel images={details?.property_information.property_images} />
           <div className="container mx-auto">
             <div className="w-[100%] mt-12 px-[1rem] flex items-end justify-end tablet:hidden">
               <div
@@ -437,7 +465,7 @@ const PropertyDetails = () => {
               </div>
             </div>
 
-            <div className="flex mt-6 lg:mt-20 flex-row  justify-between px-[1rem]">
+            <div className="flex mt-4 lg:mt-20 flex-row gap-16 justify-between px-[1rem]">
               <div className="">
                 <div className="flex flex-row w-[100%] gap-x-8 border border-white border-b-gray-200 py-4 text-[14px] flex-wrap  gap-y-2">
                   <Link
@@ -486,34 +514,170 @@ const PropertyDetails = () => {
                     <Element name="about-property" className="element">
                       <AboutProperty
                         id="about-property"
-                        detail={details[0].property_information}
+                        detail={details.property_information}
                       />
                     </Element>
 
                     <Element name="amenities" className="element ">
-                  <Amenities id="amenities" />
-                </Element>
-                    <Element name="nearby" className="element">
+                      <Amenities id="amenities" />
+                    </Element>
+                    {/* <Element name="nearby" className="element">
                   <Nearby id="nearby" />
-                </Element>
-                <Element name="availability" className="element">
-                  <Availability id="availability" detail={details[0].property_information}/>
-                </Element>
-                <Element name="terms" className="element">
-                  <Terms id="terms" />
-                </Element>
-                <Element name="reviews" className="element">
+                </Element> */}
+                    <Element name="availability" className="element">
+                      <Availability
+                        id="availability"
+                        detail={details.property_information}
+                      />
+                    </Element>
+                    <Element name="terms" className="element">
+                      <Terms id="terms" />
+                    </Element>
+                    {/* <Element name="reviews" className="element">
                   <Reviews id="reviews" />
-                </Element>
+                </Element> */}
                   </div>
                 </div>
               </div>
-              <div>
-                <PropertyOptions
+              <div className=" w-4/12 min-w-[22.5rem] h-fit">
+                <div className="border p-[1rem] rounded-xl pt-8 pb-12">
+                  <h1 className="font-[600]">Contact an Agent</h1>
+
+                  <div className="flex flex-row mt-2 justify-between">
+                    <div className="flex flex-row gap-2 items-center">
+                      <img
+                        src="https://eliezergroup.com/wp-content/webp-express/webp-images/uploads/2021/08/How-To-Become-A-Facilities-Manager.jpg.webp"
+                        className="w-28 h-24 object-cover rounded-md"
+                      />
+
+                      <div>
+                        <h1 className="font-[600]">John Doe</h1>
+                        <p className="text-[13px] text-slate-500">
+                          Modern House
+                        </p>
+                        <p className="text-[14px]">001 234 5678</p>
+                      </div>
+                    </div>
+                    <IoIosArrowDown className="text-slate-500" />
+                  </div>
+
+                  <div className="flex flex-col gap-6 mt-6">
+                    <Input
+                      value={contactName}
+                      setValue={setContactName}
+                      label="Name"
+                      placeholder=""
+                    />
+                    <Input
+                      value={contactPhone}
+                      setValue={setContactPhone}
+                      label="Phone"
+                      placeholder=""
+                    />
+                    <Input
+                      value={contactEmail}
+                      setValue={setContactEmail}
+                      label="Email"
+                      placeholder=""
+                    />
+
+                    <Textarea
+                      value={contactMessage}
+                      setValue={setContactMessage}
+                      label="Message"
+                    />
+
+                    <div className="flex flex-row items-center gap-4">
+                      <input type="checkbox" className="" />
+                      <p className="text-[13px]">
+                        I agree to the{" "}
+                        <span className="font-[600] underline text-[14px]">
+                          Terms and Conditions
+                        </span>
+                      </p>
+                    </div>
+
+                    <button className="flex flex-row gap-4 items-center border py-3 rounded-full text-white bg-slate-800 justify-center">
+                      Send Message <IoIosArrowRoundForward />
+                    </button>
+                  </div>
+                </div>
+
+
+                <div className="mt-6 border pb-6 p-[1rem] rounded-xl">
+                <h1 className="font-[600]">Mortgage Title</h1>
+
+                <div className="flex flex-row justify-evenly mt-6">
+                  <div className="border-b-4 rounded-xl px-8 py-5 text-slate-500 text-[14px] text-center">
+                    <p>Sat</p>
+                    <h1 className="text-black font-[600] text-[16px]">13</h1>
+                    <p>Jan</p>
+                  </div>
+
+                  <div className="rounded-xl bg-slate-100 px-8 py-5 text-[14px] text-slate-500 text-center">
+                    <p>Mon</p>
+                    <h1 className="text-black font-[600] text-[16px]">15</h1>
+                    <p>Jan</p>
+                  </div>
+
+
+                  <div className="rounded-xl bg-slate-100 px-8 py-5 text-[14px] text-slate-500 text-center">
+                    <p>Wed</p>
+                    <h1 className="text-black font-[600] text-[16px]">17</h1>
+                    <p>Jan</p>
+                  </div>
+                </div>
+
+
+                <h1 className="font-[600] mt-12">Tour Type</h1>
+                <div className="mt-4 flex flex-row gap-5 text-[14px] text-slate-600 font-[600]">
+                <p>
+                  In Person
+                </p>
+                <p>
+                  Video Chat
+                </p>
+                </div>
+                <div className="flex flex-col gap-6 mt-4">
+                <Input
+                      value={tourTime}
+                      setValue={setTourTime}
+                      label="Time"
+                      placeholder=""
+                    />
+                <Input
+                      value={tourName}
+                      setValue={setTourName}
+                      label="Name"
+                      placeholder=""
+                    />
+                <Input
+                      value={tourPhone}
+                      setValue={setTourPhone}
+                      label="Phone"
+                      placeholder=""
+                    />
+                    <Input
+                      value={tourEmail}
+                      setValue={setTourEmail}
+                      label="Email"
+                      placeholder=""
+                    />
+                    
+                    <Textarea
+                      value={tourMessage}
+                      setValue={setTourMessage}
+                      label="Message"
+                    />
+
+                    
+                </div>
+                </div>
+                {/* <PropertyOptions
                   state={showProperty}
                   setState={setShowProperty}
-                  item={details[0].property_information}
-                />
+                  item={details.property_information}
+                /> */}
               </div>
             </div>
           </div>

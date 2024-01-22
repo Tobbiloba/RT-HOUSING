@@ -76,7 +76,7 @@ const FeaturedPropCard = ({ item, viewMode }) => {
         <div className="flex flex-row items-center p-3 justify-between">
           <div className="flex flex-col gap-2 items-start justify-start">
             <p className="text-yellow-500 text-[14px]">{item.property_information.property_type}</p>
-            <Link to={`/property-detail/${encodeURIComponent(item.property_id)}`}>
+            <Link to={`/property-detail/${encodeURIComponent(item._id)}`}>
                <h1 className="text-[17px] text-yellow-700">{item.property_information.property_name}</h1>
             </Link>
            

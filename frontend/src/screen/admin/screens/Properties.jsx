@@ -27,7 +27,7 @@ const AdminProperties = () => {
   ];
 
   useEffect(() => {
-    // dispatch(getMyProperties());
+    dispatch(getMyProperties());
   }, []);
 
   const {properties, loading} = useSelector((state) => state?.myProperties);
@@ -84,7 +84,7 @@ const AdminProperties = () => {
         
       <div className="grid grid-cols-1 gap-x-12 mt-20 p-[1rem] sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-12">
         {properties?.map((item, index) => {
-          // console.log(item)
+          console.log(item)
           return (
             <div key={index} className="max-w-[25rem] h-fit bg-slate-600 rounded-md border border-slate-600 overflow-hidden">
               <div className="relative ">
@@ -146,7 +146,7 @@ const AdminProperties = () => {
                   <div className="mt-10 flex justify-center">
                     <Link
                       to={`/admin/property-detail/${encodeURIComponent(
-                        item.property_id
+                        item._id
                       )}`}
                     >
                       <button className="bg-gray-700 text-[14px] px-4 py-2 text-white font-[400]">

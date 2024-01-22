@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Axios from "axios";
 import { toast } from "react-toastify";
 
@@ -14,7 +15,10 @@ import {
   FETCH_PROPERTIES_SUCCESSFUL,
   FETCH_PROPERTY_DETAILS,
   FETCH_PROPERTY_DETAILS_FAILED,
-  FETCH_PROPERTY_DETAILS_SUCCESSFUL
+  FETCH_PROPERTY_DETAILS_SUCCESSFUL,
+  FETCH_PROPERTY_TYPE,
+  FETCH_PROPERTY_TYPE_FAILED,
+  FETCH_PROPERTY_TYPE_SUCCESSFUL
 } from "../constant/property";
 
 
@@ -99,6 +103,45 @@ export const getMyProperties = () => async (dispatch) => {
 }
 
 
+
+
+
+
+export const getPropertyByType = (type) => async (dispatch) => {
+  dispatch({
+      type: FETCH_PROPERTY_TYPE
+  })
+  console.log('called')
+  try {
+      const { data } = await Axios.get(`${BASE_URL}/properties/type/${'type'}`);
+      dispatch({
+        type: FETCH_PROPERTY_TYPE_SUCCESSFUL,
+        payload: data,
+      });
+  
+      console.log(data)
+  
+    } catch (error) {
+      dispatch({
+        type: FETCH_PROPERTY_TYPE_FAILED,
+        payload:
+          error.response && error.response.data[0]
+            ? error.response.data.message
+            : error.message,
+      });
+      console.log(error)
+      // toast.error(
+      //   error.response && error.response.data[0]
+      //     ? error.response.data[0]
+      //     : error.message,
+      //   {
+      //     toastId: customId,
+      //     position: "bottom-right",
+      //     theme: "colored",
+      //   }
+      // );
+    }
+}
 
 
 

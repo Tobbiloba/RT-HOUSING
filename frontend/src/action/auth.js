@@ -94,7 +94,7 @@ export const register = (email, password, phoneNo, name, avatar) => async (dispa
           email: email,
           password: password,
           avatar: avatar,
-          phone_no: phoneNo,
+          phoneNo: phoneNo,
           name: name
         });
         dispatch({
@@ -117,7 +117,7 @@ export const register = (email, password, phoneNo, name, avatar) => async (dispa
 
     
         // Saving the auth token to session storage
-        // sessionStorage.setItem("userInfo", JSON.stringify(data));
+        sessionStorage.setItem("userInfo", JSON.stringify(data));
       } catch (error) {
         dispatch({
           type: REQUEST_LOGIN_FAILED,

@@ -1,4 +1,4 @@
-import Property, { createPropertyAdmin, getActivatedProperties, getPropertyById, getPropertyByCompanyId, updatePropertyById } from "../mongodb/models/property.js";
+import Property, { createPropertyAdmin, getActivatedProperties, getPropertyById, getPropertyByCompanyId, updatePropertyById, getPropertyByType } from "../mongodb/models/property.js";
 import User, { getUserById } from "../mongodb/models/user.js";
 
 import mongoose from "mongoose";
@@ -75,10 +75,31 @@ const getPropertyByCompany = async (req, res) => {
         res.status(404).json({ message: "Property not found" });
     }
 };
+
+
+const getPropertyByTypeModel = async (req, res) => {
+    const { type } = req.params;
+
+    // console.log(id)
+    // console.log(type)
+    //
+
+    try{
+        if(type) {
+            const property = await getPropertyByType(type)
+        console.log(type)
+        console.log(property)
+        }
+    } catch(error) {
+        console.log(error)
+        return res.status(500).json(error.message)
+    }
+};
+
 const getPropertyDetailById = async (req, res) => {
     const { id } = req.params;
     try{
-        console.log(decodeURIComponent(id))
+        // console.log(decodeURIComponent(id))
         decodeURIComponent(id)
         const propertyExists = await getPropertyById(id)
     
@@ -509,5 +530,6 @@ export {
     activateProperty,
     getAllPropertiesUser,
     deActivateProperty,
-    filterProperty
+    filterProperty,
+    getPropertyByTypeModel
 };

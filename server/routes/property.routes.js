@@ -11,12 +11,14 @@ import {
     activateProperty,
     getAllPropertiesUser,
     deActivateProperty,
-    filterProperty
+    filterProperty,
+    getPropertyByTypeModel
 } from "../controllers/property.controller.js";
 
 const router = express.Router();
 router.route("/property-details/:id").get(getPropertyDetailById);
 router.route("/").get(getAllProperties);
+router.route("/type/:type").get(getPropertyByTypeModel);
 router.route("/user").get(getAllPropertiesUser);
 router.route("/:id").get(getPropertyDetail);
 router.route("/:id").post(createProperty);

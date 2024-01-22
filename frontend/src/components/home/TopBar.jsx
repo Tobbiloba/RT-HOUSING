@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 const TopBar = ({setShowLogin, setShowRegister}) => {
   const data = JSON.parse(sessionStorage.getItem("userInfo"));
 
-  // console.log(data)
+  console.log(data)
   return (
     <div className="flex items-center justify-center">
       <div className="flex flex-wrap px-[1rem] exo flex-row  justify-between md:items-center lg:flex-nowrap px-[1rem]pb-2 md:py-4 container">
@@ -31,6 +31,12 @@ const TopBar = ({setShowLogin, setShowRegister}) => {
         </div>
 }
 
+{
+  data?.authentication?.salt && <div>
+   <Link to="/user/dashboard">
+   <img src="https://cdn-icons-png.flaticon.com/128/2202/2202112.png" className="w-12 h-12 rounded-full cursor-pointer border-2"/></Link>
+  </div>
+}
         <div className="relative flex flex-row overflow-hidden w-[17.5rem] h-[2.75rem] border">
           <Link to="/admin/dashboard" className="flex-1 text-[15px] bg-yellow-500 items-center flex justify-center"><
             p >

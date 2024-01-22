@@ -12,7 +12,10 @@ import {
     FETCH_PROPERTIES_SUCCESSFUL,
     FETCH_PROPERTY_DETAILS,
     FETCH_PROPERTY_DETAILS_FAILED,
-    FETCH_PROPERTY_DETAILS_SUCCESSFUL
+    FETCH_PROPERTY_DETAILS_SUCCESSFUL,
+    FETCH_PROPERTY_TYPE,
+    FETCH_PROPERTY_TYPE_FAILED,
+    FETCH_PROPERTY_TYPE_SUCCESSFUL
   } from "../constant/property";
   
 
@@ -109,7 +112,7 @@ export const getPropertyDetailsById = (
         return {
           loading: false,
           details: action.payload,
-          status: 'succeessful'
+          status: 'successful'
         };
       case FETCH_PROPERTY_DETAILS_FAILED:
         return {
@@ -121,3 +124,29 @@ export const getPropertyDetailsById = (
     }
 }
 
+
+
+export const getPropertyByType = (
+  state= {loading: true, error: null}, action
+) => {
+  switch (action.type) {
+      case FETCH_PROPERTY_TYPE:
+        return {
+          loading: true,
+          error: null,
+        };
+      case FETCH_PROPERTY_TYPE_SUCCESSFUL:
+        return {
+          loading: false,
+          properties: action.payload,
+          status: 'successful'
+        };
+      case FETCH_PROPERTY_TYPE_FAILED:
+        return {
+          loading: false,
+          error: true,
+        };
+      default:
+        return state;
+    }
+}

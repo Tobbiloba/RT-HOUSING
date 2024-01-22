@@ -55,8 +55,13 @@ const PropertyModel = mongoose.model("Property", PropertySchema);
 
 export const getProperties = (no) => PropertyModel.find({}).limit(no);
 export const getActivatedProperties = (query) => PropertyModel.find({"activated": true, query});
-export const getPropertyById = (id) => PropertyModel.find({"_id": id});
+export const getPropertyById = (id) => PropertyModel.findOne({"_id": id});
 export const getPropertyByCompanyId = (id) => PropertyModel.find({"company_id": id})
+export const getPropertyByType = (property_type) => {
+    console.log('Searching for property_type:', property_type);
+    return PropertyModel.find({ "property_information.property_type": "Apartment" });
+  };
+  
 export const createPropertyAdmin = (values) => new PropertyModel(values)
     .save().then((user) => user.toObject())
 export const updatePropertyById = (id, property) => PropertyModel.findByIdAndUpdate(id, property);

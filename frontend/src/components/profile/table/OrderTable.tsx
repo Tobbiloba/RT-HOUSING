@@ -205,14 +205,14 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className={`capitalize text-start ${row.getValue("status") == "active" ? "text-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-yellow-500" : "text-red-500"}`}>{row.getValue("status")}</div>
+      <div className={`capitalize text-start ${row.getValue("status") == "active" ? "text-green-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-yellow-500" : "text-red-500"}`}>{row.getValue("status")}</div>
     ),
   },
   {
     accessorKey: "price",
     header: () => <div className="">Total Price</div>,
     cell: ({ row }) => (
-      <div className={`capitalize text-center ${row.getValue("status") == "active" ? "text-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-yellow-500" : "text-red-500"}`}>{row.getValue("price")}</div>
+      <div className={`capitalize text-center ${row.getValue("status") == "active" ? "text-green-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-yellow-500" : "text-red-500"}`}>{row.getValue("price")}</div>
     ),
   },
 
@@ -292,7 +292,7 @@ export function OrderTable() {
       
       <div className="rounded-md ">
         <Table >
-          <TableHeader className="text-[17px] bg-slate-100 ">
+          <TableHeader className="text-[15px] bg-slate-100 ">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="border-slate-200 shadow-md ">
                 {headerGroup.headers.map((header) => {

@@ -117,16 +117,16 @@ const DetailTopCard = ({ detail }) => {
             <div className="mt-3 flex flex-row gap-3 items-center ">
               <img src="/send-mail.png" className="w-4" />
               <p className="text-slate-500">
-                {detail.property_location?.country},{" "}
-                {detail.property_location?.state}{" "}
-                {detail.property_location?.city}
+                {detail?.property_location?.country},{" "}
+                {detail?.property_location?.state}{" "}
+                {detail?.property_location?.city}
               </p>
             </div>
           </div>
         </div>
         <div className="mt-12 lg:mt-0">
           <p className="text-[24px] font-[600] text-slate-400">
-            {detail.pricing}{" "}
+            {detail?.pricing}{" "}
             <span className="text-[16px] font-[500] text-slate-500">
               / night
             </span>
@@ -385,22 +385,23 @@ const PropertyDetail = () => {
   console.log(id)
   const dispatch = useDispatch();
   // console.log(encodeURIComponent(id));
-  const loading = false
+  // const loading = false
   const { 
-    // loading,
+    loading,
      error } = useSelector((state) => state?.propertyDetail);
   // console.log(error)
   const propertyDetails = useSelector((state) => state?.propertyDetail);
   console.log(propertyDetails);
   // const loading = true
   useEffect(() => {
-    // dispatch(getPropertyDetailById(id));
+
+    dispatch(getPropertyDetailById(id));
   }, []);
   return (
     <div className="text-white  p-[1rem] md:p-[2rem] exo w-[100%] overflow-hidden">
       {loading ? (
         <LoadingPulse />
-      ) : propertyDetails ? (
+      ) : propertyDetails?.details ? (
         <div>
           <div className="flex flex-row flex-wrap gap-8 justify-end">
             <button className="border border-slate-600 px-4 text-[15px] py-2 h-fit text--600 bg-slate-800">
@@ -415,16 +416,16 @@ const PropertyDetail = () => {
           </div>
 
           <div className="mt-12">
-            <DetailTopCard
+            {/* <DetailTopCard
               detail={propertyDetails?.details?.property_information}
-            />
-            <Carousel
+            /> */}
+            {/* <Carousel
               images={
                 propertyDetails?.details?.property_information?.property_images
               }
-            />
+            /> */}
 
-            <div className="flex mt-6 lg:mt-20 flex-row  justify-between ">
+            {/* <div className="flex mt-6 lg:mt-20 flex-row  justify-between ">
               <div className="">
                 <div className="flex flex-row w-[100%] gap-x-8  py-4 flex-wrap  gap-y-2">
                   <Link
@@ -501,16 +502,13 @@ const PropertyDetail = () => {
                         }
                       />
                     </Element>
-                    {/* <Element name="terms" className="element">
-                  <Terms id="terms" />
-                </Element> */}
                     <Element name="reviews" className="element col-span-2">
                       <Reviews id="reviews" />
                     </Element>
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       ) : <p>error</p>}
