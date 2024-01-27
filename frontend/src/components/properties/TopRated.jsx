@@ -7,9 +7,9 @@ const TopRatedCard = ({item}) => {
     <div className='flex flex-row gap-4 exo'>
       <img src={item.img} className='w-20 h-20 rounded-md'/>
       <div>
-        <p className='text-yellow-500 text-[13px]'>{item.type}</p>
-        {/* <h1 className='text-[14px] flex-nowrap text-ellipsis w-[100%] text-yellow-900'>{item.name}</h1> */}
-        <h1 className='text-[15px] overflow-hidden whitespace-nowrap text-ellipsis w-[90%] text-yellow-900'>{item.name}</h1>
+        <p className='text-slate-500 text-[13px]'>{item.type}</p>
+        {/* <h1 className='text-[14px] flex-nowrap text-ellipsis w-[100%] text-slate-900'>{item.name}</h1> */}
+        <h1 className='text-[15px] overflow-hidden whitespace-nowrap text-ellipsis w-[90%] text-slate-900'>{item.name}</h1>
         <p className='text-[14px]'>${item.price} <span className='text-[13px] text-slate-500'>/ night</span></p>
       </div>
     </div>
@@ -62,7 +62,7 @@ const TopRated = () => {
   ]
   return (
     <div className="w-[22.5rem] exo mb-6 h-fit exo rounded-md overflow-hidden border pb-6">
-    <h1 className="p-[1rem] text-yellow-900 bg-slate-100">
+    <h1 className="p-[1rem] text-slate-900 bg-slate-100">
       Top Rated Listings
     </h1>
       <div className='mt-6 flex flex-col gap-5 px-6'>

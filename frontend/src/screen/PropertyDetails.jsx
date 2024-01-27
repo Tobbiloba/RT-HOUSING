@@ -94,7 +94,7 @@ const DetailTopCard = ({ detail }) => {
             <p className="mt-3 text-sky-500 text-[15px]">
               {detail.property_type}
             </p>
-            <h1 className="text-yellow-600 text-[26px] font-[600]">
+            <h1 className="text-slate-600 text-[26px] font-[600]">
               {detail.property_name}
             </h1>
 
@@ -109,7 +109,7 @@ const DetailTopCard = ({ detail }) => {
           </div>
         </div>
         <div className="mt-12 lg:mt-0">
-          <p className="text-[25px] font-[600] text-yellow-600">
+          <p className="text-[25px] font-[600] text-slate-600">
             {detail.pricing}
             <span className="text-[16px] font-[500] text-slate-500">
               / night

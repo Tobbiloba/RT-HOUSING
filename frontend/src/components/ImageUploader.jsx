@@ -1,11 +1,12 @@
+// @ts-nocheck
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 // import { createProductVarint, updateProductVarint } from '../actions/vendor/product';
-
 const SingleImageUpload = ({ onSuccess }) => {
-  const dispatch = useDispatch();
- 
-  
+  if (!window.cloudinary || !window.cloudinary.createUploadWidget) {
+    console.error('Cloudinary is not available.');
+    return null; // or render an alternative component or message
+  }
 
   const myCropWidget = window.cloudinary.createUploadWidget(
     {
@@ -24,15 +25,9 @@ const SingleImageUpload = ({ onSuccess }) => {
   };
 
   return (
-    <div className="flex p-4 rounded-md border items-center gap-4" onClick={openUploader}>
-      {/* <button
-        onClick={openUploader}
-        className="mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-primary rounded-md p-2 hover:bg-primary hover:text-white transition-colors"
-      >
-        Open Uploader
-      </button> */}
-      <img src='https://cdn-icons-png.flaticon.com/128/1829/1829586.png' className='w-6 h-6'/>
-      <p className='text-gray-400'>Upload your image</p>
+    <div className="flex p-4 items-center gap-4 w-[100%] h-12" onClick={openUploader}>
+      <img src='https://cdn-icons-png.flaticon.com/128/1829/1829586.png' className='w-6 h-6' alt="Upload Icon" />
+      <p className='text-gray-400 text-[14px]'>Upload your image</p>
     </div>
   );
 };
@@ -70,8 +65,7 @@ const Dropzone = ({ product, updateVariant, state, setState, showImage }) => {
   };
 
   return (
-    <section className="mt-4 bg-gray-200 w-[100%]">
-      {/* Single Image Upload */}
+    <section className="mt-1 bg-slate-100 mx-3 w-[100%]">
       <SingleImageUpload onSuccess={handleImageUpload} />
 
       {/* Display Uploaded Image */}

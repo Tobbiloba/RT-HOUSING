@@ -13,7 +13,7 @@ const FilterBox = ({ children, title }) => {
         className="flex flex-row justify-between cursor-pointer"
         onClick={() => setShowChildren(!showChildren)}
       >
-        <h1 className="text-yellow-900 text-[17px] font-[600]">{title}:</h1>
+        <h1 className="text-slate-900 text-[17px] font-[600]">{title}:</h1>
         {showChildren ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
       </div>
 
@@ -268,7 +268,7 @@ const PropertyOptionCard = ({ items }) => {
           </div> */}
 
 <div className="my-6 px-3 relative">
-            <h1 className="text-yellow-900 font-[600]">When To Check In?</h1>
+            <h1 className="text-slate-900 font-[600]">When To Check In?</h1>
 
             <div className="flex flex-row">
               <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckInCalendar(true), setShowCheckOutCalendar(false))}>
@@ -298,7 +298,7 @@ const PropertyOptionCard = ({ items }) => {
 
 
             <div className="my-6 px-3">
-            <h1 className="text-yellow-900 font-[600]">Guests</h1>
+            <h1 className="text-slate-900 font-[600]">Guests</h1>
 
 
             <div className="mt-4">
@@ -319,7 +319,7 @@ const PropertyOptionCard = ({ items }) => {
 
 
           <div className="my-6 px-3">
-            <h1 className="text-yellow-900 font-[600]">Add-on Services</h1>
+            <h1 className="text-slate-900 font-[600]">Add-on Services</h1>
             <div className="grid mt-5 grid-cols-1 gap-3">
               {add_ons.map((item, index) => (
                 <div className="flex gap-3" key={index}>
@@ -339,7 +339,7 @@ const PropertyOptionCard = ({ items }) => {
 
 
           <div className="my-6 px-3">
-            <h1 className="text-yellow-900 font-[600]">Available Ammenities</h1>
+            <h1 className="text-slate-900 font-[600]">Available Ammenities</h1>
             <div className="grid mt-5 grid-cols-1 gap-3">
               {ammenitiesList.map((item, index) => (
                 <div className="flex gap-3" key={index}>
@@ -357,7 +357,7 @@ const PropertyOptionCard = ({ items }) => {
           </div>
 
         </div>
-        <button className="border w-[100%] bg-yellow-500 text-white rounded-md py-3 mt-5">Book Now</button>
+        <button className="border w-[100%] bg-slate-500 text-white rounded-md py-3 mt-5">Book Now</button>
       </div>
     </div>
   );
@@ -405,7 +405,7 @@ export default function PropertyOptions({ state, setState, item }) {
           <PropertyOptionCard items={item} />
 
 
-          {/* <div className='w-6 h-6 rounded-full absolute bg-yellow-900 top-24  -left-1'></div> */}
+          {/* <div className='w-6 h-6 rounded-full absolute bg-slate-900 top-24  -left-1'></div> */}
         </div>
       </Drawer>
 }

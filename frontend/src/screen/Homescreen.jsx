@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Tip from "@/components/home/Tip";
 import Articles from "../components/home/Articles";
 import AvailableCard from "../components/home/AvailableCard";
@@ -9,12 +10,14 @@ import FeaturedProp from "../components/home/FeaturedProp";
 import FloorPlans from "../components/home/FloorPlans";
 import Footer from "../components/home/Footer";
 import HomePage from "../components/home/HomePage";
+import Home from "@/components/home/Home";
 
  const Homescreen = () => {
 
   return (
    <div className="">
     <HomePage />
+    {/* <Home /> */}
     <Categories />
     <Facilities />
     <FloorPlans />

@@ -1,11 +1,12 @@
 // @ts-nocheck
 import { getPropertyByType } from "@/action/property";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, slate, Suspense,lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { FaBath } from "react-icons/fa";
 import { IoBedSharp } from "react-icons/io5";
 import { SlSizeActual } from "react-icons/sl";
+
 const properties = [
   {
     id: 1,
@@ -99,7 +100,8 @@ import { FaLocationDot } from "react-icons/fa6";
 // import required modules
 import { FreeMode, Pagination } from "swiper/modules";
 import { Item } from "@radix-ui/react-dropdown-menu";
-
+// const slateLoadedImage = slate(() => import("../LazyLoadedImage"));
+const LazyLoadedImage = lazy(() => import("../LazyLoadedImage"));
 const SwiperContainer = () => {
   const one = useMediaQuery({ maxWidth: 508 });
   const two = useMediaQuery({ maxWidth: 788 });
@@ -124,11 +126,25 @@ const SwiperContainer = () => {
         <SwiperSlide className="border">Slide 1</SwiperSlide> */}
 
         {properties.map((property, index) => {
-          console.log(property);
+          // console.log(property);
+         
           return (
-            <SwiperSlide key={index} className="hover:border-b hover:shadow-md border-yellow-500 rounded-xl">
+            <SwiperSlide key={index} className="hover:border-b hover:shadow-md border-slate-500 rounded-xl">
               <div className="relative  max-h-[15rem] rounded-xl overflow-hidden">
-                <img src={property.img} className="w-[100%] h-auto" />
+                {/* <img src={property.img} className="w-[100%] h-auto" /> */}
+                {/* <slateLoadedImage
+                  src={property.img}
+                  className=" w-[100%] h-auto rounded-md"
+                /> */}
+
+                <div className="w-[100%]">
+                <Suspense fallback={<div className="h-[15rem] w-[100%]"></div>}>
+                <LazyLoadedImage
+                  src={property.img}
+                  className="  rounded-md"
+                />
+              </Suspense>
+                </div>
                 <div className="w-[100%] h-[100%] z-[50] bg-black/50 absolute top-0 left-0"></div>
               </div>
 
@@ -142,21 +158,21 @@ const SwiperContainer = () => {
 
                 <div className="flex flex-row mt-3 gap-4 items-center justify-between">
                   <p className="text-[16px] gap-3 items-center  flex flex-row">
-                    <FaBath className="text-yellow-500" />
+                    <FaBath className="text-slate-500" />
                     {property.bathroom}
                   </p>
                   <p className="text-[16px] gap-3 items-center  flex flex-row">
-                    <IoBedSharp className="text-yellow-500" />
+                    <IoBedSharp className="text-slate-500" />
                     {property.bedroom}
                   </p>
                   <p className="text-[16px] gap-3 items-center  flex flex-row">
-                    <SlSizeActual className="text-yellow-500" />
+                    <SlSizeActual className="text-slate-500" />
                     {property.size}
                   </p>
                 </div>
 
                 <div className="flex mt-4 flex-row items-center gap-3">
-                  <FaLocationDot className="text-yellow-500"/>
+                  <FaLocationDot className="text-slate-500"/>
                   <h1 className="text-[16px]">{property.city}</h1>
                 </div>
               </div>
@@ -184,15 +200,15 @@ const Categories = () => {
       <div className="container flex-col flex">
         <div className="flex flex-row justify-between items-center">
           <div>
-            <h1 className="font-[600] lg:text-5xl text-yellow-500 md:tex-4xl text-3xl">
+            <h1 className="font-[600] lg:text-5xl text-slate-500 md:tex-4xl text-3xl">
               Discover Our Featured <br /> Properties
             </h1>
-            <p className="mt-2 text-[15px] font-[600] text-yellow-700">
+            <p className="mt-2 text-[15px] font-[600] text-slate-700">
               Discover best deals for your future house
             </p>
           </div>
 
-          <button className="border px-8 py-2 text-yellow-700 rounded-full border-yellow-700 text-[15px]">
+          <button className="border px-8 py-2 text-slate-700 rounded-full border-slate-700 text-[15px]">
             See More
           </button>
         </div>

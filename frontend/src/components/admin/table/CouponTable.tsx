@@ -51,7 +51,7 @@ const CodeCard = ({ code, status }: string) => {
           : status === "inactive"
           ? "text-slate-500"
           : status === "pending"
-          ? "text-yellow-500"
+          ? "text-slate-500"
           : "text-red-500"
       }`}
     >
@@ -93,7 +93,7 @@ export const columns = [
             : row.getValue("status") === "inactive"
             ? "text-slate-500"
             : row.getValue("status") === "pending"
-            ? "text-yellow-500"
+            ? "text-slate-500"
             : "text-red-500"
         }`}
       >
@@ -113,7 +113,7 @@ export const columns = [
               : row.getValue("status") === "inactive"
               ? "text-slate-500 border-slate-500 bg-slate-500"
               : row.getValue("status") === "pending"
-              ? "text-yellow-500 border-yellow-500 bg-yellow-500"
+              ? "text-slate-500 border-slate-500 bg-slate-500"
               : "text-red-500 border-red-500 bg-red-500"
           } w-5 h-5`}
         ></div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Rubik:wght@500&family=Salsa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis&family=Rubik&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -83,7 +83,8 @@
 /* font-family: 'Salsa', cursive; */
 
 .exo {
-  font-family: 'Fira Sans', sans-serif;
+  /* font-family: 'Dosis', sans-serif; */
+  font-family: 'Rubik', sans-serif;
 }
 
 .rubik {
@@ -91,9 +92,6 @@
 }
 
 
-.salsa{
-  font-family: 'Salsa', cursive;
-}
 
 @media (max-width: 1220px) { 
   .search_lg{

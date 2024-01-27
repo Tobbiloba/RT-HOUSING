@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import { thunk } from "redux-thunk";
-import { loginReducer, registerReducer, registerAdminReducer, loginAdminReducer } from "./reducer";
+import { loginReducer, registerReducer, registerAdminReducer, loginAdminReducer, activateUser } from "./reducer";
 import { fetchAllPropertiesReducer, fetchMyPropertiesReducer, createPropertyReducer, getPropertyDetailsById, getPropertyByType } from "./reducer/properties";
 import { createOrder, getAdminOrder, getUserOrder, updateOrder } from "./reducer/order";
 const rootReducer = combineReducers({
@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
     getAdminOrders: getAdminOrder,
     getUserOrder: getUserOrder,
     updateOrderStatus: updateOrder,
-    propertyType: getPropertyByType
+    propertyType: getPropertyByType,
+    activateUser: activateUser
 })
 
 

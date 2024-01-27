@@ -10,6 +10,7 @@ import BreadCrumb from "@/components/admin/breadcrumb/BreadCrumb";
 const AdminLayout = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(location.state)
   const pathname = location.pathname.split("/");
   const [toggleOpen, setToggleOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -36,6 +37,7 @@ const AdminLayout = ({ children }) => {
 
     setLoading(false);
   }, [data]);
+  console.log(JSON.parse(data))
 
   // useEffect((toggleOpen))
 
@@ -44,7 +46,7 @@ const AdminLayout = ({ children }) => {
   const handleToggleOpen = () => {};
   console.log(pathname[pathname.length - 1]);
   return (
-    <div className="max-w-[100vw] overflow-x-hidden">
+    <div className="max-w-[100vw] exo overflow-x-hidden">
       {loading ? (
         <div>
           <Loading />
@@ -67,10 +69,17 @@ const AdminLayout = ({ children }) => {
             }`}
           >
             <Topbar setShowSlide={setToggleOpen} showSlide={toggleOpen} />
+            
             <div className="md:mt-[0rem] mt-[0rem] w-[100%]">
               {pathname[pathname.length - 1] != "admin" && (
                 <BreadCrumb showSlide={toggleOpen} />
               )}
+             {
+              !JSON.parse(data).isActivated &&    <div className=" bg-red-600 md:text-center py-2 text-white text-[13px] flex gap-5 px-[1rem] justify-center md:items-center">
+              <img src="https://cdn-icons-png.flaticon.com/128/2592/2592317.png" className="w-5 h-5"/>
+          <h1>To secure your account, please verify your email by clicking the activation link in your inbox. Thank you!</h1>
+        </div>
+             }
               {children}
 
               {isMobile && toggleOpen && (

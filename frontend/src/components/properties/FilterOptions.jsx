@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Dropdown from "../home/Dropdown";
@@ -5,11 +6,11 @@ import Slider from '@mui/material/Slider';
 import FilterOptions from "../home/FilterOptions";
 import {useNavigate} from 'react-router-dom'
 const FilterBox = ({ children, title }) => {
-  const [showChildren, setShowChildren] = useState(false);
+  const [showChildren, setShowChildren] = useState(true);
   return (
-    <div className="border p-[1rem] text-[13px]">
+    <div className="border exo  text-[13px]">
       <div
-        className="flex flex-row justify-between cursor-pointer"
+        className="flex flex-row justify-between cursor-pointer text-[15px] border-b p-[1rem] "
         onClick={() => setShowChildren(!showChildren)}
       >
         <h1>{title}:</h1>
@@ -23,7 +24,7 @@ const FilterBox = ({ children, title }) => {
             overflow: "",
             transition: "height 3.3s ease-in-out",
           }}
-          className="mt-4"
+          className="mt-4 p-[1rem]"
         >
           {children}
         </div>
@@ -44,7 +45,7 @@ const FilterOption = () => {
   const [infants, setInfants] = useState("No. Of Children (Ages 0-2)");
   const [roomType, setRoomType] = useState('Private Room');
   const [accomodationType, setAccomodationType] = useState([]);
-  const [areaSize, setAreaSize] = useState([20, 70]);
+  const [areaSize, setAreaSize] = useState([0, 100]);
   const [bathrooms, setBathrooms] = useState('Other');
   const [bedroom, setBedroom] = useState("Other");
   const [priceRange, setPriceRange] = useState([300, 1200]);
@@ -150,13 +151,71 @@ const handleSizeChange = (event, newValue) => {
 
 const handleApplyFilters = () => {
   console.log('called')
-  // Check if at least one option is selected in the required fields
-  if (adults || children || infants || roomType || accomodationType.length > 0 || areaSize.length === 2 || bedroom || bathrooms || priceRange.length === 2 || amenities.length > 0 || facilities.length > 0) {
+  if (
+    (typeof adults === 'number' && !isNaN(adults)) ||
+    (typeof children === 'number' && !isNaN(children)) ||
+    (typeof infants === 'number' && !isNaN(infants)) ||
+    (typeof bedroom === 'number' && !isNaN(bedroom)) ||
+    (typeof bathrooms === 'number' && !isNaN(bathrooms)) ||
+    roomType ||
+    accomodationType.length > 0 ||
+    areaSize.length === 2 ||
+    priceRange.length === 2 ||
+    amenities.length > 0 ||
+    facilities.length > 0
+  ) {
     // Constructing the query string
-    const queryString = `?adults=${adults}&children=${children}&infants=${infants}&roomType=${roomType}&accomodationType=${accomodationType.join(',')}&areaSize=${areaSize.join(',')}&bedroom=${bedroom}&bathrooms=${bathrooms}&priceRange=${priceRange.join(',')}&amenities=${amenities.join(',')}&facilities=${facilities.join(',')}`;
-    
+    // const queryString = `?${typeof adults === Number && adults=${adults}}&children=${children}&infants=${infants}&roomType=${roomType}&accomodationType=${accomodationType.join(
+    //   ','
+    // )}&areaSize=${areaSize.join(',')}&bedroom=${bedroom}&bathrooms=${bathrooms}&priceRange=${priceRange.join(
+    //   ','
+    // )}&amenities=${amenities.join(',')}&facilities=${facilities.join(',')}`;
+
+
+    const queryString = `
+  ${
+    typeof adults === 'number' && !isNaN(adults)
+      && `adults=${adults}&`
+      
+  }
+  ${
+    typeof children === 'number' && !isNaN(children)
+      && `children=${children}&`
+      
+  }
+  ${
+    typeof infants === 'number' && !isNaN(infants)
+      && `infants=${infants}&`
+      
+  }
+  ${
+    typeof bedroom === 'number' && !isNaN(bedroom)
+      && `bedroom=${bedroom}&`
+      
+  }
+  ${
+    typeof bathrooms === 'number' && !isNaN(bathrooms)
+      && `bathrooms=${bathrooms}&`
+      
+  }
+  ${roomType ? `roomType=${roomType}&` : ''}
+  ${
+    accomodationType && `accomodationType=${accomodationType.join(
+      ','
+    )}`
+  }
+  ${areaSize.length === 2 ? `areaSize=${areaSize.join(',')}&` : ''}
+  ${
+    priceRange.length === 2 ? `priceRange=${priceRange.join(',')}&` : ''
+  }
+  ${amenities.length > 0 ? `amenities=${amenities.join(',')}&` : ''}
+  ${facilities.length > 0 ? `facilities=${facilities.join(',')}&` : ''}
+`;
+
+
     // Pushing the updated URL to history
-    navigate.push(`/${queryString}`);
+    console.log(queryString);
+    // navigate.push(`/${queryString}`);
   } else {
     // Handle case when no options are selected
     alert("Please select at least one option before applying filters.");
@@ -166,11 +225,30 @@ const handleApplyFilters = () => {
   return (
     <div className="">
       <div className="w-[22.5rem] exo mb-6 h-fit rounded-md overflow-hidden">
-        <h1 className="border p-[1rem] text-yellow-900 font-[600] bg-slate-100">
-          Narrow Your Search
-        </h1>
 
-        <div>
+
+        <div className="flex flex-col gap-6">
+
+        <FilterBox title="Accomodation Type">
+            <div className="grid grid-cols-1 gap-4">
+              {
+              accomodation.map((item, index) => (
+                <div className="flex justify-between items-center">
+                  <div className="flex gap-3">
+                  <input type="checkbox" className="custom-checkbox"             onChange={() => handleAccomodationCheckboxChange(item)}
+            checked={accomodationType.includes(item)}/>
+                  <p className="text-[15px]">{item}</p>
+                </div>
+
+                <p className="border px-2 py-1 rounded-sm bg-slate-500 text-white ">20</p>
+                </div>
+              ))
+            }
+            </div>
+            
+          </FilterBox>
+
+
           <FilterBox title="Number Of Guests">
             <Dropdown state={adults} setState={setAdults} data={numberOptions}/>
             <Dropdown state={children} setState={setChildren} data={numberOptions}/>
@@ -201,20 +279,7 @@ const handleApplyFilters = () => {
            
           </FilterBox>
 
-          <FilterBox title="Accomodation Type">
-            <div className="grid grid-cols-2 gap-3">
-              {
-              accomodation.map((item, index) => (
-                <div className="flex gap-3">
-                  <input type="checkbox" className="custom-checkbox"             onChange={() => handleAccomodationCheckboxChange(item)}
-            checked={accomodationType.includes(item)}/>
-                  <p className="text-[13px]">{item}</p>
-                </div>
-              ))
-            }
-            </div>
-            
-          </FilterBox>
+          
 
           <FilterBox title="Area Size">
             <p className="text-slate-400 text-[14px] mb-2">{areaSize[0] * 10} sq ft - {areaSize[1] * 10} sq ft</p>
@@ -266,7 +331,7 @@ const handleApplyFilters = () => {
 
           <div className="px-4 py-10 bg-gray-100 text-center items-center justify-center flex flex-col">
             <p className="text-[15px] text-gray-500">Click "Apply Filter" button to get <br /> desired search result</p>
-            <button className="mt-4 border-[3px] text-yellow-500 cursor-pointer border-yellow-500 hover:text-white hover:bg-yellow-500 px-10 py-3 rounded-md w-fit" onClick={handleApplyFilters}>Apply Filters</button>
+            <button className="mt-4 border-[3px] text-slate-500 cursor-pointer border-slate-500 hover:text-white hover:bg-slate-500 px-10 py-3 rounded-md w-fit" onClick={handleApplyFilters}>Apply Filters</button>
             <button className="mt-4 text-sky-400">Reset All</button>
           </div>
         </div>

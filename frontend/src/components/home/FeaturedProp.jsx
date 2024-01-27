@@ -199,9 +199,9 @@ const FeaturedPropCard = ({ item }) => {
       <div className="flex-1 h-[100%] mt-8">
         <div className="flex flex-row items-center p-3 justify-between">
           <div className="flex flex-col gap-2 items-start justify-start">
-            <p className="text-yellow-500 text-[14px]">{item.type}</p>
+            <p className="text-slate-500 text-[14px]">{item.type}</p>
             <Link to="/property-detail">
-              <h1 className="text-[17px] text-yellow-700 cursor-pointer">{item.name}</h1>
+              <h1 className="text-[17px] text-slate-700 cursor-pointer">{item.name}</h1>
             </Link>
             
             <p className="text-slate-700">
@@ -270,8 +270,8 @@ const FeaturedProp = () => {
   return (
     <div className="flex items-center exo justify-center">
       <div className="container text-center py-20 px-[1rem] md:px-[5%]">
-        <h1 className="text-yellow-900 text-4xl">Featured Properties</h1>
-        <p className="text-yellow-500 mt-2">Treat Yourself Like a King</p>
+        <h1 className="text-slate-900 text-4xl">Featured Properties</h1>
+        <p className="text-slate-500 mt-2">Treat Yourself Like a King</p>
 
         <p className="mt-12 text-slate-400">
           Consectetur adipisicing elit sed do eiusmod tempor incididunt ut

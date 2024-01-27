@@ -10,7 +10,7 @@
 //   const [totalDownPayment, setTotalDownPayment] = useState(1245.788)
 //   return (
 //     <div className="pt-28 flex flex-col justify-center items-center exo md:px-[1rem]">
-//       <button className="bg-yellow-50 px-6 py-2">ESTIMATE</button>
+//       <button className="bg-slate-50 px-6 py-2">ESTIMATE</button>
 //       <h1 className="mt-6 text-5xl text-center">YOUR PAYMENT <br />ESTIMATE</h1>
 
 
@@ -74,7 +74,7 @@ const calculateEstimates = () => {
   return (
     <div className="pt-28 flex flex-col justify-center items-center exo md:px-[1rem]">
       <button
-        className="bg-yellow-50 px-6 py-2"
+        className="bg-slate-50 px-6 py-2"
       
       >
         ESTIMATE
@@ -82,7 +82,7 @@ const calculateEstimates = () => {
       <h1 className="mt-6 text-4xl text-center">
         YOUR PAYMENT <br />ESTIMATE
       </h1>
-      <div className="mt-28 w-[100%] md:min-w-[50rem] md:w-[70%] flex flex-col items-center justify-center gap-16 py-16 bg-yellow-50 px-4 md:px-12">
+      <div className="mt-28 w-[100%] md:min-w-[50rem] md:w-[70%] flex flex-col items-center justify-center gap-16 py-16 bg-slate-50 px-4 md:px-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 w-[100%] gap-x-12 gap-y-12">
           <div className="flex-1">
             <p className="text-[14px]">PURCHASE PRICE:</p>
@@ -126,7 +126,7 @@ const calculateEstimates = () => {
           </div>
         </div>
 
-        <button className="px-12 bg-yellow-600 text-white hover:text-yellow-600 hover:bg-white hover:border py-5 border-yellow-600 cursor-pointer"   onClick={calculateEstimates}>Estimate Payment</button>
+        <button className="px-12 bg-slate-600 text-white hover:text-slate-600 hover:bg-white hover:border py-5 border-slate-600 cursor-pointer"   onClick={calculateEstimates}>Estimate Payment</button>
 
         <div className="border w-[100%] flex flex-col md:flex-row justify-evenly bg-white px-6 py-12">
             <div>

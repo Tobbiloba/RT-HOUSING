@@ -701,16 +701,19 @@ const AddProperty = () => {
   const [property_description, setProperty_description] = useState("");
   const [property_bedrooms, setProperty_bedrooms] = useState(0);
   const [property_bathroom, setProperty_bathroom] = useState(0);
-  const [property_size, setProperty_size] = useState([20, 70]);
+  const [property_size, setProperty_size] = useState([0, 70]);
   const [property_amenities, setProperty_amenities] = useState([]);
   const [property_images, setProperty_images] = useState([]);
   const [property_state, setProperty_state] = useState("");
   const [property_country, setProperty_country] = useState("");
   const [property_city, setProperty_city] = useState("");
+  const [property_address, setProperty_address] = useState("");
+  const [property_postal, setProperty_postal] = useState("");
   const [property_dog_policy, setProperty_dog_policy] = useState(false);
   const [property_smoking_policy, setProperty_smoking_policy] = useState(false);
   const [property_pricing, setProperty_pricing] = useState("");
   const [reason, setReason] = useState("");
+  console.log(property_images)
   const [property_availability_from_date, setProperty_availability_from_date] =
     useState(today);
   const [
@@ -1011,12 +1014,18 @@ const AddProperty = () => {
         isMobile ? "flex-col" : "flex-row px-[5%]"
       } gap-12`}
     >
-      <div className={`${isDesktop && "w-8/12"} bg-slate-500 rounded-md`}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-4 py-10 rounded-md shadow-md">
+      <div className={`${isDesktop && "w-8/12"}  rounded-md`}>
+      
+        
+        <div className="bg-slate-500 px-[1rem] py-[2rem] rounded-md">
+        <h1 className="text-slate-900 text-xl font-[600]">
+              Property Details
+            </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
           <Input
             value={property_name}
             setValue={setProperty_name}
-            label="Property name"
+            label="Property Title"
             //  placeholder='Enter Your Property Name'
           />
           <Dropdown
@@ -1077,7 +1086,73 @@ const AddProperty = () => {
               setState={setProperty_infants}
             />
           </div>
-          <div className="col-span-2 grid grid-cols-3 gap-12">
+          <Input
+          value={property_pricing}
+          setValue={setProperty_pricing}
+          label="Pricing /night"
+        />
+
+        <div className="flex flex-row  gap-12">
+          <div className="flex flex-row gap-5 items-center">
+            <input
+              type="checkbox"
+              className="w-4 h-4"
+              checked={property_dog_policy}
+              onChange={() => setProperty_dog_policy(!property_dog_policy)}
+            />
+            <p className="text-[15px] text-white">Pets</p>
+          </div>
+          <div className="flex flex-row gap-5 items-center">
+            <input
+              type="checkbox"
+              className="w-4 h-4"
+              checked={property_smoking_policy}
+              onChange={() =>
+                setProperty_smoking_policy(!property_smoking_policy)
+              }
+            />
+            <p className="text-[15px] text-white">Smoking</p>
+          </div>
+          {/* </div> */}
+        </div>
+          <div>
+          <h1 className="mb-4 text-white text-[15px]">Property Size</h1>
+          <p className="text-slate-400 text-[14px] mb-2">
+            {property_size[0] * 10} sq ft - {property_size[1] * 10} sq ft
+          </p>
+          {/* <Slider
+  getAriaLabel={() => "Temperature range"}
+  value={property_size}
+  onChange={handleSizeChange}
+  valueLabelDisplay="auto"
+  getAriaValueText={valuetext}
+  color="primary"
+/> */}
+
+          <DarkSlider
+            getAriaLabel={() => "Temperature range"}
+            value={property_size}
+            onChange={handleSizeChange}
+            valueLabelDisplay="auto"
+            getAriaValueText={valuetext}
+          />
+        </div>
+
+        </div>
+        
+         
+      </div>
+
+      <div className="mt-12 shadow-md border border-slate-600 bg-slate-500 py-[2rem] px-[1rem] rounded-md">
+        <h1 className="text-slate-900 text-xl font-[600]">
+              Available Ammenities
+            </h1>
+         <div className="col-span-2 mt-8 grid grid-cols-3 gap-12">
+            <Input
+              value={property_address}
+              setValue={setProperty_address}
+              label="Address*"
+            />
             <Input
               value={property_country}
               setValue={setProperty_country}
@@ -1093,78 +1168,38 @@ const AddProperty = () => {
               setValue={setProperty_city}
               label="City"
             />
+            <Input
+              value={property_postal}
+              setValue={setProperty_postal}
+              label="Postal code"
+            />
+
           </div>
 
           {/* <div className="col-span-2 grid sm:grid-cols-2 gap-y-6 md:gap-y-16 gap-x-12"> */}
-          <Input
-            value={property_pricing}
-            setValue={setProperty_pricing}
-            label="Pricing /night"
-          />
+         
 
-          <div className="flex flex-row  gap-12">
-            <div className="flex flex-row gap-5 items-center">
-              <input
-                type="checkbox"
-                className="w-4 h-4"
-                checked={property_dog_policy}
-                onChange={() => setProperty_dog_policy(!property_dog_policy)}
-              />
-              <p className="text-[15px] text-white">Pets</p>
-            </div>
-            <div className="flex flex-row gap-5 items-center">
-              <input
-                type="checkbox"
-                className="w-4 h-4"
-                checked={property_smoking_policy}
-                onChange={() =>
-                  setProperty_smoking_policy(!property_smoking_policy)
-                }
-              />
-              <p className="text-[15px] text-white">Smoking</p>
-            </div>
-            {/* </div> */}
-          </div>
+          {/* </div> */}
+        </div>
+        <div className="mt-12 px-[1rem] py-[2rem] bg-slate-500 rounded-md shadow-md">
+          <h1 className="text-slate-900 text-xl font-[600]">Property Image</h1>
           {/* </div> */}
 
-          <>
-            <div>
-              <h1 className="mb-4 text-white text-[15px]">Property Size</h1>
-              <p className="text-slate-400 text-[14px] mb-2">
-                {property_size[0] * 10} sq ft - {property_size[1] * 10} sq ft
-              </p>
-              {/* <Slider
-      getAriaLabel={() => "Temperature range"}
-      value={property_size}
-      onChange={handleSizeChange}
-      valueLabelDisplay="auto"
-      getAriaValueText={valuetext}
-      color="primary"
-    /> */}
-
-              <DarkSlider
-                getAriaLabel={() => "Temperature range"}
-                value={property_size}
-                onChange={handleSizeChange}
-                valueLabelDisplay="auto"
-                getAriaValueText={valuetext}
-              />
-            </div>
-            <div className="mt-5 col-span-2">
-              <div className="w-[100%] border">
-                <DragDropFiles setState={setProperty_images} />
+          {/* <> */}
+           
+            <div className="mt-8">
+              <div className="w-[100%]">
+                {/* <DragDropFiles setState={setProperty_images} /> */}
+                <Dropzone images={property_images} setImages={setProperty_images}/>
               </div>
 
-              <div>
+              {/* <div>
                 {property_images.length > 0 ? (
                   <div className="grid grid-cols-1 mt-4 md:grid-cols-2 gap-8 items-center">
                     {property_images.map((url, index) => {
-                      // console.log(img)
+                      console.log(url)
                       return (
-                        // (
-                        //   <p>{item}</p>
-                        // )
-                        // <p key={index}>lol</p>
+
                         <img
                           key={index}
                           src={url}
@@ -1179,15 +1214,19 @@ const AddProperty = () => {
                 ) : (
                   <div></div>
                 )}
-              </div>
+              </div> */}
             </div>
-          </>
+          {/* </> */}
           {/* <div className=""> */}
-          <div className="my-5  w-[100%] col-span-2">
+          
+      </div>
+
+      <div className="mt-12 px-[1rem] py-[2rem] rounded-md bg-slate-500">
+        <div className="my-5  w-[100%] col-span-2">
             <h1 className="text-slate-900 text-xl font-[600]">
               Available Ammenities
             </h1>
-            <div className=" mt-5 flex flex-row flex-wrap gap-x-6 gap-y-3">
+            <div className=" mt-8 flex flex-row flex-wrap gap-x-6 gap-y-3">
               {ammenitiesList.map((item, index) => (
                 <div className="flex gap-4" key={index}>
                   {/* <input
@@ -1214,10 +1253,11 @@ const AddProperty = () => {
               ))}
             </div>
           </div>
-
-          {/* </div> */}
-        </div>
       </div>
+      </div>
+
+
+      
 
       <div
         className={`${

@@ -45,7 +45,7 @@ const Dashboard = () => {
                 index == 0
                   ? "bg-green-100"
                   : index == 1
-                  ? "bg-yellow-100"
+                  ? "bg-slate-100"
                   : index == 2
                   ? "bg-slate-100"
                   : "bg-red-100"

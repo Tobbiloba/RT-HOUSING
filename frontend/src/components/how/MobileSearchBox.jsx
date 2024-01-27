@@ -20,11 +20,11 @@ const MobileSearchBox = ({state, setState}) => {
       <div className='w-[22.5rem] exo mb-6 h-fit rounded-md overflow-hidden'>
 
         <div className='border'>
-            <h1 className='p-[1rem] text-yellow-900 bg-slate-100'>Search</h1>
+            <h1 className='p-[1rem] text-slate-900 bg-slate-100'>Search</h1>
 
             <div className='mt-4 flex flex-row p-3'>
                 <input placeholder='Search Category' className='px-3 py-3 border text-[14px] w-[100%]'/>
-                <div className='bg-yellow-900 text-white w-12 flex items-center justify-center'>
+                <div className='bg-slate-900 text-white w-12 flex items-center justify-center'>
                     <IoSearchOutline className=''/>
                 </div>
                 
@@ -32,7 +32,7 @@ const MobileSearchBox = ({state, setState}) => {
         </div>
 
         <div className='mt-7 border pb-3'>
-            <h1 className='p-[1rem] text-yellow-900 bg-slate-100'>Archives</h1>
+            <h1 className='p-[1rem] text-slate-900 bg-slate-100'>Archives</h1>
 
             <div className='grid text-slate-500 text-[15px] grid-cols-2 mt-4  gap-5 px-6'>
                 <p>. 2019</p>

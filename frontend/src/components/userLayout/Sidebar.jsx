@@ -42,19 +42,19 @@ const Sidebar = () => {
   };
 
   const pathname = location.pathname.split('/')[2]
-  console.log(pathname)
+  // console.log(pathname)
 
   return (
-    <div className='exo flex flex-col gap-5 h-fit bg-white shadow-md pb-4  lg:pb-6 pt-4 lg:pt-8 text-slate-500 px-6 lg:min-w-[17.5rem] xl:px-4 rounded-md'>
+    <div className='exo flex flex-col gap-5 h-fit bg-white shadow-md pb-4  lg:pb-6 pt-4 lg:pt-8 text-slate-500 px-6 sm:w-[30rem] lg:min-w-[17.5rem] xl:px-4 rounded-md'>
       {links.map((link, index) => {
 
         if (pathname == link.link.split('/')[1]) {
           console.log('match')
         }
-        console.log(link.link.split('/')[1])
+        // console.log(link.link.split('/')[1])
         return (
-          <div key={index} className={`${pathname === link.link.split('/')[2] ? 'bg-yellow-500 rounded-sm text-white' : ''}`}>
-            <Link to={link.link} onClick={link.name === 'Logout' ? handleLogout : null} className='flex flex-row gap-6 cursor-pointer hover:bg-yellow-100 text-[14px] px-3 py-3 hover:text-yellow-900 rounded-md'>
+          <div key={index} className={`${pathname === link.link.split('/')[2] ? 'bg-slate-500 rounded-sm text-white' : ''}`}>
+            <Link to={link.link} onClick={link.name === 'Logout' ? handleLogout : null} className='flex flex-row gap-6 cursor-pointer hover:bg-slate-100 text-[14px] px-3 py-3 hover:text-slate-900 rounded-md'>
               {/* <img src={link.icon} alt={link.name} className='w-5 h-5'/> */}
               <div className='text-[24px]'>
                 {link.icon}

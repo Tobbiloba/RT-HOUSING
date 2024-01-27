@@ -1,6 +1,6 @@
-import AdminUser, { getAdminUserByEmail, getAdminUserById, registerAdminUser } from "../mongodb/models/admin.js";
+import AdminUser, { getAdminUserByEmail, getAdminUserById, getAdminUserByToken, registerAdminUser } from "../mongodb/models/admin.js";
 
-import { authentication, random } from "../helpers/index.js";
+import { authentication, generateRandomToken, random, sendVerificationToken } from "../helpers/index.js";
 const getAllAdminUsers = async (req, res) => {
     try {
         const users = await AdminUser.find({}).limit(req.query._end);
@@ -12,10 +12,11 @@ const getAllAdminUsers = async (req, res) => {
 
 const createAdminUser = async (req, res) => {
   try {
-    const { username, firstname, lastname, email, phone_no, password, profile_img, country, state, city, socials } = req.body;
-
-    console.log(username);
-    if (!email || !password || !username || !firstname || !lastname || !profile_img || !state || !country || !city  || !phone_no) {
+    const { username, firstname, lastname, email, phone, password, profile_img, country, state, city, socials } = req.body;
+    console.log(phone)
+    // console.log( username, firstname, lastname, email, phone, password, profile_img, country, state, city, socials );
+    const token = generateRandomToken()
+    if (!email || !password || !username || !firstname || !lastname || !profile_img || !state || !country || !city  || !phone) {
       return res.status(500).json({ message: "Pass necessary parameters" });
     }
     const userExists = await getAdminUserByEmail(email);
@@ -23,33 +24,36 @@ const createAdminUser = async (req, res) => {
       return res.status(500).json({ message: "User already exists" });
     }
     const salt = random();
-    console.log({
-      username,
-      email,
-      lastname: lastname || null,
-      firstname: firstname || null,
-      phone_no: phone_no || null,
-      profile_img: profile_img || null,
-      country: country || null,
-      state: state || null,
-      city: city || null,
-      socials: socials || null,
-      company_information: {
-        company_id: null,
-        company_name: null,
-        role: null
-      },
-      authentication: {
-        password: authentication(salt, password),
-        salt,
-      },
-    });
+    // console.log({
+    //   activationToken: token,
+    //   isActivated: false,
+    //   username,
+    //   email,
+    //   lastname: lastname || null,
+    //   firstname: firstname || null,
+    //   phone_no: phone_no || null,
+    //   profile_img: profile_img || null,
+    //   country: country || null,
+    //   state: state || null,
+    //   city: city || null,
+    //   socials: socials || null,
+    //   company_information: {
+    //     company_id: null,
+    //     company_name: null,
+    //     role: null
+    //   },
+    //   authentication: {
+    //     password: authentication(salt, password),
+    //     salt,
+    //   },
+    // });
     const newUser = await registerAdminUser({
+      activationToken: token,
       username,
       email,
       lastname: lastname || null,
       firstname: firstname || null,
-      phone_no: phone_no || null,
+      phone_no: phone || null,
       profile_img: profile_img || null,
       country: country || null,
       state: state || null,
@@ -64,7 +68,9 @@ const createAdminUser = async (req, res) => {
         salt, password: authentication(salt, password)
     }
     });
-    res.status(200).json({ newUser }).end();
+
+    sendVerificationToken('abayomitobiloba410@gmail.com', `http://localhost:5173/admin/profile/activate/${newUser._id}/${token}`)
+    res.status(200).json(newUser).end();
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: error.message });
@@ -126,5 +132,38 @@ const getAdminUserInfoByID = async (req, res) => {
   }
 };
 
+const activateAdminUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {token} = req.body;
+    console.log(id)
 
-export {getAllAdminUsers, createAdminUser, loginAdminUser, getAdminUserInfoByID}
+    if (!token) {
+      return res.status(400).json({ error: 'Token not provided' });
+    }
+
+    const adminUser = await getAdminUserById(id);
+    console.log(adminUser)
+
+    if (!adminUser) {
+      return res.status(404).json({ error: 'Admin user not found for the given token' });
+    }
+
+    if(token != adminUser.activationToken) {
+      return res.status(500).json({message: "Token not correct"})
+    }
+// // console.log(adminUser)
+    adminUser.activationToken = undefined;
+    adminUser.isActivated = true;
+
+    await adminUser.save();
+
+    return res.status(200).json({ message: 'Account successfully activated.' });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+
+export {getAllAdminUsers, createAdminUser, loginAdminUser, getAdminUserInfoByID, activateAdminUser}

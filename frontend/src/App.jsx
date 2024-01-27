@@ -35,6 +35,8 @@ import ChangePassword from './screen/profile/ChangePassword'
 import UpdateProfile from './screen/profile/UpdateProfile'
 import ProfileLayout from './components/userLayout/ProfileLayout'
 import HowItWorks from './screen/HowItWorks'
+import UserActivation from './components/home/UserActivation'
+import AdminActivation from './screen/admin/screens/Activation'
 function App() {
   
   const routes = [
@@ -43,6 +45,8 @@ function App() {
     <Route path="/how-it-works" element={<Layout><HowItWorks /></Layout>} />,
     <Route path="/user/dashboard" element={<Layout><ProfileLayout><Dashboard /></ProfileLayout></Layout>} />,
     <Route path="/user/orders" element={<Layout><ProfileLayout><UserOrders /></ProfileLayout></Layout>} />,
+    <Route path="/user/dashboard/activate/:id/:token" element={<Layout><UserActivation /></Layout>} />,
+    <Route path="/admin/profile/activate/:id/:token" element={<AdminActivation />} />,
     <Route path="/user/change-password" element={<Layout><ProfileLayout><ChangePassword /></ProfileLayout></Layout>} />,
     <Route path="/user/update-profile" element={<Layout><ProfileLayout><UpdateProfile /></ProfileLayout></Layout>} />,
     <Route path="/property-detail/:id" element={<Layout><PropertyDetails /></Layout>} />,

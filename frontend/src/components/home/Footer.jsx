@@ -1,10 +1,11 @@
+// @ts-nocheck
 import React, { useState } from "react";
 
 
 const ImageCard = ({item}) => {
     const [isHovered, setIsHovered] = useState(false)
     return (
-        <div className="cursor-pointer relative w-16 h-16" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <div className="cursor-pointer relative w-12 h-12" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             <img src={item} className="w-12 h-12"/>
             {
                 isHovered &&
@@ -29,13 +30,13 @@ const Footer = () => {
         'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-10.jpg'
     ]
   return (
-    <div className="exo flex items-center justify-center mt-8">
+    <div className="exo flex items-centerw-[100%] justify-center mt-8">
       <div className="container px-[1rem]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           <div className="flex flex-col gap-4 ">
             <h1 className="text-[16px]">SUBSCRIBE NOW</h1>
             <input placeholder="Enter your email" className=" mt-6 border px-3 py-3 text-[13px]" />
-            <button className="bg-yellow-900 text-white text-[14px] mt-6 py-3 w-[60%]">SUBSCRIBE NOW</button>
+            <button className="bg-slate-900 text-white text-[14px] mt-6 py-3 w-[60%]">SUBSCRIBE NOW</button>
           </div>
           <div>
             <h1 className="text-[15px]">UNITED STATE</h1>
@@ -74,9 +75,9 @@ const Footer = () => {
         </div>
         <div className="mt-10 border border-white border-y-gray-500 py-16 flex flex-col items-center justify-center">
             <div className="flex flex-row gap-3 items-center">
-                <div className="max-w-20 min-w-4 h-[2px] bg-yellow-900"></div>
+                <div className="max-w-20 min-w-4 h-[2px] bg-slate-900"></div>
                 <p className="text-[16px]">FOLLOW INSTAGRAM</p>
-                <div className="max-w-20 min-w-4  h-[2px] bg-yellow-900"></div>
+                <div className="max-w-20 min-w-4  h-[2px] bg-slate-900"></div>
             </div>
 
             <div className="md:flex grid grid-cols-5 flex-row gap-4 mt-6">

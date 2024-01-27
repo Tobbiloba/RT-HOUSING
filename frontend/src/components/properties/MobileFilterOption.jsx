@@ -33,7 +33,7 @@ export default function MobileFilterOption({state, setState}) {
             <FilterOption />
             <TopRated />
 
-            {/* <div className='w-6 h-6 rounded-full absolute bg-yellow-900 top-24  -left-1'></div> */}
+            {/* <div className='w-6 h-6 rounded-full absolute bg-slate-900 top-24  -left-1'></div> */}
         </div>
       </Drawer>
     </div>

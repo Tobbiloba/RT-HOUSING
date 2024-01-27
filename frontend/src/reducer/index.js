@@ -10,7 +10,9 @@ import {
     REQUEST_LOGIN_ADMIN_SUCCESSFUL,
     REQUEST_REGISTER_ADMIN,
     REQUEST_REGISTER_ADMIN_FAILED,
-    REQUEST_REGISTER_ADMIN_SUCCESSFUL
+    REQUEST_REGISTER_ADMIN_SUCCESSFUL,
+    ACTIVATE_ACCOUNT,
+    ACTIVATE_ACCOUNT_SUCCESSFUL
   } from "../constant/auth";
 
   export const loginReducer = (
@@ -112,6 +114,34 @@ export const registerAdminReducer = (
         return {
           loading: false,
           error: false,
+        };
+      default:
+        return state;
+    }
+}
+
+
+
+
+
+export const activateUser = (
+  state= {loading: true, error: null}, action
+) => {
+  switch (action.type) {
+      case ACTIVATE_ACCOUNT:
+        return {
+          loading: true,
+          error: null,
+        };
+      case ACTIVATE_ACCOUNT_SUCCESSFUL:
+        return {
+          loading: false,
+          error: false
+        };
+      case ACTIVATE_ACCOUNT_SUCCESSFUL:
+        return {
+          loading: false,
+          error: true,
         };
       default:
         return state;

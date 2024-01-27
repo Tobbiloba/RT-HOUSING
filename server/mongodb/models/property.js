@@ -5,6 +5,11 @@ import mongoose from "mongoose";
 //     company_id: {type: String, required: true},
 //     c
 // })
+const AgentSchema = new mongoose.Schema({
+    name: {type: String, required: true},
+    email: {type: String, required: true},
+    phoneNo: {type: String, required: true}
+})
 const PropertySchema = new mongoose.Schema({
     isActive: {type: Boolean, enum: [true, false], default: false},
     property_information: {
@@ -13,6 +18,8 @@ const PropertySchema = new mongoose.Schema({
         property_description: {type: String, required: true},
         property_no_bedrooms: {type: String, required: true},
         property_no_bathrooms: {type: String, required: true},
+        property_no_garages: {type: String, required: true},
+        property_no_floor: {type: String, required: true},
         property_size: {type: [String], required: false},
         property_amenities: {type: [String], required: false},
         property_images: {type: [String], required: true},
@@ -45,6 +52,11 @@ const PropertySchema = new mongoose.Schema({
         
         booking_status: { type: String, enum: ['available', 'booked', 'under maintenance', 'unavailable'], default: 'available' },
     },
+    agent: [AgentSchema],
+    discount: {type: Number, required: false},
+    isFeatured: {type: String, required: true},
+    isPopular: {type: String, required: true},
+    isTopRated: {type: String, required: true},
     company_id: {type: String, required: true},
     company_name: {type: String, required: true},
     created_by: {type: String, required: false},
@@ -54,7 +66,7 @@ const PropertySchema = new mongoose.Schema({
 const PropertyModel = mongoose.model("Property", PropertySchema);
 
 export const getProperties = (no) => PropertyModel.find({}).limit(no);
-export const getActivatedProperties = (query) => PropertyModel.find({"activated": true, query});
+export const getActivatedProperties = (query) => PropertyModel.find({"isActive": true, query});
 export const getPropertyById = (id) => PropertyModel.findOne({"_id": id});
 export const getPropertyByCompanyId = (id) => PropertyModel.find({"company_id": id})
 export const getPropertyByType = (property_type) => {

@@ -1,7 +1,9 @@
+// @ts-nocheck
 import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
+import SliderSwiper from "../SliderSwiper";
 const MenuOptions = () => {
   return (
     <div className="absolute -left-32 -bottom-14 border rounded-md bg-white px-4 py-2 flex shadow-md flex-col gap-3">
@@ -31,7 +33,11 @@ const Slider = ({ item, viewMode }) => {
   };
 
   return (
-    <div className={`slider  ${viewMode == 'flex' ? 'md:h-[20rem] xl:h-[20rem]' : 'max-h-[20rem]'} lg:h-[100%]  w-[100%] h-[100%] top-0 left-0 relative overflow-hidden`}>
+    <div
+      className={`slider  ${
+        viewMode == "flex" ? "md:h-[20rem] xl:h-[20rem]" : "max-h-[20rem]"
+      } lg:h-[100%]  w-[100%] h-[100%] top-0 left-0 relative overflow-hidden`}
+    >
       <div
         className="slider-inner flex  h-[100%]"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -42,9 +48,10 @@ const Slider = ({ item, viewMode }) => {
             <img
               src={image}
               alt={`Slide ${index + 1}`}
-              className={`w-full h-[100%] ${viewMode == 'flex' ? 'md:h-[20rem] xl:h-[20rem]' : ''} lg:h-[100%]  object-cover`}
+              className={`w-full h-[100%] ${
+                viewMode == "flex" ? "md:h-[20rem] xl:h-[20rem]" : ""
+              } lg:h-[100%]  object-cover`}
             />
-            
           </div>
         ))}
       </div>
@@ -59,42 +66,55 @@ const Slider = ({ item, viewMode }) => {
   );
 };
 
-
-
-
 const FeaturedPropCard = ({ item, viewMode }) => {
   const [showMenu, setShowMenu] = useState(false);
   return (
-    <div className={`hover:shadow-2xl mb-4  max-w-[50.5rem] mx-3 overflow-hidden  md:items-center lg:items-start xl:text-center  lg:h-[100%] flex flex-col  ${viewMode === 'flex' ? 'md:flex-row xl:h-[20rem] md:h-[20rem] xl:flex-row' : 'md:flex-col xl:flex-col md:w-[100%]'} lg:w-fit lg:flex-col `}>
-
-      <div className={`relative ${viewMode === 'flex' ? 'xl:w-2/5 md:w-2/5' : ''}  p-0 lg:w-[100%] w-[100%] overflow-hidden flex h-[100%]`}>
-        <Slider item={item} viewMode={viewMode}/>
-        
+    <div
+      className={`hover:shadow-2xl mb-4 rounded-xl max-w-[50.5rem] mx-3 overflow-hidden  md:items-center lg:items-start xl:text-center  lg:h-[100%] flex flex-col  ${
+        viewMode === "flex"
+          ? "md:flex-row xl:h-[20rem] md:h-[20rem] xl:flex-row"
+          : "sm:flex-row md:flex-col xl:flex-col md:w-[100%] min-w-[25rem]"
+      } lg:w-fit lg:flex-col flex-row`}
+    >
+      <div
+        className={`relative ${
+          viewMode === "flex" ? "xl:w-2/5 md:w-2/5" : ""
+        }  p-0 lg:w-[100%] w-[100%] overflow-hidden flex h-[100%]`}
+      >
+        {/* <Slider item={item} viewMode={viewMode}/> */}
+        <SliderSwiper
+          images={item?.property_information.property_images}
+          viewMode={viewMode}
+        />
       </div>
 
-      <div className={`  ${viewMode === 'flex' ? 'xl:w-3/5 md:w-3/5' : ''} lg:w-[100%] w-[100%]   border h-fit mt-8 md:mt-0 xl:mt-0`}>
+      <div
+        className={`  ${
+          viewMode === "flex" ? "xl:w-3/5 md:w-3/5" : " "
+        } lg:w-[100%] w-[100%]   border h-fit mt-8 md:mt-0 xl:mt-0`}
+      >
         <div className="flex flex-row items-center p-3 justify-between">
           <div className="flex flex-col gap-2 items-start justify-start">
-            <p className="text-yellow-500 text-[14px]">{item.property_information.property_type}</p>
+            <p className="text-slate-500 text-[14px]">
+              {item.property_information.property_type}
+            </p>
             <Link to={`/property-detail/${encodeURIComponent(item._id)}`}>
-               <h1 className="text-[17px] text-yellow-700">{item.property_information.property_name}</h1>
+              <h1 className="text-[17px] text-slate-700 font-[600]">
+                {item.property_information.property_name}
+              </h1>
             </Link>
-           
-            <p className="text-slate-700">
-              #{item.property_information.pricing} <span className="text-[14px]">/ night</span>
+
+            <p className="text-slate-700 font-[600]">
+              #{item.property_information.pricing}{" "}
+              <span className="text-[14px]">/ night</span>
             </p>
             <div className="flex flex-row items-center gap-4">
-              <Rating
-                name="read-only"
-                size="small"
-                value={6}
-                readOnly
-              />
-              <p className="text-[13px]">10 review</p>
+              <Rating name="read-only" size="small" value={6} readOnly />
+              <p className="text-[14px] font-[600]">10 review</p>
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative ">
             <img src={item.avatar} className="w-14 h-14" />
 
             <div className="p-1 rounded-full bg-white absolute  bottom-0 -left-2">
@@ -102,7 +122,7 @@ const FeaturedPropCard = ({ item, viewMode }) => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 p-4 gap-x-3 gap-y-4 mt-5 text-slate-600 text-[15px]">
+        <div className="grid grid-cols-2 font-[600] p-4 gap-x-3 gap-y-4 mt-5 text-slate-600 text-[15px]">
           <div className="flex items-center flex-row gap-3">
             <img src="/user.png" className="w-4 h-4" />
             <p>04 Guests</p>
@@ -143,16 +163,20 @@ const images = [
   // Add more image URLs as needed
 ];
 
-const PropertiesList = ({viewMode, properties}) => {
-  console.log(properties)
+const PropertiesList = ({ viewMode, properties }) => {
+  // console.log(properties)
   return (
     <div className="flex items-center exo justify-center">
       {/* <div className="text-center"> */}
 
-      <div className={` flex-1 flex-col md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-8 w-[100%] ${viewMode === 'flex' ? 'flex' : 'grid'}`}>
+      <div
+        className={` flex-1 flex-col md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-8 w-[100%] ${
+          viewMode === "flex" ? "flex" : "grid"
+        }`}
+      >
         {properties.map((item, index) => (
-          <div key={index} className="flex-shrink-0">
-            <FeaturedPropCard item={item} viewMode={viewMode}/>
+          <div key={index} className="flex-shrink-0 w-[100%]">
+            <FeaturedPropCard item={item} viewMode={viewMode} />
           </div>
         ))}
         {/* </div> */}
@@ -160,6 +184,5 @@ const PropertiesList = ({viewMode, properties}) => {
     </div>
   );
 };
-
 
 export default PropertiesList;

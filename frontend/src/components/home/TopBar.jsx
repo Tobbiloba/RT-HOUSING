@@ -1,16 +1,15 @@
+// @ts-nocheck
 import React from "react";
 import {Link} from 'react-router-dom'
 const TopBar = ({setShowLogin, setShowRegister}) => {
   const data = JSON.parse(sessionStorage.getItem("userInfo"));
-
-  console.log(data)
   return (
     <div className="flex items-center justify-center">
       <div className="flex flex-wrap px-[1rem] exo flex-row  justify-between md:items-center lg:flex-nowrap px-[1rem]pb-2 md:py-4 container">
     <div className="flex w-[35rem] flex-row items-center gap-x-5 md:gap-6 flex-wrap md:flex-nowrap">
-        <p className="text-[15px] text-blue-70">
+        <p className="text-[14px] text-blue-70">
           Call Us:{" "}
-          <span className="text-yellow-900 text-[16px] font-[600]">
+          <span className="text-slate-900 text-[15px] font-[600]">
             (+1) 2345 67 89 00
           </span>
         </p>
@@ -25,9 +24,9 @@ const TopBar = ({setShowLogin, setShowRegister}) => {
         {
           !data?.authentication?.salt &&
         
-        <div className="flex flex-row gap-7 md:my-0">
-          <h1 className="text-yellow-500 font-[600] cursor-pointer" onClick={() => setShowLogin(true)}>Login</h1>
-          <h1 className="text-yellow-900 font-[600] cursor-pointer" onClick={() => setShowRegister(true)}>Register</h1>
+        <div className="flex flex-row gap-7 md:my-0 text-[14px]">
+          <h1 className="text-slate-500 font-[600] cursor-pointer" onClick={() => setShowLogin(true)}>Login</h1>
+          <h1 className="text-slate-900 font-[600] cursor-pointer" onClick={() => setShowRegister(true)}>Register</h1>
         </div>
 }
 
@@ -38,13 +37,13 @@ const TopBar = ({setShowLogin, setShowRegister}) => {
   </div>
 }
         <div className="relative flex flex-row overflow-hidden w-[17.5rem] h-[2.75rem] border">
-          <Link to="/admin/dashboard" className="flex-1 text-[15px] bg-yellow-500 items-center flex justify-center"><
+          <Link to="/admin/dashboard" className="flex-1 text-[14px] bg-slate-500 items-center flex justify-center"><
             p >
             Become A Host
           </p>
           </Link>
           
-          <p className="flex-1 text-white text-[15px] bg-yellow-900 text-center items-center flex justify-center ">
+          <p className="flex-1 text-white text-[14px] bg-slate-900 text-center items-center flex justify-center ">
             Find A Property
           </p>
           <div className="absolute left-[8.5rem] rotate-6 w-[.5rem] h-[3.5rem] bg-white">

@@ -10,7 +10,7 @@ const Card = ({index, item}) => {
     return(
         <div className={`flex border-b ${(index + 1) % 2 == 1 ? 'flex-col md:flex-row  lg:flex-row xl:flex-nowrap xl:flex-row justify-end items-center' : 'flex-col-reverse md:flex-row-reverse lg:flex-row-reverse xl:flex-row-reverse justify-evenly items-center'} `}>
            <div className={`flex ${(index + 1) % 2 == 1 ? 'flex-row' : 'flex-row-reverse'} md:w-7/12 lg:w-[100%] xl:w-7/12  gap-5 items-center`}>
-            <p className="text-[22px] text-yellow-600 rubik  ">0{index + 1}.</p>
+            <p className="text-[22px] text-slate-600 rubik  ">0{index + 1}.</p>
             <div>
                 <h1 className="text-[22px] text-slate-700 rubik">{item.title}</h1>
                 <p className="mt-3 text-[14px] text-slate-500">{item.description}</p>

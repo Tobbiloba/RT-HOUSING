@@ -53,7 +53,7 @@ const PropertyLocationCard = ({ title }) => {
           >
             <div className="w-[100%] h-[100%] absolute top-0 left-0 bg-black/40 rounded-md"></div>
             <div className="z-10 relative flex flex-row items-center justify-between">
-              <p className="text-[11px] h-6 flex items-center justify-center px-3 bg-yellow-600">
+              <p className="text-[11px] h-6 flex items-center justify-center px-3 bg-slate-600">
                 {item.time}
               </p>
               <p className="text-[13px]">{item.photos} Photos</p>
@@ -72,7 +72,7 @@ const PropertyLocationCard = ({ title }) => {
         ))}
       </div>
 
-      <h1 className="mt-7 text-yellow-600">See all {title} houses </h1>
+      <h1 className="mt-7 text-slate-600">See all {title} houses </h1>
     </div>
   );
 };

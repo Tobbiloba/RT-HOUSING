@@ -52,9 +52,7 @@ const getAllProperties = async (req, res) => {
 
 const getAllPropertiesUser = async (req, res) => {
     try {
-        // console.log(req.query)
         const properties = await getActivatedProperties(req.query); // Add await here
-
         res.status(200).json(properties);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -63,12 +61,7 @@ const getAllPropertiesUser = async (req, res) => {
 
 const getPropertyByCompany = async (req, res) => {
     const { id } = req.params;
-
-    // console.log(id)
     const propertyExists = await getPropertyByCompanyId(id)
-
-
-    // console.log(propertyExists)
     if (propertyExists) {
         res.status(200).json(propertyExists);
     } else {
@@ -79,16 +72,9 @@ const getPropertyByCompany = async (req, res) => {
 
 const getPropertyByTypeModel = async (req, res) => {
     const { type } = req.params;
-
-    // console.log(id)
-    // console.log(type)
-    //
-
     try{
         if(type) {
             const property = await getPropertyByType(type)
-        console.log(type)
-        console.log(property)
         }
     } catch(error) {
         console.log(error)
@@ -99,14 +85,12 @@ const getPropertyByTypeModel = async (req, res) => {
 const getPropertyDetailById = async (req, res) => {
     const { id } = req.params;
     try{
-        // console.log(decodeURIComponent(id))
         decodeURIComponent(id)
         const propertyExists = await getPropertyById(id)
     
     
         console.log(propertyExists)
         if (propertyExists) {
-            // console.log(propertyExists)
             res.status(200).json(propertyExists);
         } else {
             
@@ -170,6 +154,7 @@ const createProperty = async (req, res) => {
         return res.status(500).end()
     };
     // console.log(user)
+    const getRandomBoolean = () => Math.random() < 0.5;
 
         const newProperty = await createPropertyAdmin({
             isActive: false,
@@ -209,6 +194,9 @@ const createProperty = async (req, res) => {
                   booking_status: property_information?.booking_status || 'available',
                   
             },
+            isFeatured: getRandomBoolean(), // Randomly set to true or false
+            isPopular: getRandomBoolean(), // Randomly set to true or false
+            isTopRated: getRandomBoolean(),
         company_name: company.company_name,
         company_id: company._id,
             created_by: id
