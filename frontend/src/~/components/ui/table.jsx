@@ -45,7 +45,7 @@ const TableRow = React.forwardRef(({ className, ...props }, ref) => (
 TableRow.displayName = "TableRow"
 
 const TableHead = React.forwardRef(({ className, ...props }, ref) =>{
-  console.log(props)
+
   return  (
     <th
       ref={ref}

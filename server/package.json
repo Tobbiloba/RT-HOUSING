@@ -21,6 +21,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "install": "^0.13.0",
+    "moment": "^2.30.1",
     "mongoose": "^6.12.4",
     "node-cron": "^3.0.3",
     "node-schedule": "^2.1.1",

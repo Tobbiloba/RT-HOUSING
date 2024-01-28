@@ -8,8 +8,12 @@ import {
   getOrderById,
 } from "../mongodb/models/order.js";
 import PropertyModel from "../mongodb/models/property.js";
-
-import { random } from "../helpers/index.js";
+import moment from "moment";
+import {
+  random,
+  sendOrderConfirmation,
+  sendOrderEnd,
+} from "../helpers/index.js";
 import { getAdminUserById } from "../mongodb/models/admin.js";
 import { getPropertyById } from "../mongodb/models/property.js";
 import { getUserById } from "../mongodb/models/user.js";
@@ -28,12 +32,15 @@ const getAllOrders = async (req, res) => {
 
 const getUserOrder = async (req, res) => {
   const { id } = req.params;
+  console.log(id)
 
   try {
     const orders = await getOrderByUserId(id);
+    console.log(orders)
 
     return res.status(200).json(orders);
   } catch (error) {
+    console.log(error.message)
     return res.status(500).json(error.message);
   }
 };
@@ -69,8 +76,9 @@ const createUserOrder = async (req, res) => {
   const { pricing, promotions, user_id, checkinDate, checkoutDate } = req.body;
 
   const extractNecessaryPropertyInfo = (property) => {
+    console.log(property);
     const { property_name, property_type, property_location, property_images } =
-      property[0].property_information;
+      property.property_information;
     return {
       propertyName: property_name,
       propertyType: property_type,
@@ -89,26 +97,26 @@ const createUserOrder = async (req, res) => {
     if (!user) {
       return res.status(500).json({ message: "User not found" });
     }
+    if (!property) {
+      return res.status(500).json({ message: "Property not found" });
+    }
 
     const necessaryPropertyInfo = extractNecessaryPropertyInfo(property);
-
+    console.log(property.property_information.booking_status);
     if (
       property &&
-      property[0].property_information.booking_status !== "available"
+      property.property_information.booking_status !== "available"
     ) {
-      console.log(property[0].status);
-      return res
-        .status(500)
-        .json({
-          message:
-            "Property unavailable at the moment. Please check back later.",
-        });
+      console.log(property.status);
+      return res.status(500).json({
+        message: "Property unavailable at the moment. Please check back later.",
+      });
     }
 
     const newOrder = await createOrder({
       orderId: random(),
       propertyId: id,
-      companyId: property[0].company_id,
+      companyId: property.company_id,
       userInformation: {
         userId: user._id,
         username: user.username,
@@ -135,7 +143,7 @@ const createUserOrder = async (req, res) => {
     // console.log({
     //   orderId: random(),
     //   propertyId: id,
-    //   companyId: property[0].company_id,
+    //   companyId: property.company_id,
     //   userInformation: {
     //     userId: user._id,
     //     username: user.username,
@@ -167,53 +175,124 @@ const createUserOrder = async (req, res) => {
   }
 };
 
+
+
 // Placeholder function for updating booking status in the database
-const updateBookingStatus = async (propertyId, newStatus) => {
+const updateBookingStatus = async (orderId, newStatus) => {
   try {
-    const property = await PropertyModel.findById(propertyId);
-    // console.log(property);
+    const orderDetails = await getOrderById(orderId);
+    if (!orderDetails) {
+      return;
+      // return res.status(500).json({ message: "Not found" });
+    }
+    const propertyId = orderDetails.propertyId;
+    const property = await getPropertyById(propertyId);
+    if (newStatus === "end") {
+      console.log("expired", newStatus);
+      
+    }
+    
+console.log(newStatus)
+    const order = {
+      orderId: orderDetails._id,
+      propertyName: orderDetails.propertyInformation.propertyName,
+      propertyAddress: `${orderDetails.propertyInformation.propertyLocation.country}, ${orderDetails.propertyInformation.propertyLocation.state}, ${orderDetails.propertyInformation.propertyLocation.city}`,
+      expenses: orderDetails.pricing.expenses,
+      usedDiscount: {
+        couponId: orderDetails.promotions.couponCode || null,
+        couponDiscount: orderDetails.promotions.discount || null,
+      },
+      totalPrice: orderDetails.pricing.totalPrice,
+      checkinDate: orderDetails.checkinDate,
+      checkoutDate: orderDetails.checkoutDate,
+      status: orderDetails.bookingStatus,
+      reason: orderDetails.reason,
+    };
+
     if (property) {
-      property.property_information.booking_status = newStatus;
-      await property.save();
-      console.log(`Booking status updated to '${newStatus}' for property with ID: ${propertyId}`);
+      if (newStatus === "start") {
+        console.log("activated order");
+        sendOrderConfirmation("abayomitobiloba410@gmail.com", order);
+        orderDetails.bookingStatus = "ongoing";
+      } else if (newStatus === "end") {
+        console.log("ended order");
+        sendOrderEnd("abayomitobiloba410@gmail.com", order);
+        orderDetails.bookingStatus = "expired";
+      }
+
+      await orderDetails.save();
+      // property.property_information.booking_status = newStatus;
+      // await property.save();
+      console.log(
+        `Booking status updated to '${newStatus}' for property with ID: ${propertyId}`
+      );
     } else {
       console.log(`Property with ID ${propertyId} not found.`);
     }
   } catch (error) {
     console.error(
-      `Error updating booking status for property with ID ${propertyId}:`,
+      `Error updating booking status for order with ID ${orderId}:`,
       error
     );
   }
 };
 
-import cron from 'node-cron'
+import cron from "node-cron";
 // Function to schedule a job to update booking status on check-in and check-out dates
-const scheduleBookingStatusUpdate = (propertyId, checkinDate, checkoutDate) => {
-  // Logic to schedule a job (e.g., using a scheduler library like cron)
-  // Set up a job to run on check-in date to update status to 'booked'
-  // Set up another job to run on check-out date to update status to 'available'
-  // You can use libraries like node-schedule, cron, or others for scheduling jobs
-  // Example using node-schedule:
-  // console.log(propertyId, checkinDate, checkoutDate)
+const scheduleBookingStatusUpdate = (checkinDate, checkoutDate, orderId) => {
+  console.log(`22 16 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]}`);
 
-  // const checkinJob = cron.schedule(`03 15 ${checkinDate.split('/')[0]} ${checkinDate.split('/')[1]} *`, () =>
-  //   updateBookingStatus(propertyId, "booked")
+
+  // updateBookingStatus(orderId, 'end')
+  const checkinJob = cron.schedule(
+    `10 21 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]} *`,
+    () => updateBookingStatus(propertyId, "start")
+  );
+  // const checkoutJob = cron.schedule(
+  //   `48 15 ${checkoutDate.split("/")[0]} ${checkoutDate.split("/")[1]} *`,
+  //   () => updateBookingStatus(propertyId, "expired")
   // );
-  // const checkoutJob = updateBookingStatus(propertyId, "available");
 
-  // console.log(checkinDate.split('/'))
+  // const checkinJob = cron.schedule(
+  //   `41 16 28 01 *`,
+  //   () => updateBookingStatus(propertyId, "start")
+  // );
 
-  const checkinJob = cron.schedule(`08 15 ${checkinDate.split('/')[0]} ${checkinDate.split('/')[1]} *`, () => updateBookingStatus(propertyId, 'booked'));
-  const checkoutJob = cron.schedule(`10 15 ${checkinDate.split('/')[0]} ${checkinDate.split('/')[1]} *`, () => updateBookingStatus(propertyId, 'available'));
+
+
+  // const checkinJob = cron.schedule(
+  //   `0 21 28 01 *`,
+  //   () => console.log(propertyId, "start")
+  // );
+
+  // const checkoutJob = cron.schedule(
+  //   `1 21 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]} *`,
+  //   () => console.log(propertyId, "end")
+  // );
+
+  // const checkinJob = cron.schedule(
+  //   `22 20 28 01 *`,
+  //   () => updateBookingStatus(propertyId, "start")
+  // );
+
+  // const checkoutJob = cron.schedule(
+  //   `23 20 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]} *`,
+  //   () => updateBookingStatus(propertyId, "end")
+  // );
 };
+
+
+
+
+
+
+
 
 const updateOrderStatus = async (req, res) => {
   const { id } = req.params;
   const { companyId, status, reason } = req.body;
 
   try {
-    // Check if the user is an admin
     const company = await getCompanyByIdSchema(companyId);
 
     if (!company) {
@@ -221,75 +300,76 @@ const updateOrderStatus = async (req, res) => {
     }
 
     const order = await getOrderById(id);
-    const checkinDate = order.checkinDate;
-    const checkoutDate = order.checkoutDate;
+    const checkoutDate = "28/01/2024";
+    const checkinDate = "28/01/2024";
     const property = await getPropertyById(order.propertyId);
+
+    // console.log(order.userInformation.email)
 
     if (!checkinDate || !checkoutDate) {
       return res.status(400).json({ message: "Date is undefined" });
     }
 
-    // console.log(checkinDate, checkoutDate)
-
     if (order) {
-      // Assuming the admin checks if they are the owner before updating the order
-      // ... your logic to check if admin is the owner of the property
-      if (status === "active" && status !== "declined") {
-        // Update the order status
-        order.bookingStatus = status;
+      if (status === "active" || status === "declined") {
+        if (status === "declined" && !reason) {
+          return res.status(500).json({ message: "Pass in your reason" });
+        }
 
-        // Check if the difference between checkinDate and checkoutDate is at least one day
+        const [day, month, year] = checkinDate.split("/");
+        const parsedCheckinDate = moment(
+          `${year}-${month}-${day}`,
+          "YYYY-MM-DD"
+        );
+
+        if (!parsedCheckinDate.isValid()) {
+          console.log("not passed");
+          return res
+            .status(500)
+            .json({ message: "Invalid checkin date format" });
+        }
+
+        // // Check if checkinDate is after or the same as the current moment, and not before the current moment
+
         const diffInDays =
           (new Date(checkoutDate) - new Date(checkinDate)) /
           (1000 * 60 * 60 * 24);
+
         if (diffInDays < 1) {
-          console.log(
-            "Invalid checkin and checkout dates. Must be at least one day apart."
-          );
-          return res
-            .status(400)
-            .json({
-              message:
-                "Invalid checkin and checkout dates. Must be at least one day apart.",
-            });
+          return res.status(400).json({
+            message:
+              "Invalid checkin and checkout dates. Must be at least one day apart.",
+          });
         }
 
-        // Assuming checkoutDate is in "DD/MM/YYYY" format
-        const [day, month, year] = checkoutDate.split("/");
-        const parsedCheckoutDate = new Date(`${month}/${day}/${year}`);
+        if (checkinDate && parsedCheckinDate.isBefore(moment())) {
+          console.log("Valid checkin date");
 
-        if (!isNaN(parsedCheckoutDate)) {
-          // The parsedCheckoutDate is a valid date object
-          // console.log(parsedCheckoutDate);
+          // Your logic to send mail to the user and call cron job function here
         } else {
-          // Invalid date string
-          console.log("Invalid date format");
+          console.log("Invalid checkin date");
+          return;
         }
+        const orderDetails = {
+          orderId: order._id,
+          propertyName: order.propertyInformation.propertyName,
+          propertyAddress: `${order.propertyInformation.propertyLocation.country}, ${order.propertyInformation.propertyLocation.state}, ${order.propertyInformation.propertyLocation.city}`,
+          expenses: order.pricing.expenses,
+          usedDiscount: {
+            couponId: order.promotions.couponCode || null,
+            couponDiscount: order.promotions.discount || null,
+          },
+          totalPrice: order.pricing.totalPrice,
+          checkinDate: order.checkinDate,
+          checkoutDate: order.checkoutDate,
+          status: status,
+          reason: reason,
+        };
 
-        // console.log(new Date(checkoutDate))
-        // console.log(new Date())
-        // Schedule a job to set booking status to "booked" on the checkoutDate
-        if (checkoutDate && new Date(parsedCheckoutDate) > new Date()) {
-          scheduleBookingStatusUpdate(
-            property[0]._id,
-            checkinDate,
-            checkoutDate
-          );
-          // console.log('called')
+        order.bookingStatus = "active"
+          scheduleBookingStatusUpdate(checkinDate, checkoutDate, order._id);
 
-          // Add code here to send an email or perform any other actions after scheduling
-          // e.g., sendEmail(order.userEmail, 'Booking Confirmed', 'Your booking has been confirmed.');
-        } else {
-          console.log("Invalid checkout date");
-        }
-
-        // Update the reason only if status is "declined"
-        if (status === "declined") {
-          order.bookingStatus = status;
-          order.reason = reason;
-        }
-
-        // Save the order after all updates
+          
         await order.save();
         return res
           .status(200)

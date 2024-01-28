@@ -157,63 +157,121 @@ export type Payment = {
 
 export const columns: ColumnDef<Payment>[] = [
 
+  // {
+  //   accessorKey: "property_name",
+  //   header: "Property name",
+  //   cell: ({ row }) => (
+  //     <div className="capitalize ">{row.getValue("property_name")}</div>
+  //   ),
+  // },
+  // {
+  //   accessorKey: "propertyInformation.propertyType",
+  //   header: "Property type",
+  //   cell: ({ row }) => {
+  //     console.log(row.getValue("propertyInformation.propertyType"))
+  //     return (
+  //       <div className="capitalize ">{row.getValue("propertyInformation.propertyType")}</div>
+  //     )
+  //   },
+  // },
+
+
   {
-    accessorKey: "property_name",
-    header: "Property name",
-    cell: ({ row }) => (
-      <div className="capitalize ">{row.getValue("property_name")}</div>
-    ),
-  },
-  {
-    accessorKey: "property_type",
+    accessorKey: "propertyInformation.properttyName",
     header: "Property type",
-    cell: ({ row }) => (
-      <div className="capitalize ">{row.getValue("property_type")}</div>
-    ),
+    cell: ({ row }) => {
+      const propertyInformation = row.original?.propertyInformation;
+  
+      if (propertyInformation && propertyInformation.propertyName) {
+        console.log(propertyInformation.propertyName);
+  
+        return (
+          <div className="capitalize text-[13px]">
+            {propertyInformation.propertyName}
+          </div>
+        );
+      } else {
+        // Handle the case where propertyInformation or propertyType is undefined
+        return <div className="capitalize ">N/A</div>;
+      }
+    },
+  },
+
+
+
+
+
+  {
+    accessorKey: "propertyInformation.propertyType",
+    header: "Property type",
+    cell: ({ row }) => {
+      const propertyInformation = row.original?.propertyInformation;
+  
+      if (propertyInformation && propertyInformation.propertyType) {
+        // console.log(propertyInformation.propertyType);
+  
+        return (
+          <div className="capitalize text-[13px]">
+            {propertyInformation.propertyType}
+          </div>
+        );
+      } else {
+        // Handle the case where propertyInformation or propertyType is undefined
+        return <div className="capitalize ">N/A</div>;
+      }
+    },
   },
 
   {
-    accessorKey: "checkin",
+    accessorKey: "checkinDate",
     header: "Checkin Date",
     cell: ({ row }) => (
-      <div className="capitalize text-[14px]">{row.getValue("checkin")}</div>
+      <div className={`capitalize text-[12px] ${row.getValue("bookingStatus") === "active" 
+      || row.getValue("bookingStatus") === "ongoing" ? "text-green-500" : row.getValue("bookingStatus") === "pending" ? "text-yellow-500" : row.getValue("bookingStatus") === "expired" || row.getValue("bookingStatus") === "declined" && "text-red-500" }`}>{row.getValue("checkinDate")}</div>
     ),
   },
   {
-    accessorKey: "checkout",
+    accessorKey: "checkoutDate",
     header: "Checkout Date",
-    cell: ({ row }) => (
-      <div className="capitalize text-[14px]">{row.getValue("checkout")}</div>
-    ),
+    cell: ({ row }) => {
+        // console.log(row.getValue)
+      return (
+        <div className={`capitalize text-[12px] ${row.getValue("bookingStatus") === "active" 
+        || row.getValue("bookingStatus") === "ongoing" ? "text-green-500" : row.getValue("bookingStatus") === "pending" ? "text-yellow-500" : row.getValue("bookingStatus") === "expired" || row.getValue("bookingStatus") === "declined" && "text-red-500" }`}>{row.getValue("checkoutDate")}</div>
+      )
+    },
   },
-  // {
-  //   accessorKey: "email",
-  //   header: ({ column }) => {
-  //     return (
-  //       <Button
-  //         variant="ghost"
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //       >
-  //         Email
-  //         <CaretSortIcon className="ml-2 h-4 w-4" />
-  //       </Button>
-  //     )
-  //   },
-  //   cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
-  // },
   {
-    accessorKey: "status",
+    accessorKey: "bookingStatus",
     header: "Status",
-    cell: ({ row }) => (
-      <div className={`capitalize text-start ${row.getValue("status") == "active" ? "text-green-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("status")}</div>
-    ),
+    cell: ({ row }) => {
+        // console.log(row.getValue)
+      return (
+        <div className={`capitalize text-[12px] ${row.getValue("bookingStatus") === "active" 
+        || row.getValue("bookingStatus") === "ongoing" ? "text-green-500" : row.getValue("bookingStatus") === "pending" ? "text-yellow-500" : row.getValue("bookingStatus") === "expired" || row.getValue("bookingStatus") === "declined" && "text-red-500" }`}>{row.getValue("bookingStatus")}</div>
+      )
+    },
   },
   {
-    accessorKey: "price",
-    header: () => <div className="">Total Price</div>,
-    cell: ({ row }) => (
-      <div className={`capitalize text-center ${row.getValue("status") == "active" ? "text-green-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("price")}</div>
-    ),
+    accessorKey: "pricing",
+    header: "Property type",
+    cell: ({ row }) => {
+      const pricing = row.original?.pricing;
+  
+      if (pricing && pricing.totalPrice) {
+        // console.log(pricing.propertyType);
+  
+        return (
+          <div className={`capitalize text-[12px] ${row.getValue("bookingStatus") === "active" 
+          || row.getValue("bookingStatus") === "ongoing" ? "text-green-500" : row.getValue("bookingStatus") === "pending" ? "text-yellow-500" : row.getValue("bookingStatus") === "expired" || row.getValue("bookingStatus") === "declined" && "text-red-500" }`}>
+            {pricing.totalPrice}
+          </div>
+        );
+      } else {
+        // Handle the case where propertyInformation or propertyType is undefined
+        return <div className="capitalize ">N/A</div>;
+      }
+    },
   },
 
   // https://cdn-icons-png.flaticon.com/128/6811/6811049.png
@@ -228,38 +286,38 @@ export const columns: ColumnDef<Payment>[] = [
 
 // https://cdn-icons-png.flaticon.com/128/2762/2762463.png
 
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original;
+  // {
+  //   id: "actions",
+  //   enableHiding: false,
+  //   cell: ({ row }) => {
+  //     const payment = row.original;
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
+  //     return (
+  //       <DropdownMenu>
+  //         <DropdownMenuTrigger asChild>
+  //           <Button variant="ghost" className="h-8 w-8 p-0">
+  //             <span className="sr-only">Open menu</span>
+  //             <DotsHorizontalIcon className="h-4 w-4" />
+  //           </Button>
+  //         </DropdownMenuTrigger>
+  //         <DropdownMenuContent align="end">
+  //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
+  //           <DropdownMenuItem
+  //             onClick={() => navigator.clipboard.writeText(payment.id)}
+  //           >
+  //             Copy payment ID
+  //           </DropdownMenuItem>
+  //           <DropdownMenuSeparator />
+  //           <DropdownMenuItem>View customer</DropdownMenuItem>
+  //           <DropdownMenuItem>View payment details</DropdownMenuItem>
+  //         </DropdownMenuContent>
+  //       </DropdownMenu>
+  //     );
+  //   },
+  // },
 ];
 
-export function OrderTable() {
+export function OrderTable({ orders }: { orders: Payment[] }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -269,7 +327,7 @@ export function OrderTable() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data,
+    data: orders,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -297,7 +355,7 @@ export function OrderTable() {
               <TableRow key={headerGroup.id} className="border-slate-200 shadow-md ">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="text-slate-500">
+                    <TableHead key={header.id} className="text-slate-500 text-[13px]">
                       {header.isPlaceholder
                         ? null
                         : flexRender(

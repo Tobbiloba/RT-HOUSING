@@ -12,12 +12,14 @@ import {
     getAllPropertiesUser,
     deActivateProperty,
     filterProperty,
-    getPropertyByTypeModel
+    getPropertyByTypeModel,
+    getProp
 } from "../controllers/property.controller.js";
 
 const router = express.Router();
 router.route("/property-details/:id").get(getPropertyDetailById);
 router.route("/").get(getAllProperties);
+router.route("/prop").get(getProp);
 router.route("/type/:type").get(getPropertyByTypeModel);
 router.route("/user").get(getAllPropertiesUser);
 router.route("/:id").get(getPropertyDetail);
@@ -27,7 +29,7 @@ router.route("/:id").delete(deleteProperty);
 router.route("/activate/:id").post(activateProperty);
 router.route("/deactivate/:id").post(deActivateProperty);
 router.route("/company/:id").get(getPropertyByCompany);
-router.route("/fsearch").get(filterProperty);
+
 
 
 export default router;

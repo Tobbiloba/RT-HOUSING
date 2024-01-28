@@ -41,7 +41,7 @@ const OrderSchema = new mongoose.Schema({
   },
   bookingStatus: {
     type: String,
-    enum: ["pending", "active", "expired", "declined"],
+    enum: ["pending", "active", "expired", "declined", "ongoing"],
     default: "pending",
   },
   reason: {
@@ -61,7 +61,7 @@ export const getOrderByProperty = (id) =>
   export const getOrderByCompany = (id) =>
   OrderModel.find({ company_id: id });
 export const getOrderByUserId = (id) =>
-  OrderModel.find({ user_id: id }).populate("creator");
+  OrderModel.find({ "userInformation.userId": "659feb1f77db261ec3ea9088" })
 export const getOrderById = (id) => OrderModel.findOne({ _id: id });
 export const createOrder = (values) =>
   new OrderModel(values).save().then((user) => user.toObject());

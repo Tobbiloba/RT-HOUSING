@@ -78,6 +78,8 @@ export const getUserOrder = (id) => async (dispatch) => {
         type: FETCH_USER_ORDER
     })
 
+    console.log(id)
+
     try {
         const { data } = await Axios.get(`${BASE_URL}/order/user/${id}/orders`);
         dispatch({
@@ -85,7 +87,7 @@ export const getUserOrder = (id) => async (dispatch) => {
           payload: data,
         });
     
-
+console.log(data)
     
       } catch (error) {
         dispatch({

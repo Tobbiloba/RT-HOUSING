@@ -50,6 +50,70 @@ const getAllProperties = async (req, res) => {
 
 
 
+const getProp = async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 5;
+        const search = req.query.search || "";
+        let sort = req.query.sort || "rating";
+        let type = req.query.type || "All";
+        console.log(page, limit)
+
+        const propertyTypes = [
+            "apartment",
+            "condo",
+            "multi family space",
+            "single family space",
+            "farm",
+            "loft",
+            "villa",
+            "townhouse",
+        ];
+
+        type === "All"
+            ? (type = [...propertyTypes])
+            : (type = req.query.type.split(","));
+
+        req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
+
+        let sortBy = {};
+        if (sort[1]) {
+            sortBy[sort[0]] = sort[1];
+        } else {
+            sortBy[sort[0]] = "asc";
+        }
+
+        const properties = await Property.find({
+            name: { $regex: search, $options: "i" },
+            type: { $in: type },
+        })
+            .sort(sortBy)
+            .skip(page * limit)
+            .limit(limit);
+
+        const total = await Property.countDocuments({
+            type: { $in: type },
+            name: { $regex: search, $options: "i" },
+        });
+
+        const response = {
+            error: false,
+            total,
+            page: page + 1,
+            limit,
+            types: propertyTypes,
+            properties,
+        };
+
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: true, message: "Internal Server Error" });
+    }
+};
+
+
+
 const getAllPropertiesUser = async (req, res) => {
     try {
         const properties = await getActivatedProperties(req.query); // Add await here
@@ -519,5 +583,6 @@ export {
     getAllPropertiesUser,
     deActivateProperty,
     filterProperty,
-    getPropertyByTypeModel
+    getPropertyByTypeModel,
+    getProp
 };

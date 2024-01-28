@@ -56,7 +56,7 @@ const PropertySchema = new mongoose.Schema({
     discount: {type: Number, required: false},
     isFeatured: {type: String, required: true},
     isPopular: {type: String, required: true},
-    isTopRated: {type: String, required: true},
+    isTopRated: {type: String, required: false},
     company_id: {type: String, required: true},
     company_name: {type: String, required: true},
     created_by: {type: String, required: false},
