@@ -66,7 +66,7 @@ const Properties = () => {
     // dispatch(getAllProperties())
   }, []);
 
-  const { properties } = useSelector((state) => state.allProperties);
+  const { properties, loading } = useSelector((state) => state.allProperties);
 
   // console.log(properties)
   useEffect(() => {
@@ -92,10 +92,12 @@ const Properties = () => {
 
   const anchor = "right";
 
-  const isMobile = useMediaQuery({ maxWidth: 999 });
-  const isDesktop = useMediaQuery({ minWidth: 999 });
+  const isMobile = useMediaQuery({ maxWidth: 1270 });
+  const isDesktop = useMediaQuery({ minWidth: 1271 });
 
-  const loading = true;
+  // const loading = true;
+
+  console.log(properties)
   return (
     <div className=" flex flex-col items-center justify-center">
       <Banner />
@@ -130,7 +132,7 @@ const Properties = () => {
               ))}
             </div>
           ) : !loading && properties ? (
-            <div className="w-[100%] border flex items-end justify-center">
+            <div className="w-[100%] flex items-end justify-center">
               <PropertiesList viewMode={viewMode} properties={properties} />
             </div>
           ) : (
@@ -142,11 +144,12 @@ const Properties = () => {
             )
           )}
         </div>
-
+{isDesktop &&
         <div className="hidden lg:flex flex-col pl-4">
-          {isDesktop && <FilterOption />}
+           <FilterOption />
           <TopRated />
         </div>
+}
       </div>
       {isMobile && (
         <div className="">

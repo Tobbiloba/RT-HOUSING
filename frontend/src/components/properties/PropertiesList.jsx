@@ -68,30 +68,28 @@ const Slider = ({ item, viewMode }) => {
 
 const FeaturedPropCard = ({ item, viewMode }) => {
   const [showMenu, setShowMenu] = useState(false);
+  // console.log(item?.property_information.property_images[0])
   return (
     <div
-      className={`hover:shadow-2xl mb-4 rounded-xl max-w-[50.5rem] mx-3 overflow-hidden  md:items-center lg:items-start xl:text-center  lg:h-[100%] flex flex-col  ${
+      className={`hover:shadow-2xl w-full overflow-hidden  md:items-center lg:items-start xl:text-center  lg:h-[100%] flex flex-col  ${
         viewMode === "flex"
           ? "md:flex-row xl:h-[20rem] md:h-[20rem] xl:flex-row"
           : "sm:flex-row md:flex-col xl:flex-col md:w-[100%] min-w-[25rem]"
-      } lg:w-fit lg:flex-col flex-row`}
+      }  lg:flex- w-[100%] flex-row`}
     >
       <div
         className={`relative ${
           viewMode === "flex" ? "xl:w-2/5 md:w-2/5" : ""
-        }  p-0 lg:w-[100%] w-[100%] overflow-hidden flex h-[100%]`}
+        }  p-0 lg:w-[100%] w-[100%] overflow-hidden flex h-fit md:h-[20rem]`}
       >
-        {/* <Slider item={item} viewMode={viewMode}/> */}
-        <SliderSwiper
-          images={item?.property_information.property_images}
-          viewMode={viewMode}
-        />
+        <img src={`https://res.cloudinary.com/dlbcrsq2l/image/upload/v1706052744/qi3u1ym753mgojhfsxr5.jpg`} className="w-[100%] h-[100%]"/>
+
       </div>
 
       <div
         className={`  ${
           viewMode === "flex" ? "xl:w-3/5 md:w-3/5" : " "
-        } lg:w-[100%] w-[100%]   border h-fit mt-8 md:mt-0 xl:mt-0`}
+        } lg:w-[100%] w-[100%]   border h-fit xl:mt-0`}
       >
         <div className="flex flex-row items-center p-3 justify-between">
           <div className="flex flex-col gap-2 items-start justify-start">
@@ -163,23 +161,78 @@ const images = [
   // Add more image URLs as needed
 ];
 
-const PropertiesList = ({ viewMode, properties }) => {
-  // console.log(properties)
-  return (
-    <div className="flex items-center exo justify-center">
-      {/* <div className="text-center"> */}
+// const PropertiesList = ({ viewMode, properties }) => {
+//   // console.log(properties)
+  
+//   return (
+//     <div className="flex items-center exo border w-[100%] justify-center">
+//       {/* <div className="text-center"> */}
 
-      <div
-        className={` flex-1 flex-col md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-8 w-[100%] ${
-          viewMode === "flex" ? "flex" : "grid"
-        }`}
-      >
-        {properties.map((item, index) => (
-          <div key={index} className="flex-shrink-0 w-[100%]">
-            <FeaturedPropCard item={item} viewMode={viewMode} />
-          </div>
-        ))}
-        {/* </div> */}
+//       <div
+//         className={` flex-1 flex-col md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-8 w-[100%] ${
+//           viewMode === "flex" ? "flex" : "grid"
+//         }`}
+//       >
+//         {properties.map((item, index) => (
+//           <div key={index} className="w-[100%] overflow-hidden">
+//             <FeaturedPropCard item={item} viewMode={viewMode} />
+//           </div>
+//         ))}
+//         {/* </div> */}
+//       </div>
+//     </div>
+//   );
+// };
+
+
+
+
+
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+
+
+
+
+const PropertiesList = ({ viewMode, properties }) => {
+  const itemsPerPage = 4;
+  const totalItems = properties.length; // Use the length of the actual properties array
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const paginatedArray = properties
+    .slice(startIndex, endIndex)
+    .map((property, index) => (
+      <div className="w-[100%]" key={startIndex + index}>
+        {/* Replace LoadingCard with your actual component */}
+        <FeaturedPropCard item={property} viewMode={viewMode} />
+      </div>
+    ));
+
+  return (
+    <div className="flex flex-col items-center exo w-[100%] justify-center">
+      <div className={` flex-1 flex-col md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-8 w-[100%] ${viewMode === "flex" ? "flex" : "grid"}`}>
+        {paginatedArray}
+      </div>
+
+      <div className="mt-20 w-[100%] items-center flex justify-end gap-5">
+        <button
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`${currentPage === 1 ? "bg-slate-100 cursor-not-allowed" : "bg-slate-300 shadow-md"} text-slate-500 rounded-md text-[24px] p-2 border`}
+        >
+          <IoIosArrowBack />
+        </button>
+        <span className="text-slate-600">{currentPage} </span>
+        <button
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={endIndex >= totalItems}
+          className={`${endIndex >= totalItems ? "bg-slate-100 cursor-not-allowed" : "bg-slate-300 shadow-md"} text-slate-500 rounded-md text-[24px] p-2 border`}
+        >
+          <IoIosArrowForward />
+        </button>
       </div>
     </div>
   );

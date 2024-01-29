@@ -14,7 +14,7 @@ const UserOrders = () => {
   console.log(data._id)
 
   useEffect(() => {
-    // dispatch(getUserOrder(data._id))
+    dispatch(getUserOrder(data._id))
   }, [])
   return (
     <div className="bg-white exo p-3 rounded-md">

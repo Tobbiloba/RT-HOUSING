@@ -27,7 +27,7 @@ const SliderSwiper = ({images, viewMode}) => {
         }}
         modules={[EffectCreative]}
         // className={`slider  ${viewMode == 'flex' ? 'md:h-[20rem] xl:h-[20rem] md:max-w-[30rem] sm:max-w-[30rem] w-[100%] border lg:max-w-[40rem]' : 'max-h-[20rem]'} lg:h-[100%]  w-[100%] h-[100%] top-0 left-0 relative overflow-hidden`}
-        className={`slider  ${viewMode == 'flex' ? '' : ''} max-w-[90vw] w-[100%] border lg:max-w-[100%] border-red-500`}
+        className={`slider  ${viewMode == 'flex' ? '' : ''} h-[100%] border-sky-400 max-w-[90vw] w-[100%] border lg:max-w-[100%]`}
         // className="mySwiper overflow-hidden h-[100%]"
       >
 
@@ -35,7 +35,7 @@ const SliderSwiper = ({images, viewMode}) => {
 {
             images.map((img, index) => (
                 <SwiperSlide className='' key={index}>
-                    <img src={img} className={`h-[100%] ${viewMode == 'flex' ? '' : ''} `}/>
+                    <img src={img} className={`h-auto md:h-[100%] w-[100%] border ${viewMode == 'flex' ? '' : ''} `}/>
                 </SwiperSlide>
                 
             ))
