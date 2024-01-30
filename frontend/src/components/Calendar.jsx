@@ -49,7 +49,7 @@ const Calendar = ({selectedDay, setSelectedDay, setShowCalendar}) => {
 // console.log(selectedDay)
 
   return (
-    <div className="w-[21rem] bg-white rounded-md">
+    <div className="w-[21rem] bg-white p-2">
       <div className=" w-[100%]">
         <div className="">
           <div className="">
@@ -108,14 +108,14 @@ const Calendar = ({selectedDay, setSelectedDay, setShowCalendar}) => {
                         !isToday(day) &&
                         !isSameMonth(day, firstDayCurrentMonth) &&
                         'text-gray-400',
-                      isEqual(day, selectedDay) && isToday(day) && 'bg-red-500',
+                      isEqual(day, selectedDay) && isToday(day) && 'bg-slate-500',
                       isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         'bg-gray-900',
                       !isEqual(day, selectedDay) && 'hover:bg-gray-200',
                       (isEqual(day, selectedDay) || isToday(day)) &&
                         'font-semibold',
-                      'mx-auto flex h-8 w-8 items-center justify-center rounded-full'
+                      'mx-auto flex h-8 w-8 items-center justify-center'
                     )}
                   >
                     <time dateTime={format(day, 'yyyy-MM-dd')}>

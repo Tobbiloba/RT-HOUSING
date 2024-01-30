@@ -123,13 +123,13 @@ export function EmployeeTable({ data }) {
           onChange={(event) =>
             table.getColumn("property_name")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm bg-slate-900 border-slate-600 text-white text-[15px] h-[50px] placeholder:text-white"
+          className="max-w-sm rounded-none bg-slate-900 border-slate-600 text-white text-[15px] h-[50px] placeholder:text-white"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
-              className="ml-auto text-white bg-slate-900 border-slate-600"
+              className="ml-auto rounded-none text-white bg-slate-900 border-slate-600"
             >
               Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>

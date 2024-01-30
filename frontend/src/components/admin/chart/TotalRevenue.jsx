@@ -16,7 +16,6 @@ const TotalRevenue = () => {
             id="chart"
             display="flex"
             flexDirection="column"
-            borderRadius="15px"
             minWidth={430}
         >
             <Typography fontSize={18} fontWeight={600} color="#11142d">

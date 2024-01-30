@@ -80,12 +80,25 @@ export const createProductSchema = yup.object().shape({
   state: yup.string().required("Required"),
   city: yup.string().required("Required"),
   postal_code: yup.string().required("Required"),
-  // adults: yup.object().required("Required"),
-  // children: yup.string().email("Please enter a valid email").required("Required"),
-  // infant: yup.number().positive().integer().required("Required"),
-  // password: yup
-  //   .string()
-  //   .min(5, "Password must be at least 5 characters")
-  //   .matches(passwordRules, "Please create a stronger password")
-  //   .required("Required"),
+});
+
+
+
+
+
+export const createPropertySchema = yup.object().shape({
+  propertyName: yup.string().trim().required("Property Name is required"),
+  propertyDescription: yup.string().trim().required("Property Description is required"),
+  propertyType: yup.string().trim().required("Property Type is required"),
+  bathrooms: yup.number().integer().min(1, "Number of Bathrooms must be greater than 0").required("Number of Bathrooms is required"),
+  bedrooms: yup.number().integer().min(1, "Number of Bedrooms must be greater than 0").required("Number of Bedrooms is required"),
+  adults: yup.number().integer().min(1, "Number of Adults must be greater than 0").required("Number of Adults is required"),
+  children: yup.number().integer().min(1, "Number of Children must be greater than 0").required("Number of Children is required"),
+  infants: yup.number().integer().min(1, "Number of Infants must be greater than 0").required("Number of Infants is required"),
+  pricing: yup.string().trim().required("Pricing is required"),
+  address: yup.string().trim().required("Address is required"),
+  country: yup.string().trim().required("Country is required"),
+  state: yup.string().trim().required("State is required"),
+  city: yup.string().trim().required("City is required"),
+  postalCode: yup.string().trim().required("Postal Code is required"),
 });

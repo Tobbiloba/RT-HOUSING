@@ -19,8 +19,8 @@ const UpdateProfile = ({setShowState}) => {
 
   return (
     <div className="fixed text-white top-0 left-0 z-[100] w-[100%]  h-[100%] bg-black/50 flex items-center justify-center">
-      <div className="max-w-[45rem] w-[90%] mt-[6rem] md:mt-0 h-fit bg-slate-700 rounded-md relative">
-        <IoIosClose className="absolute -right-4 -top-4 text-black hover:animate-spin cursor-pointer bg-white text-[34px] rounded-full shadow-md border p-[1px]" onClick={() => setShowState(false)}/>
+      <div className="max-w-[45rem] w-[90%] mt-[6rem] md:mt-0 h-fit bg-slate-700 relative">
+        <IoIosClose className="absolute -right-4 -top-4 text-black hover:animate-spin cursor-pointer bg-white text-[34px] shadow-md border p-[1px]" onClick={() => setShowState(false)}/>
 
         <h1 className="p-[1rem]">Edit Profile</h1>
 
@@ -98,8 +98,8 @@ const UpdateProfile = ({setShowState}) => {
             
           </div>
           <div className=" text-[14px] flex p-[1rem] mt-4 flex-row gap-6 justify-end">
-            <button className="rounded-sm border border-red-500 text-red-500 px-5 py-2">Discard changes</button>
-            <button className="px-5 py-2 bg-green-600 rounded-sm">Save</button>
+            <button className=" border border-red-500 text-red-500 px-5 py-2">Discard changes</button>
+            <button className="px-5 py-2 bg-green-600">Save</button>
           </div>
         </div>
       </div>
@@ -110,15 +110,15 @@ const Profile = () => {
   const [showUpdateOption, setShowUpdateOption] = useState(false);
   return (
     <div className="exo  pb-8 w-[100%] p-[1rem] md:p-[2rem] flex">
-      <div className="rounded h-fit w-[100%] relative px-[5%] py-[5%] bg-slate-500 flex flex-col gap-[5%]">
-        <div className="absolute top-0 rounded-sm shadow-sm left-0 w-[100%] bg-slate-700 h-[8rem]"></div>
-        <div className="relative z-10 w-[100%] h-fit flex flex-row justify-between items-center mt-4">
+      <div className=" h-fit w-[100%] relative px-[5%] py-[5%] bg-slate-500 flex flex-col gap-[5%]">
+        <div className="absolute top-0  shadow-sm left-0 w-[100%] bg-slate-700 h-[8rem]"></div>
+        <div className="relative z-10 w-[100%] h-fit flex flex-row justify-between items-center mt-0">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScuQGyYbgV9HFyiunO9mF6_lnB6MYwcx6t3w&usqp=CAU"
-            className="w-28 h-28 rounded-full bg-slate-700 p-2"
+            className="w-36 h-36 bg-slate-700 p-2"
           />
 
-          <button onClick={() => setShowUpdateOption(true)} className="flex flex-row gap-4 text-[14px] px-4 border-4 border-slate-700 rounded-md shadow-md py-2 bg-slate-900 items-center text-white">
+          <button onClick={() => setShowUpdateOption(true)} className="flex flex-row gap-4 text-[14px] px-4 border-4 border-slate-700 shadow-md py-2 bg-slate-900 items-center text-white">
             <LuPencilLine className="text-[18px]" /> Edit Profile
           </button>
         </div>

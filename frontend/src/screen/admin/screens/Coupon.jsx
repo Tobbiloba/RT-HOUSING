@@ -136,7 +136,7 @@ const Input = ({ state, setState, label, placeholder }) => {
       </label>
 
       <input
-        className="border flex-1 text-[14px] bg-transparent h-[2.5rem] w-[100%] border-slate-500 rounded-sm outline-none pl-3 text-white"
+        className="border flex-1 text-[14px] bg-transparent h-[2.5rem] w-[100%] border-slate-500 outline-none pl-3 text-white"
         onChange={(e) => setState(e.target.value)}
         value={state}
       />
@@ -153,7 +153,7 @@ const DateSelect = ({ state, setState, label }) => {
       </p>
       <div className="h-[2.5rem] relative flex-1  md:min-w-[10rem] md:max-w-[35rem] flex flex-row">
         <input
-          className="border w-[100%] text-[14px] h-[100%] bg-transparent  border-slate-500 rounded-l-sm outline-none pl-3 text-white"
+          className="border w-[100%] text-[14px] h-[100%] bg-transparent  border-slate-500  outline-none pl-3 text-white"
           // onChange={(e) => setState(e.target.value)}
           value={state.toLocaleDateString()}
         />
@@ -204,12 +204,12 @@ const AddCoupon = ({setState}) => {
 
   return (
     <div className="w-[100vw] top-0 left-0 flex items-center justify-center h-[100vh] bg-black/40 z-[100] fixed">
-      <div className="max-w-[40rem] relative min-h-[40rem] flex flex-col justify-evenly w-[100%]  bg-slate-700 rounded-md h-fit p-[1rem]">
-      <IoCloseOutline className="absolute -right-4 -top-4 text-black hover:animate-spin cursor-pointer bg-white text-[34px] rounded-full shadow-md border p-[1px]" onClick={() => setState(false)}/>
+      <div className="max-w-[40rem] relative min-h-[40rem] flex flex-col justify-evenly w-[100%]  bg-slate-700 h-fit p-[1rem]">
+      <IoCloseOutline className="absolute -right-4 -top-4 text-black hover:animate-spin cursor-pointer bg-white text-[34px]  shadow-md border p-[1px]" onClick={() => setState(false)}/>
         <h1 className="text-[18px] text-slate-400">Discount Coupon Details</h1>
 
         <div className="flex flex-row gap-4 mt-5 text-slate-900 border-b border-slate-500">
-          <h1 className="border-b p-2 border-b-slate-700 cursor-pointer">
+          <h1 className="border-b text-white p-2 border-b-slate-700 cursor-pointer">
             General
           </h1>
           <h1 className="p-2 cursor-not-allowed">Restriction</h1>
@@ -253,7 +253,7 @@ const AddCoupon = ({setState}) => {
                 data={options}
                 state={discountType}
                 setState={setDiscountType}
-                height="border border-slate-600  h-[2.5rem] px-3 w-[100%] rounded-md text-[14px] text-white"
+                height="border border-slate-600  h-[2.5rem] px-3 w-[100%] text-[14px] text-white"
               />
             </div>
           </div>
@@ -279,7 +279,7 @@ const Coupon = () => {
   return (
     <div className="exo  pb-8 w-[100%] p-[1rem] md:p-[2rem] flex">
       <div className="rounded h-fit w-[100%]">
-        <div className="flex p-4 text-slate-100 flex-row gap-x-7 gap-y-4 text-[15px] justify-end">
+        <div className="flex p-4 text-slate-100 flex-row gap-x-7 gap-y-4 text-[13px] justify-end">
         <button className="px-5 py-2 bg-red-600 cursor-not-allowed">
             DELETE
           </button>

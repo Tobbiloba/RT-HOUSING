@@ -161,7 +161,7 @@ const AboutProperty = ({propertyDetails}) => {
   return (
     <div className="py-6 px-[5%]">
       <h1 className="text-slate-400 text-[17px] font-[600]">About Property</h1>
-      <p className="mt-3 text-slate-500 text-[14px] leading-6">
+      <p className="mt-3 text-slate-100 text-[14px] leading-6">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempoer incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nrud exercitation ullamco laboris nisi ute aliquip ex ea
@@ -174,10 +174,10 @@ const AboutProperty = ({propertyDetails}) => {
         </h1>
 
         <div className="w-full mt-6">
-          <table class="border-collapse w-full text-start ...">
+          <table class="border-collapse  bg-slate-700 w-full text-start ...">
             <thead>
               <tr className="bg-slate-600">
-                <th className="border border-slate-900 text-[15px] border-r-gray-300 pl-5 text-start  text-slate-100 py-3 w-6/12">
+                <th className="border border-slate-600 text-[15px] border-r-gray-300 pl-5 text-start  text-slate-100 py-3 w-6/12">
                   Accommodation
                 </th>
                 <th className="text-start pl-5 text-gray-100 text-[15px] font-[500]">
@@ -188,9 +188,9 @@ const AboutProperty = ({propertyDetails}) => {
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="">
               <tr>
-                <td className="border border-slate-900 border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600] text-[15px]">
+                <td className="border border-slate-600 border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600] text-[15px]">
                   Bedrooms
                 </td>
                 <td className="text-start pl-5 text-[15px] text-gray-100 font-[500]">
@@ -198,7 +198,7 @@ const AboutProperty = ({propertyDetails}) => {
                 </td>
               </tr>
               <tr className="bg-slate-100">
-                <td className="border border-white  border-r-gray-300 pl-5 text-start text-[15px] text-slate-600 py-3 font-[600]">
+                <td className="border border-slate-600  border-r-gray-300 pl-5 text-start text-[15px] text-slate-600 py-3 font-[600]">
                   Bathrooms
                 </td>
                 <td className="text-start pl-5 text-gray-500 text-[15px] font-[500]">
@@ -206,7 +206,7 @@ const AboutProperty = ({propertyDetails}) => {
                 </td>
               </tr>
               <tr>
-                <td className="border border-slate-900 text-[15px]  border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600]">
+                <td className="border border-slate-600 text-[15px]  border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600]">
                   Dimension
                 </td>
                 <td className="text-start pl-5 text-[15px] text-gray-100 font-[500]">
@@ -222,7 +222,7 @@ const AboutProperty = ({propertyDetails}) => {
                 </td>
               </tr>
               <tr>
-                <td className="border border-slate-900 text-[15px] border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600]">
+                <td className="border border-slate-600 text-[15px] border-r-gray-300 pl-5 text-start  text-slate-100 py-3 font-[600]">
                   Check-In Start @
                 </td>
                 <td className="text-start pl-5 text-[15px] text-gray-100 font-[500]">
@@ -257,7 +257,7 @@ const Nearby = () => {
   return (
     <div className="my-12">
       <h1 className="text-slate-400 text-[17px] font-[600]">Nearby Locations</h1>
-      <div className="w-[100%] bg-gray-600 h-[30rem] my-3 flex items-center justify-center">
+      <div className="w-[100%] bg-gray-900 h-[30rem] my-3 flex items-center justify-center">
         <h1 className="text-[17px]">Feature Not Available...</h1>
       </div>
     </div>
@@ -377,11 +377,12 @@ const LoadingPulse = () => {
     </div>
   );
 };
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPropertyDetailById } from "../../../action/property";
 const PropertyDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate()
   console.log(id)
   const dispatch = useDispatch();
   // console.log(encodeURIComponent(id));
@@ -407,7 +408,7 @@ const PropertyDetail = () => {
             <button className="border border-slate-600 px-4 text-[15px] py-2 h-fit text--600 bg-slate-800">
               De Activate Property
             </button>
-            <button className="border border-sky-600 px-4 text-[15px] py-2 h-fit text--600 bg-sky-800">
+            <button className="border border-sky-600 px-4 text-[15px] py-2 h-fit text--600 bg-sky-800" onClick={() => navigate(`/admin/properties-update/${id}`)}>
               Edit Property
             </button>
             <button className="border border-red-600 px-4 text-[15px] py-2 h-fit text--600 bg-red-800">
@@ -419,13 +420,13 @@ const PropertyDetail = () => {
             {/* <DetailTopCard
               detail={propertyDetails?.details?.property_information}
             /> */}
-            {/* <Carousel
+            <Carousel
               images={
                 propertyDetails?.details?.property_information?.property_images
               }
-            /> */}
+            />
 
-            {/* <div className="flex mt-6 lg:mt-20 flex-row  justify-between ">
+            <div className="flex border mt-6 lg:mt-20 flex-row  justify-between ">
               <div className="">
                 <div className="flex flex-row w-[100%] gap-x-8  py-4 flex-wrap  gap-y-2">
                   <Link
@@ -434,7 +435,7 @@ const PropertyDetail = () => {
                     offset={20}
                     duration={500}
                   >
-                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-600 border-b-white cursor-pointer pb-4">
                       About
                     </span>
                   </Link>
@@ -444,12 +445,12 @@ const PropertyDetail = () => {
                     offset={-70}
                     duration={500}
                   >
-                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-600 border-b-white cursor-pointer pb-4">
                       Amenities Others
                     </span>
                   </Link>
                   <Link to="nearby" smooth={true} offset={-70} duration={500}>
-                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-600 border-b-white cursor-pointer pb-4">
                       Nearby
                     </span>
                   </Link>
@@ -459,17 +460,17 @@ const PropertyDetail = () => {
                     offset={-70}
                     duration={500}
                   >
-                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-600 border-b-white cursor-pointer pb-4">
                       Availability
                     </span>
                   </Link>
                   <Link to="terms" smooth={true} offset={-70} duration={500}>
-                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-600 border-b-white cursor-pointer pb-4">
                       Terms & Rules
                     </span>
                   </Link>
                   <Link to="reviews" smooth={true} offset={-70} duration={500}>
-                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-900 border-b-white cursor-pointer pb-4">
+                    <span className="text-slate-300 text-[17px] hover:border-2 border-slate-600 border-b-white cursor-pointer pb-4">
                       Reviews
                     </span>
                   </Link>
@@ -508,7 +509,7 @@ const PropertyDetail = () => {
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       ) : <p>error</p>}

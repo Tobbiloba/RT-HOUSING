@@ -45,9 +45,9 @@ const Carousel = ({ images }) => {
                 // console.log(index)
                 return (
                   <div
-                    className={`w-[100%] min-w-[10rem] rounded-xl overflow-hidden h-[100%] object-cover ${
+                    className={`w-[100%] min-w-[10rem]  overflow-hidden h-[100%] object-cover ${
                       index === 0
-                        ? "col-span-2 md:row-span-3"
+                        ? "col-span-2 md:row-span-3 "
                         : index === 1
                         ? "md:col-span-1"
                         : "md:row-span-1 "
@@ -57,7 +57,7 @@ const Carousel = ({ images }) => {
                       key={index}
                       src={img}
                       alt={`Slide ${index + 1}`}
-                      className="w-[100%] h-auto object-contain rounded-xl"
+                      className="w-[100%] h-auto min-h-[100%] object-contain"
                     />
                   </div>
                   // <p>{img}</p>

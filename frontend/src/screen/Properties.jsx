@@ -63,7 +63,7 @@ const Properties = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(getAllProperties())
+    dispatch(getAllProperties())
   }, []);
 
   const { properties, loading } = useSelector((state) => state.allProperties);

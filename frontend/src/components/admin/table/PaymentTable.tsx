@@ -50,28 +50,28 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "property_name",
     header: "PROPERTY",
     cell: ({ row }) => (
-      <div className="capitalize text-[14px] w-5/12">{row.getValue("property_name")}</div>
+      <div className="capitalize text-[13px] w-5/12">{row.getValue("property_name")}</div>
     ),
   },
   {
     accessorKey: "checkout",
     header: "Checkout Date",
     cell: ({ row }) => (
-      <div className="capitalize text-[14px]">{row.getValue("checkout")}</div>
+      <div className="capitalize text-[13px]">{row.getValue("checkout")}</div>
     ),
   },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className={`capitalize text-[14px] text-start ${row.getValue("status") == "active" ? "text-green-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("status")}</div>
+      <div className={`capitalize text-[13px] text-start ${row.getValue("status") == "active" ? "text-green-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("status")}</div>
     ),
   },
   {
     accessorKey: "price",
     header: () => <div className="">Total Price</div>,
     cell: ({ row }) => (
-      <div className={`capitalize text-[14px] text-start ${row.getValue("status") == "active" ? "text-green-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>$ {row.getValue("price")}</div>
+      <div className={`capitalize text-[13px] text-start ${row.getValue("status") == "active" ? "text-green-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>$ {row.getValue("price")}</div>
     ),
   },
 
@@ -80,51 +80,11 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className={`capitalize border text-center py-3 text-[14px] rounded-xl ${row.getValue("status") == "active" ? "text-green-400 border-green-400" : row.getValue("status") === "inactive" ? "text-slate-500 border-slate-500" : row.getValue("status") === "pending" ? "text-slate-500 border-slate-500" : "text-red-500 border-red-500"}`}>{row.getValue("status")}</div>
+      <div className={`capitalize border text-center py-2 px-0 text-[13px] ${row.getValue("status") == "active" ? "text-green-400 border-green-400" : row.getValue("status") === "inactive" ? "text-slate-500 border-slate-500" : row.getValue("status") === "pending" ? "text-slate-500 border-slate-500" : "text-red-500 border-red-500"}`}>{row.getValue("status")}</div>
     ),
   },
 
-  // https://cdn-icons-png.flaticon.com/128/6811/6811049.png
 
-// https://cdn-icons-png.flaticon.com/128/4303/4303935.png
-
-
-
-// https://cdn-icons-png.flaticon.com/128/2704/2704312.png
-
-
-
-// https://cdn-icons-png.flaticon.com/128/2762/2762463.png
-
-  // {
-  //   id: "actions",
-  //   enableHiding: false,
-  //   cell: ({ row }) => {
-  //     const payment = row.original;
-
-  //     return (
-  //       <DropdownMenu>
-  //         <DropdownMenuTrigger asChild>
-  //           <Button variant="ghost" className="h-8 w-8 p-0">
-  //             <span className="sr-only">Open menu</span>
-  //             <DotsHorizontalIcon className="h-4 w-4" />
-  //           </Button>
-  //         </DropdownMenuTrigger>
-  //         <DropdownMenuContent align="end">
-  //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-  //           <DropdownMenuItem
-  //             onClick={() => navigator.clipboard.writeText(payment.id)}
-  //           >
-  //             Copy payment ID
-  //           </DropdownMenuItem>
-  //           <DropdownMenuSeparator />
-  //           <DropdownMenuItem>View customer</DropdownMenuItem>
-  //           <DropdownMenuItem>View payment details</DropdownMenuItem>
-  //         </DropdownMenuContent>
-  //       </DropdownMenu>
-  //     );
-  //   },
-  // },
 ];
 
 export function PaymentTable({data}) {
@@ -164,11 +124,11 @@ export function PaymentTable({data}) {
           onChange={(event) =>
             table.getColumn("property_name")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm bg-slate-900 border-slate-600 text-white text-[15px] h-[50px] placeholder:text-white"
+          className="max-w-sm bg-slate-900 border-slate-600 text-white text-[13px] h-[50px] placeholder:text-white rounded-none"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto text-white bg-slate-900 border-slate-600">
+            <Button variant="outline" className="ml-auto rounded-none text-white text-[13px] bg-slate-900 border-slate-600">
               Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -180,7 +140,7 @@ export function PaymentTable({data}) {
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
-                    className="capitalize"
+                    className="capitalize text-[13px]"
                     checked={column.getIsVisible()}
                     onCheckedChange={(value) =>
                       column.toggleVisibility(!!value)
@@ -200,7 +160,7 @@ export function PaymentTable({data}) {
               <TableRow key={headerGroup.id} className="border hover:bg-slate-800 border-slate-900">
                 {headerGroup.headers.map((header, index) => {
                   return (
-                    <TableHead key={header.id} className={`text-white  ${index === 0 && "w-4/12 border-slate-800"}`}>
+                    <TableHead key={header.id} className={`text-white text-[14px] ${index === 0 && "w-4/12 border-slate-800"}`}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -360,6 +320,7 @@ export function PaymentTable({data}) {
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
+            className="rounded-none"
           >
             Previous
           </Button>
@@ -368,6 +329,7 @@ export function PaymentTable({data}) {
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            className="rounded-none"
           >
             Next
           </Button>

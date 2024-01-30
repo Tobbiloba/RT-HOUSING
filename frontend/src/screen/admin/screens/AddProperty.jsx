@@ -673,7 +673,7 @@ import React, { useEffect, useState } from "react";
 import Stepper from "../../../components/admin/stepper/Stepper";
 import Input from "../../../components/input/Input";
 import Dropdown from "../../../components/admin/dropdown/Dropdown";
-import Textarea from "../../../components/textarea/Textarea";
+// import Textarea from "../../../components/textarea/Textarea";
 import { Slider } from "@mui/material";
 import { toast } from "react-toastify";
 import Calendar from "../../../components/Calendar";
@@ -1035,11 +1035,11 @@ const AddProperty = () => {
             setState={setProperty_type}
           />
 
-          <Textarea
+          {/* <Textarea
             value={property_description}
             setValue={setProperty_description}
             label="Property description"
-          />
+          /> */}
           {/* <input /> */}
 
           {/* <div className="flex col-span-2 flex-col sm:flex-row gap-y-6 md:gap-y-16 gap-x-12"> */}

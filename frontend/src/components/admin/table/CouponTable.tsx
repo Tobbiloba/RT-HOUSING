@@ -45,7 +45,7 @@ const CodeCard = ({ code, status }: string) => {
     <div
       onMouseEnter={() => setShowClipboard(true)}
       onMouseLeave={() => setShowClipboard(false)}
-      className={`capitalize flex flex-row items-center gap-3 text-[14px] text-start ${
+      className={`capitalize flex flex-row items-center gap-3 text-[13px] text-start ${
         status == "active"
           ? "text-green-400"
           : status === "inactive"
@@ -72,7 +72,7 @@ export const columns = [
     accessorKey: "title",
     header: "Title",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("title")}</div>
+      <div className="capitalize text-[13px]">{row.getValue("title")}</div>
     ),
   },
   {
@@ -107,7 +107,7 @@ export const columns = [
     cell: ({ row }) => (
       <div className="flex flex-row gap-4 items-center">
         <div
-          className={`capitalize border text-center text-[14px] rounded-xl ${
+          className={`capitalize border text-center text-[13px] ${
             row.getValue("status") == "active"
               ? "text-green-400 border-green-400 bg-green-500 "
               : row.getValue("status") === "inactive"
@@ -115,7 +115,7 @@ export const columns = [
               : row.getValue("status") === "pending"
               ? "text-slate-500 border-slate-500 bg-slate-500"
               : "text-red-500 border-red-500 bg-red-500"
-          } w-5 h-5`}
+          } w-3 h-3`}
         ></div>
         {row.getValue("status")}
       </div>
@@ -157,7 +157,7 @@ export function CouponTable({ data }) {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
-                className="border  hover:bg-slate-800 border-slate-900"
+                className="border  hover:bg-slate-800 border-slate-900 text-[14px]"
               >
                 {headerGroup.headers.map((header, index) => {
                   return (
@@ -273,6 +273,7 @@ export function CouponTable({ data }) {
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
+            className="rounded-none"
           >
             Previous
           </Button>
@@ -281,6 +282,7 @@ export function CouponTable({ data }) {
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            className="rounded-none"
           >
             Next
           </Button>

@@ -37,6 +37,7 @@ import ProfileLayout from './components/userLayout/ProfileLayout'
 import HowItWorks from './screen/HowItWorks'
 import UserActivation from './components/home/UserActivation'
 import AdminActivation from './screen/admin/screens/Activation'
+import UpdateProperty from './screen/admin/screens/UpdateProperty'
 function App() {
   
   const routes = [
@@ -53,6 +54,7 @@ function App() {
     <Route path="/admin/dashboard" element={<AdminLayout><Home /></AdminLayout>} />,
     <Route path="/admin/properties" element={<AdminLayout><AdminProperties /></AdminLayout>} />,
     <Route path="/admin/properties/create" element={<AdminLayout><AddProperty /></AdminLayout>} />,
+    <Route path="/admin/property-update/:id" element={<AdminLayout><UpdateProperty /></AdminLayout>} />,
     <Route path="/admin/payments" element={<AdminLayout><Payments /></AdminLayout>} />,
     <Route path="/admin/property-detail/:id" element={<AdminLayout><PropertyDetail /></AdminLayout>} />,
     <Route path="/admin/transactions" element={<AdminLayout><Transactions /></AdminLayout>} />,

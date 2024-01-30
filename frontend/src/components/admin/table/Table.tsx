@@ -184,14 +184,14 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "property_name",
     header: "Property name",
     cell: ({ row }) => (
-      <div className="capitalize ">{row.getValue("property_name")}</div>
+      <div className="capitalize text-[13px]">{row.getValue("property_name")}</div>
     ),
   },
   {
     accessorKey: "property_type",
     header: "Property type",
     cell: ({ row }) => (
-      <div className="capitalize ">{row.getValue("property_type")}</div>
+      <div className="capitalize text-[13px]">{row.getValue("property_type")}</div>
     ),
   },
 
@@ -199,14 +199,14 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "checkin",
     header: "Checkin Date",
     cell: ({ row }) => (
-      <div className="capitalize text-[14px]">{row.getValue("checkin")}</div>
+      <div className="capitalize text-[13px]">{row.getValue("checkin")}</div>
     ),
   },
   {
     accessorKey: "checkout",
     header: "Checkout Date",
     cell: ({ row }) => (
-      <div className="capitalize text-[14px]">{row.getValue("checkout")}</div>
+      <div className="capitalize text-[13px]">{row.getValue("checkout")}</div>
     ),
   },
   // {
@@ -228,14 +228,14 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className={`capitalize text-start ${row.getValue("status") == "active" ? "text-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("status")}</div>
+      <div className={`capitalize text-start text-[13px] ${row.getValue("status") == "active" ? "text-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("status")}</div>
     ),
   },
   {
     accessorKey: "price",
     header: () => <div className="">Total Price</div>,
     cell: ({ row }) => (
-      <div className={`capitalize text-center ${row.getValue("status") == "active" ? "text-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("price")}</div>
+      <div className={`capitalize text-center text-[13px] ${row.getValue("status") == "active" ? "text-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("price")}</div>
     ),
   },
 
@@ -319,12 +319,12 @@ export function DataTableDemo2() {
           onChange={(event) =>
             table.getColumn("property_name")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm bg-slate-900 border-slate-600 text-white text-[15px] h-[50px] placeholder:text-white"
+          className="max-w-sm rounded-none  bg-slate-900 border-slate-600 text-white h-[50px] text-[13px] placeholder:text-white"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto text-white bg-slate-900 border-slate-600">
-              Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
+            <Button variant="outline" className="ml-auto rounded-none text-[13px] text-white bg-slate-900 border-slate-600">
+              Columns <ChevronDownIcon className="ml-2 h-4 w-4 " />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -335,7 +335,7 @@ export function DataTableDemo2() {
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
-                    className="capitalize"
+                    className="capitalize text-[13px]"
                     checked={column.getIsVisible()}
                     onCheckedChange={(value) =>
                       column.toggleVisibility(!!value)
@@ -350,12 +350,12 @@ export function DataTableDemo2() {
       </div>
       <div className="rounded-md ">
         <Table >
-          <TableHeader className="text-[17px] bg-slate-900 border border-slate-900">
+          <TableHeader className="text-[17px] bg-slate-900 ">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="border border-slate-900">
+              <TableRow key={headerGroup.id} className="border-b border-slate-900">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="text-white">
+                    <TableHead key={header.id} className="text-white text-[14px]">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -377,7 +377,7 @@ export function DataTableDemo2() {
                   className={`${index % 2 === 0 ? 'bg-slate-800' : 'bg-slate-950'} border-0 py-8`}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id } className={` text-slate-600 ${index % 2 === 0 ? 'text-white' : 'text-slate-400'} `}>
+                    <TableCell key={cell.id } className={` text-slate-600 ${index % 2 === 0 ? 'text-white' : 'text-slate-400'}`}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -411,6 +411,7 @@ export function DataTableDemo2() {
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
+            className="rounded-none"
           >
             Previous
           </Button>
@@ -419,6 +420,7 @@ export function DataTableDemo2() {
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            className="rounded-none"
           >
             Next
           </Button>

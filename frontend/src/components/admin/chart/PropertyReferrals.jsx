@@ -73,7 +73,6 @@ const PropertyReferrals = () => {
             // minWidth={320}
             display="flex"
             flexDirection="column"
-            borderRadius="15px"
             width="100%"
         >
             <Typography fontSize={18} fontWeight={600} color="#11142d">

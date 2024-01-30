@@ -62,7 +62,7 @@ const AdminLayout = ({ children }) => {
           </div>
 
           <div
-            className={`h-fit bg-slate-600 rounded-xl mx-2 my-4 overflow-x-hidden relative flex flex-col items-end  min-h-[100vh] ${
+            className={`h-fit bg-slate-600 mx-2 my-4 overflow-x-hidden relative flex flex-col items-end  min-h-[100vh] ${
               toggleOpen
                 ? "sidebar-slide-in-topbar"
                 : "sidebar-slide-out-in-topbar "

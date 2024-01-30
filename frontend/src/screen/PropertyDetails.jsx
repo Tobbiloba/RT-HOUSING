@@ -382,7 +382,8 @@ import { useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { IoIosArrowDown } from "react-icons/io";
 import Input from "@/components/input/Input";
-import Textarea from "@/components/textarea/Textarea";
+// import Textarea from "@/components/textarea/Textarea";
+// import Textarea from "@/components/textarea/Textarea";
 import { IoIosArrowRoundForward } from "react-icons/io";
 const PropertyDetails = () => {
   useEffect(() => {
@@ -581,11 +582,11 @@ const PropertyDetails = () => {
                       placeholder=""
                     />
 
-                    <Textarea
+                    {/* <Textarea
                       value={contactMessage}
                       setValue={setContactMessage}
                       label="Message"
-                    />
+                    /> */}
 
                     <div className="flex flex-row items-center gap-4">
                       <input type="checkbox" className="" />

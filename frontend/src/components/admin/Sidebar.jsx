@@ -90,7 +90,7 @@ const Sidebar = ({showSlide, setShowSlide}) => {
         <h1 className=" flex text-[28px] text-slate-400 flex-row pt-0 capitalized">
           Fe
           <div className="rotate-12 w-[30px] h-[60px] flex flex-col items-center justify-center">
-            <div className="w-[10px] h-[10px] rounded-full bg-white"></div>
+            <div className="w-[10px] h-[10px]  bg-white"></div>
             <span className="text-white relative bottom-2">bt</span>
           </div>
           oS
@@ -101,7 +101,7 @@ const Sidebar = ({showSlide, setShowSlide}) => {
             navLinks.map((nav) => {
               // console.log(`${nav.link.split('/')[2] || 'admin'}`, pathname[2])
               return(
-                <Link to={nav.link} key={nav.id} className={`flex flex-row  items-center ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[2]}` ? 'bg-slate-600 text-white' : ''} text-white rounded-full ${!showSlide ? 'h-[3rem]  w-[3rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}>
+                <Link to={nav.link} key={nav.id} className={`flex flex-row  items-center ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[2]}` ? 'bg-slate-600 text-white' : ''} text-white -full ${!showSlide ? 'h-[3rem]  w-[3rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}>
                     
                     <div className='text-[22px] '>
                         {nav.icon}

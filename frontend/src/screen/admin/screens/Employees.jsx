@@ -158,12 +158,12 @@ const DateSelect = ({ state, setState, label }) => {
       </p>
       <div className="h-[3rem] relative flex-1  lg:min-w-[10rem] md:max-w-[35rem] flex flex-row">
         <input
-          className="border w-[100%] h-[100%] bg-transparent text-[14px] border-slate-500 rounded-l-sm outline-none pl-3 text-white"
+          className="border w-[100%] h-[100%] bg-transparent text-[14px] border-slate-500  outline-none pl-3 text-white"
           // onChange={(e) => setState(e.target.value)}
           value={state.toLocaleDateString()}
         />
         <div
-          className="w-16 rounded-r-md flex text-white items-center justify-center bg-slate-500"
+          className="w-16 r flex text-white items-center justify-center bg-slate-500"
           onClick={() => setShowCalendar(true)}
         >
           <FaCalendarAlt />
@@ -203,8 +203,8 @@ const AddEmployee = ({setState}) => {
   ]
   return (
     <div className='fixed flex items-center justify-center w-[100vw] h-[100vh] top-0 left-0 bg-black/40 z-[100]'>
-      <div className="max-w-[40rem] w-[100%] mt-[6rem] md:mt-0 h-fit bg-slate-700 rounded-md relative">
-        <IoCloseOutline className="absolute -right-4 -top-4 text-black hover:animate-spin cursor-pointer bg-white text-[34px] rounded-full shadow-md border p-[1px]" onClick={() => setState(false)}/>
+      <div className="max-w-[40rem] w-[100%] mt-[6rem] md:mt-0 h-fit bg-slate-700  relative">
+        <IoCloseOutline className="absolute -right-4 -top-4 text-black hover:animate-spin cursor-pointer bg-white text-[34px] shadow-md border p-[1px]" onClick={() => setState(false)}/>
 
         <h1 className="p-[1rem] text-white">Edit Profile</h1>
 
@@ -257,7 +257,7 @@ const AddEmployee = ({setState}) => {
               data={options}
               state={role}
               setState={setRole}
-              height="border border-slate-600 py-3 h-fit px-3 w-[100%] rounded-md text-[14px] text-white"
+              height="border border-slate-600 py-3 h-fit px-3 w-[100%] text-[14px] text-white"
             />
             </div>
           </div>
@@ -265,8 +265,8 @@ const AddEmployee = ({setState}) => {
 
           </div>
           <div className=" text-[14px] flex p-[1rem] mt-4 flex-row gap-6 justify-end">
-            <button className="rounded-sm border border-red-500 text-red-500 px-5 py-2">Discard changes</button>
-            <button className="px-5 py-2 bg-green-600 rounded-sm">Save</button>
+            <button className="border border-red-500 text-red-500 px-5 py-2">Discard changes</button>
+            <button className="px-5 py-2 bg-green-600">Save</button>
           </div>
         </div>
       </div>
@@ -279,7 +279,7 @@ const Employees = () => {
   return (
     <div className="exo  pb-8 w-[100%] p-[1rem] md:p-[2%] flex">
       <div className='rounded h-fit w-[100%]'>
-        <div className='flex p-4 text-slate-100 flex-row gap-x-7 gap-y-4 text-[15px] justify-end'>
+        <div className='flex p-4 text-[13px] text-slate-100 flex-row gap-x-7 gap-y-4 justify-end'>
           <button className='px-5 py-2 bg-red-600 cursor-not-allowed'>DELETE</button>
           <button className='px-5 py-2 bg-green-600' onClick={() => setShowAddEmployee(true)}>ADD EMPLOYEE</button>
           

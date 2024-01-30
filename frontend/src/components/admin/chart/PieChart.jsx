@@ -18,7 +18,6 @@ const PieChart = ({ title, value, series, colors }) => {
             pl={3.5}
             py={2}
             gap={2}
-            borderRadius="15px"
             minHeight="110px"
             width="100%"
         >
