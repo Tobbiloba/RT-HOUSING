@@ -69,7 +69,7 @@ const createAdminUser = async (req, res) => {
     }
     });
 
-    sendVerificationToken('abayomitobiloba410@gmail.com', `http://localhost:5173/admin/profile/activate/${newUser._id}/${token}`)
+    sendVerificationToken('abayomitobiloba410@gmail.com', `https://rt-housing.vercel.app/admin/profile/activate/${newUser._id}/${token}`)
     res.status(200).json(newUser).end();
   } catch (error) {
     console.log(error);
