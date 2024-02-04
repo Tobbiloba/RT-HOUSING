@@ -18,9 +18,12 @@
 
   .form {
     position: relative;
-    height: 3rem;
+    height: 2rem;
   }
-  
+  .textform {
+    position: relative;
+    height: 6rem;
+  }
   .form__input {
     position: absolute;
     top: 0;

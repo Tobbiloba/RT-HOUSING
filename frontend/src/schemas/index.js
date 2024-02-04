@@ -101,4 +101,54 @@ export const createPropertySchema = yup.object().shape({
   state: yup.string().trim().required("State is required"),
   city: yup.string().trim().required("City is required"),
   postalCode: yup.string().trim().required("Postal Code is required"),
+  images: yup.array().of(yup.string()).min(5, "At least 5 images are required"),
+  amenities: yup.array().of(yup.string()).min(3, "At least 3 amenities are required"),
+  availableFromDate: yup.date().required("Available From Date is required"),
+  availableTillDate: yup.date()
+    .when('availableFromDate', {
+      is: (availableFromDate) => availableFromDate != null,
+      then: yup.date().min(yup.ref('availableFromDate'), "Available Till Date must be after Available From Date")
+    }),
+  unavailableFromDate: yup.date(),
+  unavailableTillDate: yup.date()
+    .when('unavailableFromDate', {
+      is: (unavailableFromDate) => unavailableFromDate != null,
+      then: yup.date().min(yup.ref('unavailableFromDate'), "Unavailable Till Date must be after Unavailable From Date")
+    }),
+  reasonForUnavailability: yup.string()
+    .when(['unavailableFromDate', 'unavailableTillDate'], {
+      is: (unavailableFromDate, unavailableTillDate) => unavailableFromDate != null || unavailableTillDate != null,
+      then: yup.string().required("Reason for Unavailability is required")
+    })
+});
+
+
+
+
+
+
+
+
+
+export const contactAgentSchema = yup.object().shape({
+  name: yup.string().required("Required"),
+  message: yup.string().required("Required"),
+  email: yup.string().email("Please enter a valid email").required("Required"),
+  // phone: yup.number().positive().integer().required("Required"),
+  phone: yup
+  .string()
+  .matches(/^\d+$/, 'Phone number must only contain digits')
+  .min(11, 'Phone number must be at least 11 digits long')
+  .required('Required'),
+  termsAndConditions: yup.boolean().oneOf([true], 'Please accept the terms and conditions').required('Required'),
+});
+
+
+
+
+
+export const tourSchema = yup.object().shape({
+  name: yup.string().required("Required"),
+  email: yup.string().email("Please enter a valid email").required("Required"),
+  phone: yup.number().positive().integer().required("Required"),
 });

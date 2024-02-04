@@ -4,7 +4,8 @@ import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaRegBell } from "react-icons/fa6";
 import { LuMessageSquare } from "react-icons/lu";
 import { CiMenuKebab } from "react-icons/ci";
-import Input from "../input/Input";
+// import Input from "../Input";
+import Input from "../Input";
 const Topbar = ({ setShowSlide, showSlide }) => {
   const [search, setSearch] = useState("");
   const [showMobileMenu, setShowMobileMenu] = useState(false);

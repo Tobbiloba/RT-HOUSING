@@ -38,11 +38,16 @@ import HowItWorks from './screen/HowItWorks'
 import UserActivation from './components/home/UserActivation'
 import AdminActivation from './screen/admin/screens/Activation'
 import UpdateProperty from './screen/admin/screens/UpdateProperty'
+import Chatbot from './components/chatbot/Chatbot'
+import Aboutus from './screen/Aboutus'
+import Contactus from './screen/Contactus'
 function App() {
   
   const routes = [
     <Route path="/" element={<Layout><Homescreen /></Layout>} />,
     <Route path="/properties" element={<Layout><Properties /></Layout>} />,
+    <Route path="/about-us" element={<Layout><Aboutus /></Layout>} />,
+    <Route path="/contact-us" element={<Layout><Contactus /></Layout>} />,
     <Route path="/how-it-works" element={<Layout><HowItWorks /></Layout>} />,
     <Route path="/user/dashboard" element={<Layout><ProfileLayout><Dashboard /></ProfileLayout></Layout>} />,
     <Route path="/user/orders" element={<Layout><ProfileLayout><UserOrders /></ProfileLayout></Layout>} />,
@@ -75,6 +80,7 @@ function App() {
     <>
      <ToastContainer />
      <Toaster />
+     <Chatbot />
        <RouterProvider router={router} />
     </>
   )

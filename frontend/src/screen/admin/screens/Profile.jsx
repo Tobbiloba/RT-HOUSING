@@ -8,7 +8,7 @@ import {
 import { FaLocationDot } from "react-icons/fa6";
 import { FaBuilding } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
-import Input from "@/components/input/Input";
+import Input from "@/components/Input";
 const UpdateProfile = ({setShowState}) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("")

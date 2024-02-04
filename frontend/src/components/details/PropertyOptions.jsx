@@ -3,17 +3,17 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Dropdown from "../home/Dropdown";
 import Slider from "@mui/material/Slider";
 import FilterOptions from "../home/FilterOptions";
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 import { startOfToday, startOfTomorrow } from "date-fns";
 const FilterBox = ({ children, title }) => {
   const [showChildren, setShowChildren] = useState(true);
   return (
-    <div className="border p-[1rem] text-[13px] bg-slate-50">
+    <div className="border p-[1rem] text-[13px] bg-slate-100">
       <div
         className="flex flex-row justify-between cursor-pointer"
         onClick={() => setShowChildren(!showChildren)}
       >
-        <h1 className="text-slate-900 text-[17px] font-[600]">{title}:</h1>
+        <h1 className="text-slate-900 text-[14px]">{title}:</h1>
         {showChildren ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
       </div>
 
@@ -38,9 +38,9 @@ function valuetext(value) {
 }
 
 const PropertyOptionCard = ({ items }) => {
-  console.log(items)
-  let today = startOfToday()
-  let tomorrow = startOfTomorrow()
+  console.log(items);
+  let today = startOfToday();
+  let tomorrow = startOfTomorrow();
   const [adults, setAdults] = useState("No. Of Adults");
   const [children, setChildren] = useState("No. Of Children (Ages 2-12)");
   const [infants, setInfants] = useState("No. Of Children (Ages 0-2)");
@@ -57,7 +57,7 @@ const PropertyOptionCard = ({ items }) => {
   let [checkInDate, setCheckInDate] = useState(today);
   let [checkOutDate, setCheckOutDate] = useState(tomorrow);
 
-  console.log(addOns)
+  console.log(addOns);
 
   const numberOptions = [1, 2, 3, 4, 5];
 
@@ -161,165 +161,209 @@ const PropertyOptionCard = ({ items }) => {
   };
   // console.log(checkOutDate.toLocaleDateString())
   function calculateDayDifference(checkinDate, checkoutDate) {
-    const [checkinDay, checkinMonth, checkinYear] = checkinDate.split('/').map(Number);
-    const [checkoutDay, checkoutMonth, checkoutYear] = checkoutDate.split('/').map(Number);
-  
+    const [checkinDay, checkinMonth, checkinYear] = checkinDate
+      .split("/")
+      .map(Number);
+    const [checkoutDay, checkoutMonth, checkoutYear] = checkoutDate
+      .split("/")
+      .map(Number);
+
     const checkin = new Date(checkinYear, checkinMonth - 1, checkinDay);
     const checkout = new Date(checkoutYear, checkoutMonth - 1, checkoutDay);
-  
+
     if (checkout < checkin) {
       console.error("Error: Checkout date can't be before checkin date");
       return null;
     }
-  
+
     const differenceInMilliseconds = checkout - checkin;
-    const differenceInDays = Math.floor(differenceInMilliseconds / (24 * 60 * 60 * 1000));
-    console.log(differenceInDays)
+    const differenceInDays = Math.floor(
+      differenceInMilliseconds / (24 * 60 * 60 * 1000)
+    );
+    console.log(differenceInDays);
     return differenceInDays;
   }
 
   // calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString())
 
-
-
   const calculateTotalPrice = () => {
-    return addOns.reduce((total, addOn) => total + addOn.price, 0) + (items.pricing * calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString()));
+    return (
+      addOns.reduce((total, addOn) => total + addOn.price, 0) +
+      items.pricing *
+        calculateDayDifference(
+          checkInDate.toLocaleDateString(),
+          checkOutDate.toLocaleDateString()
+        )
+    );
   };
 
   return (
     <div className="">
-      <div className="w-[22.5rem] exo mb-6 h-fit rounded-md overflow-hidden">
-        <div>
+      <div className="w-[22.5rem] exo mb-6 h-fit overflow-hidden">
+        <div className="flex flex-col gap-6">
           <FilterBox title="Pricing">
             <div>
-              <h1 className="text-[26px] font-[600] text-slate-500">${calculateTotalPrice()} <span className="text-[16px] text-slate-500 font-[500]">/ for 0{calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString())} nights</span></h1>
+              <h1 className="text-[20px]  text-slate-500">
+                ${calculateTotalPrice()}{" "}
+                <span className="text-[14px] text-slate-500 font-[500]">
+                  / for 0
+                  {calculateDayDifference(
+                    checkInDate.toLocaleDateString(),
+                    checkOutDate.toLocaleDateString()
+                  )}{" "}
+                  nights
+                </span>
+              </h1>
 
               <div className="flex flex-row justify-between items-center mt-5">
-                      <p className="text-slate-600 text-[13px]">
-                        {items.price} x {calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString())} nights
-                      </p>
-      
-                      <p className="font-[600] text-slate-600 text-[14px]">${items.pricing * calculateDayDifference(checkInDate.toLocaleDateString(), checkOutDate.toLocaleDateString())}</p>
-                    </div>
+                <p className="text-slate-500 text-[13px]">
+                  {items.price} x{" "}
+                  {calculateDayDifference(
+                    checkInDate.toLocaleDateString(),
+                    checkOutDate.toLocaleDateString()
+                  )}{" "}
+                  nights
+                </p>
+
+                <p className="font-[600] text-slate-600 text-[14px]">
+                  $
+                  {items.pricing *
+                    calculateDayDifference(
+                      checkInDate.toLocaleDateString(),
+                      checkOutDate.toLocaleDateString()
+                    )}
+                </p>
+              </div>
               <div className="">
-                {
-                  addOns.map((itm, index) => (
-                   <div>
-                    {
-                      index !== 0 &&  <div key={index} className="flex flex-row justify-between items-center mt-3">
-                      <p className="text-slate-600 text-[13px]">
-                        {itm.name} 
-                      </p>
-      
-                      <p className="font-[600] text-slate-600 text-[14px]">${itm.price}</p>
-                    </div>
-                    }
-                   </div>
-                  ))
-                }
+                {addOns.map((itm, index) => (
+                  <div>
+                    {index !== 0 && (
+                      <div
+                        key={index}
+                        className="flex flex-row justify-between items-center mt-3"
+                      >
+                        <p className="text-slate-600 text-[13px]">{itm.name}</p>
+
+                        <p className=" text-slate-600 text-[14px]">
+                          ${itm.price}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))}
 
                 <div className="flex flex-row justify-between items-center mt-6 border border-x-slate-50 py-3">
                   <p className="text-slate-600 text-[13px]">Taxes & Fees</p>
-                  <p className="font-[600] text-slate-600 text-[14px]">${calculateTotalPrice() * 0.05}</p>
+                  <p className="font-[600] text-slate-600 text-[14px]">
+                    ${calculateTotalPrice() * 0.05}
+                  </p>
                 </div>
 
                 <div className="flex flex-row justify-between items-center mt-4 mb-2">
                   <p className="text-red-500 text-[13px]">Total</p>
-                  <p className="font-[600] text-red-500 text-[14px]">${calculateTotalPrice()}</p>
+                  <p className="font-[600] text-red-500 text-[14px]">
+                    ${calculateTotalPrice()}
+                  </p>
                 </div>
               </div>
-              
             </div>
           </FilterBox>
 
-          {/* <div className="flex  h-[6rem] md:h-[3.75rem] mt-5  flex-col md:flex-row"> */}
-            {/* <div className="w-[100%] md:w-2/5 border flex  py-2 md:py-0 flex-col justify-center md:rounded-l-md">
-              <p
-                className="text-[13px] mx-4 text-gray-500"
+
+
+      <FilterBox title="Date">
+      <div className="my- px-3 relative">
+            <h1 className="text-slate-900 text-[13px]">When To Check In?</h1>
+
+            <div className="flex flex-col mt-3">
+              <div
+                className=" border-b flex justify-center px-2 py-2 flex-col"
                 onClick={() => (
-                  setShowCheckInCalendar(true), setCheckOutDate(false)
+                  setShowCheckInCalendar(true), setShowCheckOutCalendar(false)
                 )}
               >
-                Check-In:
-              </p>
-
-              <h1 className="text-[15px] text-gray-500 px-4 cursor-text">
-                {checkInDate !== "" ? checkInDate : "Date"}
-              </h1>
-            </div>
-            <div className="md:w-3/5 w-[100%] flex flex-row">
-              <div className="w-9/12  md:mt-0 md:w-4/6 border py-2 md:py-0 flex flex-col  justify-center">
-                <p
-                  className="text-[13px] mx-4 text-gray-500"
-                  onClick={() => (
-                    setShowCheckInCalendar(false), setCheckOutDate(true)
-                  )}
-                >
-                  Check-Out:
-                </p>
-                <h1 className="text-[15px] text-gray-500 px-4 cursor-text">
-                  Date
+                <p className="text-[13px] text-slate-500">Check-In:</p>
+                <h1 className="text-[14px] text-slate-600 cursor-text">
+                  {checkInDate.toLocaleDateString()}
                 </h1>
               </div>
-              <div className="w-3/12 md:w-2/6  md:mt-0 border py-2 md:py-0 flex items-center justify-center md:rounded-r-md">
-                <img src="/calendar.png" className="w-6" />
-              </div>
-            </div>
-          </div> */}
-
-<div className="my-6 px-3 relative">
-            <h1 className="text-slate-900 font-[600]">When To Check In?</h1>
-
-            <div className="flex flex-row">
-              <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckInCalendar(true), setShowCheckOutCalendar(false))}>
-                <p className="text-[13px] text-slate-400">Check-In:</p>
-                <h1 className="text-[15px] text-slate-600 cursor-text">{checkInDate.toLocaleDateString()}</h1>
-              </div>
-              <div className="w-2/5 border flex justify-center px-3 py-2 flex-col" onClick={() => (setShowCheckOutCalendar(true), setShowCheckInCalendar(false))}>
-                <p className="text-[13px] text-slate-400">Check-Out:</p>
-                <h1 className="text-[15px] text-slate-600 cursor-text">{checkOutDate.toLocaleDateString()}</h1>
+              <div
+                className=" border-b flex justify-center px-2 py-2 flex-col"
+                onClick={() => (
+                  setShowCheckOutCalendar(true), setShowCheckInCalendar(false)
+                )}
+              >
+                <p className="text-[13px] text-slate-500">Check-Out:</p>
+                <h1 className="text-[14px] text-slate-600 cursor-text">
+                  {checkOutDate.toLocaleDateString()}
+                </h1>
               </div>
 
-              <div className="w-1/5 border flex items-center justify-center">
+              {/* <div className=" border flex items-center justify-center">
                 <img src="/calendar.png" className="w-5" />
-              </div>
-              
+              </div> */}
             </div>
             <div className="absolute z-[100]  drop-shadow-md rounded-md bg-white w-fit">
-            {showCheckInCalendar && (
-          <Calendar selectedDay={checkInDate} setSelectedDay={setCheckInDate} setShowCalendar={setShowCheckInCalendar}/>
-        )}
-            {showCheckOutCalendar && (
-          <Calendar selectedDay={checkOutDate} setSelectedDay={setCheckOutDate}  setShowCalendar={setShowCheckOutCalendar}/>
-        )}
+              {showCheckInCalendar && (
+                <Calendar
+                  selectedDay={checkInDate}
+                  setSelectedDay={setCheckInDate}
+                  setShowCalendar={setShowCheckInCalendar}
+                />
+              )}
+              {showCheckOutCalendar && (
+                <Calendar
+                  selectedDay={checkOutDate}
+                  setSelectedDay={setCheckOutDate}
+                  setShowCalendar={setShowCheckOutCalendar}
+                />
+              )}
+            </div>
           </div>
-          </div>
-          
+      </FilterBox>
 
-
-            <div className="my-6 px-3">
-            <h1 className="text-slate-900 font-[600]">Guests</h1>
-
+         <FilterBox title="Guests">
+         <div className="my-6 px-3">
+            {/* <h1 className="text-slate-900">Guests</h1> */}
 
             <div className="mt-4">
               <div className="flex flex-row">
-                <h1 className="w-7/12 border px-4 rounded-tl-md flex items-center text-[15px] font-[600] text-slate-600">Adults</h1>
-                <p className="w-5/12 border px-4 py-3 border-l-white  rounded-tr-md text-[14px] text-slate-400">01</p>
+                <h1 className="w-7/12 border px-4 flex items-center text-[13px] text-slate-600">
+                  Adults
+                </h1>
+                <p className="w-5/12 border px-4 py-3 border-l-slate-600  rounded-tr-md text-[13px] text-slate-400">
+                  01
+                </p>
               </div>
               <div className="flex flex-row">
-                <h1 className="w-7/12 border px-4  flex items-center text-[15px] font-[600] text-slate-600">Children <span className="font-[500] text-[13px] text-slate-400 ml-2">(Age 2-12)</span></h1>
-                <p className="w-5/12 border px-4 py-3 border-l-white   text-[14px] text-slate-400">01</p>
+                <h1 className="w-7/12 border px-4  flex items-center text-[13px] text-slate-600">
+                  Children{" "}
+                  <span className="font-[500] text-[12px] text-slate-400 ml-2">
+                    (Age 2-12)
+                  </span>
+                </h1>
+                <p className="w-5/12 border px-4 py-3 border-l-slate-600   text-[13px] text-slate-400">
+                  01
+                </p>
               </div>
               <div className="flex flex-row">
-              <h1 className="w-7/12 border px-4 rounded-bl-md flex items-center text-[15px] font-[600] text-slate-600">Infants <span className="font-[500] text-[13px] text-slate-400 ml-2">(Age 0-2)</span></h1>
-                <p className="w-5/12 border px-4 py-3 border-l-white  rounded-br-md text-[14px] text-slate-400">01</p>
+                <h1 className="w-7/12 border px-4 rounded-bl-md flex items-center text-[13px] text-slate-600">
+                  Infants{" "}
+                  <span className="font-[500] text-[12px] text-slate-400 ml-2">
+                    (Age 0-2)
+                  </span>
+                </h1>
+                <p className="w-5/12 border px-4 py-3 border-l-slate-600 text-[13px] text-slate-400">
+                  01
+                </p>
               </div>
             </div>
-            </div>
+          </div>
+         </FilterBox>
 
-
+          <FilterBox title="Add-on Services">
           <div className="my-6 px-3">
-            <h1 className="text-slate-900 font-[600]">Add-on Services</h1>
+            {/* <h1 className="text-slate-900 font-[600]">Add-on Services</h1> */}
             <div className="grid mt-5 grid-cols-1 gap-3">
               {add_ons.map((item, index) => (
                 <div className="flex gap-3" key={index}>
@@ -336,28 +380,35 @@ const PropertyOptionCard = ({ items }) => {
               ))}
             </div>
           </div>
+          </FilterBox>
 
-
+          <FilterBox title="Available Amenitites">
           <div className="my-6 px-3">
-            <h1 className="text-slate-900 font-[600]">Available Ammenities</h1>
-            <div className="grid mt-5 grid-cols-1 gap-3">
+            {/* <h1 className="text-slate-900 font-[600]">Available Ammenities</h1> */}
+            <div className="mt-5 flex flex-row flex-wrap gap-3">
               {ammenitiesList.map((item, index) => (
                 <div className="flex gap-3" key={index}>
-                  <input
+                  {/* <input
                     type="checkbox"
                     className="bg-blue-500"
                     // onChange={() => handleAmmenitiesCheckboxChange(item)}
                     checked={items.property_amenities.includes(item)}
                     disabled={!items.property_amenities.includes(item)}
-                  />
-                  <p className="text-[13px]">{item}</p>
+                  /> */}
+                  <p className="text-[13px] px-3 py-1 bg-slate-600 text-white">{item}</p>
                 </div>
               ))}
             </div>
           </div>
-
+          </FilterBox>
+          <div className="flex gap-5 items-center">
+            <input type="checkbox" className=""/>
+            <p className="text-slate-600 text-[13px]">I agree to the terms and condition</p>
+          </div>
         </div>
-        <button className="border w-[100%] bg-slate-500 text-white rounded-md py-3 mt-5">Book Now</button>
+        <button className="border w-[100%] bg-slate-500 text-white py-3 mt-5">
+          Book Now
+        </button>
       </div>
     </div>
   );
@@ -367,8 +418,6 @@ import FilterOption from "../properties/FilterOptions";
 import { Drawer } from "@mui/material";
 import Calendar from "../Calendar";
 export default function PropertyOptions({ state, setState, item }) {
-
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -386,34 +435,33 @@ export default function PropertyOptions({ state, setState, item }) {
   const isDesktop = useMediaQuery({ minWidth: 999 });
 
   useEffect(() => {
-    if(isDesktop) {
-      toggleDrawer(anchor, false)
+    if (isDesktop) {
+      // toggleDrawer(anchor, false)
     }
-  }, [isMobile, isDesktop])
+  }, [isMobile, isDesktop]);
   return (
-    <div className="">
+    <div className="border bg-slate-100 z-50">
       {/* <button onClick={toggleDrawer(anchor, true)}>Open Filter</button> */}
-      {
-        isMobile &&
-      
+      {/* {
+        isMobile && */}
+
       <Drawer
         anchor={anchor}
         open={state[anchor]}
         onClose={toggleDrawer(anchor, false)}
       >
-        <div style={{ width: "24.5rem" }} className="py-[1.5rem] pl-4 relative">
+        <div style={{ width: "25rem" }} className="py-[1.5rem] flex justify-center relative">
           <PropertyOptionCard items={item} />
-
 
           {/* <div className='w-6 h-6 rounded-full absolute bg-slate-900 top-24  -left-1'></div> */}
         </div>
       </Drawer>
-}
+      {/* } */}
 
-{
+      {/* {
   isDesktop && <div style={{ width: "24.5rem" }} className="  pl-4 relative">
   <PropertyOptionCard items={item} /> </div>
-}
+} */}
     </div>
   );
 }

@@ -381,10 +381,16 @@ import { getPropertyDetailById } from "@/action/property";
 import { useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { IoIosArrowDown } from "react-icons/io";
-import Input from "@/components/input/Input";
+import Input from "@/components/Input";
 // import Textarea from "@/components/textarea/Textarea";
 // import Textarea from "@/components/textarea/Textarea";
+import { tourSchema, contactAgentSchema } from "@/schemas";
+import { useFormik } from "formik";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import Checkbox from "@/components/Checkbox";
+import Textarea from "@/components/textarea/Textarea";
+import { getCurrentTime, getNext7Days } from "@/components/utils";
+import dayjs from 'dayjs';
 const PropertyDetails = () => {
   useEffect(() => {
     // Scroll to the top of the page when the component mounts
@@ -403,7 +409,7 @@ const PropertyDetails = () => {
   ];
 
   const [showProperty, setShowProperty] = useState({
-    right: false,
+    right: true,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -427,7 +433,7 @@ const PropertyDetails = () => {
     (state) => state.propertyDetail
   );
 
-  console.log(details);
+  // console.log(details);
   useEffect(() => {
     // if(id) {
     // dispatch(getPropertyDetailById(id))
@@ -435,18 +441,51 @@ const PropertyDetails = () => {
   }, []);
 
   // const [name, setName] = useState("");
-  const [tourName, setTourName] = useState('')
-  const [tourEmail, setTourEmail] = useState('')
-  const [tourMessage, setTourMessage] = useState('')
-  const [tourPhone, setTourPhone] = useState('')
-  const [tourTime, setTourTime] = useState('10:00 am')
+  const [tourName, setTourName] = useState("");
+  const [tourEmail, setTourEmail] = useState("");
+  const [tourMessage, setTourMessage] = useState("");
+  const [tourPhone, setTourPhone] = useState("");
+  const [tourTime, setTourTime] = useState("10:00 am");
+
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [selectedTourDate, setSelectedDateTour] = useState(0)
+
+  // Formik instance for contact agent form
+  const contactAgentFormik = useFormik({
+    initialValues: {
+      name: "",
+      message: "",
+      email: "",
+      phone: "",
+      termsAndConditions: false
+    },
+    validationSchema: contactAgentSchema,
+    onSubmit: (values) => {
+      // Handle contact agent form submission
+      console.log("Contact Agent Form Values:", values);
+    },
+  });
+
+  // Formik instance for tour form
+  const tourFormik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      phone: ""
+      
+    },
+    validationSchema: tourSchema,
+    onSubmit: (values) => {
+      // Handle tour form submission
+      console.log("Tour Form Values:", values);
+    },
+  });
 
 
-
-  const [contactName, setContactName] = useState('')
-  const [contactEmail, setContactEmail] = useState('')
-  const [contactMessage, setContactMessage] = useState('')
-  const [contactPhone, setContactPhone] = useState('')
+  console.log(details)
   return (
     <div className="bg-slate-50 pt-16 font-mono">
       {loading ? (
@@ -456,6 +495,13 @@ const PropertyDetails = () => {
       ) : !loading && details ? (
         <div>
           <Carousel images={details?.property_information.property_images} />
+          {/* <div className="fixed top-0 right-0 z-50"> */}
+          <PropertyOptions
+            state={showProperty}
+            setState={setShowProperty}
+            item={details.property_information}
+          />
+          {/* </div> */}
           <div className="container mx-auto">
             <div className="w-[100%] mt-12 px-[1rem] flex items-end justify-end tablet:hidden">
               <div
@@ -466,7 +512,7 @@ const PropertyDetails = () => {
               </div>
             </div>
 
-            <div className="flex mt-4 lg:mt-20 flex-row gap-16 justify-between px-[1rem]">
+            <div className="flex mt-4 lg:mt-20 flex-col lg:flex-row gap-16 justify-between px-[1rem] relative">
               <div className="">
                 <div className="flex flex-row w-[100%] gap-x-8 border border-white border-b-gray-200 py-4 text-[14px] flex-wrap  gap-y-2">
                   <Link
@@ -522,9 +568,9 @@ const PropertyDetails = () => {
                     <Element name="amenities" className="element ">
                       <Amenities id="amenities" />
                     </Element>
-                    {/* <Element name="nearby" className="element">
-                  <Nearby id="nearby" />
-                </Element> */}
+                    <Element name="nearby" className="element">
+                      <Nearby id="nearby" />
+                    </Element>
                     <Element name="availability" className="element">
                       <Availability
                         id="availability"
@@ -534,14 +580,11 @@ const PropertyDetails = () => {
                     <Element name="terms" className="element">
                       <Terms id="terms" />
                     </Element>
-                    {/* <Element name="reviews" className="element">
-                  <Reviews id="reviews" />
-                </Element> */}
                   </div>
                 </div>
               </div>
-              <div className=" w-4/12 min-w-[22.5rem] h-fit">
-                <div className="border p-[1rem] rounded-xl pt-8 pb-12">
+              <div className=" lg:w-4/12 min-w-[22.5rem] h-fit">
+                <div className="border p-[1rem] pt-8 pb-12">
                   <h1 className="font-[600]">Contact an Agent</h1>
 
                   <div className="flex flex-row mt-2 justify-between">
@@ -562,33 +605,91 @@ const PropertyDetails = () => {
                     <IoIosArrowDown className="text-slate-500" />
                   </div>
 
-                  <div className="flex flex-col gap-6 mt-6">
+                  <form onSubmit={contactAgentFormik.handleSubmit} className="flex h-fit flex-col gap-5 mt-6">
                     <Input
-                      value={contactName}
-                      setValue={setContactName}
+                      placeholder=""
+                      type="text"
                       label="Name"
-                      placeholder=""
+                      value={contactAgentFormik.values.name}
+                      handleChange={contactAgentFormik.handleChange}
+                      error={
+                        contactAgentFormik.errors.name && contactAgentFormik.touched.name
+                          ? contactAgentFormik.errors.name
+                          : undefined
+                      }
+                      id="name"
+                      // formType="custom"
                     />
                     <Input
-                      value={contactPhone}
-                      setValue={setContactPhone}
-                      label="Phone"
                       placeholder=""
-                    />
-                    <Input
-                      value={contactEmail}
-                      setValue={setContactEmail}
+                      type="text"
                       label="Email"
-                      placeholder=""
+                      value={contactAgentFormik.values.email}
+                      handleChange={contactAgentFormik.handleChange}
+                      error={
+                        contactAgentFormik.errors.email && contactAgentFormik.touched.email
+                          ? contactAgentFormik.errors.email
+                          : undefined
+                      }
+                      id="email"
+                      // formType="custom"
                     />
-
-                    {/* <Textarea
-                      value={contactMessage}
-                      setValue={setContactMessage}
+                    <Input
+                      placeholder=""
+                      type="text"
+                      label="Phone"
+                      value={contactAgentFormik.values.phone}
+                      handleChange={contactAgentFormik.handleChange}
+                      error={
+                        contactAgentFormik.errors.phone && contactAgentFormik.touched.phone
+                          ? contactAgentFormik.errors.phone
+                          : undefined
+                      }
+                      id="phone"
+                      // formType="custom"
+                    />
+                    <Input
+                      placeholder=""
+                      type="text"
                       label="Message"
-                    /> */}
+                      value={contactAgentFormik.values.phone}
+                      handleChange={contactAgentFormik.handleChange}
+                      error={
+                        contactAgentFormik.errors.phone && contactAgentFormik.touched.phone
+                          ? contactAgentFormik.errors.phone
+                          : undefined
+                      }
+                      id="phone"
+                      inputType="textarea"
+                      // formType="custom"
+                    />
+                    {/* <Textarea 
 
-                    <div className="flex flex-row items-center gap-4">
+                    /> */}
+                   <Checkbox
+        label="I agree to the terms and conditions"
+        field={tourFormik.getFieldProps('termsAndConditions')}
+        form={{
+          errors: tourFormik.errors.termsAndConditions,
+          touched: tourFormik.touched.termsAndConditions,
+        }}
+        id="termsAndConditions"
+      />
+                    {/* <Input
+        type="checkbox"
+        label="Accept Terms and Conditions"
+        checked={contactAgentFormik.values.termsAndConditions}
+        handleChange={contactAgentFormik.handleChange}
+        error={
+          contactAgentFormik.errors.termsAndConditions &&
+          contactAgentFormik.touched.termsAndConditions
+            ? contactAgentFormik.errors.termsAndConditions
+            : undefined
+        }
+        id="termsAndConditions"
+      /> */}
+
+                    {/* <div className="flex flex-row items-center gap-4">
                       <input type="checkbox" className="" />
                       <p className="text-[13px]">
                         I agree to the{" "}
@@ -596,89 +697,158 @@ const PropertyDetails = () => {
                           Terms and Conditions
                         </span>
                       </p>
-                    </div>
+                    </div> */}
 
-                    <button className="flex flex-row gap-4 items-center border py-3 rounded-full text-white bg-slate-800 justify-center">
+                    <button type="submit" className="flex flex-row gap-4 items-center border py-3 text-white bg-slate-800 justify-center">
                       Send Message <IoIosArrowRoundForward />
                     </button>
-                  </div>
+                  </form>
+
+
                 </div>
 
+                <div className="mt-6 border pb-6 p-[1rem]">
+                  <h1 className="font-[600]">Property Tour</h1>
 
-                <div className="mt-6 border pb-6 p-[1rem] rounded-xl">
-                <h1 className="font-[600]">Mortgage Title</h1>
+                  <div className="gap-3 grid grid-cols-3 justify-evenly mt-6">
+                  {
+  getNext7Days().map((item, index) => (
+    <div key={index} onClick={() => setSelectedDateTour(index)} className={`${index === selectedTourDate ? "bg-slate-600 border shadow-xl text-white" : "bg-slate-200 text-slate-500"} hover:rounded-xl cursor-pointer hover:border-b hover:border-t border-slate-500 py-6 text-[14px]  text-center`}>
+      <p className="text-[12px]">{item.dayOfWeek}</p>
+      <h1 className="text-black my-1 font-[600] text-[16px]">{item.dateOfMonth}</h1>
+      <p className="text-[12px]">{item.monthOfYear}</p>
+    </div>
+  ))
+}
+                    {/* <div className="border-b-4 rounded-xl px-8 py-5 text-slate-500 text-[14px] text-center">
+                      <p>Sat</p>
+                      <h1 className="text-black font-[600] text-[16px]">13</h1>
+                      <p>Jan</p>
+                    </div>
 
-                <div className="flex flex-row justify-evenly mt-6">
-                  <div className="border-b-4 rounded-xl px-8 py-5 text-slate-500 text-[14px] text-center">
-                    <p>Sat</p>
-                    <h1 className="text-black font-[600] text-[16px]">13</h1>
-                    <p>Jan</p>
+                    
+
+                    <div className="rounded-xl bg-slate-100 px-8 py-5 text-[14px] text-slate-500 text-center">
+                      <p>Wed</p>
+                      <h1 className="text-black font-[600] text-[16px]">17</h1>
+                      <p>Jan</p>
+                    </div> */}
                   </div>
 
-                  <div className="rounded-xl bg-slate-100 px-8 py-5 text-[14px] text-slate-500 text-center">
-                    <p>Mon</p>
-                    <h1 className="text-black font-[600] text-[16px]">15</h1>
-                    <p>Jan</p>
+                  <h1 className="font-[600] mt-12">Tour Type</h1>
+                  <div className="mt-4 flex flex-row gap-5 text-[14px] text-slate-600 font-[600]">
+                    <p>In Person</p>
+                    <p>Video Chat</p>
                   </div>
-
-
-                  <div className="rounded-xl bg-slate-100 px-8 py-5 text-[14px] text-slate-500 text-center">
-                    <p>Wed</p>
-                    <h1 className="text-black font-[600] text-[16px]">17</h1>
-                    <p>Jan</p>
-                  </div>
-                </div>
-
-
-                <h1 className="font-[600] mt-12">Tour Type</h1>
-                <div className="mt-4 flex flex-row gap-5 text-[14px] text-slate-600 font-[600]">
-                <p>
-                  In Person
-                </p>
-                <p>
-                  Video Chat
-                </p>
-                </div>
-                <div className="flex flex-col gap-6 mt-4">
-                <Input
+                  <div className="flex flex-col gap-6 mt-4">
+                    {/* <Input
                       value={tourTime}
                       setValue={setTourTime}
                       label="Time"
                       placeholder=""
-                    />
-                <Input
-                      value={tourName}
-                      setValue={setTourName}
+                    /> */}
+
+                    <Input
+                      placeholder=""
+                      type="text"
                       label="Name"
-                      placeholder=""
-                    />
-                <Input
-                      value={tourPhone}
-                      setValue={setTourPhone}
-                      label="Phone"
-                      placeholder=""
+                      value={tourFormik.values.name}
+                      handleChange={tourFormik.values.name}
+                      error={
+                        tourFormik.values.name && tourFormik.values.name
+                          ? tourFormik.values.name
+                          : undefined
+                      }
+                      id="name"
                     />
                     <Input
-                      value={tourEmail}
-                      setValue={setTourEmail}
-                      label="Email"
                       placeholder=""
+                      type="number"
+                      label="Phone"
+                      value={tourFormik.values.phone}
+                      handleChange={tourFormik.values.phone}
+                      error={
+                        tourFormik.values.phone && tourFormik.values.phone
+                          ? tourFormik.values.phone
+                          : undefined
+                      }
+                      id="phone"
                     />
                     
-                    <Textarea
+                    <Input
+                      placeholder=""
+                      type="text"
+                      label="Email"
+                      value={tourFormik.values.email}
+                      handleChange={tourFormik.values.email}
+                      error={
+                        tourFormik.values.email && tourFormik.values.email
+                          ? tourFormik.values.email
+                          : undefined
+                      }
+                      id="email"
+                    />
+ {/* <form onSubmit={tourFormik.handleSubmit} className="flex flex-col gap-6 mt-6">
+                    <Input
+                      placeholder=""
+                      type="text"
+                      label="Name"
+                      value={tourFormik.values.name}
+                      handleChange={tourFormik.handleChange}
+                      error={
+                        tourFormik.errors.name && tourFormik.touched.name
+                          ? tourFormik.errors.name
+                          : undefined
+                      }
+                      id="name"
+                    />
+                    <Input
+                      placeholder=""
+                      type="text"
+                      label="Email"
+                      value={tourFormik.values.email}
+                      handleChange={tourFormik.handleChange}
+                      error={
+                        tourFormik.errors.email && tourFormik.touched.email
+                          ? tourFormik.errors.email
+                          : undefined
+                      }
+                      id="email"
+                    />
+                    <Input
+                      placeholder=""
+                      type="text"
+                      label="Phone"
+                      value={tourFormik.values.phone}
+                      handleChange={tourFormik.handleChange}
+                      error={
+                        tourFormik.errors.phone && tourFormik.touched.phone
+                          ? tourFormik.errors.phone
+                          : undefined
+                      }
+                      id="phone"
+                    />
+                    <Checkbox
+                      label="I agree to the terms and conditions"
+                      field={tourFormik.getFieldProps("termsAndConditions")}
+                      form={{
+                        errors: tourFormik.errors.termsAndConditions,
+                        touched: tourFormik.touched.termsAndConditions,
+                      }}
+                    />
+                
+
+                    <button className="flex flex-row gap-4 items-center border py-3 text-white bg-slate-800 justify-center">
+                      Send Message <IoIosArrowRoundForward />
+                    </button>
+                  </form> */}
+                    {/* <Textarea
                       value={tourMessage}
                       setValue={setTourMessage}
                       label="Message"
-                    />
-
-                    
+                    /> */}
+                  </div>
                 </div>
-                </div>
-                {/* <PropertyOptions
-                  state={showProperty}
-                  setState={setShowProperty}
-                  item={details.property_information}
-                /> */}
               </div>
             </div>
           </div>

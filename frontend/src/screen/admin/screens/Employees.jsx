@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoCloseOutline , IoCheckmarkDoneOutline} from "react-icons/io5";
 import { RiDeleteBin4Line } from "react-icons/ri";
-import Input from '@/components/input/Input';
+import Input from '@/components/Input';
 import { startOfToday, startOfTomorrow } from "date-fns";
 import Dropdown from '@/components/home/Dropdown';
 import { FaCalendarAlt } from "react-icons/fa";

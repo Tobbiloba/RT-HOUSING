@@ -130,7 +130,7 @@ const SwiperContainer = () => {
          
           return (
             <SwiperSlide key={index} className="hover:border-b hover:shadow-md border-slate-500 rounded-xl">
-              <div className="relative  max-h-[15rem] rounded-xl overflow-hidden">
+              <div className="relative  max-h-[15rem] overflow-hidden">
                 {/* <img src={property.img} className="w-[100%] h-auto" /> */}
                 {/* <slateLoadedImage
                   src={property.img}
@@ -141,7 +141,7 @@ const SwiperContainer = () => {
                 <Suspense fallback={<div className="h-[15rem] w-[100%]"></div>}>
                 <LazyLoadedImage
                   src={property.img}
-                  className="  rounded-md"
+                  className=" "
                 />
               </Suspense>
                 </div>
@@ -208,7 +208,7 @@ const Categories = () => {
             </p>
           </div>
 
-          <button className="border px-8 py-2 text-slate-700 rounded-full border-slate-700 text-[15px]">
+          <button className="border px-8 py-2 text-slate-700 border-slate-700 text-[15px]">
             See More
           </button>
         </div>

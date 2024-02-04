@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import Calendar from "@/components/Calendar";
@@ -10,7 +11,7 @@ const Input = ({ state, setState, label, placeholder }) => {
         <span className="text-white h-4">*</span>
         {label}
       </label>
-
+      
       <input
         className="border flex-1 bg-transparent h-[3rem] lg:min-w-[10rem] md:max-w-[35rem] border-slate-500 rounded-sm outline-none pl-3 text-white"
         onChange={(e) => setState(e.target.value)}

@@ -46,7 +46,7 @@ const Tip = () => {
                 <div className='w-12 h-[2px] bg-slate-500'></div>
                 <p className='mt-3 text-slate-500 text-[16px]'>See Tips And Trick From Our Partnership</p>
                 <h1 className='mt-2 text-center3 text-3xl md:text-5xl'>Find Out More About <br />Selling And Buying Homes</h1>
-                <button className='mt-6 bg-slate-500 text-white px-7 rounded-full font-[600] py-3'>More Artikel</button>
+                <button className='mt-6 bg-slate-500 text-white px-7 font-[600] py-3'>More Artikel</button>
             </div>
 
 
@@ -54,11 +54,11 @@ const Tip = () => {
                 {
                     tips.map((item, index) => (
                         <div className={` flex gap-8 ${index != 3 ? 'flex-row' : 'flex-col'} ${index == 0 ? 'col-span-2' : index == 1 ? 'col-span-2' : index == 2 ? 'col-span-2' : 'col-span-2 row-span-3'}`}>
-                            <img src={item.img} className={`rounded-2xl ${index != 3 ? 'w-5/12' : 'w-[100%]'}`}/>
+                            <img src={item.img} className={`${index != 3 ? 'w-5/12' : 'w-[100%]'}`}/>
 
                             <div className='flex flex-col justify-evenly gap-4'>
                                 <div className='flex flex-row items-center gap-6'>
-                                    <img src={item.userImg} className='lg:w-9 lg:h-9 w-8 h-8 rounded-full'/>
+                                    <img src={item.userImg} className='lg:w-9 lg:h-9 w-8 h-8'/>
                                     <p className='text-slate-500 text-[14px] lg:text-[16px]'>{item.userName}</p>
                                 </div>
 

@@ -121,7 +121,7 @@ const Properties = () => {
               className={`grid ${
                 viewMode == "flex"
                   ? "grid-cols-1 gap-y-12"
-                  : "grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 2xl:grid-cols-3"
+                  : "grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 "
               } mt-8`}
             >
               {/* <CircularProgress /> */}

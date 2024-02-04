@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
 import Stepper from "../../../components/admin/stepper/Stepper";
-// import Input from "../../../components/input/Input";
+// import Input from "../../../components/Input";
 import Input from "@/components/Input";
 import Dropdown from "../../../components/admin/dropdown/Dropdown";
 import Textarea from "@/components/textarea/Textarea";
@@ -13,7 +13,7 @@ import Box from "../../../components/admin/box/Box";
 import Dropzone from "../../../components/admin/dropzone/Dropzone";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { Clear, createProperty } from "../../../action/property";
+import { Clear, createProperty, getPropertyDetailById } from "../../../action/property";
 import { IoMdCloseCircle } from "react-icons/io";
 import { styled } from "@mui/system";
 import { useMediaQuery } from "react-responsive";
@@ -24,6 +24,13 @@ import { ammenitiesList, add_ons, options, numbers } from "@/components/data";
 const UpdateProperty = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+
+  useEffect(() => {
+    // dispatch(getPropertyDetailById(id))
+  }, [])
+  const {details} = useSelector((state) => state?.propertyDetail);
+  console.log(details)
+
   const navigate = useNavigate();
   let today = startOfToday();
   let tomorrow = startOfTomorrow();
@@ -156,6 +163,8 @@ const UpdateProperty = () => {
     // dispatch(login(values));
   };
 
+
+ 
   const {
     values,
     errors,
@@ -181,10 +190,49 @@ const UpdateProperty = () => {
       state: "",
       city: "",
       postalCode: "",
+      images: [],
+      amenities: [],
+      availableFromDate: today,
+      availableTillDate: tomorrow,
+      unavailableFromDate: tomorrow, // Set to your initial value
+      unavailableTillDate: tomorrow, // Set to your initial value
+      reasonForUnavailability: "",
+      propertySize: [0, 70],
+      propertyOccupiedFromDate: "", // Set to your initial value
+      propertyOccupiedTillDate: "", // Set to your initial value
+      isUnavailable: true,
     },
     validationSchema: createPropertySchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    if(details) {
+      console.log(details.property_information.availability.available_date_from[0])
+      values.propertyName = details.property_information.property_name
+      values.propertyType = details.property_information.property_type
+      values.propertyDescription = details.property_information.property_description
+      values.bathrooms = details.property_information.property_no_bathrooms
+      values.bedrooms = details.property_information.property_no_bedrooms
+      values.adults = details.property_information.guest.maximum_adults
+      values.children = details.property_information.guest.maximum_children
+      values.infants = details.property_information.guest.maximum_infants
+      values.pricing = details.property_information.pricing
+      setProperty_images(details.property_information.property_images)
+      setProperty_amenities(details.property_information.property_amenities)
+      values.address = details.property_information.property_location.address
+      values.country = details.property_information.property_location.country
+      values.state = details.property_information.property_location.state
+      values.city = details.property_information.property_location.city 
+      values.postalCode = details.property_information.property_location.postal_code 
+      setProperty_size(details.property_information.property_size)
+      values.property_smoking_policy = details.property_information.property_policy.smoking_policy
+      values.property_dog_policy = details.property_information.property_policy.pet_policy
+      // setProperty_availability_from_date(details.property_information.availability.available_date_from[0])
+    }
+  }, [details])
+
+  console.log(values.availableFromDate.toDateString())
 
   return (
     <div
@@ -569,7 +617,7 @@ const UpdateProperty = () => {
           <div>
             <Box
               label="Available from"
-              value={property_availability_from_date.toLocaleDateString()}
+              value={values.availableFromDate.toDateString()}
               setShowState={set_Show_Property_availability_from_date}
               showState={show_Property_availability_from_date}
             />
@@ -577,9 +625,11 @@ const UpdateProperty = () => {
           {show_Property_availability_from_date && (
             <div className="mt-4 absolute z-50">
               <Calendar
-                selectedDay={property_availability_from_date}
+                selectedDay={values.availableFromDate}
                 setSelectedDay={setProperty_availability_from_date}
                 setShowCalendar={set_Show_Property_availability_from_date}
+                id="availableFromDate"
+                setFieldValue={setFieldValue}
               />
             </div>
           )}
@@ -589,7 +639,7 @@ const UpdateProperty = () => {
           <div>
             <Box
               label="Available till"
-              value={property_availability_till_date.toLocaleDateString()}
+              value={values.availableTillDate.toDateString()}
               setShowState={set_Show_Property_availability_till_date}
               showState={show_Property_availability_till_date}
             />
@@ -597,9 +647,10 @@ const UpdateProperty = () => {
           {show_Property_availability_till_date && (
             <div className="mt-4 absolute">
               <Calendar
-                selectedDay={property_availability_till_date}
-                setSelectedDay={setProperty_availability_till_date}
+                selectedDay={values.availableTillDate}
                 setShowCalendar={set_Show_Property_availability_till_date}
+                id="availableTillDate"
+                setFieldValue={setFieldValue}
               />
             </div>
           )}

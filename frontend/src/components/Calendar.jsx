@@ -26,7 +26,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const Calendar = ({selectedDay, setSelectedDay, setShowCalendar}) => {
+const Calendar = ({selectedDay, setShowCalendar, id, setFieldValue}) => {
   let today = startOfToday()
 //   let [selectedDay, setSelectedDay] = useState(today)
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
@@ -46,7 +46,7 @@ const Calendar = ({selectedDay, setSelectedDay, setShowCalendar}) => {
     let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 })
     setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'))
   }
-// console.log(selectedDay)
+console.log(selectedDay)
 
   return (
     <div className="w-[21rem] bg-white p-2">
@@ -94,7 +94,7 @@ const Calendar = ({selectedDay, setSelectedDay, setShowCalendar}) => {
                 >
                   <button
                     type="button"
-                    onClick={() => (setSelectedDay(day), setShowCalendar(false), console.log(day))}
+                    onClick={() => (setShowCalendar(false), console.log(day),    setFieldValue(id, day))}
                     className={classNames(
                       isEqual(day, selectedDay) && 'text-white',
                       !isEqual(day, selectedDay) &&

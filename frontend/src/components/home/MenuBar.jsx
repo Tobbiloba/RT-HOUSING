@@ -22,9 +22,9 @@ const MenuBar = () => {
   const links = [
     { name: "Home", link: "/" },
     { name: "Properties", link: "/properties" },
-    { name: "About", link: "/about" },
+    { name: "About", link: "/about-us" },
     { name: "How It works?", link: "/how-it-works" },
-    { name: "Contact", link: "/contact" },
+    { name: "Contact", link: "/contact-us" },
   ];
   return (
     <div className="flex relative border exo border-white border-t-gray-100 pt-4 exo items-center justify-center pl-[1rem] md:px-[1rem] mt-4 ">

@@ -75,12 +75,12 @@ const FloorPlans = () => {
           <div className="lg:mt-6 mt-16 flex flex-col  md:flex-row  gap-12">
             <div className="flex flex-col gap-6 md:w-[50%] w-[100%]">
               {floors.map((item) => (
-                <div key={item.id} onClick={() => setCurrentTab(item)} className={` hover:bg-white hover:border border-slate-600 hover:text-slate-500 cursor-pointer w-[100%] text-white md:w-[15rem] flex items-center justify-center py-3 ${currentTab.id === item.id ? 'shadow-xl bg-white border text-slate-600': ' bg-slate-600'}`}>
+                <div key={item.id} onClick={() => setCurrentTab(item)} className={` hover:bg-white hover:border border-slate-600 hover:text-slate-500 cursor-pointer w-[100%] md:w-[15rem] flex items-center justify-center py-3 ${currentTab.id === item.id ? 'shadow-xl bg-white border text-slate-600': ' bg-slate-600 text-white '}`}>
                   <p>{item.floor}</p>
                 </div>
               ))}
             </div>
-            <div className="lg:w-[20rem] md:w-[50%] shadow-md px-5 flex items-center h-[20rem] md:h-[inherit] flex-col justify-evenly bg-white border-slate-600 rounded-md relative border">
+            <div className="lg:w-[20rem] md:w-[50%] shadow-md px-5 flex items-center h-[20rem] md:h-[inherit] flex-col justify-evenly bg-white border-slate-600 relative border">
                 <div className={`hidden md:flex triangle absolute -rotate-90 -left-9`} style={{ top: `${currentTab.top * 4}px` }}
 ></div>
 
