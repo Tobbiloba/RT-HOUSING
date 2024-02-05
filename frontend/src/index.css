@@ -104,3 +104,87 @@
     flex-direction: row;
   }
  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* Slide In Animation */
+@keyframes slideIn {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-in-out;
+  transform-origin: top;
+}
+
+/* Slide Down Animation */
+@keyframes slideDown {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+.slide-down {
+  animation: slideDown 0.5s ease-in-out;
+  transform-origin: top;
+}
+
+
+
+/* .overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0%;
+  left: 0;
+  z-index: 20;
+  transform-origin: top;
+  transition: transform 4.5s ease-in-out;
+  transform: scaleY(0);
+}
+
+.hover-slide-in:hover + .overlay {
+  transform: scaleY(1);
+} */
+
+
+
+.overlay {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 20;
+  transform-origin: left; /* Set transform-origin to left */
+  transition: width 4.5s ease-in-out; /* Use width for the animation */
+}
+
+.hover-slide-in:hover + .overlay {
+  width: 100%; /* Set hover width to 100% */
+}
+
+
