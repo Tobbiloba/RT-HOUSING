@@ -20,7 +20,7 @@ const Dropzone = ({ images, setImages }) => {
     // Concatenate the new images with the existing ones
     setImages((prevImages) => [...prevImages, ...newImages]);
 
-    console.log(images); // Updated array of images
+    // console.log(images); // Updated array of images
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Dropzone = ({ images, setImages }) => {
   );
 
   const removeItemAtIndex = (index) => {
-    console.log(index);
+    // console.log(index);
     // Ensure that the index is within the valid range
     if (index >= 0 && index < images.length) {
       // Create a new array without the item at the specified index
@@ -58,7 +58,7 @@ const Dropzone = ({ images, setImages }) => {
     }
   };
 
-  console.log(images);
+  // console.log(images);
   return (
     <section className="mt-1 exo">
       <div className="flex">

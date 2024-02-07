@@ -193,6 +193,58 @@ export const createProperty = (id, property_information) => async (dispatch) => 
 
 
 
+
+
+
+
+
+
+export const updateProperty = (id, property_information) => async (dispatch) => {
+  dispatch({
+      type: CREATE_PROPERTIES
+  })
+
+  // console.log(id, property_information)
+
+  try {
+      const { data } = await Axios.patch(`${BASE_URL}/properties/${id}`, {
+          // id,
+          property_information: property_information
+      });
+      dispatch({
+        type: CREATE_PROPERTIES_SUCCESSFUL,
+        payload: data,
+      });
+  console.log(data)
+
+  
+    } catch (error) {
+      dispatch({
+        type: CREATE_PROPERTIES_FAILED,
+        payload:
+          error.response && error.response.data[0]
+            ? error.response.data.message
+            : error.message,
+      });
+  
+      toast.error(
+        error.response && error.response.data[0]
+          ? error.response.data[0]
+          : error.message,
+        {
+          toastId: customId,
+          position: "bottom-right",
+          theme: "colored",
+        }
+      );
+    }
+}
+
+
+
+
+
+
 export const Clear = () => async (dispatch) => {
   dispatch({
       type: CLEAR

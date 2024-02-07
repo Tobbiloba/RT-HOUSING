@@ -92,6 +92,8 @@ export const createPropertySchema = yup.object().shape({
   propertyType: yup.string().trim().required("Property Type is required"),
   bathrooms: yup.number().integer().min(1, "Number of Bathrooms must be greater than 0").required("Number of Bathrooms is required"),
   bedrooms: yup.number().integer().min(1, "Number of Bedrooms must be greater than 0").required("Number of Bedrooms is required"),
+  floors: yup.number().integer().min(1, "Number of Floors must be greater than 0").required("Number of Floors is required"),
+  garages: yup.number().integer().min(1, "Number of Garages must be greater than 0").required("Number of Garages is required"),
   adults: yup.number().integer().min(1, "Number of Adults must be greater than 0").required("Number of Adults is required"),
   children: yup.number().integer().min(1, "Number of Children must be greater than 0").required("Number of Children is required"),
   infants: yup.number().integer().min(1, "Number of Infants must be greater than 0").required("Number of Infants is required"),
@@ -104,22 +106,25 @@ export const createPropertySchema = yup.object().shape({
   images: yup.array().of(yup.string()).min(5, "At least 5 images are required"),
   amenities: yup.array().of(yup.string()).min(3, "At least 3 amenities are required"),
   availableFromDate: yup.date().required("Available From Date is required"),
-  availableTillDate: yup.date()
-    .when('availableFromDate', {
-      is: (availableFromDate) => availableFromDate != null,
-      then: yup.date().min(yup.ref('availableFromDate'), "Available Till Date must be after Available From Date")
-    }),
+  // availableTillDate: yup.date()
+  //   .when('availableFromDate', {
+  //     is: (availableFromDate) => !!availableFromDate, // Check if availableFromDate is truthy
+  //     then: yup.date().min(yup.ref('availableFromDate'), "Available Till Date must be after Available From Date")
+  //   }),
+
   unavailableFromDate: yup.date(),
-  unavailableTillDate: yup.date()
-    .when('unavailableFromDate', {
-      is: (unavailableFromDate) => unavailableFromDate != null,
-      then: yup.date().min(yup.ref('unavailableFromDate'), "Unavailable Till Date must be after Unavailable From Date")
-    }),
-  reasonForUnavailability: yup.string()
-    .when(['unavailableFromDate', 'unavailableTillDate'], {
-      is: (unavailableFromDate, unavailableTillDate) => unavailableFromDate != null || unavailableTillDate != null,
-      then: yup.string().required("Reason for Unavailability is required")
-    })
+  // unavailableTillDate: yup.date()
+  // .when('unavailableFromDate', {
+  //   is: (unavailableFromDate) => !!unavailableFromDate, // Check if unavailableFromDate is truthy
+  //   then: yup.date().min(yup.ref('unavailableFromDate'), "Unavailable Till Date must be after Unavailable From Date")
+  // }),
+
+  // reasonForUnavailability: yup.string()
+  //   .when(['unavailableFromDate', 'unavailableTillDate'], {
+  //     is: (unavailableFromDate, unavailableTillDate) => !!unavailableFromDate || !!unavailableTillDate, // Check if either field is truthy
+  //     then: yup.string().required("Reason for Unavailability is required")
+  //   })
+
 });
 
 

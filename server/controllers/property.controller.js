@@ -323,61 +323,71 @@ const updateProperty = async (req, res) => {
         } = req.body;
 
 
-        const existingPropertyInformation = getPropertyById(id)
+        const existingPropertyInformation = await getPropertyById(id)
 
         if(!existingPropertyInformation) {
             return res.status(500).json({message: "property doesn't exist"})
         }
+// console.log(existingPropertyInformation.property_information)
 
-
-        await updatePropertyById(
-            { _id: id },
-            {
-                property_information: {
-                    ...existingPropertyInformation, // Copy existing properties
-                    property_name: property_information?.property_name,
-                    property_type: property_information?.property_type,
-                    property_description: property_information?.property_description,
-                    property_no_bedrooms: property_information?.property_no_bedrooms,
-                    property_no_bathroom: property_information?.property_no_bathroom,
-                    property_size: property_information?.property_size,
-                    property_amenities: property_information?.property_amenities,
-                    property_images: property_information?.property_images,
-                    property_review: property_information?.property_review,
-                    property_avg_ratings: property_information?.property_avg_ratings,
-                    property_location: {
-                      ...existingPropertyInformation?.property_location, // Copy existing location properties
-                      country: property_information?.property_location?.country,
-                      state: property_information?.property_location?.state,
-                      zip_code: property_information?.property_location?.zip_code,
-                    },
-                    property_policy: {
-                      ...existingPropertyInformation?.property_policy, // Copy existing policy properties
-                      pet_policy: property_information?.property_policy?.pet_policy,
-                      smoking_policy: property_information?.property_policy?.smoking_policy,
-                    },
-                    pricing: property_information?.pricing,
-                    availability: {
-                      ...existingPropertyInformation?.availability, // Copy existing availability properties
-                      available_date_from: property_information?.availability?.available_date_from,
-                      available_date_till: property_information?.availability?.available_date_till,
-                      unavailable_date_from: property_information?.availability?.unavailable_date_from,
-                      unavailable_date_till: property_information?.availability?.unavailable_date_till,
-                      occupied_date_from: property_information?.availability?.occupied_date_from,
-                      occupied_date_till: property_information?.availability?.occupied_date_till,
-                    },
-                    guest: {
-                      ...existingPropertyInformation?.guest, // Copy existing guest properties
-                      maximum_children: property_information?.guest?.maximum_children,
-                      maximum_adults: property_information?.guest?.maximum_adults,
-                      maximum_infants: property_information?.guest?.maximum_infants,
-                    },
-                    booking_status: property_information?.booking_status,
+        const updateProperty = await updatePropertyById(
+            // const updateProperty = await updatePropertyById(
+                { _id: id },
+                {
+                  $set: {
+                    property_information: { /* ...property_information */ }
                   }
-            },
+                }
+            //   );
+            // { _id: id },
+            // {
+            //     property_information: {
+            //         ...existingPropertyInformation, // Copy existing properties
+            //         property_name:property_information?.property_name || existingPropertyInformation.property_information.property_name,
+            //         property_type: property_information?.property_type,
+            //         property_description: property_information?.property_description,
+            //         property_no_bedrooms: property_information?.property_no_bedrooms,
+            //         property_no_bathroom: property_information?.property_no_bathroom,
+            //         property_size: property_information?.property_size,
+            //         property_amenities: property_information?.property_amenities,
+            //         property_images: property_information?.property_images,
+            //         property_review: property_information?.property_review,
+            //         property_avg_ratings: property_information?.property_avg_ratings,
+            //         property_location: {
+            //           ...existingPropertyInformation?.property_location, // Copy existing location properties
+            //           country: property_information?.property_location?.country,
+            //           state: property_information?.property_location?.state,
+            //           zip_code: property_information?.property_location?.zip_code,
+            //         },
+            //         property_policy: {
+            //           ...existingPropertyInformation?.property_policy, // Copy existing policy properties
+            //           pet_policy: property_information?.property_policy?.pet_policy,
+            //           smoking_policy: property_information?.property_policy?.smoking_policy,
+            //         },
+            //         pricing: property_information?.pricing,
+            //         availability: {
+            //           ...existingPropertyInformation?.availability, // Copy existing availability properties
+            //           available_date_from: property_information?.availability?.available_date_from,
+            //           available_date_till: property_information?.availability?.available_date_till,
+            //           unavailable_date_from: property_information?.availability?.unavailable_date_from,
+            //           unavailable_date_till: property_information?.availability?.unavailable_date_till,
+            //           occupied_date_from: property_information?.availability?.occupied_date_from,
+            //           occupied_date_till: property_information?.availability?.occupied_date_till,
+            //         },
+            //         guest: {
+            //           ...existingPropertyInformation?.guest, // Copy existing guest properties
+            //           maximum_children: property_information?.guest?.maximum_children,
+            //           maximum_adults: property_information?.guest?.maximum_adults,
+            //           maximum_infants: property_information?.guest?.maximum_infants,
+            //         },
+            //         booking_status: property_information?.booking_status,
+            //       }
+            // },
         );
 
-        res.status(200).json({ message: "Property updated successfully" });
+        console.log(updateProperty)
+
+        res.status(200).json({ message: "Property updated successfully", updateProperty });
     } catch (error) {
         // console.log(error)
         res.status(500).json({ message: error.message });

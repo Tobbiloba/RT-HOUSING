@@ -179,7 +179,7 @@ const HomePage = () => {
             {item.h1}
           </h1>
           {currentSwiper === item.id && (
-            <button className="hover:text-slate-500 hover:bg-white mt-6 border border-slate-500 px-5 py-2 text-white bg-slate-500 rounded-md">
+            <button className="hover:text-slate-500 hover:bg-white mt-6 border border-slate-500 px-5 py-2 text-white bg-slate-500">
               Start Exploring
             </button>
           )}

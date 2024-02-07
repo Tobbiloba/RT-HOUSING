@@ -166,4 +166,17 @@ const activateAdminUser = async (req, res) => {
 }
 
 
+// const messageAgent = async (req, res) => {
+//   try{
+//     const {id} = req.params;
+//     const {
+
+//     }
+//   } catch (error) {
+//     console.log(error.message)
+//     return res.status(500).json(error.message)
+//   }
+// }
+
+
 export {getAllAdminUsers, createAdminUser, loginAdminUser, getAdminUserInfoByID, activateAdminUser}

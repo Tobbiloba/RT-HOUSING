@@ -28,7 +28,8 @@ const PropertySchema = new mongoose.Schema({
             state: {type: String, required: true},
             city: {type: String, required: true},
             latitude: {type: String, required: false},
-            longitude: {type: String, required: false}
+            longitude: {type: String, required: false},
+            postal_code: {}
         },
         property_policy: {
             pet_policy: {type: Boolean, required: false},

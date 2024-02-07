@@ -29,7 +29,7 @@ const UpdateProperty = () => {
     // dispatch(getPropertyDetailById(id))
   }, [])
   const {details} = useSelector((state) => state?.propertyDetail);
-  console.log(details)
+  // console.log(details)
 
   const navigate = useNavigate();
   let today = startOfToday();
@@ -38,7 +38,7 @@ const UpdateProperty = () => {
   const [property_amenities, setProperty_amenities] = useState([]);
   const [property_images, setProperty_images] = useState([]);
   const [reason, setReason] = useState("");
-  console.log(property_images);
+  // console.log(property_images);
   const [property_availability_from_date, setProperty_availability_from_date] =
     useState(today);
   const [
@@ -137,34 +137,34 @@ const UpdateProperty = () => {
   const isDesktop = useMediaQuery({ minWidth: 999 });
 
   const onSubmit = async (values, actions) => {
-    if (property_amenities <= 2) {
-      toast.info("You must select at least 3 amenities", {
-        /* toast options */
-      });
-      return;
-    }
+    // if (property_amenities <= 2) {
+    //   toast.info("You must select at least 3 amenities");
+    //   return;
 
-    if (!isUnavailable && !reason) {
-      toast.info("You need to have a reason", {
-        /* toast options */
-      });
-      return;
-    }
 
-    if (!property_images || property_images.length < 3) {
-      console.log("Image not enough");
-      toast.info("You need to upload at least 5 images", {
-        /* toast options */
-      });
-      return;
-    }
+    //   console.log('working')
+    // }
 
+    // if (!isUnavailable && !reason) {
+    //   toast.info("You need to have a reason");
+    //   return;
+    // }
+
+    // if (!property_images || property_images.length < 3) {
+    //   console.log("Image not enough");
+    //   toast.info("You need to upload at least 5 images");
+    //   return;
+    // }
+console.log('values')
     // console.log(values, image), image));
     // dispatch(login(values));
   };
 
 
- 
+ const test = (e) => {
+  e.preventDefault()
+  console.log(values)
+ }
   const {
     values,
     errors,
@@ -181,6 +181,8 @@ const UpdateProperty = () => {
       propertyType: "",
       bathrooms: 1,
       bedrooms: 1,
+      floors: 1,
+      garages: 1,
       adults: 1,
       children: 0,
       infants: 0,
@@ -194,27 +196,31 @@ const UpdateProperty = () => {
       amenities: [],
       availableFromDate: today,
       availableTillDate: tomorrow,
-      unavailableFromDate: tomorrow, // Set to your initial value
-      unavailableTillDate: tomorrow, // Set to your initial value
+      unavailableFromDate: null, // Set to your initial value
+      unavailableTillDate: null, // Set to your initial value
       reasonForUnavailability: "",
       propertySize: [0, 70],
       propertyOccupiedFromDate: "", // Set to your initial value
       propertyOccupiedTillDate: "", // Set to your initial value
       isUnavailable: true,
     },
-    validationSchema: createPropertySchema,
-    onSubmit,
+    // validationSchema: createPropertySchema,
+    onSubmit: (values) => console.log(values),
+    validationSchema: createPropertySchema
   });
+  // console.log(values)
 
   useEffect(() => {
     if(details) {
-      console.log(details.property_information.availability.available_date_from[0])
+      // console.log(details.property_information.availability.available_date_from[0])
       values.propertyName = details.property_information.property_name
       values.propertyType = details.property_information.property_type
       values.propertyDescription = details.property_information.property_description
       values.bathrooms = details.property_information.property_no_bathrooms
+      values.garages = details.property_information.property_no_bedrooms
+      values.floors = details.property_information.property_no_bathrooms
       values.bedrooms = details.property_information.property_no_bedrooms
-      values.adults = details.property_information.guest.maximum_adults
+      values.adults = details.property_information.guest?.maximum_adults
       values.children = details.property_information.guest.maximum_children
       values.infants = details.property_information.guest.maximum_infants
       values.pricing = details.property_information.pricing
@@ -232,7 +238,7 @@ const UpdateProperty = () => {
     }
   }, [details])
 
-  console.log(values.availableFromDate.toDateString())
+  // console.log(values.availableFromDate.toDateString())
 
   return (
     <div
@@ -241,7 +247,7 @@ const UpdateProperty = () => {
       <form className={`exo p-4 flex ${
         isMobile ? "flex-col" : "flex-row px-[5%]"
       } gap-12`}
-      onSubmit={handleSubmit}>  
+      onSubmit={test}>  
       <div className={`${isDesktop && "w-8/12"} `}>
         <div className="bg-slate-500 px-[1rem] py-[2rem] shadow-md">
           <h1 className="text-slate-900 text-xl font-[600]">
@@ -309,6 +315,29 @@ const UpdateProperty = () => {
               error={
                 errors.bedrooms && touched.bedrooms
                   ? errors.bedrooms
+                  : undefined
+              }
+            />
+            <Dropdown
+              label="Floors"
+              data={numbers}
+              field={{ name: "floors", value: values.floors }}
+              form={{ setFieldValue, handleBlur, values, errors, touched }}
+              error={
+                errors.floors && touched.floors
+                  ? errors.floors
+                  : undefined
+              }
+            />
+
+            <Dropdown
+              label="Garages"
+              data={numbers}
+              field={{ name: "garages", value: values.garages }}
+              form={{ setFieldValue, handleBlur, values, errors, touched }}
+              error={
+                errors.garages && touched.garages
+                  ? errors.garages
                   : undefined
               }
             />
@@ -396,7 +425,6 @@ const UpdateProperty = () => {
             <div>
               <h1 className="mb-4 text-white text-[15px]">Property Size</h1>
               <p className="text-slate-400 text-[14px] mb-2">
-                {/* {values.property_size[0] * 10} sq ft - {values.property_size[1] * 10} sq ft */}
               </p>
 
               <DarkSlider
@@ -410,83 +438,6 @@ const UpdateProperty = () => {
           </div>
         </div>
 
-        {/* <div className="mt-12 shadow-md border border-slate-600 bg-slate-500 py-[2rem] px-[1rem]">
-          <h1 className="text-slate-900 text-xl font-[600]">
-            Property Location
-          </h1>
-          <div className="col-span-2 mt-8 grid grid-cols-3 gap-12">
-            <Input
-              placeholder="Enter address"
-              type="text"
-              label="Address*"
-              value={values.property_address}
-              handleChange={handleChange}
-              error={
-                errors.property_address && touched.property_address
-                  ? errors.property_address
-                  : undefined
-              }
-              touched={touched.property_address}
-              id="property_address"
-            />
-            <Input
-              placeholder="Enter country"
-              type="text"
-              label="Country"
-              value={values.property_country}
-              handleChange={handleChange}
-              error={
-                errors.property_country && touched.property_country
-                  ? errors.property_country
-                  : undefined
-              }
-              touched={touched.property_country}
-              id="property_country"
-            />
-            <Input
-              placeholder="Enter state"
-              type="text"
-              label="State"
-              value={values.property_state}
-              handleChange={handleChange}
-              error={
-                errors.property_state && touched.property_state
-                  ? errors.property_state
-                  : undefined
-              }
-              touched={touched.property_state}
-              id="property_state"
-            />
-            <Input
-              placeholder="Enter city"
-              type="text"
-              label="City"
-              value={values.property_city}
-              handleChange={handleChange}
-              error={
-                errors.property_city && touched.property_city
-                  ? errors.property_city
-                  : undefined
-              }
-              touched={touched.property_city}
-              id="property_city"
-            />
-            <Input
-              placeholder="Enter postal code"
-              type="text"
-              label="Postal Code"
-              value={values.property_postal}
-              handleChange={handleChange}
-              error={
-                errors.property_postal && touched.property_postal
-                  ? errors.property_postal
-                  : undefined
-              }
-              touched={touched.property_postal}
-              id="property_postal"
-            />
-          </div>
-        </div> */}
         <div className="mt-12 px-[1rem] py-[2rem] bg-slate-500  shadow-md">
           <h1 className="text-slate-900 text-xl font-[600]">Property Image</h1>
 
@@ -750,22 +701,29 @@ const UpdateProperty = () => {
           </div>
 
           <div className="mt-12 flex text-[14px] flex-row justify-between">
-            <button className="w-5/12 bg-slate-700 text-white shadow-md">
-              Discard
-            </button>
+          <button className="w-5/12 bg-slate-700 text-white shadow-md" type="submit">
+Discard
+</button> 
             <button
               className="w-6/12 py-3 bg-slate-400 text-white shadow-md"
               // onClick={validateForm}
               type="submit"
             >
-              Create Property
+             {
+              id ? ' Update Property' : 'Create Property'
+             }
             </button>
           </div>
         </div>
       </div>
       </form>
     </div>
+
   );
 };
 
 export default UpdateProperty;
+
+{/* <button className="w-5/12 bg-slate-700 text-white shadow-md">
+Discard
+</button> */}

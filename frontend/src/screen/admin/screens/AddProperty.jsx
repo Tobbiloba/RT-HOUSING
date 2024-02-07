@@ -17,9 +17,9 @@ import { styled } from "@mui/system";
 import DragDropFiles from "@/components/dropzone/Dropzone";
 import { useMediaQuery } from "react-responsive";
 import Input from "@/components/Input";
-
-
-
+import { useFormik } from "formik";
+import { createPropertySchema } from "@/schemas";
+import Textarea from "@/components/textarea/Textarea";
 const AddProperty = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -42,7 +42,7 @@ const AddProperty = () => {
   const [property_smoking_policy, setProperty_smoking_policy] = useState(false);
   const [property_pricing, setProperty_pricing] = useState("");
   const [reason, setReason] = useState("");
-  console.log(property_images)
+  // console.log(property_images)
   const [property_availability_from_date, setProperty_availability_from_date] =
     useState(today);
   const [
@@ -319,16 +319,61 @@ const AddProperty = () => {
     console.log('all check passed')
     // toast.success("You have successfully added your property", { /* toast options */ });
   };
-  
+const onSubmit = () => {
+  console.log('lol')
 
+}
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldValue, // Access setFieldValue function from useFormik
+  } = useFormik({
+    initialValues: {
+      propertyName: "",
+      propertyDescription: "",
+      propertyType: "",
+      bathrooms: 1,
+      bedrooms: 1,
+      adults: 1,
+      children: 0,
+      infants: 0,
+      pricing: "",
+      address: "",
+      country: "",
+      state: "",
+      city: "",
+      postalCode: "",
+      images: [],
+      amenities: [],
+      availableFromDate: today,
+      availableTillDate: tomorrow,
+      unavailableFromDate: tomorrow, // Set to your initial value
+      unavailableTillDate: tomorrow, // Set to your initial value
+      reasonForUnavailability: "",
+      propertySize: [0, 70],
+      propertyOccupiedFromDate: "", // Set to your initial value
+      propertyOccupiedTillDate: "", // Set to your initial value
+      isUnavailable: true,
+    },
+    // validationSchema: createPropertySchema,
+    validationSchema: createPropertySchema,
+    onSubmit,
+  });
+  
+console.log(values)
   const {status, property} = useSelector((state) => state.createProperty)
 
-  useEffect(() => {
-    if(status == 'successful') {
-      dispatch(Clear())
-      navigate('/admin/properties')
-    }
-  }, [status])
+  // useEffect(() => {
+  //   if(status == 'successful') {
+  //     dispatch(Clear())
+  //     navigate('/admin/properties')
+  //   }
+  // }, [status])
 
 
   const DarkSlider = styled(Slider)({
@@ -338,87 +383,673 @@ const AddProperty = () => {
   const isMobile = useMediaQuery({ maxWidth: 999 });
   const isDesktop = useMediaQuery({ minWidth: 999 });
   return (
-    <div
-      className={`exo p-4 flex ${
-        isMobile ? "flex-col" : "flex-row px-[5%]"
-      } gap-12`}
-    >
-      <div className={`${isDesktop && "w-8/12"}  rounded-md`}>
+//     <div
+//       className={`exo p-4 flex ${
+//         isMobile ? "flex-col" : "flex-row px-[5%]"
+//       } gap-12`}
+//     >
+//       <div className={`${isDesktop && "w-8/12"}  rounded-md`}>
       
         
-        <div className="bg-slate-500 px-[1rem] py-[2rem] rounded-md">
-        <h1 className="text-slate-900 text-xl font-[600]">
-              Property Details
-            </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
-          <Input
-            value={property_name}
-            setValue={setProperty_name}
-            label="Property Title"
-            //  placeholder='Enter Your Property Name'
+//         <div className="bg-slate-500 px-[1rem] py-[2rem] rounded-md">
+//         <h1 className="text-slate-900 text-xl font-[600]">
+//               Property Details
+//             </h1>
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
+//            <Input
+//               placeholder="Title"
+//               type="text"
+//               label="Property Title"
+//               value={values.propertyName}
+//               handleChange={handleChange}
+//               error={
+//                 errors.propertyName && touched.propertyName
+//                   ? errors.propertyName
+//                   : undefined
+//               }
+//               id="propertyName"
+//             />
+
+//             <Dropdown
+//               label="Property Type"
+//               data={options}
+//               field={{ name: "propertyType", value: values.propertyType }}
+//               form={{ setFieldValue, handleBlur, values, errors, touched }}
+//               error={
+//                 errors.propertyType && touched.propertyType
+//                   ? errors.propertyType
+//                   : undefined
+//               }
+//             />
+
+// <div className="col-span-2">
+//               <Textarea
+//                 placeholder="Property description"
+//                 type="text"
+//                 label="Property Description"
+//                 value={values.propertyDescription}
+//                 handleChange={handleChange}
+//                 error={
+//                   errors.propertyDescription && touched.propertyDescription
+//                     ? errors.propertyDescription
+//                     : undefined
+//                 }
+//                 id="propertyDescription"
+//               />
+//             </div>
+//           {/* <div className="flex col-span-2 flex-col sm:flex-row gap-y-6 md:gap-y-16 gap-x-12"> */}
+//           {/* <div className="w-6/12"> */}
+//           {/* <// @ts-ignore
+//           Dropdown
+//             label="Bathrooms"
+//             data={numbers}
+//             state={property_bathroom}
+//             setState={setProperty_bathroom}
+//           /> */}
+//           {/* </div> */}
+
+//           {/* <div className="w-6/12 border"> */}
+//           {/* <// @ts-ignore
+//           Dropdown
+//             label="Bedrooms"
+//             data={numbers}
+//             state={property_bedrooms}
+//             setState={setProperty_bedrooms}
+//           /> */}
+//           {/* </div> */}
+
+//           <Dropdown
+//               label="Bathrooms"
+//               data={numbers}
+//               field={{ name: "bathrooms", value: values.bathrooms }}
+//               form={{ setFieldValue, handleBlur, values, errors, touched }}
+//               error={
+//                 errors.bathrooms && touched.bathrooms
+//                   ? errors.bathrooms
+//                   : undefined
+//               }
+//             />
+
+//             <Dropdown
+//               label="Bedrooms"
+//               data={numbers}
+//               field={{ name: "bedrooms", value: values.bedrooms }}
+//               form={{ setFieldValue, handleBlur, values, errors, touched }}
+//               error={
+//                 errors.bedrooms && touched.bedrooms
+//                   ? errors.bedrooms
+//                   : undefined
+//               }
+//             />
+
+//           {/* <div className="col-span-2 grid grid-cols-3 gap-12">
+//             <// @ts-ignore
+//             Dropdown
+//               label="Adults"
+//               data={numbers}
+//               state={property_adults}
+//               setState={setProperty_adults}
+//             />
+//             <// @ts-ignore
+//             Dropdown
+//               label="Children (2 - 10) yrs"
+//               data={numbers}
+//               state={property_children}
+//               setState={setProperty_children}
+//             />
+//             <// @ts-ignore
+//             Dropdown
+//               label="Infants (0 - 2) yrs"
+//               data={numbers}
+//               state={property_infants}
+//               setState={setProperty_infants}
+//             />
+//           </div> */}
+
+// <div className="col-span-2 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+//               <Dropdown
+//                 label="No of adults"
+//                 data={numbers}
+//                 field={{ name: "adults", value: values.adults }}
+//                 form={{ setFieldValue, handleBlur, values, errors, touched }}
+//                 error={
+//                   errors.adults && touched.adults
+//                     ? errors.adults
+//                     : undefined
+//                 }
+//               />
+//               <Dropdown
+//                 label="No of children"
+//                 data={numbers}
+//                 field={{ name: "children", value: values.children }}
+//                 form={{ setFieldValue, handleBlur, values, errors, touched }}
+//                 error={
+//                   errors.children && touched.children
+//                     ? errors.children
+//                     : undefined
+//                 }
+//               />
+
+//               <Dropdown
+//                 label="Infants"
+//                 data={numbers}
+//                 field={{ name: "infants", value: values.infants }}
+//                 form={{ setFieldValue, handleBlur, values, errors, touched }}
+//                 error={
+//                   errors.infants && touched.infants
+//                     ? errors.infants
+//                     : undefined
+//                 }
+//               />
+//             </div>
+//             <Input
+//               placeholder="ng"
+//               type="text"
+//               label="Pricing / night"
+//               value={values.pricing}
+//               handleChange={handleChange}
+//               error={
+//                 errors.pricing && touched.pricing ? errors.pricing : undefined
+//               }
+//               id="pricing"
+//             />
+
+
+//           {/* <Input
+//           value={property_pricing}
+//           setValue={setProperty_pricing}
+//           label="Pricing /night"
+//         /> */}
+
+//         {/* <div className="flex flex-row  gap-12">
+//           <div className="flex flex-row gap-5 items-center">
+//             <input
+//               type="checkbox"
+//               className="w-4 h-4"
+//               checked={property_dog_policy}
+//               onChange={() => setProperty_dog_policy(!property_dog_policy)}
+//             />
+//             <p className="text-[15px] text-white">Pets</p>
+//           </div>
+//           <div className="flex flex-row gap-5 items-center">
+//             <input
+//               type="checkbox"
+//               className="w-4 h-4"
+//               checked={property_smoking_policy}
+//               onChange={() =>
+//                 setProperty_smoking_policy(!property_smoking_policy)
+//               }
+//             />
+//             <p className="text-[15px] text-white">Smoking</p>
+//           </div>
+//         </div> */}
+
+// <div className="flex flex-row  gap-12">
+//               <div className="flex flex-row gap-5 items-center">
+//                 <input
+//                   type="checkbox"
+//                   className="w-4 h-4"
+//                   checked={values.property_dog_policy}
+//                   onChange={(e) => {
+//                     handleChange(e);
+//                     setFieldValue(
+//                       "property_dog_policy",
+//                       !values.property_dog_policy
+//                     );
+//                   }}
+//                 />
+//                 <p className="text-[15px] text-white">Pets</p>
+//               </div>
+//               <div className="flex flex-row gap-5 items-center">
+//                 <input
+//                   type="checkbox"
+//                   className="w-4 h-4"
+//                   checked={values.property_smoking_policy}
+//                   onChange={(e) => {
+//                     handleChange(e);
+//                     setFieldValue(
+//                       "property_smoking_policy",
+//                       !values.property_smoking_policy
+//                     );
+//                   }}
+//                 />
+//                 <p className="text-[15px] text-white">Smoking</p>
+//               </div>
+//             </div>
+
+
+
+//           {/* <div>
+//           <h1 className="mb-4 text-white text-[15px]">Property Size</h1>
+//           <p className="text-slate-400 text-[14px] mb-2">
+//             {property_size[0] * 10} sq ft - {property_size[1] * 10} sq ft
+//           </p>
+//           <DarkSlider
+//             getAriaLabel={() => "Temperature range"}
+//             value={property_size}
+//             onChange={handleSizeChange}
+//             valueLabelDisplay="auto"
+//             getAriaValueText={valuetext}
+//           />
+//         </div> */}
+
+// <div>
+//               <h1 className="mb-4 text-white text-[15px]">Property Size</h1>
+//               <p className="text-slate-400 text-[14px] mb-2">
+//                 {/* {values.property_size[0] * 10} sq ft - {values.property_size[1] * 10} sq ft */}
+//               </p>
+
+//               <DarkSlider
+//                 getAriaLabel={() => "Temperature range"}
+//                 value={property_size}
+//                 onChange={handleSizeChange}
+//                 valueLabelDisplay="auto"
+//                 getAriaValueText={valuetext}
+//               />
+//             </div>
+
+//         </div>
+        
+         
+//       </div>
+
+//       <div className="mt-12 px-[1rem] py-[2rem] bg-slate-500  shadow-md">
+//           <h1 className="text-slate-900 text-xl font-[600]">Property Image</h1>
+
+//           <div className="mt-8">
+//             <div className="w-[100%]">
+//               <Dropzone
+//                 images={property_images}
+//                 setImages={setProperty_images}
+//               />
+//             </div>
+//           </div>
+//         </div>
+
+//       <div className="mt-12 shadow-md border border-slate-600 bg-slate-500 py-[2rem] px-[1rem] rounded-md">
+//         <h1 className="text-slate-900 text-xl font-[600]">
+//               Available Ammenities
+//             </h1>
+//          <div className="col-span-2 mt-8 grid grid-cols-3 gap-12">
+//             <Input
+//               value={property_address}
+//               setValue={setProperty_address}
+//               label="Address*"
+//             />
+//             <Input
+//               value={property_country}
+//               setValue={setProperty_country}
+//               label="Country"
+//             />
+//             <Input
+//               value={property_state}
+//               setValue={setProperty_state}
+//               label="State"
+//             />
+//             <Input
+//               value={property_city}
+//               setValue={setProperty_city}
+//               label="City"
+//             />
+//             <Input
+//               value={property_postal}
+//               setValue={setProperty_postal}
+//               label="Postal code"
+//             />
+
+//           </div>
+
+//           {/* <div className="col-span-2 grid sm:grid-cols-2 gap-y-6 md:gap-y-16 gap-x-12"> */}
+         
+
+//           {/* </div> */}
+//         </div>
+//         <div className="mt-12 px-[1rem] py-[2rem] bg-slate-500 rounded-md shadow-md">
+//           <h1 className="text-slate-900 text-xl font-[600]">Property Image</h1>
+//           {/* </div> */}
+
+//           {/* <> */}
+           
+//             <div className="mt-8">
+//               <div className="w-[100%]">
+//                 {/* <DragDropFiles setState={setProperty_images} /> */}
+//                 <Dropzone images={property_images} setImages={setProperty_images}/>
+//               </div>
+
+//               {/* <div>
+//                 {property_images.length > 0 ? (
+//                   <div className="grid grid-cols-1 mt-4 md:grid-cols-2 gap-8 items-center">
+//                     {property_images.map((url, index) => {
+//                       console.log(url)
+//                       return (
+
+//                         <img
+//                           key={index}
+//                           src={url}
+//                           alt={`Uploaded Image ${index}`}
+//                           style={{ objectFit: "contain" }}
+//                           className="w-[100%] h-auto rounded-md"
+//                         />
+//                         // <img key={index} src={url} alt={`Uploaded Image ${index}`} className="w-28 h-28 object-cover"/>
+//                       );
+//                     })}
+//                   </div>
+//                 ) : (
+//                   <div></div>
+//                 )}
+//               </div> */}
+//             </div>
+//           {/* </> */}
+//           {/* <div className=""> */}
+          
+//       </div>
+
+//       <div className="mt-12 px-[1rem] py-[2rem] rounded-md bg-slate-500">
+//         <div className="my-5  w-[100%] col-span-2">
+//             <h1 className="text-slate-900 text-xl font-[600]">
+//               Available Ammenities
+//             </h1>
+//             <div className=" mt-8 flex flex-row flex-wrap gap-x-6 gap-y-3">
+//               {ammenitiesList.map((item, index) => (
+//                 <div className="flex gap-4" key={index}>
+//                   {/* <input
+//                     type="checkbox"
+//                     className="bg-blue-500"
+//                     onChange={() => handleAmmenitiesCheckboxChange(item)}
+//                     // @ts-ignore
+//                     checked={property_amenities.includes(item)}
+//                     // disabled={!property_amenities.includes(item)}
+//                   /> */}
+//                   <p
+//                     onClick={() => handleAmmenitiesCheckboxChange(item)}
+//                     className={`text-[15px] text-white cursor-pointer ${
+//                       property_amenities.includes(item)
+//                         ? "bg-slate-900 "
+//                         : "border"
+//                     } hover:bg-slate-300 px-4 py-1 rounded-full`}
+//                   >
+//                     {item}
+//                   </p>
+
+//                   {/* <p className={`text-[16px] text-white  ${property_amenities.includes(item) ? '' : ''}`}>{item}</p> */}
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//       </div>
+//       </div>
+
+
+      
+
+//       <div
+//         className={`${
+//           isDesktop ? "w-4/12" : "mt-16"
+//         }  p-[1.5rem] h-fit bg-slate-500 rounded-md grid grid-cols-1 gap-8`}
+//       >
+//         {/* <div className="mt-2 grid grid-cols-1 gap-10"> */}
+//         <div className="relative">
+//           <div>
+//             <Box
+//               label="Available from"
+//               value={property_availability_from_date.toLocaleDateString()}
+//               setShowState={set_Show_Property_availability_from_date}
+//               showState={show_Property_availability_from_date}
+//             />
+//           </div>
+//           {show_Property_availability_from_date && (
+//             <div className="mt-4 absolute z-50">
+//               <Calendar
+//                 selectedDay={property_availability_from_date}
+//                 setSelectedDay={setProperty_availability_from_date}
+//                 setShowCalendar={set_Show_Property_availability_from_date}
+//               />
+//             </div>
+//           )}
+//         </div>
+
+//         <div className="relative">
+//           <div>
+//             <Box
+//               label="Available till"
+//               value={property_availability_till_date.toLocaleDateString()}
+//               setShowState={set_Show_Property_availability_till_date}
+//               showState={show_Property_availability_till_date}
+//             />
+//           </div>
+//           {show_Property_availability_till_date && (
+//             <div className="mt-4 absolute">
+//               <Calendar
+//                 selectedDay={property_availability_till_date}
+//                 setSelectedDay={setProperty_availability_till_date}
+//                 setShowCalendar={set_Show_Property_availability_till_date}
+//               />
+//             </div>
+//           )}
+//         </div>
+
+//         {/* {isUnavailable && ( */}
+//         <div className="flex flex-row gap-5 items-center">
+//           <input
+//             type="checkbox"
+//             checked={!isUnavailable}
+//             onChange={() => setIsUnavailable(!isUnavailable)}
+//             className="w-4 h-4"
+//           />
+//           <h1 className="text-[15px] text-white">Set Unavailable date</h1>
+//         </div>
+//         {/* )} */}
+
+//         <div>
+//         {!isUnavailable && (
+//           <div className="col-span-2 gap-8 grid grid-cols-1">
+//             <div className="relative">
+//               <div>
+//                 <Box
+//                   label="Unavailable from"
+//                   value={property_unavailability_from_date.toLocaleDateString()}
+//                   setShowState={set_Show_Property_unavailability_from_date}
+//                   showState={show_Property_unavailability_from_date}
+//                 />
+//               </div>
+//               {show_Property_unavailability_from_date && (
+//                 <div className="mt-4 absolute z-50">
+//                   <Calendar
+//                     selectedDay={property_unavailability_from_date}
+//                     setSelectedDay={setProperty_unavailability_from_date}
+//                     setShowCalendar={set_Show_Property_unavailability_from_date}
+//                   />
+//                 </div>
+//               )}
+//             </div>
+
+//             <div className="relative">
+//               <div>
+//                 <Box
+//                   label="Available from"
+//                   value={property_unavailability_till_date.toLocaleDateString()}
+//                   setShowState={set_Show_Property_unavailability_till_date}
+//                   showState={show_Property_unavailability_till_date}
+//                 />
+//               </div>
+//               {show_Property_unavailability_till_date && (
+//                 <div className="mt-4 absolute z-50">
+//                   <Calendar
+//                     selectedDay={property_unavailability_till_date}
+//                     setSelectedDay={setProperty_unavailability_till_date}
+//                     setShowCalendar={set_Show_Property_unavailability_till_date}
+//                   />
+//                 </div>
+//               )}
+//             </div>
+//             {!isUnavailable && (
+//               <div>
+//                 <Input value={reason} setValue={setReason} label="Reason" />
+//               </div>
+//             )}
+//           </div>
+//         )}
+//         </div>
+//         <div>
+//         <h1 className="text-slate-900 text-xl  font-[600]">Amenities</h1>
+
+//         <div>
+//           {property_amenities.length > 0 ? (
+//             <div className=" mt-5 flex flex-row flex-wrap gap-x-3 gap-y-3 border rounded-md p-[1rem]">
+//               {property_amenities.map((item, index) => (
+//                 <div
+//                   key={index}
+//                   className="flex flex-row items-center text-[14px] justify-center gap-2 px-4 py-1 rounded-full bg-slate-300"
+//                 >
+//                   {item}
+//                   <IoMdCloseCircle
+//                     className="text-slate-800 cursor-pointer"
+//                     onClick={() => handleAmmenitiesCheckboxChange(item)}
+//                   />
+//                 </div>
+//               ))}
+//             </div>
+//           ) : (
+//             <div className="h-[10rem] border mt-4 rounded-md flex items-center justify-center">
+//               <p className="text-[14px]">You haven't selected any amenity</p>
+//             </div>
+//           )}
+//         </div>
+
+
+//         <div className="mt-12 flex flex-row justify-between">
+//           <button className="w-5/12 bg-slate-700 text-white rounded-xl">Discard</button>
+//           <button className="w-6/12 py-3 bg-slate-400 text-white rounded-xl" onClick={validateForm}>Create Property</button>
+//         </div>
+//       </div>
+//       </div>
+//     </div>
+
+
+<div
+      
+>
+  <form className={`exo p-4 flex ${
+    isMobile ? "flex-col" : "flex-row px-[5%]"
+  } gap-12`}
+  onSubmit={handleSubmit}>  
+  <div className={`${isDesktop && "w-8/12"} `}>
+    <div className="bg-slate-500 px-[1rem] py-[2rem] shadow-md">
+      <h1 className="text-slate-900 text-xl font-[600]">
+        Property Details
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
+        <Input
+          placeholder="Title"
+          type="text"
+          label="Property Title"
+          value={values.propertyName}
+          handleChange={handleChange}
+          error={
+            errors.propertyName && touched.propertyName
+              ? errors.propertyName
+              : undefined
+          }
+          id="propertyName"
+        />
+
+        <Dropdown
+          label="Property Type"
+          data={options}
+          field={{ name: "propertyType", value: values.propertyType }}
+          form={{ setFieldValue, handleBlur, values, errors, touched }}
+          error={
+            errors.propertyType && touched.propertyType
+              ? errors.propertyType
+              : undefined
+          }
+        />
+        <div className="col-span-2">
+          <Textarea
+            placeholder="Property description"
+            type="text"
+            label="Property Description"
+            value={values.propertyDescription}
+            handleChange={handleChange}
+            error={
+              errors.propertyDescription && touched.propertyDescription
+                ? errors.propertyDescription
+                : undefined
+            }
+            id="propertyDescription"
+          />
+        </div>
+
+        <Dropdown
+          label="Bathrooms"
+          data={numbers}
+          field={{ name: "bathrooms", value: values.bathrooms }}
+          form={{ setFieldValue, handleBlur, values, errors, touched }}
+          error={
+            errors.bathrooms && touched.bathrooms
+              ? errors.bathrooms
+              : undefined
+          }
+        />
+
+        <Dropdown
+          label="Bedrooms"
+          data={numbers}
+          field={{ name: "bedrooms", value: values.bedrooms }}
+          form={{ setFieldValue, handleBlur, values, errors, touched }}
+          error={
+            errors.bedrooms && touched.bedrooms
+              ? errors.bedrooms
+              : undefined
+          }
+        />
+        <div className="col-span-2 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <Dropdown
+            label="No of adults"
+            data={numbers}
+            field={{ name: "adults", value: values.adults }}
+            form={{ setFieldValue, handleBlur, values, errors, touched }}
+            error={
+              errors.adults && touched.adults
+                ? errors.adults
+                : undefined
+            }
           />
           <Dropdown
-            label="Property Type"
-            data={options}
-            state={property_type}
-            setState={setProperty_type}
-          />
-
-          {/* <Textarea
-            value={property_description}
-            setValue={setProperty_description}
-            label="Property description"
-          /> */}
-          {/* <input /> */}
-
-          {/* <div className="flex col-span-2 flex-col sm:flex-row gap-y-6 md:gap-y-16 gap-x-12"> */}
-          {/* <div className="w-6/12"> */}
-          <// @ts-ignore
-          Dropdown
-            label="Bathrooms"
+            label="No of children"
             data={numbers}
-            state={property_bathroom}
-            setState={setProperty_bathroom}
+            field={{ name: "children", value: values.children }}
+            form={{ setFieldValue, handleBlur, values, errors, touched }}
+            error={
+              errors.children && touched.children
+                ? errors.children
+                : undefined
+            }
           />
-          {/* </div> */}
 
-          {/* <div className="w-6/12 border"> */}
-          <// @ts-ignore
-          Dropdown
-            label="Bedrooms"
+          <Dropdown
+            label="Infants"
             data={numbers}
-            state={property_bedrooms}
-            setState={setProperty_bedrooms}
+            field={{ name: "infants", value: values.infants }}
+            form={{ setFieldValue, handleBlur, values, errors, touched }}
+            error={
+              errors.infants && touched.infants
+                ? errors.infants
+                : undefined
+            }
           />
-          {/* </div> */}
+        </div>
 
-          <div className="col-span-2 grid grid-cols-3 gap-12">
-            <// @ts-ignore
-            Dropdown
-              label="Adults"
-              data={numbers}
-              state={property_adults}
-              setState={setProperty_adults}
-            />
-            <// @ts-ignore
-            Dropdown
-              label="Children (2 - 10) yrs"
-              data={numbers}
-              state={property_children}
-              setState={setProperty_children}
-            />
-            <// @ts-ignore
-            Dropdown
-              label="Infants (0 - 2) yrs"
-              data={numbers}
-              state={property_infants}
-              setState={setProperty_infants}
-            />
-          </div>
-          <Input
-          value={property_pricing}
-          setValue={setProperty_pricing}
-          label="Pricing /night"
+        <Input
+          placeholder="ng"
+          type="text"
+          label="Pricing / night"
+          value={values.pricing}
+          handleChange={handleChange}
+          error={
+            errors.pricing && touched.pricing ? errors.pricing : undefined
+          }
+          id="pricing"
         />
 
         <div className="flex flex-row  gap-12">
@@ -426,8 +1057,14 @@ const AddProperty = () => {
             <input
               type="checkbox"
               className="w-4 h-4"
-              checked={property_dog_policy}
-              onChange={() => setProperty_dog_policy(!property_dog_policy)}
+              checked={values.property_dog_policy}
+              onChange={(e) => {
+                handleChange(e);
+                setFieldValue(
+                  "property_dog_policy",
+                  !values.property_dog_policy
+                );
+              }}
             />
             <p className="text-[15px] text-white">Pets</p>
           </div>
@@ -435,28 +1072,23 @@ const AddProperty = () => {
             <input
               type="checkbox"
               className="w-4 h-4"
-              checked={property_smoking_policy}
-              onChange={() =>
-                setProperty_smoking_policy(!property_smoking_policy)
-              }
+              checked={values.property_smoking_policy}
+              onChange={(e) => {
+                handleChange(e);
+                setFieldValue(
+                  "property_smoking_policy",
+                  !values.property_smoking_policy
+                );
+              }}
             />
             <p className="text-[15px] text-white">Smoking</p>
           </div>
-          {/* </div> */}
         </div>
-          <div>
+        <div>
           <h1 className="mb-4 text-white text-[15px]">Property Size</h1>
           <p className="text-slate-400 text-[14px] mb-2">
-            {property_size[0] * 10} sq ft - {property_size[1] * 10} sq ft
+            {/* {values.property_size[0] * 10} sq ft - {values.property_size[1] * 10} sq ft */}
           </p>
-          {/* <Slider
-  getAriaLabel={() => "Temperature range"}
-  value={property_size}
-  onChange={handleSizeChange}
-  valueLabelDisplay="auto"
-  getAriaValueText={valuetext}
-  color="primary"
-/> */}
 
           <DarkSlider
             getAriaLabel={() => "Temperature range"}
@@ -466,270 +1098,364 @@ const AddProperty = () => {
             getAriaValueText={valuetext}
           />
         </div>
-
-        </div>
-        
-         
       </div>
+    </div>
 
-      <div className="mt-12 shadow-md border border-slate-600 bg-slate-500 py-[2rem] px-[1rem] rounded-md">
-        <h1 className="text-slate-900 text-xl font-[600]">
-              Available Ammenities
-            </h1>
-         <div className="col-span-2 mt-8 grid grid-cols-3 gap-12">
-            <Input
-              value={property_address}
-              setValue={setProperty_address}
-              label="Address*"
-            />
-            <Input
-              value={property_country}
-              setValue={setProperty_country}
-              label="Country"
-            />
-            <Input
-              value={property_state}
-              setValue={setProperty_state}
-              label="State"
-            />
-            <Input
-              value={property_city}
-              setValue={setProperty_city}
-              label="City"
-            />
-            <Input
-              value={property_postal}
-              setValue={setProperty_postal}
-              label="Postal code"
-            />
-
-          </div>
-
-          {/* <div className="col-span-2 grid sm:grid-cols-2 gap-y-6 md:gap-y-16 gap-x-12"> */}
-         
-
-          {/* </div> */}
-        </div>
-        <div className="mt-12 px-[1rem] py-[2rem] bg-slate-500 rounded-md shadow-md">
-          <h1 className="text-slate-900 text-xl font-[600]">Property Image</h1>
-          {/* </div> */}
-
-          {/* <> */}
-           
-            <div className="mt-8">
-              <div className="w-[100%]">
-                {/* <DragDropFiles setState={setProperty_images} /> */}
-                <Dropzone images={property_images} setImages={setProperty_images}/>
-              </div>
-
-              {/* <div>
-                {property_images.length > 0 ? (
-                  <div className="grid grid-cols-1 mt-4 md:grid-cols-2 gap-8 items-center">
-                    {property_images.map((url, index) => {
-                      console.log(url)
-                      return (
-
-                        <img
-                          key={index}
-                          src={url}
-                          alt={`Uploaded Image ${index}`}
-                          style={{ objectFit: "contain" }}
-                          className="w-[100%] h-auto rounded-md"
-                        />
-                        // <img key={index} src={url} alt={`Uploaded Image ${index}`} className="w-28 h-28 object-cover"/>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div></div>
-                )}
-              </div> */}
-            </div>
-          {/* </> */}
-          {/* <div className=""> */}
-          
+    {/* <div className="mt-12 shadow-md border border-slate-600 bg-slate-500 py-[2rem] px-[1rem]">
+      <h1 className="text-slate-900 text-xl font-[600]">
+        Property Location
+      </h1>
+      <div className="col-span-2 mt-8 grid grid-cols-3 gap-12">
+        <Input
+          placeholder="Enter address"
+          type="text"
+          label="Address*"
+          value={values.property_address}
+          handleChange={handleChange}
+          error={
+            errors.property_address && touched.property_address
+              ? errors.property_address
+              : undefined
+          }
+          touched={touched.property_address}
+          id="property_address"
+        />
+        <Input
+          placeholder="Enter country"
+          type="text"
+          label="Country"
+          value={values.property_country}
+          handleChange={handleChange}
+          error={
+            errors.property_country && touched.property_country
+              ? errors.property_country
+              : undefined
+          }
+          touched={touched.property_country}
+          id="property_country"
+        />
+        <Input
+          placeholder="Enter state"
+          type="text"
+          label="State"
+          value={values.property_state}
+          handleChange={handleChange}
+          error={
+            errors.property_state && touched.property_state
+              ? errors.property_state
+              : undefined
+          }
+          touched={touched.property_state}
+          id="property_state"
+        />
+        <Input
+          placeholder="Enter city"
+          type="text"
+          label="City"
+          value={values.property_city}
+          handleChange={handleChange}
+          error={
+            errors.property_city && touched.property_city
+              ? errors.property_city
+              : undefined
+          }
+          touched={touched.property_city}
+          id="property_city"
+        />
+        <Input
+          placeholder="Enter postal code"
+          type="text"
+          label="Postal Code"
+          value={values.property_postal}
+          handleChange={handleChange}
+          error={
+            errors.property_postal && touched.property_postal
+              ? errors.property_postal
+              : undefined
+          }
+          touched={touched.property_postal}
+          id="property_postal"
+        />
       </div>
+    </div> */}
+    <div className="mt-12 px-[1rem] py-[2rem] bg-slate-500  shadow-md">
+      <h1 className="text-slate-900 text-xl font-[600]">Property Image</h1>
 
-      <div className="mt-12 px-[1rem] py-[2rem] rounded-md bg-slate-500">
-        <div className="my-5  w-[100%] col-span-2">
-            <h1 className="text-slate-900 text-xl font-[600]">
-              Available Ammenities
-            </h1>
-            <div className=" mt-8 flex flex-row flex-wrap gap-x-6 gap-y-3">
-              {ammenitiesList.map((item, index) => (
-                <div className="flex gap-4" key={index}>
-                  {/* <input
-                    type="checkbox"
-                    className="bg-blue-500"
-                    onChange={() => handleAmmenitiesCheckboxChange(item)}
-                    // @ts-ignore
-                    checked={property_amenities.includes(item)}
-                    // disabled={!property_amenities.includes(item)}
-                  /> */}
-                  <p
-                    onClick={() => handleAmmenitiesCheckboxChange(item)}
-                    className={`text-[15px] text-white cursor-pointer ${
-                      property_amenities.includes(item)
-                        ? "bg-slate-900 "
-                        : "border"
-                    } hover:bg-slate-300 px-4 py-1 rounded-full`}
-                  >
-                    {item}
-                  </p>
-
-                  {/* <p className={`text-[16px] text-white  ${property_amenities.includes(item) ? '' : ''}`}>{item}</p> */}
-                </div>
-              ))}
-            </div>
-          </div>
-      </div>
-      </div>
-
-
-      
-
-      <div
-        className={`${
-          isDesktop ? "w-4/12" : "mt-16"
-        }  p-[1.5rem] h-fit bg-slate-500 rounded-md grid grid-cols-1 gap-8`}
-      >
-        {/* <div className="mt-2 grid grid-cols-1 gap-10"> */}
-        <div className="relative">
-          <div>
-            <Box
-              label="Available from"
-              value={property_availability_from_date.toLocaleDateString()}
-              setShowState={set_Show_Property_availability_from_date}
-              showState={show_Property_availability_from_date}
-            />
-          </div>
-          {show_Property_availability_from_date && (
-            <div className="mt-4 absolute z-50">
-              <Calendar
-                selectedDay={property_availability_from_date}
-                setSelectedDay={setProperty_availability_from_date}
-                setShowCalendar={set_Show_Property_availability_from_date}
-              />
-            </div>
-          )}
-        </div>
-
-        <div className="relative">
-          <div>
-            <Box
-              label="Available till"
-              value={property_availability_till_date.toLocaleDateString()}
-              setShowState={set_Show_Property_availability_till_date}
-              showState={show_Property_availability_till_date}
-            />
-          </div>
-          {show_Property_availability_till_date && (
-            <div className="mt-4 absolute">
-              <Calendar
-                selectedDay={property_availability_till_date}
-                setSelectedDay={setProperty_availability_till_date}
-                setShowCalendar={set_Show_Property_availability_till_date}
-              />
-            </div>
-          )}
-        </div>
-
-        {/* {isUnavailable && ( */}
-        <div className="flex flex-row gap-5 items-center">
-          <input
-            type="checkbox"
-            checked={!isUnavailable}
-            onChange={() => setIsUnavailable(!isUnavailable)}
-            className="w-4 h-4"
+      <div className="mt-8">
+        <div className="w-[100%]">
+          <Dropzone
+            images={property_images}
+            setImages={setProperty_images}
           />
-          <h1 className="text-[15px] text-white">Set Unavailable date</h1>
         </div>
-        {/* )} */}
+      </div>
+    </div>
 
-        <div>
-        {!isUnavailable && (
-          <div className="col-span-2 gap-8 grid grid-cols-1">
-            <div className="relative">
-              <div>
-                <Box
-                  label="Unavailable from"
-                  value={property_unavailability_from_date.toLocaleDateString()}
-                  setShowState={set_Show_Property_unavailability_from_date}
-                  showState={show_Property_unavailability_from_date}
-                />
-              </div>
-              {show_Property_unavailability_from_date && (
-                <div className="mt-4 absolute z-50">
-                  <Calendar
-                    selectedDay={property_unavailability_from_date}
-                    setSelectedDay={setProperty_unavailability_from_date}
-                    setShowCalendar={set_Show_Property_unavailability_from_date}
-                  />
-                </div>
-              )}
+    <div className="mt-12 px-[1rem] py-[2rem] shadow-md bg-slate-500">
+      <div className="my-5  w-[100%] col-span-2">
+        <h1 className="text-slate-900 text-xl font-[600]">
+          Available Ammenities
+        </h1>
+        <div className=" mt-8 flex flex-row flex-wrap gap-x-6 gap-y-3">
+          {ammenitiesList.map((item, index) => (
+            <div className="flex gap-4" key={index}>
+              <p
+                onClick={() => handleAmmenitiesCheckboxChange(item)}
+                className={`text-[15px] text-white cursor-pointer ${
+                  property_amenities.includes(item)
+                    ? "bg-slate-900 "
+                    : "border"
+                } hover:bg-slate-300 px-4 py-1`}
+              >
+                {item}
+              </p>
             </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <div className="relative">
-              <div>
-                <Box
-                  label="Available from"
-                  value={property_unavailability_till_date.toLocaleDateString()}
-                  setShowState={set_Show_Property_unavailability_till_date}
-                  showState={show_Property_unavailability_till_date}
-                />
-              </div>
-              {show_Property_unavailability_till_date && (
-                <div className="mt-4 absolute z-50">
-                  <Calendar
-                    selectedDay={property_unavailability_till_date}
-                    setSelectedDay={setProperty_unavailability_till_date}
-                    setShowCalendar={set_Show_Property_unavailability_till_date}
-                  />
-                </div>
-              )}
+  <div
+    className={`${
+      isDesktop ? "w-4/12" : "mt-16"
+    }   grid grid-cols-1 gap-12 h-fit`}
+  >
+    <div className="mt-0 shadow-md h-fit bg-slate-500 py-[2rem] px-[1rem]">
+      <h1 className="text-slate-900 text-xl font-[600]">
+        Property Location
+      </h1>
+      <div className="col-span-2 mt-8 grid grid-cols-1 gap-4">
+        <Input
+          placeholder="Enter address"
+          type="text"
+          label="Address*"
+          value={values.address}
+          handleChange={handleChange}
+          error={
+            errors.address && touched.address
+              ? errors.address
+              : undefined
+          }
+          touched={touched.address}
+          id="address"
+        />
+        <Input
+          placeholder="Enter country"
+          type="text"
+          label="Country"
+          value={values.country}
+          handleChange={handleChange}
+          error={
+            errors.country && touched.country
+              ? errors.country
+              : undefined
+          }
+          touched={touched.country}
+          id="country"
+        />
+        <Input
+          placeholder="Enter state"
+          type="text"
+          label="State"
+          value={values.state}
+          handleChange={handleChange}
+          error={
+            errors.state && touched.state
+              ? errors.state
+              : undefined
+          }
+          touched={touched.state}
+          id="state"
+        />
+        <Input
+          placeholder="Enter city"
+          type="text"
+          label="City"
+          value={values.city}
+          handleChange={handleChange}
+          error={
+            errors.city && touched.city
+              ? errors.city
+              : undefined
+          }
+          touched={touched.city}
+          id="city"
+        />
+        <Input
+          placeholder="Enter postal code"
+          type="text"
+          label="Postal Code"
+          value={values.postalCode}
+          handleChange={handleChange}
+          error={
+            errors.postalCode && touched.postalCode
+              ? errors.postalCode
+              : undefined
+          }
+          touched={touched.postalCode}
+          id="postalCode"
+        />
+      </div>
+    </div>
+
+
+    <div className="p-[1.5rem] h-fit shadow-md bg-slate-500 flex flex-col gap-6">
+    <h1 className="text-slate-900 text-xl font-[600]">
+        Availability Date
+      </h1>
+    <div className="relative ">
+      <div>
+        <Box
+          label="Available from"
+          value={values.availableFromDate.toDateString()}
+          setShowState={set_Show_Property_availability_from_date}
+          showState={show_Property_availability_from_date}
+        />
+      </div>
+      {show_Property_availability_from_date && (
+        <div className="mt-4 absolute z-50">
+          <Calendar
+            selectedDay={values.availableFromDate}
+            setSelectedDay={setProperty_availability_from_date}
+            setShowCalendar={set_Show_Property_availability_from_date}
+            id="availableFromDate"
+            setFieldValue={setFieldValue}
+          />
+        </div>
+      )}
+    </div>
+
+    <div className="relative">
+      <div>
+        <Box
+          label="Available till"
+          value={values.availableTillDate.toDateString()}
+          setShowState={set_Show_Property_availability_till_date}
+          showState={show_Property_availability_till_date}
+        />
+      </div>
+      {show_Property_availability_till_date && (
+        <div className="mt-4 absolute">
+          <Calendar
+            selectedDay={values.availableTillDate}
+            setShowCalendar={set_Show_Property_availability_till_date}
+            id="availableTillDate"
+            setFieldValue={setFieldValue}
+          />
+        </div>
+      )}
+    </div>
+
+    {/* {isUnavailable && ( */}
+    <div className="flex flex-row gap-5 my-3 items-center">
+      <input
+        type="checkbox"
+        checked={!isUnavailable}
+        onChange={() => setIsUnavailable(!isUnavailable)}
+        className="w-4 h-4"
+      />
+      <h1 className="text-[15px] text-white">Set Unavailable date</h1>
+    </div>
+    {/* )} */}
+
+    <div>
+      {!isUnavailable && (
+        <div className="col-span-2 gap-8 grid grid-cols-1">
+          <div className="relative">
+            <div>
+              <Box
+                label="Unavailable from"
+                value={property_unavailability_from_date.toLocaleDateString()}
+                setShowState={set_Show_Property_unavailability_from_date}
+                showState={show_Property_unavailability_from_date}
+              />
             </div>
-            {!isUnavailable && (
-              <div>
-                <Input value={reason} setValue={setReason} label="Reason" />
+            {show_Property_unavailability_from_date && (
+              <div className="mt-4 absolute z-50">
+                <Calendar
+                  selectedDay={property_unavailability_from_date}
+                  setSelectedDay={setProperty_unavailability_from_date}
+                  setShowCalendar={
+                    set_Show_Property_unavailability_from_date
+                  }
+                />
               </div>
             )}
           </div>
-        )}
-        </div>
-        <div>
-        <h1 className="text-slate-900 text-xl  font-[600]">Amenities</h1>
 
-        <div>
-          {property_amenities.length > 0 ? (
-            <div className=" mt-5 flex flex-row flex-wrap gap-x-3 gap-y-3 border rounded-md p-[1rem]">
-              {property_amenities.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex flex-row items-center text-[14px] justify-center gap-2 px-4 py-1 rounded-full bg-slate-300"
-                >
-                  {item}
-                  <IoMdCloseCircle
-                    className="text-slate-800 cursor-pointer"
-                    onClick={() => handleAmmenitiesCheckboxChange(item)}
-                  />
-                </div>
-              ))}
+          <div className="relative">
+            <div>
+              <Box
+                label="Available from"
+                value={property_unavailability_till_date.toLocaleDateString()}
+                setShowState={set_Show_Property_unavailability_till_date}
+                showState={show_Property_unavailability_till_date}
+              />
             </div>
-          ) : (
-            <div className="h-[10rem] border mt-4 rounded-md flex items-center justify-center">
-              <p className="text-[14px]">You haven't selected any amenity</p>
+            {show_Property_unavailability_till_date && (
+              <div className="mt-4 absolute z-50">
+                <Calendar
+                  selectedDay={property_unavailability_till_date}
+                  setSelectedDay={setProperty_unavailability_till_date}
+                  setShowCalendar={
+                    set_Show_Property_unavailability_till_date
+                  }
+                />
+              </div>
+            )}
+          </div>
+          {!isUnavailable && (
+            <div>
+              <Input value={reason} setValue={setReason} label="Reason" />
             </div>
           )}
         </div>
+      )}
+    </div>
+    </div>
+    <div className="p-[1.5rem] shadow-md bg-slate-500 h-fit">
+      <h1 className="text-slate-900 text-xl  font-[600]">Amenities</h1>
 
-
-        <div className="mt-12 flex flex-row justify-between">
-          <button className="w-5/12 bg-slate-700 text-white rounded-xl">Discard</button>
-          <button className="w-6/12 py-3 bg-slate-400 text-white rounded-xl" onClick={validateForm}>Create Property</button>
-        </div>
+      <div>
+        {property_amenities.length > 0 ? (
+          <div className=" mt-5 flex flex-row flex-wrap gap-x-3 gap-y-3 border shadow-md p-[1rem]">
+            {property_amenities.map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-row items-center text-[14px] justify-center gap-2 px-4 py-[6px] bg-slate-300"
+              >
+                {item}
+                <IoMdCloseCircle
+                  className="text-slate-800 cursor-pointer text-[17px]"
+                  onClick={() => handleAmmenitiesCheckboxChange(item)}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="h-[10rem] border mt-4  flex items-center justify-center">
+            <p className="text-[14px] text-white">You haven't selected any amenity</p>
+          </div>
+        )}
       </div>
+
+      <div className="mt-12 flex text-[14px] flex-row justify-between">
+        <button className="w-5/12 bg-slate-700 text-white shadow-md">
+          Discard
+        </button>
+        <button
+          className="w-6/12 py-3 bg-slate-400 text-white shadow-md"
+          // onClick={validateForm}
+          type="submit"
+        >
+          Create Property
+        </button>
       </div>
     </div>
+  </div>
+  </form>
+</div>
   );
 };
 

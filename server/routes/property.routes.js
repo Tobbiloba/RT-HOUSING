@@ -25,6 +25,7 @@ router.route("/user").get(getAllPropertiesUser);
 router.route("/:id").get(getPropertyDetail);
 router.route("/:id").post(createProperty);
 router.route("/:id").patch(updateProperty);
+
 router.route("/:id").delete(deleteProperty);
 router.route("/activate/:id").post(activateProperty);
 router.route("/deactivate/:id").post(deActivateProperty);
