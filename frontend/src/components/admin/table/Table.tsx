@@ -43,107 +43,107 @@ import {
   TableRow,
 } from "@/~/components/ui/table";
 
-const data: Payment[] = [
-  {
-    id: "bhqecj4p",
-    price: "721",
-    status: "active",
-    property_name: "Lekki Villa",
-    property_type: "Vila",
-    checkin: "20/01/2024",
-    checkout: "25/01/2024",
-  },
-  {
-    id: "3u1reuv4",
-    price: "500",
-    status: "declined",
-    property_name: "Downtown Apartment",
-    property_type: "Apartment",
-    checkin: "15/02/2024",
-    checkout: "22/02/2024",
-  },
-  {
-    id: "m5gr84i9",
-    price: "900",
-    status: "inactive",
-    property_name: "Ocean View Resort",
-    property_type: "Resort",
-    checkin: "10/03/2024",
-    checkout: "18/03/2024",
-  },
-  {
-    id: "v9zg7p2r",
-    price: "600",
-    status: "pending",
-    property_name: "Sunny Condo",
-    property_type: "Condo",
-    checkin: "05/04/2024",
-    checkout: "12/04/2024",
-  },
-  {
-    id: "k3s6v1e8",
-    price: "800",
-    status: "pending",
-    property_name: "Mountain Cabin",
-    property_type: "Cabin",
-    checkin: "01/05/2024",
-    checkout: "08/05/2024",
-  },
-  {
-    id: "x2a4d5w9",
-    price: "450",
-    status: "active",
-    property_name: "Riverside Bungalow",
-    property_type: "Bungalow",
-    checkin: "20/05/2024",
-    checkout: "27/05/2024",
-  },
-  {
-    id: "p1t9o8y7",
-    price: "700",
-    status: "inactive",
-    property_name: "City Loft",
-    property_type: "Loft",
-    checkin: "15/06/2024",
-    checkout: "22/06/2024",
-  },
-  {
-    id: "z6m8c7b2",
-    price: "550",
-    status: "active",
-    property_name: "Beachfront Cottage",
-    property_type: "Cottage",
-    checkin: "10/07/2024",
-    checkout: "18/07/2024",
-  },
-  {
-    id: "o5k3j1a7",
-    price: "950",
-    status: "declined",
-    property_name: "Luxury Penthouse",
-    property_type: "Penthouse",
-    checkin: "05/08/2024",
-    checkout: "12/08/2024",
-  },
-  {
-    id: "r8t2e3w1",
-    price: "520",
-    status: "pending",
-    property_name: "Country Retreat",
-    property_type: "Retreat",
-    checkin: "01/09/2024",
-    checkout: "08/09/2024",
-  },
-  {
-    id: "wocenwoine",
-    price: "520",
-    status: "pending",
-    property_name: "Country Retreat",
-    property_type: "Retreat",
-    checkin: "01/09/2024",
-    checkout: "08/09/2024",
-  },
-];
+// const data: Payment[] = [
+//   {
+//     id: "bhqecj4p",
+//     price: "721",
+//     status: "active",
+//     property_name: "Lekki Villa",
+//     property_type: "Vila",
+//     checkin: "20/01/2024",
+//     checkout: "25/01/2024",
+//   },
+//   {
+//     id: "3u1reuv4",
+//     price: "500",
+//     status: "declined",
+//     property_name: "Downtown Apartment",
+//     property_type: "Apartment",
+//     checkin: "15/02/2024",
+//     checkout: "22/02/2024",
+//   },
+//   {
+//     id: "m5gr84i9",
+//     price: "900",
+//     status: "inactive",
+//     property_name: "Ocean View Resort",
+//     property_type: "Resort",
+//     checkin: "10/03/2024",
+//     checkout: "18/03/2024",
+//   },
+//   {
+//     id: "v9zg7p2r",
+//     price: "600",
+//     status: "pending",
+//     property_name: "Sunny Condo",
+//     property_type: "Condo",
+//     checkin: "05/04/2024",
+//     checkout: "12/04/2024",
+//   },
+//   {
+//     id: "k3s6v1e8",
+//     price: "800",
+//     status: "pending",
+//     property_name: "Mountain Cabin",
+//     property_type: "Cabin",
+//     checkin: "01/05/2024",
+//     checkout: "08/05/2024",
+//   },
+//   {
+//     id: "x2a4d5w9",
+//     price: "450",
+//     status: "active",
+//     property_name: "Riverside Bungalow",
+//     property_type: "Bungalow",
+//     checkin: "20/05/2024",
+//     checkout: "27/05/2024",
+//   },
+//   {
+//     id: "p1t9o8y7",
+//     price: "700",
+//     status: "inactive",
+//     property_name: "City Loft",
+//     property_type: "Loft",
+//     checkin: "15/06/2024",
+//     checkout: "22/06/2024",
+//   },
+//   {
+//     id: "z6m8c7b2",
+//     price: "550",
+//     status: "active",
+//     property_name: "Beachfront Cottage",
+//     property_type: "Cottage",
+//     checkin: "10/07/2024",
+//     checkout: "18/07/2024",
+//   },
+//   {
+//     id: "o5k3j1a7",
+//     price: "950",
+//     status: "declined",
+//     property_name: "Luxury Penthouse",
+//     property_type: "Penthouse",
+//     checkin: "05/08/2024",
+//     checkout: "12/08/2024",
+//   },
+//   {
+//     id: "r8t2e3w1",
+//     price: "520",
+//     status: "pending",
+//     property_name: "Country Retreat",
+//     property_type: "Retreat",
+//     checkin: "01/09/2024",
+//     checkout: "08/09/2024",
+//   },
+//   {
+//     id: "wocenwoine",
+//     price: "520",
+//     status: "pending",
+//     property_name: "Country Retreat",
+//     property_type: "Retreat",
+//     checkin: "01/09/2024",
+//     checkout: "08/09/2024",
+//   },
+// ];
 
 export type Payment = {
   id: string;
@@ -181,32 +181,38 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "property_name",
+    accessorKey: "propertyInformation",
     header: "Property name",
-    cell: ({ row }) => (
-      <div className="capitalize text-[13px]">{row.getValue("property_name")}</div>
-    ),
+    cell: ({ row }) => {
+      const propertyInformation = row.getValue("propertyInformation")
+      return (
+        <div className="capitalize text-[13px]">{propertyInformation.propertyName}</div>
+      )
+    }
   },
   {
-    accessorKey: "property_type",
+    accessorKey: "propertyInformation",
     header: "Property type",
-    cell: ({ row }) => (
-      <div className="capitalize text-[13px]">{row.getValue("property_type")}</div>
-    ),
+    cell: ({ row }) => {
+      const propertyInformation = row.getValue("propertyInformation")
+      // console.log(propertyInformation.propertyType)
+      return(
+      <div className="capitalize text-[13px]">{propertyInformation.propertyType}</div>
+    )}
   },
 
   {
-    accessorKey: "checkin",
+    accessorKey: "checkinDate",
     header: "Checkin Date",
     cell: ({ row }) => (
-      <div className="capitalize text-[13px]">{row.getValue("checkin")}</div>
+      <div className="capitalize text-[13px]">{row.getValue("checkinDate")}</div>
     ),
   },
   {
-    accessorKey: "checkout",
+    accessorKey: "checkoutDate",
     header: "Checkout Date",
     cell: ({ row }) => (
-      <div className="capitalize text-[13px]">{row.getValue("checkout")}</div>
+      <div className="capitalize text-[13px]">{row.getValue("checkoutDate")}</div>
     ),
   },
   // {
@@ -225,19 +231,43 @@ export const columns: ColumnDef<Payment>[] = [
   //   cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   // },
   {
-    accessorKey: "status",
+    accessorKey: "bookingStatus",
     header: "Status",
     cell: ({ row }) => (
-      <div className={`capitalize text-start text-[13px] ${row.getValue("status") == "active" ? "text-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("status")}</div>
+      <div className={`capitalize text-start text-[13px] ${row.getValue("bookingStatus") == "active" ? "text-sky-400" : row.getValue("bookingStatus") === "inactive" ? "text-slate-500" : row.getValue("bookingStatus") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("bookingStatus")}</div>
     ),
   },
   {
-    accessorKey: "price",
+    accessorKey: "pricing",
     header: () => <div className="">Total Price</div>,
-    cell: ({ row }) => (
-      <div className={`capitalize text-center text-[13px] ${row.getValue("status") == "active" ? "text-sky-400" : row.getValue("status") === "inactive" ? "text-slate-500" : row.getValue("status") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("price")}</div>
-    ),
+    cell: ({ row }) => {
+      // console.log("Status:", row.getValue("bookingStatus"));
+      const price = row.getValue("pricing")
+      console.log(price.totalPrice)
+      // console.log(row.getValue(`'pricing.'totalPrice'`))
+  console.log("Total Price:", row.getValue("pricing"));
+      const statusColor =
+        row.getValue("bookingStatus") === "active"
+          ? "text-sky-400"
+          : row.getValue("bookingStatus") === "inactive" || row.getValue("bookingStatus") === "pending"
+          ? "text-slate-500"
+          : "text-red-500";
+  
+      return (
+        <div className={`capitalize text- text-[13px] ${statusColor}`}>
+          {/* {row.getValue("pricing.totalPrice")} */}
+          {price.totalPrice}
+        </div>
+      );
+    },
   },
+  // {
+  //   accessorKey: "pricing",
+  //   header: () => <div className="">Total Price</div>,
+  //   cell: ({ row }) => (
+  //     <div className={`capitalize text-center text-[13px] ${row.getValue("bookingStatus") == "active" ? "text-sky-400" : row.getValue("bookingStatus") === "inactive" ? "text-slate-500" : row.getValue("bookingStatus") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("pricing.totalPrice")}</div>
+  //   ),
+  // },
 
   // https://cdn-icons-png.flaticon.com/128/6811/6811049.png
 
@@ -282,7 +312,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ];
 
-export function DataTableDemo2() {
+export function DataTableDemo2({data}) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

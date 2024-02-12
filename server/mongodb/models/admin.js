@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
-const CompanySchema = new mongoose.Schema({});
+const EmployeeSchema = new mongoose.Schema({
+  id: {type: String, required: true}
+})
 const AdminUserSchema = new mongoose.Schema({
   activationToken: { type: String, required: false },
   isActivated: { type: Boolean, enum: [true, false], default: false },
@@ -13,15 +15,11 @@ const AdminUserSchema = new mongoose.Schema({
   state: { type: String, required: false },
   city: { type: String, required: false },
   socials: { type: [String], required: false },
-  company_information: {
-    company_id: { type: String, required: false },
-    company_name: { type: String, required: false },
-    role: { type: String, required: false },
-  },
   authentication: {
     password: { type: String, required: true, select: false },
     salt: { type: String, required: true, select: false },
   },
+  employee: [EmployeeSchema],
 });
 
 const adminUserModel = mongoose.model("AdminUser", AdminUserSchema);

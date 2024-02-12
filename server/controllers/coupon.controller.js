@@ -1,7 +1,8 @@
 import mgongoose from "mongoose"
 import { random } from "../helpers/index.js"
-import { getAllCouponSchema, getCompanyCouponByIdSchema, createCouponSchema, deleteCouponSchema, getCouponByCodeSchema, getCouponById } from "../mongodb/models/coupon.js"
+import { getAllCouponSchema, getAdminCouponByIdSchema, createCouponSchema, deleteCouponSchema, getCouponByCodeSchema, getCouponById } from "../mongodb/models/coupon.js"
 import { getCompanyByIdSchema } from "../mongodb/models/company.js"
+import { getAdminUserById } from "../mongodb/models/admin.js"
 
 
 
@@ -17,11 +18,11 @@ const getAllCouponsModel = async(req, res) => {
     }
 }
 
-const getCompanyCouponByIdModel = async (req, res) => {
+const getAdminCouponByIdModel = async (req, res) => {
     try {
         const {id} = req.params;
 
-        const coupons = getCompanyCouponByIdSchema(id)
+        const coupons = await getAdminCouponByIdSchema(id)
 
         console.log(coupons)
 
@@ -36,16 +37,18 @@ const getCompanyCouponByIdModel = async (req, res) => {
 const createCouponModel = async (req, res) => {
     try {
         const { id } = req.params;
-        const { coupon_title, coupon_code, free_shipping, quantity, min_purchase, discount_type, status } = req.body;
-
-        if (!id || !coupon_title || !coupon_code || !free_shipping || !min_purchase || !discount_type || !status || !quantity) {
+        const {  coupon_code, free_shipping, quantity, min_purchase, discount_type, status, discount_price } = req.body;
+        console.log(id, coupon_code, free_shipping, quantity, min_purchase, discount_type, status, discount_price)
+        if (!id || !discount_price || !coupon_code  || !min_purchase || !discount_type || !status || !quantity) {
+            console.log('not complete')
             return res.status(400).json({ message: "Pass in all required parameters" });
         }
 
-        const companyExists = await getCompanyByIdSchema(id);
+        const adminExist = await getAdminUserById(id);
 
-        if (!companyExists) {
-            return res.status(404).json({ message: "Company doesn't exist" });
+        if (!adminExist) {
+            console.log('admin not found')
+            return res.status(404).json({ message: "Admin doesn't exist" });
         }
 
         const couponExist = await getCouponByCodeSchema(coupon_code);
@@ -54,15 +57,16 @@ const createCouponModel = async (req, res) => {
             return res.status(400).json({ message: "Coupon code already used" });
         }
 
+
         const coupon = await createCouponSchema({
-            company_id: id,
-            company_name: companyExists.company_name,
-            coupon_title: coupon_title,
+            admin_id: id,
+            admin_name: adminExist.username,
             coupon_code: coupon_code,
             free_shipping: free_shipping,
             quantity: quantity,
             min_purchase: min_purchase,
             discount_type: discount_type,
+            discount_price: discount_price,
             status: 'active',
         });
         console.log(coupon)
@@ -122,4 +126,4 @@ const verifyCouponModel = async (req, res) => {
     }
 }
 
-export {getAllCouponsModel, getCompanyCouponByIdModel, createCouponModel, verifyCouponModel}
+export {getAllCouponsModel, getAdminCouponByIdModel, createCouponModel, verifyCouponModel}

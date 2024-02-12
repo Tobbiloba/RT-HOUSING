@@ -77,7 +77,7 @@ const Input = ({
           )}
         </div>
         {/* <p className=" text-red-500 z-100 bottom-0  text-[12px] py-[3px]">lol</p> */}
-        {error && <p className=" text-red-500 text-[12px] py-[3px]">{error}</p>}
+        {error && <p className=" text-white text-[12px] py-[3px]">{error}</p>}
       </div>
     </>
   );

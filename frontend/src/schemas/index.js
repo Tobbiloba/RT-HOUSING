@@ -106,13 +106,9 @@ export const createPropertySchema = yup.object().shape({
   images: yup.array().of(yup.string()).min(5, "At least 5 images are required"),
   amenities: yup.array().of(yup.string()).min(3, "At least 3 amenities are required"),
   availableFromDate: yup.date().required("Available From Date is required"),
-  // availableTillDate: yup.date()
-  //   .when('availableFromDate', {
-  //     is: (availableFromDate) => !!availableFromDate, // Check if availableFromDate is truthy
-  //     then: yup.date().min(yup.ref('availableFromDate'), "Available Till Date must be after Available From Date")
-  //   }),
-
-  unavailableFromDate: yup.date(),
+  availableTillDate: yup.date().required("Available From Date is required"),
+  agent: yup.array()
+  // unavailableFromDate: yup.date(),
   // unavailableTillDate: yup.date()
   // .when('unavailableFromDate', {
   //   is: (unavailableFromDate) => !!unavailableFromDate, // Check if unavailableFromDate is truthy
@@ -156,4 +152,50 @@ export const tourSchema = yup.object().shape({
   name: yup.string().required("Required"),
   email: yup.string().email("Please enter a valid email").required("Required"),
   phone: yup.number().positive().integer().required("Required"),
+});
+
+
+export const couponSchema = yup.object().shape({
+  code: yup.string().required("Required"),
+  free_shipping: yup.bool().required("Required"),
+  discount_type: yup.string().required("Required"),
+  discount_price: yup.number().positive().integer().required("Required"),
+  min_price: yup.number().positive().integer().required("Required"),
+});
+
+
+export const createEmployeeSchema = yup.object().shape({
+  firstname: yup.string().required("Required"),
+  lastname: yup.string().required("Required"),
+  username: yup.string().required("Required"),
+  email: yup.string().email("Please enter a valid email").required("Required"),
+  phone: yup
+  .string()
+  .matches(/^\d+$/, 'Phone number must only contain digits').required("Required"),
+  role: yup.string().required("Required"),
+  start_date: yup.date().required("Start Date is required"),
+  job_type: yup.string().required("Required"),
+  status: yup.string().required("Required"),
+  img: yup.string().required("Required")
+});
+
+
+
+
+
+export const updateAdminProfileSchema = yup.object().shape({
+  firstname: yup.string().required("Required"),
+  lastname: yup.string().required("Required"),
+  email: yup.string().email("Please enter a valid email").required("Required"),
+  phone: yup
+  .string()
+  .matches(/^\d+$/, 'Phone number must only contain digits').required("Required"),
+  city: yup.string().required("Required"),
+  state: yup.string().required("Required"),
+  country: yup.string().required("Required"),
+  password: yup
+  .string()
+  .min(5, "Password must be at least 5 characters")
+  .matches(passwordRules, "Please create a stronger password")
+  .required("Required"),
 });

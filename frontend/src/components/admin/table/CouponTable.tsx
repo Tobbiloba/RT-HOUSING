@@ -38,6 +38,7 @@ import {
 } from "@/~/components/ui/table";
 import { BsClipboard } from "react-icons/bs";
 import { ToastButton } from "@/components/toast/Toast";
+import { FaLongArrowAltUp } from "react-icons/fa";
 const CodeCard = ({ code, status }: string) => {
   const [showClipboard, setShowClipboard] = React.useState(false);
 
@@ -45,67 +46,96 @@ const CodeCard = ({ code, status }: string) => {
     <div
       onMouseEnter={() => setShowClipboard(true)}
       onMouseLeave={() => setShowClipboard(false)}
-      className={`capitalize flex flex-row items-center gap-3 text-[13px] text-start ${
-        status == "active"
-          ? "text-green-400"
-          : status === "inactive"
-          ? "text-slate-500"
-          : status === "pending"
-          ? "text-slate-500"
-          : "text-red-500"
-      }`}
+      className={`capitalize flex flex-row items-center gap-3 text-[13px] font-[600] text-start `}
     >
       {code}{" "}
-      {showClipboard && (
+
+      {
+        showClipboard && <div>
+            <BsClipboard className="text-white cursor-pointer" />
+        </div>
+      }
+      {/* {showClipboard && (
         <ToastButton
           description="You have successfully copied this discount code"
           header={code}
         >
           <BsClipboard className="text-white cursor-pointer" />
         </ToastButton>
-      )}
+      )} */}
     </div>
   );
 };
 export const columns = [
+ 
   {
-    accessorKey: "title",
-    header: "Title",
+    accessorKey: "coupon_code",
+    header: () => <div className="h-[100%] py-3">code</div>,
     cell: ({ row }) => (
-      <div className="capitalize text-[13px]">{row.getValue("title")}</div>
+      <CodeCard code={row.getValue("coupon_code")} status={row.getValue("status")} />
     ),
   },
   {
-    accessorKey: "code",
-    header: "Code",
-    cell: ({ row }) => (
-      <CodeCard code={row.getValue("code")} status={row.getValue("status")} />
-    ),
+    accessorKey: "min_purchase",
+    header: () => <div className=""><p>Min Purchase</p> <FaLongArrowAltUp className="mt-2 text-white text-xl"/></div>,
+    cell: ({ row }) => {
+      // console.log(row.getValue("min_purchase"))
+
+      return (
+        <div
+          className={`capitalize text-[13px] text-start `}
+        >
+          {row.getValue("min_purchase")}
+        </div>
+      )
+    }
   },
+  // {
+  //   accessorKey: "discount_type",
+  //   header: () => <div className=""><p>End date</p> <FaLongArrowAltUp className="mt-2 text-white text-xl"/></div>,
+  //   cell: ({ row }) => (
+  //     <div
+  //       className={`capitalize text-[14px] text-start `}
+  //     >
+  //       {row.getValue("discount_type")}
+  //     </div>
+  //   ),
+  // },
   {
-    accessorKey: "discount",
-    header: () => <div className="">Discount</div>,
+    accessorKey: "discount_type",
+    header: () => <div className=""><p>Discount Type</p> <FaLongArrowAltUp className="mt-2 text-white text-xl"/></div>,
     cell: ({ row }) => (
       <div
-        className={`capitalize text-[14px] text-start ${
-          row.getValue("status") == "active"
-            ? "text-green-400"
-            : row.getValue("status") === "inactive"
-            ? "text-slate-500"
-            : row.getValue("status") === "pending"
-            ? "text-slate-500"
-            : "text-red-500"
-        }`}
+        className={`capitalize text-[13px] text-start `}
       >
-        {row.getValue("discount")}
+        {row.getValue("discount_type")}
+      </div>
+    ),
+  },
+  {
+    accessorKey: "quantity",
+    header: () => <div className=""><p>Discount Price</p> <FaLongArrowAltUp className="mt-2 text-white text-xl"/></div>,
+    cell: ({ row }) => (
+      <div
+        className={`capitalize text-[13px] text-start `}
+      >
+        {row.getValue("quantity")}
       </div>
     ),
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: () => <div className=""><p>Status</p> <FaLongArrowAltUp className="mt-2 text-white text-xl"/></div>,
     cell: ({ row }) => (
-      <div className="flex flex-row gap-4 items-center">
+      <div className={`flex flex-row gap-4 items-center ${
+        row.getValue("status") == "active"
+          ? "text-green-400"
+          : row.getValue("status") === "inactive"
+          ? "text-slate-500"
+          : row.getValue("status") === "pending"
+          ? "text-slate-500"
+          : "text-red-500"
+      }`}>
         <div
           className={`capitalize border text-center text-[13px] ${
             row.getValue("status") == "active"
@@ -121,6 +151,7 @@ export const columns = [
       </div>
     ),
   },
+  
 ];
 export function CouponTable({ data }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -153,19 +184,17 @@ export function CouponTable({ data }) {
     <div className="w-full exo">
       <div className="rounded-md ">
         <Table>
-          <TableHeader className="text-[17px] bg-slate-900  border-slate-900">
+          <TableHeader className="bg-slate-950 h-[3rem]">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
-                className="border  hover:bg-slate-800 border-slate-900 text-[14px]"
+                className="hover:bg-slate-800 text-[13px]"
               >
                 {headerGroup.headers.map((header, index) => {
                   return (
                     <TableHead
                       key={header.id}
-                      className={`text-white  ${
-                        index === 0 && "w-4/12 border-slate-800"
-                      }`}
+                      className={`text-white`}
                     >
                       {header.isPlaceholder
                         ? null
@@ -191,8 +220,8 @@ export function CouponTable({ data }) {
                     data-state={row.getIsSelected() && "selected"}
                     className={`${
                       index % 2 === 0
-                        ? "bg-slate-800 hover:bg-slate-800"
-                        : "bg-slate-900 hover:bg-slate-900"
+                        ? "bg-slate-700 hover:bg-slate-800"
+                        : "bg-slate-800 hover:bg-slate-900"
                     } border-0 py-8 bg-black `}
                   >
                     {row.getVisibleCells().map((cell) => (
@@ -229,16 +258,16 @@ export function CouponTable({ data }) {
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   className={`${
-                    index % 2 === 0 ? "bg-slate-800" : "bg-slate-950"
+                    index % 2 === 0 ? "bg-slate-700 text-slate-400 hover:text-slate-800" : "bg-slate-800"
                   } border-0 py-8`}
                 >
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <TableCell
                         key={cell.id}
-                        className={` text-slate-600 ${
-                          index % 2 === 0 ? "text-white" : "text-slate-400"
-                        } `}
+                        // className={` text-slate-600 ${
+                        //   index % 2 === 0 ? "text-white" : "text-slate-400"
+                        // } `}
                       >
                         {flexRender(
                           cell.column.columnDef.cell,

@@ -6,7 +6,7 @@ import {
     getAllProperties,
     getPropertyDetail,
     updateProperty,
-    getPropertyByCompany,
+    getPropertyByAdmin,
     getPropertyDetailById,
     activateProperty,
     getAllPropertiesUser,
@@ -17,8 +17,9 @@ import {
 } from "../controllers/property.controller.js";
 
 const router = express.Router();
-router.route("/property-details/:id").get(getPropertyDetailById);
 router.route("/").get(getAllProperties);
+router.route("/property-details/:id").get(getPropertyDetailById);
+
 router.route("/prop").get(getProp);
 router.route("/type/:type").get(getPropertyByTypeModel);
 router.route("/user").get(getAllPropertiesUser);
@@ -29,7 +30,7 @@ router.route("/:id").patch(updateProperty);
 router.route("/:id").delete(deleteProperty);
 router.route("/activate/:id").post(activateProperty);
 router.route("/deactivate/:id").post(deActivateProperty);
-router.route("/company/:id").get(getPropertyByCompany);
+router.route("/company/:id").get(getPropertyByAdmin);
 
 
 

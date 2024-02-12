@@ -8,7 +8,8 @@ import mongoose from "mongoose";
 const AgentSchema = new mongoose.Schema({
     name: {type: String, required: true},
     email: {type: String, required: true},
-    phoneNo: {type: String, required: true}
+    phone: {type: String, required: true},
+    img: {type: String, required: true}
 })
 const PropertySchema = new mongoose.Schema({
     isActive: {type: Boolean, enum: [true, false], default: false},
@@ -24,12 +25,13 @@ const PropertySchema = new mongoose.Schema({
         property_amenities: {type: [String], required: false},
         property_images: {type: [String], required: true},
         property_location: {
+            address: {type: String, required: true},
             country: {type: String, required: true},
             state: {type: String, required: true},
             city: {type: String, required: true},
             latitude: {type: String, required: false},
             longitude: {type: String, required: false},
-            postal_code: {}
+            postal_code: {type: String, required: false}
         },
         property_policy: {
             pet_policy: {type: Boolean, required: false},
@@ -39,11 +41,6 @@ const PropertySchema = new mongoose.Schema({
         availability: {
             available_date_from: {type: [String], required: true},
             available_date_till: {type: [String], required: true},
-            unavailable_date_from: {type: [String], required: false},
-            unavailable_date_till: {type: [String], required: false},
-            occupied_date_from: {type: [String], required: false},
-            occupied_date_till: {type: [String], required: false},
-            unavailability_reason: {type: String, required: false}
         },
         guest: {
             maximum_adults: {type: String, required: true},
@@ -54,12 +51,11 @@ const PropertySchema = new mongoose.Schema({
         booking_status: { type: String, enum: ['available', 'booked', 'under maintenance', 'unavailable'], default: 'available' },
     },
     agent: [AgentSchema],
-    discount: {type: Number, required: false},
     isFeatured: {type: String, required: true},
     isPopular: {type: String, required: true},
     isTopRated: {type: String, required: false},
-    company_id: {type: String, required: true},
-    company_name: {type: String, required: true},
+    admin_id: {type: String, required: true},
+    admin_name: {type: String, required: true},
     created_by: {type: String, required: false},
     created_at: { type: Date, default: Date.now },
 });
@@ -69,7 +65,7 @@ const PropertyModel = mongoose.model("Property", PropertySchema);
 export const getProperties = (no) => PropertyModel.find({}).limit(no);
 export const getActivatedProperties = (query) => PropertyModel.find({"isActive": true, query});
 export const getPropertyById = (id) => PropertyModel.findOne({"_id": id});
-export const getPropertyByCompanyId = (id) => PropertyModel.find({"company_id": id})
+export const getPropertyByAdminId = (id) => PropertyModel.find({"admin_id": id})
 export const getPropertyByType = (property_type) => {
     console.log('Searching for property_type:', property_type);
     return PropertyModel.find({ "property_information.property_type": "Apartment" });

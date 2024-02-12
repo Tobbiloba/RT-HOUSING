@@ -4,6 +4,7 @@ import User, {
   registerUser,
 } from "../mongodb/models/user.js";
 import { authentication, generateRandomToken, random, sendVerificationToken } from "../helpers/index.js";
+import { createNotificationModel } from "./notification.controller.js";
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({}).limit(req.query._end);
@@ -191,6 +192,8 @@ if(token != user.activationToken) {
 
     user.activationToken = undefined;
     user.isActivated = true;
+    
+    createNotificationModel({id, title: "Account Activation", message: "You have successfully activated your account"})
 
     await user.save();
 

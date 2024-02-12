@@ -6,8 +6,9 @@ import {
   updateOrderById,
   getOrdersByPropertyIds,
   getOrderById,
+  getOrderByCompany,
 } from "../mongodb/models/order.js";
-import PropertyModel from "../mongodb/models/property.js";
+import PropertyModel, { getPropertyByAdminId } from "../mongodb/models/property.js";
 import moment from "moment";
 import {
   random,
@@ -50,21 +51,33 @@ const getOrdersByAdmin = async (req, res) => {
   console.log(id);
 
   try {
-    const user = await getAdminUserById(id);
-    // console.log(user)
-
-    if (user) {
-      const propertyIds = user.allProperties.map((property) =>
-        property._id.toString()
-      );
-      // const propertyIds = user.allProperties.map(property => new ObjectId(property._id));
-      // console.log(propertyIds)
-      const orders = await getOrdersByPropertyIds(propertyIds);
-      // console.log(orders)
-      return res.status(200).json({ orders });
-    } else {
-      return res.status(404).json({ message: "Admin not found" });
+    const company = await getCompanyByIdSchema(id)
+    if(!company) {
+      return res.status(500).json({message: "Company doesn't exist"})
     }
+
+    console.log(company)
+
+    const orders = await getOrderByCompany(id);
+
+    console.log(orders)
+    // const user = await getAdminUserById(id);
+    // // console.log(user)
+
+    // if (user) {
+    //   const propertyIds = user.allProperties.map((property) =>
+    //     property._id.toString()
+    //   );
+    //   // const propertyIds = user.allProperties.map(property => new ObjectId(property._id));
+    //   // console.log(propertyIds)
+    //   const orders = await getOrdersByPropertyIds(propertyIds);
+    //   // console.log(orders)
+    //   return res.status(200).json({ orders });
+    // } else {
+    //   return res.status(404).json({ message: "Admin not found" });
+    // }
+
+    return res.status(200).json(orders)
   } catch (error) {
     console.error("Error fetching orders for admin:", error);
     return res.status(500).json({ message: "Internal Server Error" });

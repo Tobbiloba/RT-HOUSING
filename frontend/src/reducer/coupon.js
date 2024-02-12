@@ -9,7 +9,8 @@ import {
     GET_COMPANY_COUPON_FAILED,
     GET_COMPANY_COUPON_SUCCESSFUL,
   } from "../constant/coupon";
-  
+
+  import {CLEAR} from "../constant/employee"
   
 
 
@@ -26,13 +27,15 @@ import {
           return {
             loading: false,
             coupon: action.payload,
-            status: 'succeessful'
+            status: 'successful'
           };
         case CREATE_COUPON_CODE_FAILED:
           return {
             loading: false,
             error: true,
           };
+        case CLEAR: 
+          return {}
         default:
           return state;
       }

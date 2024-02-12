@@ -43,32 +43,63 @@ console.log('called')
 
         </head>
         
-        <body style="display: flex; justify-content: center; align-items: center; width: 100%; max-width: 100vw; margin: 0 auto; background-color: #e2e8f0;">
-            <div class="" style="background-color: #64748b; padding: .1rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 35rem; width: 100%; margin: 1rem auto;">
-
-        <h1 style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: 1rem 0;">
-            Fe
-            <div style="transform: rotate(12deg); width: 30px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-              <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #798584;"></div>
-              <span style="color: #798584; position: relative; bottom: -2px;">bt</span>
-            </div>
-            oS
-          </h1>
-                <div class="">
-                <p class="thank-you">
-                        Howdy! We appreciate your trust in Febtos. To activate your account, click the button below:
-                    </p>
-                    <p class="description">
-                        Thank you for choosing Febtos, your go-to rental company. We appreciate your business and welcome you to
-                        our community!
-                    </p>
-                    
+        <body style="display: flex; justify-content: center; align-items: center; width: 100%; max-width: 100vw; margin: 0 auto; background-color: #e2e8f0; ">
+        <div class="" style="background-color: #1e293b; padding: 0rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 35rem; width: 100%; margin: 0rem auto; height: 45rem; display: flex; flex-direction: column; justify-content: space-between;">
+    
+            <h1 style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: 1rem 0;">
+                Fe
+                <div style="transform: rotate(12deg); width: 30px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #798584;"></div>
+                    <span style="color: #798584; position: relative; bottom: -2px;">bt</span>
                 </div>
-        
-                <a href=${url} class="activation-button">Activate
-                    Account</a>
+                oS
+            </h1>
+    
+            <div class="">
+                <h1 style="color: #f1f5f9; font-family: 'Mono', monospace; text-align: center; font-size: 17px;">Thank you for choosing Febtos</h1>
+    
+                <p class="thank-you" style="color: #cbd5e1; font-size: 14px; margin-top: 30px;">
+                    Howdy! We appreciate your trust in Febtos. To activate your account, click the button below:
+                </p>
+                <p class="description" style="color: #cbd5e1; font-size: 14px; margin-top: 30px;">
+                    Thank you for choosing Febtos, your go-to rental company. We appreciate your business and welcome you to our community!
+                </p>
+    
+                <!-- Activation Button -->
+                <a href=${url} class="activation-button" style="color: #475569;">Activate Account</a>
+    
+                <!-- Additional Texts (e.g., Terms and Conditions, Privacy Policy, Contact Us) -->
+                <div class="additional-texts" style="color: #cbd5e1; font-size: 14px; margin-top: 30px;">
+                    <p class="terms-and-conditions">
+                        By clicking the "Activate Account" button, you agree to our
+                        <a href="/terms" style="color: #475569; text-decoration: none;">Terms and Conditions</a>.
+                    </p>
+                    <p class="privacy-policy">
+                        Our <a href="/privacy" style="color: #475569; text-decoration: none;">Privacy Policy</a> explains how we protect
+                        your privacy.
+                    </p>
+                    <p class="contact-us">
+                        Need assistance? Contact us at <a href="mailto:support@febtos.com" style="color: #475569; text-decoration: none;">support@febtos.com</a>.
+                    </p>
+                </div>
+                <div style="background: linear-gradient(to right, #919292, #5c8884); padding: .1rem .5rem; font-family: 'Open Sans', sans-serif;  width: 100%; margin: 1rem auto; height: 1rem;">
+    
+                    <!-- ... (rest of your content) ... -->
+                
+                </div>
+               
             </div>
-        </body>
+             <!-- Footer Section -->
+             <div class="foote" style="margin-top: 1rem; color: white; font-size: 14px; text-align: center;">
+                <p class="copyright">
+                    &copy; 2024 Febtos. All rights reserved.
+                </p>
+                <p class="footer-info">
+                    Febtos Inc. | 123 Main Street, Cityville, Country
+                </p>
+            </div>
+        </div>
+    </body>
         
         </html>`
     };

@@ -12,6 +12,7 @@ import companyRouter from "./routes/company.routes.js"
 import couponRouter from "./routes/coupon.routes.js"
 import notificationRouter from "./routes/notification.routes.js"
 import propertyType from "./routes/type.routes.js"
+import employeeRouter from "./routes/employee.routes.js"
 dotenv.config();
 
 const app = express();
@@ -32,6 +33,7 @@ app.use("/api/v1/company", companyRouter);
 app.use("/api/v1/coupon", couponRouter);
 app.use("/api/v1/notification", notificationRouter);
 app.use("/api/v1/type", propertyType);
+app.use("/api/v1/employee", employeeRouter);
 const startServer = async () => {
     try {
         connectDB(process.env.MONGODB_URL);

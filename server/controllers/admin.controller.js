@@ -1,6 +1,7 @@
 import AdminUser, { getAdminUserByEmail, getAdminUserById, getAdminUserByToken, registerAdminUser } from "../mongodb/models/admin.js";
 
 import { authentication, generateRandomToken, random, sendVerificationToken } from "../helpers/index.js";
+import { createNotificationModel } from "./notification.controller.js";
 const getAllAdminUsers = async (req, res) => {
     try {
         const users = await AdminUser.find({}).limit(req.query._end);
@@ -12,11 +13,11 @@ const getAllAdminUsers = async (req, res) => {
 
 const createAdminUser = async (req, res) => {
   try {
-    const { username, firstname, lastname, email, phone, password, profile_img, country, state, city, socials } = req.body;
-    console.log(phone)
+    const { username, firstname, lastname, email, phone_no, password, profile_img, country, state, city, socials } = req.body;
+    console.log(phone_no)
     // console.log( username, firstname, lastname, email, phone, password, profile_img, country, state, city, socials );
     const token = generateRandomToken()
-    if (!email || !password || !username || !firstname || !lastname || !profile_img || !state || !country || !city  || !phone) {
+    if (!email || !password || !username || !firstname || !lastname || !profile_img || !state || !country || !city  || !phone_no) {
       return res.status(500).json({ message: "Pass necessary parameters" });
     }
     const userExists = await getAdminUserByEmail(email);
@@ -24,46 +25,18 @@ const createAdminUser = async (req, res) => {
       return res.status(500).json({ message: "User already exists" });
     }
     const salt = random();
-    // console.log({
-    //   activationToken: token,
-    //   isActivated: false,
-    //   username,
-    //   email,
-    //   lastname: lastname || null,
-    //   firstname: firstname || null,
-    //   phone_no: phone_no || null,
-    //   profile_img: profile_img || null,
-    //   country: country || null,
-    //   state: state || null,
-    //   city: city || null,
-    //   socials: socials || null,
-    //   company_information: {
-    //     company_id: null,
-    //     company_name: null,
-    //     role: null
-    //   },
-    //   authentication: {
-    //     password: authentication(salt, password),
-    //     salt,
-    //   },
-    // });
     const newUser = await registerAdminUser({
       activationToken: token,
       username,
       email,
       lastname: lastname || null,
       firstname: firstname || null,
-      phone_no: phone || null,
+      phone_no: phone_no || null,
       profile_img: profile_img || null,
       country: country || null,
       state: state || null,
       city: city || null,
       socials: socials || null,
-      company_information: {
-        company_id: null,
-        company_name: null,
-        role: null
-      },
       authentication: {
         salt, password: authentication(salt, password)
     }
@@ -78,7 +51,42 @@ const createAdminUser = async (req, res) => {
 };
 
 
+const updateAdminUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { newFields } = req.body;
+    // console.log(newFields)
 
+    if (!id || !newFields) {
+      return res.status(400).json({ message: "Pass necessary parameters" });
+    }
+
+    const existingUser = await getAdminUserById(id);
+    if (!existingUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if email is being updated in newFields
+    if (newFields.email) {
+      return res.status(400).json({ message: "Cannot update email address" });
+    }
+
+    // Update user fields
+    for (const key in newFields) {
+      if (newFields.hasOwnProperty(key)) {
+        existingUser[key] = newFields[key];
+      }
+    }
+
+    // Save the updated user
+    const updatedUser = await existingUser.save();
+
+    res.status(200).json(updatedUser).end();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 const loginAdminUser = async (req, res) => {
   try {
@@ -158,6 +166,8 @@ const activateAdminUser = async (req, res) => {
 
     await adminUser.save();
 
+    createNotificationModel({id, title: 'Account Activation', message: 'You have successfully activated your account'})
+
     return res.status(200).json({ message: 'Account successfully activated.' });
   } catch (error) {
     console.error(error.message);
@@ -179,4 +189,4 @@ const activateAdminUser = async (req, res) => {
 // }
 
 
-export {getAllAdminUsers, createAdminUser, loginAdminUser, getAdminUserInfoByID, activateAdminUser}
+export {getAllAdminUsers, createAdminUser, loginAdminUser, getAdminUserInfoByID, activateAdminUser, updateAdminUser}

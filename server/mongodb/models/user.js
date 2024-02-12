@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
     activationToken: { type: String, required: false },
-  isActivated: { type: Boolean, enum: [true, false], default: false },
+    isActivated: { type: Boolean, enum: [true, false], default: false },
     username: { type: String, required: true },
     email: { type: String, required: true },
     phoneNo: { type: String, required: true },

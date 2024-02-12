@@ -7,104 +7,174 @@ import {
 } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaBuilding } from "react-icons/fa";
-import { IoIosClose } from "react-icons/io";
+import { IoCloseOutline } from "react-icons/io5";
+import { useFormik } from "formik";
+import { updateAdminProfileSchema } from "@/schemas";
 import Input from "@/components/Input";
 const UpdateProfile = ({setShowState}) => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("")
-  const [country, setCountry] = useState("")
-  const [state, setState] = useState("")
-  const [city, setCity] = useState("")
-  const [phoneNo, setPhoneNo] = useState("")
+
+  const onSubmit = () => {
+    console.log('lol')
+  
+  }
+
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldValue, // Access setFieldValue function from useFormik
+  } = useFormik({
+    initialValues: {
+      firstname: "",
+      lastname: "",
+      email: "",
+      phone: "",
+      city: "",
+      state: "",
+      country: "",
+      password: ""
+    },
+    validationSchema: updateAdminProfileSchema,
+    onSubmit,
+  });
+
+
 
   return (
-    <div className="fixed text-white top-0 left-0 z-[100] w-[100%]  h-[100%] bg-black/50 flex items-center justify-center">
-      <div className="max-w-[45rem] w-[90%] mt-[6rem] md:mt-0 h-fit bg-slate-700 relative">
-        <IoIosClose className="absolute -right-4 -top-4 text-black hover:animate-spin cursor-pointer bg-white text-[34px] shadow-md border p-[1px]" onClick={() => setShowState(false)}/>
+    <form onSubmit={handleSubmit} className="w-[100vw] top-0 left-0 flex items-center justify-center h-[100vh] bg-white/20 z-[100] fixed">
+      <div className="max-w-[35rem] relative min-h-[40rem] flex flex-col justify-evenly w-[100%]  bg-slate-900 h-fit p-[1rem]">
+      <IoCloseOutline className="absolute -right-4 -top-4 text-black hover:bg-red-500 cursor-pointer bg-white text-[34px]  shadow-md hover:text-white p-[1px]" onClick={() => setShowState(false)}/>
+        <h1 className="text-[17px] text-slate-100">Update User Profile</h1>
 
-        <h1 className="p-[1rem]">Edit Profile</h1>
+        <div className="flex flex-row text-[15px] gap-4 mt-5 text-slate-300 border-b border-slate-500">
+          <h1 className="border-b text-white p-2 border-b-slate-700 cursor-pointer">
+            General
+          </h1>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2  mt-5  justify-between gap-y-9 gap-x-12">
 
-        <div>
-          <div className="flex flex-col-reverse md:flex-row justify-between gap-[1rem] p-[1rem] border-t">
-            <div className="max-w-[25rem] w-[100%] mt-10 flex flex-col gap-10">
             <Input
-              placeholder=""
+              placeholder="Firstname"
+              type="text"
+              label="Firstname"
+              value={values.firstname}
+              handleChange={handleChange}
+              error={
+                errors.firstname && touched.firstname
+                  ? errors.firstname
+                  : undefined
+              }
+              id="firstname"
+            />
+      <Input
+              placeholder="Lastname"
               type="text"
               label="Lastname"
-              value={username}
-              setValue={setUsername}
-              style="border border-white border-b-gray-400 text-black"
-              bigText="18px"
-              smallText="14px"
+              value={values.lastname}
+              handleChange={handleChange}
+              error={
+                errors.lastname && touched.lastname
+                  ? errors.lastname
+                  : undefined
+              }
+              id="lastname"
             />
-            <Input
-              placeholder=""
+<Input
+              placeholder="Email"
               type="text"
               label="Email"
-              value={email}
-              setValue={setEmail}
-              style="border border-white border-b-gray-400 text-black"
-              bigText="18px"
-              smallText="14px"
+              value={values.email}
+              handleChange={handleChange}
+              error={
+                errors.email && touched.email
+                  ? errors.firstname
+                  : undefined
+              }
+              id="email"
             />
             <Input
-              placeholder=""
+              placeholder="Phone"
               type="text"
-              label="Contact"
-              value={phoneNo}
-              setValue={setPhoneNo}
-              style="border border-white border-b-gray-400 text-black"
-              bigText="18px"
-              smallText="14px"
+              label="Phone"
+              value={values.phone}
+              handleChange={handleChange}
+              error={
+                errors.phone && touched.phone
+                  ? errors.phone
+                  : undefined
+              }
+              id="phone"
             />
-            <div className="
-            flex flex-row gap-6">
             <Input
-              placeholder=""
+              placeholder="City"
               type="text"
               label="City"
-              value={city}
-              setValue={setCity}
-              style="border border-white border-b-gray-400 text-black"
-              bigText="18px"
-              smallText="14px"
+              value={values.city}
+              handleChange={handleChange}
+              error={
+                errors.city && touched.city
+                  ? errors.city
+                  : undefined
+              }
+              id="city"
             />
             <Input
-              placeholder=""
+              placeholder="State"
               type="text"
               label="State"
-              value={state}
-              setValue={setState}
-              style="border border-white border-b-gray-400 text-black"
-              bigText="18px"
-              smallText="14px"
+              value={values.state}
+              handleChange={handleChange}
+              error={
+                errors.state && touched.state
+                  ? errors.state
+                  : undefined
+              }
+              id="state"
             />
-            </div>
             <Input
-              placeholder=""
+              placeholder="Country"
               type="text"
               label="Country"
-              value={country}
-              setValue={setCountry}
-              style="border border-white border-b-gray-400 text-black"
-              bigText="18px"
-              smallText="14px"
+              value={values.country}
+              handleChange={handleChange}
+              error={
+                errors.country && touched.country
+                  ? errors.country
+                  : undefined
+              }
+              id="country"
             />
-            </div>
-            <div className="mr-[1rem] h-fit">
-              <p className="text-[14px] mb-4">Profile Picture:</p>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScuQGyYbgV9HFyiunO9mF6_lnB6MYwcx6t3w&usqp=CAU" className="w-32 h-32 rounded-full"/>
-            </div>
-            
-          </div>
-          <div className=" text-[14px] flex p-[1rem] mt-4 flex-row gap-6 justify-end">
-            <button className=" border border-red-500 text-red-500 px-5 py-2">Discard changes</button>
-            <button className="px-5 py-2 bg-green-600">Save</button>
-          </div>
+
+<Input
+              placeholder="Password"
+              type="password"
+              label="Password"
+              value={values.password}
+              handleChange={handleChange}
+              error={
+                errors.password && touched.password
+                  ? errors.password
+                  : undefined
+              }
+              id="password"
+            />
+
+
+
+ 
+        </div>
+        <div className="mt-16 text-[14px] flex gap-8 flex-row justify-end">
+          <button className="bg-green-700 px-4 py-3 text-white border-slate-500" type="submit">
+            Update Profile
+          </button>
         </div>
       </div>
-    </div>
-  )
+    </form>
+  );
 }
 const Profile = () => {
   const [showUpdateOption, setShowUpdateOption] = useState(false);

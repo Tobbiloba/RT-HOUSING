@@ -31,9 +31,9 @@ const AdminLayout = ({ children }) => {
     //   navigate("/admin");
     // }
 
-    if (!data) {
-      navigate("/admin/login", { replace: true });
-    }
+    // if (!data) {
+    //   navigate("/admin/login", { replace: true });
+    // }
 
     setLoading(false);
   }, [data]);
@@ -51,7 +51,7 @@ const AdminLayout = ({ children }) => {
         <div>
           <Loading />
         </div>
-      ) : data ? (
+      ) : !data ? (
         <div className="flex flex-row bg-slate-900 gap-2">
           <div
             className={`${
@@ -74,12 +74,12 @@ const AdminLayout = ({ children }) => {
               {pathname[pathname.length - 1] != "admin" && (
                 <BreadCrumb showSlide={toggleOpen} />
               )}
-             {
+             {/* {
               !JSON.parse(data).isActivated &&    <div className=" bg-red-600 md:text-center py-2 text-white text-[13px] flex gap-5 px-[1rem] justify-center md:items-center">
               <img src="https://cdn-icons-png.flaticon.com/128/2592/2592317.png" className="w-5 h-5"/>
           <h1>To secure your account, please verify your email by clicking the activation link in your inbox. Thank you!</h1>
         </div>
-             }
+             } */}
               {children}
 
               {isMobile && toggleOpen && (

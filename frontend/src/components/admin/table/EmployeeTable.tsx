@@ -38,52 +38,91 @@ import {
 } from "@/~/components/ui/table";
 import { BsClipboard } from "react-icons/bs";
 import { ToastButton } from "@/components/toast/Toast";
-
+import { useDispatch } from "react-redux";
+import { deleteEmployee } from "@/action/employee";
 export const columns = [
+  // {
+  //   accessorKey: "action",
+  //   header: "Action",
+  //   cell: ({ row }) => (
+  //     <div className="capitalize">
+  //       <input type="checkbox" className="" />
+  //     </div>
+  //   ),
+  // },
   {
-    accessorKey: "action",
-    header: "Action",
+    accessorKey: "img",
+    header: () => <p className="text-[14px]">Avatar</p>,
     cell: ({ row }) => (
       <div className="capitalize">
-        <input type="checkbox" className="" />
+        <img src={row.getValue("img")} className="w-10 rounded- h-10" />
       </div>
     ),
   },
   {
-    accessorKey: "avatar",
-    header: "Avatar",
-    cell: ({ row }) => (
-      <div className="capitalize">
-        <img src={row.getValue("avatar")} className="w-10 rounded-full h-10" />
-      </div>
-    ),
+    accessorKey: "firstname",
+    header: () => <p className="text-[14px]">Firstname</p>,
+    cell: ({ row }) => <h1 className="text-[13px]">{row.getValue("firstname")}</h1>,
   },
   {
-    accessorKey: "first_name",
-    header: "Firstname",
-    cell: ({ row }) => <h1>{row.getValue("first_name")}</h1>,
-  },
-  {
-    accessorKey: "last_name",
-    header: "Lastname",
-    cell: ({ row }) => <div className="">{row.getValue("last_name")}</div>,
+    accessorKey: "lastname",
+    header: () => <p className="text-[14px]">Lastname</p>,
+    cell: ({ row }) => <div className="text-[13px]">{row.getValue("lastname")}</div>,
   },
 
   {
     accessorKey: "email",
-    header: "Email",
-    cell: ({ row }) => <div className="">{row.getValue("email")}</div>,
+    header: () => <p className="text-[14px]">Email</p>,
+    cell: ({ row }) => <div className="text-[13px]">{row.getValue("email")}</div>,
   },
   {
-    accessorKey: "last_login",
-    header: "Last login",
-    cell: ({ row }) => <div className="">{row.getValue("last_login")}</div>,
+    accessorKey: "status",
+    header: () => <p className="text-[14px]">Status</p>,
+    cell: ({ row }) => <div className="text-[13px]">{row.getValue("status")}</div>,
+  },
+  {
+    accessorKey: "job_type",
+    header: () => <p className="text-[14px]">Job Type</p>,
+    cell: ({ row }) => <div className="text-[13px]">{row.getValue("job_type")}</div>,
+  },
+  {
+    accessorKey: "role",
+    header: () => <p className="text-[14px]">Role</p>,
+    cell: ({ row }) => <div className="text-[13px]">{row.getValue("role")}</div>,
   },
 
   {
-    accessorKey: "role",
-    header: "Role",
-    cell: ({ row }) => <div className="">{row.getValue("role")}</div>,
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const payment = row.original
+      const dispatch = useDispatch()
+
+ 
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <DotsHorizontalIcon className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {/* <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem>Update Status</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => dispatch(deleteEmployee(payment._id))}>Delete Employee </DropdownMenuItem> */}
+            <div className="bg-slate-800 pt-[1rem] w-[10rem] h-fit">
+              <h1 className="text-slate-400 ml-[1rem]">Actions</h1>
+              <div className="mt-4">
+                <button className="py-3 text-slate-400 text-[14px] hover:bg-slate-600 w-[100%]">Update Status</button>
+                <button onClick={() => dispatch(deleteEmployee(payment._id))} className="py-3 text-slate-400 text-[14px] hover:bg-slate-600 w-[100%]">Delete Employee</button>
+              </div>
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
+    },
   },
 ];
 export function EmployeeTable({ data }) {

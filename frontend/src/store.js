@@ -3,6 +3,8 @@ import { thunk } from "redux-thunk";
 import { loginReducer, registerReducer, registerAdminReducer, loginAdminReducer, activateUser } from "./reducer";
 import { fetchAllPropertiesReducer, fetchMyPropertiesReducer, createPropertyReducer, getPropertyDetailsById, getPropertyByType } from "./reducer/properties";
 import { createOrder, getAdminOrder, getUserOrder, updateOrder } from "./reducer/order";
+import { createCouponReducer, fetchCouponReducer } from "./reducer/coupon";
+import { createEmployeeReducer, fetchAdminEmployeeReducer, fetchAllEmployeeReducer, updateEmployeeStatusReducer, deleteEmployeeReducer } from "./reducer/employee";
 const rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
@@ -17,7 +19,14 @@ const rootReducer = combineReducers({
     getUserOrder: getUserOrder,
     updateOrderStatus: updateOrder,
     propertyType: getPropertyByType,
-    activateUser: activateUser
+    activateUser: activateUser,
+    createCoupon: createCouponReducer,
+    fetchCoupon: fetchCouponReducer,
+    fetchAdminEmployee: fetchAdminEmployeeReducer,
+    fetchAllEmployees: fetchAllEmployeeReducer,
+    deleteEmployee: deleteEmployeeReducer,
+    updateEmployee: updateEmployeeStatusReducer,
+    createEmployee: createEmployeeReducer
 })
 
 

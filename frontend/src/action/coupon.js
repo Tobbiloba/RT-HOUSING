@@ -11,11 +11,14 @@ import {
   GET_COMPANY_COUPON,
   GET_COMPANY_COUPON_FAILED,
   GET_COMPANY_COUPON_SUCCESSFUL,
+  GET_ALL_COUPONS,
+  GET_ALL_COUPONS_FAILED,
+  GET_ALL_COUPONS_SUCCESSFUL
 } from "@/constant/coupon";
 
 
 
-const BASE_URL = import.meta.env.VITE_APP_BASE_URL
+const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/coupon`
 
 const customId = "custom-id-yes";
 
@@ -28,7 +31,7 @@ export const getCompanyCoupon = (id) => async (dispatch) => {
         type: GET_COMPANY_COUPON
     })
     try {
-        const { data } = await Axios.get(`${BASE_URL}/coupon/65a0fc46a3cd4f366e7a3c52`);
+        const { data } = await Axios.get(`${BASE_URL}/${id}`);
         dispatch({
           type: GET_COMPANY_COUPON_SUCCESSFUL,
           payload: data,
@@ -63,21 +66,74 @@ export const getCompanyCoupon = (id) => async (dispatch) => {
 
 
 
+export const getAllCoupon = () => async (dispatch) => {
+  dispatch({
+      type: GET_ALL_COUPONS
+  })
+  try {
+      const { data } = await Axios.get(`${BASE_URL}/`);
+      dispatch({
+        type: GET_ALL_COUPONS_SUCCESSFUL,
+        payload: data,
+      });
+  
+
+      console.log(data)
+  } catch(error) {
+      console.log(error.message)
+
+      dispatch({
+          type: GET_ALL_COUPONS_FAILED,
+          payload:
+          error.response && error.response.data[0]
+            ? error.response.data.message
+            : error.message,
+      });
+  
+      toast.error(
+        error.response && error.response.data[0]
+          ? error.response.data[0]
+          : error.message,
+        {
+          toastId: customId,
+          position: "bottom-right",
+          theme: "colored",
+        }
+      );
+  }
+}
 
 
 
-export const createCompanyCoupon = (coupon_title, coupon_code, free_shipping, quantity, discount_type, status) => async (dispatch) => {
+export const createCompanyCoupon = ({values, id}) => async (dispatch) => {
     dispatch({
         type: GET_COMPANY_COUPON
     })
+    console.log(values)
     try {
-        const { data } = await Axios.get(`${BASE_URL}/coupon/65a0fc46a3cd4f366e7a3c52`);
+        const { data } = await Axios.post(`${BASE_URL}/create/65c77993a24964910729d98d`, {
+          // ...values
+          coupon_code: values.code,
+          free_shipping: values.free_shipping,
+          quantity: 1,
+          min_purchase: values.min_price,
+          discount_type: values.discount_type,
+          discount_price: values.discount_price,
+          status: 'active'
+        });
         dispatch({
           type: CREATE_COUPON_CODE_SUCCESSFUL,
           payload: data,
         });
     
-
+        toast.success(
+          'Successfully created coupon',
+          {
+            toastId: customId,
+            position: "bottom-right",
+            theme: "colored",
+          }
+        );
         console.log(data)
     } catch(error) {
         console.log(error.message)

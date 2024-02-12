@@ -41,6 +41,8 @@ export const getAdminOrder = (id) => async (dispatch) => {
           type: FETCH_ADMIN_ORDER_SUCCESSFUL,
           payload: data,
         });
+
+        console.log(data)
     
 
     
@@ -52,6 +54,7 @@ export const getAdminOrder = (id) => async (dispatch) => {
               ? error.response.data.message
               : error.message,
         });
+        console.log(error)
     
         toast.error(
           error.response && error.response.data[0]
