@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaRegBell } from "react-icons/fa6";
@@ -6,9 +6,20 @@ import { LuMessageSquare } from "react-icons/lu";
 import { CiMenuKebab } from "react-icons/ci";
 // import Input from "../Input";
 import Input from "../Input";
+import Notification from "../notification/Notification";
+import { useDispatch, useSelector } from 'react-redux';
+import { getNotifications } from "@/action/notification";
 const Topbar = ({ setShowSlide, showSlide }) => {
+  const dispatch = useDispatch()
   const [search, setSearch] = useState("");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showNotification, setShowNotification] = useState(true)
+
+  useEffect(() => {
+    // dispatch(getNotifications('65c77993a24964910729d98d'))
+  }, [])
+  const {notifications} = useSelector((state) => state.getNotifications)
+  console.log(notifications)
   return (
     <div
       className={` bg-slate-600 z-[499] md:z-[100] exo ml-auto px-[1rem] md:px-[2%] md: shadow-b-md h-fit md:h-[4.25rem] flex flex-col md:flex-row md:items-center justify-between  ${
@@ -35,12 +46,15 @@ const Topbar = ({ setShowSlide, showSlide }) => {
             placeholder="search"
             className="bg-slate-700 w-[100%] border-slate-500 border px-6 py-2 rounded-md"
           />
-          <div className="flex flex-row gap-9 w-[100%] items-center justify-end mt-2">
+          <div className="flex relative flex-row gap-9 w-[100%] items-center justify-end mt-2">
             <div className="border-l-2  text-[15px] py-1 px-4 border-slate-500">
               EN
             </div>
-            <div className="border-l-2 border-r-2 text-[18px] py-1 px-4 border-slate-500">
-              <FaRegBell />
+            <div className="border-l-2 relative border-r-2 text-[18px] py-1 px-4 border-slate-500">
+              <FaRegBell onClick={() => setShowNotification(!showNotification)}/>
+              {
+            showNotification && <Notification />
+          }
             </div>
             <div className="border-r-2 text-[20px] py-1 px-4 border-slate-500">
               <LuMessageSquare />
@@ -59,11 +73,29 @@ const Topbar = ({ setShowSlide, showSlide }) => {
           EN
         </div>
         <div className="border-l-2 relative border-r-2 text-[18px] py-1 px-4 border-slate-500">
-          <span className="absolute bottom-0 right-1 flex h-2 w-2">
+          {/* {
+            notifications && notifications.length > 0 && <span className="absolute bottom-0 right-1 flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-100 opacity-80"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-500"></span>
           </span>
-          <FaRegBell className="text-[15px]" />
+          } */}
+          {
+  notifications && notifications.length > 0 && (
+    <>
+      {notifications.some(notification => notification.status === 'unread') && (
+        <span className="absolute bottom-0 right-1 flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-100 opacity-80"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-500"></span>
+        </span>
+      )}
+    </>
+  )
+}
+          <FaRegBell className="text-[15px]" onClick={() => setShowNotification(!showNotification)}/>
+
+          {
+            showNotification && <Notification />
+          }
         </div>
         <div className="ml-4">
           <img

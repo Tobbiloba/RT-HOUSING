@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import { timeAgo } from "@/components/utils";
 import { handleAgentsCheckboxChange } from "@/utils";
 import { useEffect, useState } from "react";
 
@@ -37,4 +38,24 @@ const AgentCard = ({ item, values, setFieldValue }) => {
   );
 };
 
-export { AgentCard };
+
+
+const NotificationCard = ({item}) => {
+  console.log(item)
+  return(
+    <div className="  p-4 flex gap-3 items-">
+      <div className="w-14 h-14 overflow-hidden ">
+      {
+        item.imageUrl ? <img src={item?.img} className="w-14 h-14"/>: <div className="w-12 h-12"></div>
+      }
+      </div>
+
+      <div className=" md:w-[23rem]">
+        <h1 className="text-[14px] font-[600]">{item?.title}: <span className="font-[500] ml-2">{item?.message}</span></h1>
+          <p className="text-[12px] mt-2">{timeAgo(item?.timeStamp)}</p>
+      </div>
+    </div>
+  )
+}
+
+export { AgentCard, NotificationCard };

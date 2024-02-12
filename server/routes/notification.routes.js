@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.route('/').get(getAllNotificationModel);
 router.route('/:id').get(getUserNotificationModel);
-router.route('/read/:id').put(updateNotificationModel)
+router.route('/read').put(updateNotificationModel)
 
 export default router;

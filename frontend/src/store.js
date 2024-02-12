@@ -5,6 +5,7 @@ import { fetchAllPropertiesReducer, fetchMyPropertiesReducer, createPropertyRedu
 import { createOrder, getAdminOrder, getUserOrder, updateOrder } from "./reducer/order";
 import { createCouponReducer, fetchCouponReducer } from "./reducer/coupon";
 import { createEmployeeReducer, fetchAdminEmployeeReducer, fetchAllEmployeeReducer, updateEmployeeStatusReducer, deleteEmployeeReducer } from "./reducer/employee";
+import { getNotificationReducer, updateNotificationReducer } from "./reducer/notification";
 const rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
@@ -26,7 +27,9 @@ const rootReducer = combineReducers({
     fetchAllEmployees: fetchAllEmployeeReducer,
     deleteEmployee: deleteEmployeeReducer,
     updateEmployee: updateEmployeeStatusReducer,
-    createEmployee: createEmployeeReducer
+    createEmployee: createEmployeeReducer,
+    getNotifications: getNotificationReducer,
+    updateNotification: updateNotificationReducer
 })
 
 

@@ -77,23 +77,31 @@ const createNotificationModel = async ({id, title, message}) => {
 
 
 const updateNotificationModel = async (req, res) => {
-    const {id} = req.params;
-
-    try{
-        const notification = await getNotificationByIdSchema(id)
-
-        if(!notification ) {
-            console.log('not found')
-            return res.status(500).json({message: "Can't find notification"})
-        }
-        notification.status = 'read'
-
-        await notification.save()
-        console.log(notification)
-        return res.status(200).json({message: "Marked as read"})
-    } catch(error){
-        console.log(error)
-    } 
-}
+    const { ids } = req.body; // Assuming the array of IDs is passed in the request body
+  
+    try {
+      // Find all notifications with the given IDs
+      const notifications = await getNotificationByIdSchema(ids);
+      console.log(notifications)
+  
+      if (!notifications || notifications.length === 0) {
+        console.log('Notifications not found');
+        return res.status(404).json({ message: "No notifications found" });
+      }
+  
+      // Update the status of each notification to 'read'
+      notifications.forEach(async (notification) => {
+        notification.status = 'read';
+        await notification.save();
+      });
+  
+      console.log(notifications);
+      return res.status(200).json({ message: "Marked as read" });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  };
+  
 
 export {updateNotificationModel, createNotificationModel, getUserNotificationModel, getAllNotificationModel}

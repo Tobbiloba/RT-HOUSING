@@ -14,6 +14,6 @@ const NotificationModel = mongoose.model("Notification", NotificationSchema)
 
 export const getNotificationSchema = (no) => NotificationModel.find({}).limit(no)
 export const getUserNotificationSchema = (id) => NotificationModel.find({"userId": id})
-export const getNotificationByIdSchema = (id) => NotificationModel.findOne({"_id": id})
+export const getNotificationByIdSchema = (id) => NotificationModel.find({"_id": id})
 export const createNotificationSchema = (values) => new NotificationModel(values).save().then((notification) => notification.toObject())
 export const updateNotificationSchema = (id, value) => NotificationModel.findByIdAndUpdate(id, value)
