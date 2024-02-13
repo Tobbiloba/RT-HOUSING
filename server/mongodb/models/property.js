@@ -62,7 +62,7 @@ const PropertySchema = new mongoose.Schema({
 
 const PropertyModel = mongoose.model("Property", PropertySchema);
 
-export const getProperties = (no) => PropertyModel.find({}).limit(no);
+export const getProperties = () => PropertyModel.find({});
 export const getActivatedProperties = (query) => PropertyModel.find({"isActive": true, query});
 export const getPropertyById = (id) => PropertyModel.findOne({"_id": id});
 export const getPropertyByAdminId = (id) => PropertyModel.find({"admin_id": id})

@@ -1,10 +1,11 @@
-import { getAllPropertyType, getPropertyTypeByName, createPropertyType } from "../mongodb/models/type";
+import { getAllPropertyType, getPropertyTypeByName, createPropertyType } from "../mongodb/models/type.js";
 import mongoose from "mongoose"
 
 
 const getAllPropertyTypeModel = async (req, res) => {
 
     try {
+        console.log('called')
         const types = await getAllPropertyType()
         console.log(types)
         return res.status(200).json(types)
@@ -15,22 +16,12 @@ const getAllPropertyTypeModel = async (req, res) => {
 }
 
 
-const getPropertyByTypeNameModel = async (req, res) => {
-    try{
-        const name = req.params;
 
-        const type = await getPropertyTypeByName(name)
-        console.log(type)
-        return res.status(200).json(type)
-    } catch(error) {
-        console.log(error.message)
-        return res.status(500).json(error.message)
-    }
-}
 
-export const createPropertyTypeModel = async (req, res) => {
+ const createPropertyTypeModel = async (req, res) => {
     try {
         const {name} = req.body;
+        console.log(name)
 
         const type = await createPropertyType({
             name: name,
@@ -47,4 +38,4 @@ export const createPropertyTypeModel = async (req, res) => {
 }
 
 
-export {getAllPropertyTypeModel, getPropertyByTypeNameModel, createPropertyTypeModel}
+export {getAllPropertyTypeModel, createPropertyTypeModel}

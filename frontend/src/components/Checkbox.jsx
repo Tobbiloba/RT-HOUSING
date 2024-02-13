@@ -1,5 +1,5 @@
 // Checkbox.jsx
-import React from 'react';
+import React from 'react'
 
 const Checkbox = ({
   label,
@@ -24,7 +24,7 @@ const Checkbox = ({
         <p className="text-white text-[12px] mt-1">{errors}</p>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Checkbox;
+export default Checkbox

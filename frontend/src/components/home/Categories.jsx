@@ -1,112 +1,112 @@
 // @ts-nocheck
-import { getPropertyByType } from "@/action/property";
-import React, { useEffect, useState, slate, Suspense,lazy } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useMediaQuery } from "react-responsive";
-import { FaBath } from "react-icons/fa";
-import { IoBedSharp } from "react-icons/io5";
-import { SlSizeActual } from "react-icons/sl";
+import { getPropertyByType } from '@/action/property'
+import React, { useEffect, useState, slate, Suspense, lazy } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useMediaQuery } from 'react-responsive'
+import { FaBath } from 'react-icons/fa'
+import { IoBedSharp } from 'react-icons/io5'
+import { SlSizeActual } from 'react-icons/sl'
 
 const properties = [
   {
     id: 1,
-    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
-    price: "$100,000",
-    purpose: "sale",
-    paymentPlan: "month",
-    city: "Tranquil Countryside Estate",
-    state: "New York",
-    bedroom: "4",
-    bathroom: "3",
-    size: "78 m2",
+    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
+    price: '$100,000',
+    purpose: 'sale',
+    paymentPlan: 'month',
+    city: 'Tranquil Countryside Estate',
+    state: 'New York',
+    bedroom: '4',
+    bathroom: '3',
+    size: '78 m2',
   },
   {
     id: 2,
-    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
-    price: "$100,000",
-    purpose: "rent",
-    paymentPlan: "week",
-    city: "Tranquil Countryside Estate",
-    state: "New York",
-    bedroom: "4",
-    bathroom: "3",
-    size: "78 m2",
+    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
+    price: '$100,000',
+    purpose: 'rent',
+    paymentPlan: 'week',
+    city: 'Tranquil Countryside Estate',
+    state: 'New York',
+    bedroom: '4',
+    bathroom: '3',
+    size: '78 m2',
   },
   {
     id: 3,
-    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
-    price: "$100,000",
-    purpose: "sale",
-    paymentPlan: "night",
-    city: "Tranquil Countryside Estate",
-    state: "New York",
-    bedroom: "4",
-    bathroom: "3",
-    size: "78 m2",
+    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
+    price: '$100,000',
+    purpose: 'sale',
+    paymentPlan: 'night',
+    city: 'Tranquil Countryside Estate',
+    state: 'New York',
+    bedroom: '4',
+    bathroom: '3',
+    size: '78 m2',
   },
   {
     id: 4,
-    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
-    price: "$100,000",
-    purpose: "rent",
-    paymentPlan: "month",
-    city: "Tranquil Countryside Estate",
-    state: "New York",
-    bedroom: "4",
-    bathroom: "3",
-    size: "78 m2",
+    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
+    price: '$100,000',
+    purpose: 'rent',
+    paymentPlan: 'month',
+    city: 'Tranquil Countryside Estate',
+    state: 'New York',
+    bedroom: '4',
+    bathroom: '3',
+    size: '78 m2',
   },
   {
     id: 5,
-    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
-    price: "$100,000",
-    purpose: "sale",
-    paymentPlan: "night",
-    city: "Tranquil Countryside Estate",
-    state: "New York",
-    bedroom: "4",
-    bathroom: "3",
-    size: "78 m2",
+    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
+    price: '$100,000',
+    purpose: 'sale',
+    paymentPlan: 'night',
+    city: 'Tranquil Countryside Estate',
+    state: 'New York',
+    bedroom: '4',
+    bathroom: '3',
+    size: '78 m2',
   },
   {
     id: 6,
-    img: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D",
-    price: "$100,000",
-    purpose: "sale",
-    paymentPlan: "month",
-    city: "Tranquil Countryside Estate",
-    state: "New York",
-    bedroom: "4",
-    bathroom: "3",
-    size: "78 m2",
+    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
+    price: '$100,000',
+    purpose: 'sale',
+    paymentPlan: 'month',
+    city: 'Tranquil Countryside Estate',
+    state: 'New York',
+    bedroom: '4',
+    bathroom: '3',
+    size: '78 m2',
   },
-];
-const categories = ["Residential", "Commercial", "Apartments", "Office Space"];
+]
+const categories = ['Residential', 'Commercial', 'Apartments', 'Office Space']
 
 const CategoryCard = ({ property }) => {
-  return <div className="w-[100%] rounded-xl p-2 bg-white"></div>;
-};
-import { useRef } from "react";
+  return <div className="w-[100%] rounded-xl p-2 bg-white"></div>
+}
+import { useRef } from 'react'
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/pagination";
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/pagination'
 
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLocationDot } from 'react-icons/fa6'
 
 // import required modules
-import { FreeMode, Pagination } from "swiper/modules";
-import { Item } from "@radix-ui/react-dropdown-menu";
+import { FreeMode, Pagination } from 'swiper/modules'
+import { Item } from '@radix-ui/react-dropdown-menu'
 // const slateLoadedImage = slate(() => import("../LazyLoadedImage"));
-const LazyLoadedImage = lazy(() => import("../LazyLoadedImage"));
+const LazyLoadedImage = lazy(() => import('../LazyLoadedImage'))
 const SwiperContainer = () => {
-  const one = useMediaQuery({ maxWidth: 508 });
-  const two = useMediaQuery({ maxWidth: 788 });
-  const three = useMediaQuery({ maxWidth: 920 });
-  const four = useMediaQuery({ minWidth: 1024 });
+  const one = useMediaQuery({ maxWidth: 508 })
+  const two = useMediaQuery({ maxWidth: 788 })
+  const three = useMediaQuery({ maxWidth: 920 })
+  const four = useMediaQuery({ minWidth: 1024 })
   return (
     <>
       <Swiper
@@ -127,9 +127,12 @@ const SwiperContainer = () => {
 
         {properties.map((property, index) => {
           // console.log(property);
-         
+
           return (
-            <SwiperSlide key={index} className="hover:border-b hover:shadow-md border-slate-500 rounded-xl">
+            <SwiperSlide
+              key={index}
+              className="hover:border-b hover:shadow-md border-slate-500 rounded-xl"
+            >
               <div className="relative  max-h-[15rem] overflow-hidden">
                 {/* <img src={property.img} className="w-[100%] h-auto" /> */}
                 {/* <slateLoadedImage
@@ -138,19 +141,18 @@ const SwiperContainer = () => {
                 /> */}
 
                 <div className="w-[100%]">
-                <Suspense fallback={<div className="h-[15rem] w-[100%]"></div>}>
-                <LazyLoadedImage
-                  src={property.img}
-                  className=" "
-                />
-              </Suspense>
+                  <Suspense
+                    fallback={<div className="h-[15rem] w-[100%]"></div>}
+                  >
+                    <LazyLoadedImage src={property.img} className=" " />
+                  </Suspense>
                 </div>
                 <div className="w-[100%] h-[100%] z-[50] bg-black/50 absolute top-0 left-0"></div>
               </div>
 
               <div className=" p-[1.25rem] py-[2rem]">
                 <p className="text-[18px] font-[600]">
-                  {property.price}{" "}
+                  {property.price}{' '}
                   <span className="text-slate-500 text-[13px]">
                     / {property.paymentPlan}
                   </span>
@@ -172,28 +174,28 @@ const SwiperContainer = () => {
                 </div>
 
                 <div className="flex mt-4 flex-row items-center gap-3">
-                  <FaLocationDot className="text-slate-500"/>
+                  <FaLocationDot className="text-slate-500" />
                   <h1 className="text-[16px]">{property.city}</h1>
                 </div>
               </div>
             </SwiperSlide>
-          );
+          )
         })}
       </Swiper>
     </>
-  );
-};
+  )
+}
 
 const Categories = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Residential");
+  const [selectedCategory, setSelectedCategory] = useState('Residential')
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getPropertyByType("lol"));
-  }, []);
+    dispatch(getPropertyByType('lol'))
+  }, [])
 
-  const property = useSelector((state) => state.propertyType);
+  const property = useSelector(state => state.propertyType)
 
   return (
     <div className="flex items-center justify-center exo bg-gray-100 h-fit py-6 lg:py-12 ">
@@ -218,7 +220,7 @@ const Categories = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Categories;
+export default Categories

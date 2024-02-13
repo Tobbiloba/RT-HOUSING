@@ -172,16 +172,16 @@
 
 // export default AdminProperties;
 
-import React, { useEffect, useState } from "react";
-import { HiArrowLongDown, HiArrowLongUp } from "react-icons/hi2";
-import { CircularProgress, Select } from "@mui/material";
-import Dropdown from "../../../components/home/Dropdown";
-import { IoMdAdd } from "react-icons/io";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getMyProperties } from "../../../action/property";
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import BreadCrumb from "@/components/admin/breadcrumb/BreadCrumb";
+import React, { useEffect, useState } from 'react'
+import { HiArrowLongDown, HiArrowLongUp } from 'react-icons/hi2'
+import { CircularProgress, Select } from '@mui/material'
+import Dropdown from '../../../components/home/Dropdown'
+import { IoMdAdd } from 'react-icons/io'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMyProperties } from '../../../action/property'
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
+import BreadCrumb from '@/components/admin/breadcrumb/BreadCrumb'
 
 const PropertyCard = ({ item }) => {
   return (
@@ -201,7 +201,7 @@ const PropertyCard = ({ item }) => {
           {item.property_information.peoperty_bedrooms} For Rent
         </h1>
         <p className="absolute top-4 border bg-black/60 border-slate-600 text-[11px] left-4 text-white px-2 py-1">
-          {item.property_information.property_location.country},{" "}
+          {item.property_information.property_location.country},{' '}
           {item.property_information.property_location.state}
         </p>
       </div>
@@ -261,36 +261,36 @@ const PropertyCard = ({ item }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 // import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 const AdminProperties = () => {
-  const dispatch = useDispatch();
-  const [option, setOption] = useState("All");
-  const [sortBy, setSortBy] = useState(true);
+  const dispatch = useDispatch()
+  const [option, setOption] = useState('All')
+  const [sortBy, setSortBy] = useState(true)
 
   const options = [
-    "Apartment",
-    "Villa",
-    "Farmhouse",
-    "Condos",
-    "Townhouse",
-    "Duplex",
-    "Studio",
-    "Chalet",
-  ];
+    'Apartment',
+    'Villa',
+    'Farmhouse',
+    'Condos',
+    'Townhouse',
+    'Duplex',
+    'Studio',
+    'Chalet',
+  ]
 
   useEffect(() => {
-    dispatch(getMyProperties());
-  }, []);
+    dispatch(getMyProperties())
+  }, [])
 
-  const { properties, loading } = useSelector((state) => state?.myProperties);
+  const { properties, loading } = useSelector(state => state?.myProperties)
 
-  const itemsPerPage = 4;
-  const totalItems = properties?.length;
-  const [currentPage, setCurrentPage] = useState(1);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  const itemsPerPage = 4
+  const totalItems = properties?.length
+  const [currentPage, setCurrentPage] = useState(1)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
 
   return (
     <div className="exo">
@@ -326,7 +326,7 @@ const AdminProperties = () => {
       </div>
       <div>
         {loading ? (
-          <div className="mt-6 flex justify-center"> 
+          <div className="mt-6 flex justify-center">
             <CircularProgress />
           </div>
         ) : properties?.length ? (
@@ -346,8 +346,8 @@ const AdminProperties = () => {
                 disabled={currentPage === 1}
                 className={`${
                   currentPage === 1
-                    ? "bg-slate-400 cursor-not-allowed text-slate-100"
-                    : "bg-slate-300 shadow-md text-slate-500"
+                    ? 'bg-slate-400 cursor-not-allowed text-slate-100'
+                    : 'bg-slate-300 shadow-md text-slate-500'
                 }   text-[24px] p-2`}
               >
                 <IoIosArrowBack />
@@ -358,8 +358,8 @@ const AdminProperties = () => {
                 disabled={endIndex >= totalItems}
                 className={`${
                   endIndex >= totalItems
-                    ? "bg-slate-400 cursor-not-allowed text-slate-100"
-                    : "bg-slate-300 shadow-md text-slate-500"
+                    ? 'bg-slate-400 cursor-not-allowed text-slate-100'
+                    : 'bg-slate-300 shadow-md text-slate-500'
                 }  text-[24px] p-2`}
               >
                 <IoIosArrowForward />
@@ -373,7 +373,7 @@ const AdminProperties = () => {
               No property
             </h1>
             <p className="text-[15px] mt-3 text-slate-500 text-center">
-              Seems like you haven't added any properties yet. Ready to begin?{" "}
+              Seems like you haven't added any properties yet. Ready to begin?{' '}
               <br /> Click the button below to start adding your first property.
             </p>
             <Link to="/admin/properties/create">
@@ -385,7 +385,7 @@ const AdminProperties = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AdminProperties;
+export default AdminProperties

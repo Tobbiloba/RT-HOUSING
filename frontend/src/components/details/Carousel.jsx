@@ -1,28 +1,24 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from 'react'
 const Carousel = ({ images }) => {
-  console.log(images);
+  console.log(images)
   const groupedImages = useMemo(() => {
     // Divide the images into groups of three
-    const result = [];
+    const result = []
     for (let i = 0; i < images.length; i += 3) {
-      result.push(images.slice(i, i + 3));
+      result.push(images.slice(i, i + 3))
     }
-    return result;
-  }, [images]);
+    return result
+  }, [images])
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   const nextSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === groupedImages.length - 1 ? 0 : prev + 1
-    );
-  };
+    setCurrentSlide(prev => (prev === groupedImages.length - 1 ? 0 : prev + 1))
+  }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? groupedImages.length - 1 : prev - 1
-    );
-  };
+    setCurrentSlide(prev => (prev === 0 ? groupedImages.length - 1 : prev - 1))
+  }
 
   return (
     <div className="slider w-[100%] h-[100%] top-0 left-0">
@@ -47,10 +43,10 @@ const Carousel = ({ images }) => {
                   <div
                     className={`w-[100%] min-w-[10rem]  overflow-hidden h-[100%] object-cover ${
                       index === 0
-                        ? "col-span-2 md:row-span-3 "
+                        ? 'col-span-2 md:row-span-3 '
                         : index === 1
-                        ? "md:col-span-1"
-                        : "md:row-span-1 "
+                          ? 'md:col-span-1'
+                          : 'md:row-span-1 '
                     }`}
                   >
                     <img
@@ -61,12 +57,12 @@ const Carousel = ({ images }) => {
                     />
                   </div>
                   // <p>{img}</p>
-                );
+                )
               })}
 
               {/* <p className="w-[100%]">{image}</p> */}
             </div>
-          );
+          )
         })}
       </div>
       <button className="btn prev-btn text-white" onClick={prevSlide}>
@@ -76,9 +72,9 @@ const Carousel = ({ images }) => {
         <img src="/right2.png" className="w-4" />
       </button>
     </div>
-  );
-};
-export default Carousel;
+  )
+}
+export default Carousel
 
 // https://images.unsplash.com/photo-1516802273409-68526ee1bdd6?w=164&h=164&fit=crop&auto=format
 // https://images.unsplash.com/photo-1471357674240-e1a485acb3e1?w=164&h=164&fit=crop&auto=format

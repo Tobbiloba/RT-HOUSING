@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react'
 import {
   CaretSortIcon,
   ChevronDownIcon,
   DotsHorizontalIcon,
-} from "@radix-ui/react-icons";
+} from '@radix-ui/react-icons'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -15,9 +15,9 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import { Button } from "@/~/components/ui/button";
-import { Checkbox } from "@/~/components/ui/checkbox";
+} from '@tanstack/react-table'
+import { Button } from '@/~/components/ui/button'
+import { Checkbox } from '@/~/components/ui/checkbox'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -26,8 +26,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/~/components/ui/input";
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/~/components/ui/input'
 import {
   Table,
   TableBody,
@@ -35,12 +35,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/~/components/ui/table";
-import { BsClipboard } from "react-icons/bs";
-import { ToastButton } from "@/components/toast/Toast";
-import { FaLongArrowAltUp } from "react-icons/fa";
+} from '@/~/components/ui/table'
+import { BsClipboard } from 'react-icons/bs'
+import { ToastButton } from '@/components/toast/Toast'
+import { FaLongArrowAltUp } from 'react-icons/fa'
 const CodeCard = ({ code, status }: string) => {
-  const [showClipboard, setShowClipboard] = React.useState(false);
+  const [showClipboard, setShowClipboard] = React.useState(false)
 
   return (
     <div
@@ -48,13 +48,12 @@ const CodeCard = ({ code, status }: string) => {
       onMouseLeave={() => setShowClipboard(false)}
       className={`capitalize flex flex-row items-center gap-3 text-[13px] font-[600] text-start `}
     >
-      {code}{" "}
-
-      {
-        showClipboard && <div>
-            <BsClipboard className="text-white cursor-pointer" />
+      {code}{' '}
+      {showClipboard && (
+        <div>
+          <BsClipboard className="text-white cursor-pointer" />
         </div>
-      }
+      )}
       {/* {showClipboard && (
         <ToastButton
           description="You have successfully copied this discount code"
@@ -64,31 +63,36 @@ const CodeCard = ({ code, status }: string) => {
         </ToastButton>
       )} */}
     </div>
-  );
-};
+  )
+}
 export const columns = [
- 
   {
-    accessorKey: "coupon_code",
+    accessorKey: 'coupon_code',
     header: () => <div className="h-[100%] py-3">code</div>,
     cell: ({ row }) => (
-      <CodeCard code={row.getValue("coupon_code")} status={row.getValue("status")} />
+      <CodeCard
+        code={row.getValue('coupon_code')}
+        status={row.getValue('status')}
+      />
     ),
   },
   {
-    accessorKey: "min_purchase",
-    header: () => <div className=""><p>Min Purchase</p> <FaLongArrowAltUp className="mt-2 text-white text-xl"/></div>,
+    accessorKey: 'min_purchase',
+    header: () => (
+      <div className="">
+        <p>Min Purchase</p>{' '}
+        <FaLongArrowAltUp className="mt-2 text-white text-xl" />
+      </div>
+    ),
     cell: ({ row }) => {
       // console.log(row.getValue("min_purchase"))
 
       return (
-        <div
-          className={`capitalize text-[13px] text-start `}
-        >
-          {row.getValue("min_purchase")}
+        <div className={`capitalize text-[13px] text-start `}>
+          {row.getValue('min_purchase')}
         </div>
       )
-    }
+    },
   },
   // {
   //   accessorKey: "discount_type",
@@ -102,65 +106,76 @@ export const columns = [
   //   ),
   // },
   {
-    accessorKey: "discount_type",
-    header: () => <div className=""><p>Discount Type</p> <FaLongArrowAltUp className="mt-2 text-white text-xl"/></div>,
+    accessorKey: 'discount_type',
+    header: () => (
+      <div className="">
+        <p>Discount Type</p>{' '}
+        <FaLongArrowAltUp className="mt-2 text-white text-xl" />
+      </div>
+    ),
     cell: ({ row }) => (
-      <div
-        className={`capitalize text-[13px] text-start `}
-      >
-        {row.getValue("discount_type")}
+      <div className={`capitalize text-[13px] text-start `}>
+        {row.getValue('discount_type')}
       </div>
     ),
   },
   {
-    accessorKey: "quantity",
-    header: () => <div className=""><p>Discount Price</p> <FaLongArrowAltUp className="mt-2 text-white text-xl"/></div>,
+    accessorKey: 'quantity',
+    header: () => (
+      <div className="">
+        <p>Discount Price</p>{' '}
+        <FaLongArrowAltUp className="mt-2 text-white text-xl" />
+      </div>
+    ),
     cell: ({ row }) => (
-      <div
-        className={`capitalize text-[13px] text-start `}
-      >
-        {row.getValue("quantity")}
+      <div className={`capitalize text-[13px] text-start `}>
+        {row.getValue('quantity')}
       </div>
     ),
   },
   {
-    accessorKey: "status",
-    header: () => <div className=""><p>Status</p> <FaLongArrowAltUp className="mt-2 text-white text-xl"/></div>,
+    accessorKey: 'status',
+    header: () => (
+      <div className="">
+        <p>Status</p> <FaLongArrowAltUp className="mt-2 text-white text-xl" />
+      </div>
+    ),
     cell: ({ row }) => (
-      <div className={`flex flex-row gap-4 items-center ${
-        row.getValue("status") == "active"
-          ? "text-green-400"
-          : row.getValue("status") === "inactive"
-          ? "text-slate-500"
-          : row.getValue("status") === "pending"
-          ? "text-slate-500"
-          : "text-red-500"
-      }`}>
+      <div
+        className={`flex flex-row gap-4 items-center ${
+          row.getValue('status') == 'active'
+            ? 'text-green-400'
+            : row.getValue('status') === 'inactive'
+              ? 'text-slate-500'
+              : row.getValue('status') === 'pending'
+                ? 'text-slate-500'
+                : 'text-red-500'
+        }`}
+      >
         <div
           className={`capitalize border text-center text-[13px] ${
-            row.getValue("status") == "active"
-              ? "text-green-400 border-green-400 bg-green-500 "
-              : row.getValue("status") === "inactive"
-              ? "text-slate-500 border-slate-500 bg-slate-500"
-              : row.getValue("status") === "pending"
-              ? "text-slate-500 border-slate-500 bg-slate-500"
-              : "text-red-500 border-red-500 bg-red-500"
+            row.getValue('status') == 'active'
+              ? 'text-green-400 border-green-400 bg-green-500 '
+              : row.getValue('status') === 'inactive'
+                ? 'text-slate-500 border-slate-500 bg-slate-500'
+                : row.getValue('status') === 'pending'
+                  ? 'text-slate-500 border-slate-500 bg-slate-500'
+                  : 'text-red-500 border-red-500 bg-red-500'
           } w-3 h-3`}
         ></div>
-        {row.getValue("status")}
+        {row.getValue('status')}
       </div>
     ),
   },
-  
-];
+]
 export function CouponTable({ data }) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+    [],
+  )
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+    React.useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
     data,
@@ -179,31 +194,28 @@ export function CouponTable({ data }) {
       columnVisibility,
       rowSelection,
     },
-  });
+  })
   return (
     <div className="w-full exo">
       <div className="rounded-md ">
         <Table>
           <TableHeader className="bg-slate-950 h-[3rem]">
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map(headerGroup => (
               <TableRow
                 key={headerGroup.id}
                 className="hover:bg-slate-800 text-[13px]"
               >
                 {headerGroup.headers.map((header, index) => {
                   return (
-                    <TableHead
-                      key={header.id}
-                      className={`text-white`}
-                    >
+                    <TableHead key={header.id} className={`text-white`}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
-                  );
+                  )
                 })}
               </TableRow>
             ))}
@@ -211,34 +223,34 @@ export function CouponTable({ data }) {
           <TableBody className="">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row, index) => {
-                if (row.original !== "active") {
-                  return null;
+                if (row.original !== 'active') {
+                  return null
                 }
                 return (
                   <TableRow
                     key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
+                    data-state={row.getIsSelected() && 'selected'}
                     className={`${
                       index % 2 === 0
-                        ? "bg-slate-700 hover:bg-slate-800"
-                        : "bg-slate-800 hover:bg-slate-900"
+                        ? 'bg-slate-700 hover:bg-slate-800'
+                        : 'bg-slate-800 hover:bg-slate-900'
                     } border-0 py-8 bg-black `}
                   >
-                    {row.getVisibleCells().map((cell) => (
+                    {row.getVisibleCells().map(cell => (
                       <TableCell
                         key={cell.id}
                         className={`mt-3 text-slate-600 ${
-                          index % 2 === 0 ? "text-white" : "text-slate-400"
+                          index % 2 === 0 ? 'text-white' : 'text-slate-400'
                         } bg-black`}
                       >
                         {flexRender(
                           cell.column.columnDef.cell,
-                          cell.getContext()
+                          cell.getContext(),
                         )}
                       </TableCell>
                     ))}
                   </TableRow>
-                );
+                )
               })
             ) : (
               <TableRow>
@@ -256,12 +268,14 @@ export function CouponTable({ data }) {
               table.getRowModel().rows.map((row, index) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                   className={`${
-                    index % 2 === 0 ? "bg-slate-700 text-slate-400 hover:text-slate-800" : "bg-slate-800"
+                    index % 2 === 0
+                      ? 'bg-slate-700 text-slate-400 hover:text-slate-800'
+                      : 'bg-slate-800'
                   } border-0 py-8`}
                 >
-                  {row.getVisibleCells().map((cell) => {
+                  {row.getVisibleCells().map(cell => {
                     return (
                       <TableCell
                         key={cell.id}
@@ -271,10 +285,10 @@ export function CouponTable({ data }) {
                       >
                         {flexRender(
                           cell.column.columnDef.cell,
-                          cell.getContext()
+                          cell.getContext(),
                         )}
                       </TableCell>
-                    );
+                    )
                   })}
                 </TableRow>
               ))
@@ -293,7 +307,7 @@ export function CouponTable({ data }) {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4 px-[1rem]">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="space-x-2">
@@ -318,5 +332,5 @@ export function CouponTable({ data }) {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

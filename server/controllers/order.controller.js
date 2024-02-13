@@ -6,7 +6,8 @@ import {
   updateOrderById,
   getOrdersByPropertyIds,
   getOrderById,
-  getOrderByCompany,
+  // getOrderByCompany,
+  getOrderByAdminId,
 } from "../mongodb/models/order.js";
 import PropertyModel, { getPropertyByAdminId } from "../mongodb/models/property.js";
 import moment from "moment";
@@ -58,7 +59,7 @@ const getOrdersByAdmin = async (req, res) => {
 
     console.log(company)
 
-    const orders = await getOrderByCompany(id);
+    const orders = await getOrderByAdminId(id);
 
     console.log(orders)
     // const user = await getAdminUserById(id);
@@ -232,6 +233,7 @@ console.log(newStatus)
         sendOrderEnd("abayomitobiloba410@gmail.com", order);
         orderDetails.bookingStatus = "expired";
       }
+      
 
       await orderDetails.save();
       // property.property_information.booking_status = newStatus;
@@ -250,17 +252,30 @@ console.log(newStatus)
   }
 };
 
+const scheduleJobHandler = (minute, hour, dayOfMonth, month, propertyId, status) => {
+  const cronSchedule = `${minute} ${hour} ${dayOfMonth} ${month} *`;
+  
+  const job = cron.schedule(
+    cronSchedule,
+    () => updateBookingStatus(propertyId, status)
+  );
+
+  return job;
+};
+
+
 import cron from "node-cron";
 // Function to schedule a job to update booking status on check-in and check-out dates
-const scheduleBookingStatusUpdate = (checkinDate, checkoutDate, orderId) => {
+const scheduleBookingStatusUpdate = (checkinDate, checkoutDate, propertyId) => {
+  console.log('called')
   console.log(`22 16 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]}`);
 
 
   // updateBookingStatus(orderId, 'end')
-  const checkinJob = cron.schedule(
-    `10 21 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]} *`,
-    () => updateBookingStatus(propertyId, "start")
-  );
+  // const checkinJob = cron.schedule(
+  //   `10 21 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]} *`,
+  //   () => updateBookingStatus(propertyId, "start")
+  // );
   // const checkoutJob = cron.schedule(
   //   `48 15 ${checkoutDate.split("/")[0]} ${checkoutDate.split("/")[1]} *`,
   //   () => updateBookingStatus(propertyId, "expired")
@@ -271,27 +286,22 @@ const scheduleBookingStatusUpdate = (checkinDate, checkoutDate, orderId) => {
   //   () => updateBookingStatus(propertyId, "start")
   // );
 
-
-
-  // const checkinJob = cron.schedule(
-  //   `0 21 28 01 *`,
-  //   () => console.log(propertyId, "start")
-  // );
-
-  // const checkoutJob = cron.schedule(
-  //   `1 21 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]} *`,
-  //   () => console.log(propertyId, "end")
-  // );
+  // scheduleJobHandler(57, 22, 12, 2, propertyId, 'start');
+  scheduleJobHandler(21, 23, 12, 2, propertyId, 'end');
+  // scheduleJobHandler(56, 18, 12, 2, propertyId, 'start');
+  // scheduleJobHandler(57, 18, 12, 2, propertyId, 'start');
+  // scheduleJobHandler(58, 18, 12, 2, propertyId, 'start');
 
   // const checkinJob = cron.schedule(
-  //   `22 20 28 01 *`,
-  //   () => updateBookingStatus(propertyId, "start")
+  //   '49 18 12 2 *', // Minute: 47, Hour: 18 (6 PM), Day of the Month: 12, Month: 2 (February), Any Day of the Week
+  //   () => console.log(propertyId, 'start')
+  // );
+  
+  // const checkoutJob = cron.schedule(
+  //   '50 18 12 2 *', // Minute: 48, Hour: 18 (6 PM), Day of the Month: 12, Month: 2 (February), Any Day of the Week
+  //   () => console.log(propertyId, 'end')
   // );
 
-  // const checkoutJob = cron.schedule(
-  //   `23 20 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]} *`,
-  //   () => updateBookingStatus(propertyId, "end")
-  // );
 };
 
 
@@ -303,12 +313,12 @@ const scheduleBookingStatusUpdate = (checkinDate, checkoutDate, orderId) => {
 
 const updateOrderStatus = async (req, res) => {
   const { id } = req.params;
-  const { companyId, status, reason } = req.body;
+  const { adminId, status, reason } = req.body;
 
   try {
-    const company = await getCompanyByIdSchema(companyId);
+    const admin = await getAdminUserById(adminId);
 
-    if (!company) {
+    if (!admin) {
       return res.status(403).json({ message: "Not authorized as an admin" });
     }
 

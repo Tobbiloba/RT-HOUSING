@@ -1,7 +1,11 @@
 import AdminUser, { getAdminUserByEmail, getAdminUserById, getAdminUserByToken, registerAdminUser } from "../mongodb/models/admin.js";
 
-import { authentication, generateRandomToken, random, sendVerificationToken } from "../helpers/index.js";
+import { authentication, generateRandomToken, random, sendLoginNotification, sendVerificationToken } from "../helpers/index.js";
 import { createNotificationModel } from "./notification.controller.js";
+import { getPropertyByAdminId } from "../mongodb/models/property.js";
+import { getOrderByAdminId } from "../mongodb/models/order.js";
+import { getUserNotificationSchema } from "../mongodb/models/notification.js";
+import { getAdminCouponByIdSchema } from "../mongodb/models/coupon.js";
 const getAllAdminUsers = async (req, res) => {
     try {
         const users = await AdminUser.find({}).limit(req.query._end);
@@ -81,6 +85,8 @@ const updateAdminUser = async (req, res) => {
     // Save the updated user
     const updatedUser = await existingUser.save();
 
+    createNotificationModel({id, title: 'Account Update', message: 'You have successfully updated your account'})
+
     res.status(200).json(updatedUser).end();
   } catch (error) {
     console.log(error);
@@ -109,6 +115,8 @@ const loginAdminUser = async (req, res) => {
         userExists.authentication.sessionToken = authentication(salt, userExists._id.toString());
     
         await userExists.save();
+
+        sendLoginNotification(userExists._id)
         console.log('successful')
         res.cookie('TOBBIE-AUTH', userExists.authentication.sessionToken, { domain: 'localhost', path: '/' });
         return res.status(200).json(userExists).end();
@@ -122,16 +130,19 @@ const loginAdminUser = async (req, res) => {
 };
 
 
-
-
 const getAdminUserInfoByID = async (req, res) => {
   try {
     const { id } = req.params;
 
     const user = await getAdminUserById(id);
+    const properties = await getPropertyByAdminId(id)
+    const orders = await getOrderByAdminId(id)
+    const notifications = await getUserNotificationSchema(id)
+    const coupons = await getAdminCouponByIdSchema(id)
+    // console.log({...user, couponCount: coupons.length, notificationCount: notifications.length, orderCount: orders.length, propertyCount: properties.length})
 
     if (user) {
-      res.status(200).json(user);
+      res.status(200).json({user: user, couponCount: coupons.length, notificationCount: notifications.length, orderCount: orders.length, propertyCount: properties.length});
     } else {
       res.status(404).json({ message: "Admin User not found" });
     }

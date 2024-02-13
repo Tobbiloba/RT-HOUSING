@@ -1,51 +1,51 @@
-import { Item } from "@radix-ui/react-dropdown-menu";
-import React from "react";
-import { CiHeart } from "react-icons/ci";
+import { Item } from '@radix-ui/react-dropdown-menu'
+import React from 'react'
+import { CiHeart } from 'react-icons/ci'
 const property = [
   {
     id: 1,
     photos: 18,
-    time: "2HRS AGO",
-    price: "120,000.00",
-    bedroom: "4",
-    location: "Ikeja GRA, Lagos.",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvcGVydHl8ZW58MHx8MHx8fDA%3D",
+    time: '2HRS AGO',
+    price: '120,000.00',
+    bedroom: '4',
+    location: 'Ikeja GRA, Lagos.',
+    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvcGVydHl8ZW58MHx8MHx8fDA%3D',
   },
   {
     id: 2,
     photos: 11,
-    time: "6HRS AGO",
-    price: "200,000.00",
-    bedroom: "4",
-    location: "Lekki Phase 2, Lagos.",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvcGVydHl8ZW58MHx8MHx8fDA%3D",
+    time: '6HRS AGO',
+    price: '200,000.00',
+    bedroom: '4',
+    location: 'Lekki Phase 2, Lagos.',
+    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvcGVydHl8ZW58MHx8MHx8fDA%3D',
   },
   {
     id: 3,
     photos: 23,
-    time: "2DAYS AGO",
-    price: "320,000.00",
-    bedroom: "4",
-    location: "Victoria Island, Lagos.",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvcGVydHl8ZW58MHx8MHx8fDA%3D",
+    time: '2DAYS AGO',
+    price: '320,000.00',
+    bedroom: '4',
+    location: 'Victoria Island, Lagos.',
+    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvcGVydHl8ZW58MHx8MHx8fDA%3D',
   },
   {
     id: 4,
     photos: 23,
-    time: "2DAYS AGO",
-    price: "320,000.00",
-    bedroom: "4",
-    location: "Victoria Island, Lagos.",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvcGVydHl8ZW58MHx8MHx8fDA%3D",
+    time: '2DAYS AGO',
+    price: '320,000.00',
+    bedroom: '4',
+    location: 'Victoria Island, Lagos.',
+    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvcGVydHl8ZW58MHx8MHx8fDA%3D',
   },
-];
+]
 const PropertyLocationCard = ({ title }) => {
   return (
     <div className="container rubik text-slate-600 border-b pb-16">
       <h1 className="text-xl">Homes in {title}</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mt-4">
-        {property.map((item) => (
+        {property.map(item => (
           <div
             key={item.id}
             style={{ backgroundImage: `url(${item.img})` }}
@@ -74,7 +74,7 @@ const PropertyLocationCard = ({ title }) => {
 
       <h1 className="mt-7 text-slate-600">See all {title} houses </h1>
     </div>
-  );
-};
+  )
+}
 
-export default PropertyLocationCard;
+export default PropertyLocationCard

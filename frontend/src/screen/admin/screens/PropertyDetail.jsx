@@ -1,43 +1,43 @@
-import React, { useEffect } from "react";
-import Carousel from "../../../components/details/Carousel";
-import AvailabilityCalendar from "../../../components/AvailabilityCalendar";
+import React, { useEffect } from 'react'
+import Carousel from '../../../components/details/Carousel'
+import AvailabilityCalendar from '../../../components/AvailabilityCalendar'
 import {
   Link,
   Element,
   Events,
   animateScroll as scroll,
   scrollSpy,
-} from "react-scroll";
-import { Rating } from "@mui/material";
+} from 'react-scroll'
+import { Rating } from '@mui/material'
 const images = [
-  "http://amentotech.com/htmls/tenanto/images/property-single/img-01.jpg",
-  "http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg",
-  "http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg",
-  "http://amentotech.com/htmls/tenanto/images/property-single/img-01.jpg",
-  "http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg",
-  "http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg",
-  "http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg",
-  "http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg",
+  'http://amentotech.com/htmls/tenanto/images/property-single/img-01.jpg',
+  'http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg',
+  'http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg',
+  'http://amentotech.com/htmls/tenanto/images/property-single/img-01.jpg',
+  'http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg',
+  'http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg',
+  'http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg',
+  'http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg',
   // Add more image URLs as needed
-];
+]
 
 const detail = [
   {
     id: 5,
     featured: true,
     top_rated: true,
-    type: "Villa",
-    name: "Exquisite Lakeside Villa",
+    type: 'Villa',
+    name: 'Exquisite Lakeside Villa',
     star: 5,
     reviews: 150,
     bedroom: 4,
     guests: 8,
-    location: "101 Serenity Lane, Rome, Italy",
-    avatar: "https://cdn-icons-png.flaticon.com/128/2202/2202108.png",
+    location: '101 Serenity Lane, Rome, Italy',
+    avatar: 'https://cdn-icons-png.flaticon.com/128/2202/2202108.png',
     saved: true,
 
     about:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempoer incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nrud exercitation ullamco laboris nisi ute aliquip ex ea commodo consequat duis auete irure dolor in reprehenderit in voluptate velit.",
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempoer incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nrud exercitation ullamco laboris nisi ute aliquip ex ea commodo consequat duis auete irure dolor in reprehenderit in voluptate velit.',
     // guests: 4,
     bedrooms: 3,
     bathrooms: 3,
@@ -45,46 +45,46 @@ const detail = [
     infants: 2,
     adults: 4,
     dimension: 1200,
-    check_in: "9:00 am",
+    check_in: '9:00 am',
     price: 640,
     other_expenses: [
       {
         id: 1,
-        expense: "Car Rental",
+        expense: 'Car Rental',
         price: 50,
       },
       {
         id: 2,
-        expense: "Fresh Grocereis",
+        expense: 'Fresh Grocereis',
         price: 50,
       },
       {
         id: 3,
-        expense: "Medical Representative",
+        expense: 'Medical Representative',
         price: 50,
       },
     ],
     amenities: [
-      "WI-FI",
-      "Air Conditioning",
-      "TV Cable",
-      "Dish Washer",
-      "Laundry",
-      "Fire Extinguisher",
-      "First Aid",
+      'WI-FI',
+      'Air Conditioning',
+      'TV Cable',
+      'Dish Washer',
+      'Laundry',
+      'Fire Extinguisher',
+      'First Aid',
     ],
-    available_date_from: "06/01/2024",
-    available_date_till: "09/01/2024",
+    available_date_from: '06/01/2024',
+    available_date_till: '09/01/2024',
     available: true,
-    un_available_date_from: "10/01/2024",
-    un_available_date_till: "17/01/2024",
-    occupied_date_from: "03/01/2024",
-    occupied_date_till: "05/01/2024",
+    un_available_date_from: '10/01/2024',
+    un_available_date_till: '17/01/2024',
+    occupied_date_from: '03/01/2024',
+    occupied_date_till: '05/01/2024',
   },
-];
+]
 
 const DetailTopCard = ({ detail }) => {
-  console.log(detail?.property_no_bathroom);
+  console.log(detail?.property_no_bathroom)
   return (
     <div className="mb-6">
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center px-[1.25rem] sm:px-[5%] md:px-[2%] ">
@@ -117,8 +117,8 @@ const DetailTopCard = ({ detail }) => {
             <div className="mt-3 flex flex-row gap-3 items-center ">
               <img src="/send-mail.png" className="w-4" />
               <p className="text-slate-500">
-                {detail?.property_location?.country},{" "}
-                {detail?.property_location?.state}{" "}
+                {detail?.property_location?.country},{' '}
+                {detail?.property_location?.state}{' '}
                 {detail?.property_location?.city}
               </p>
             </div>
@@ -126,7 +126,7 @@ const DetailTopCard = ({ detail }) => {
         </div>
         <div className="mt-12 lg:mt-0">
           <p className="text-[24px] font-[600] text-slate-400">
-            {detail?.pricing}{" "}
+            {detail?.pricing}{' '}
             <span className="text-[16px] font-[500] text-slate-500">
               / night
             </span>
@@ -153,10 +153,10 @@ const DetailTopCard = ({ detail }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-const AboutProperty = ({propertyDetails}) => {
+const AboutProperty = ({ propertyDetails }) => {
   console.log(propertyDetails)
   return (
     <div className="py-6 px-[5%]">
@@ -181,10 +181,9 @@ const AboutProperty = ({propertyDetails}) => {
                   Accommodation
                 </th>
                 <th className="text-start pl-5 text-gray-100 text-[15px] font-[500]">
-                  {detail[0].guests < 10 && "0"}
+                  {detail[0].guests < 10 && '0'}
                   {detail[0].guests} Guests
                   {/* {propertyDetails} */}
-
                 </th>
               </tr>
             </thead>
@@ -202,7 +201,7 @@ const AboutProperty = ({propertyDetails}) => {
                   Bathrooms
                 </td>
                 <td className="text-start pl-5 text-gray-500 text-[15px] font-[500]">
-                {propertyDetails?.property_no_bathrooms}
+                  {propertyDetails?.property_no_bathrooms}
                 </td>
               </tr>
               <tr>
@@ -210,7 +209,8 @@ const AboutProperty = ({propertyDetails}) => {
                   Dimension
                 </td>
                 <td className="text-start pl-5 text-[15px] text-gray-100 font-[500]">
-                  {propertyDetails?.property_size[0] || ''} x {propertyDetails?.property_size[1] || ''}Sq Ft
+                  {propertyDetails?.property_size[0] || ''} x{' '}
+                  {propertyDetails?.property_size[1] || ''}Sq Ft
                 </td>
               </tr>
               <tr className="bg-slate-100">
@@ -234,8 +234,8 @@ const AboutProperty = ({propertyDetails}) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Amenities = ({ amenities }) => {
   // console.log(amenities)
@@ -250,42 +250,44 @@ const Amenities = ({ amenities }) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Nearby = () => {
   return (
     <div className="my-12">
-      <h1 className="text-slate-400 text-[17px] font-[600]">Nearby Locations</h1>
+      <h1 className="text-slate-400 text-[17px] font-[600]">
+        Nearby Locations
+      </h1>
       <div className="w-[100%] bg-gray-900 h-[30rem] my-3 flex items-center justify-center">
         <h1 className="text-[17px]">Feature Not Available...</h1>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Availability = ({ dates }) => {
   // console.log(dates);
 
-  const dateFormat = (inputDateString) => {
-    if(!inputDateString) {
-      return;
+  const dateFormat = inputDateString => {
+    if (!inputDateString) {
+      return
     }
     // Parse the input date string
-    const inputDate = new Date(inputDateString);
+    const inputDate = new Date(inputDateString)
 
     // Get the day, month, and year components
-    const day = inputDate.getUTCDate();
-    const month = inputDate.getUTCMonth() + 1; // Months are zero-based, so add 1
-    const year = inputDate.getUTCFullYear();
+    const day = inputDate.getUTCDate()
+    const month = inputDate.getUTCMonth() + 1 // Months are zero-based, so add 1
+    const year = inputDate.getUTCFullYear()
 
     // Pad single-digit day and month with leading zeros if needed
-    const formattedDay = day < 10 ? `0${day}` : day;
-    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedDay = day < 10 ? `0${day}` : day
+    const formattedMonth = month < 10 ? `0${month}` : month
 
     // Construct the final formatted date string
-    return `${formattedDay}/${formattedMonth}/${year}`;
-  };
+    return `${formattedDay}/${formattedMonth}/${year}`
+  }
 
   // console.log(dateFormat(dates.unavailable_date_from[0]))
   return (
@@ -301,12 +303,12 @@ const Availability = ({ dates }) => {
 
       <div className="mt-8 bg-slate-400 w-fit">
         <AvailabilityCalendar
-        availableFromDate={dateFormat(dates?.available_date_from[0])}
-        availableToDate={dateFormat(dates.available_date_till[0])}
-        unavailableFromDate={dateFormat(dates.unavailable_date_from[0])}
-        unavailableToDate={dateFormat(dates.unavailable_date_till[0])}
-        occupiedDateFrom={dateFormat(dates.occupied_date_from[0])}
-        occupiedDateTill={dateFormat(dates.occupied_date_till[0])}
+          availableFromDate={dateFormat(dates?.available_date_from[0])}
+          availableToDate={dateFormat(dates.available_date_till[0])}
+          unavailableFromDate={dateFormat(dates.unavailable_date_from[0])}
+          unavailableToDate={dateFormat(dates.unavailable_date_till[0])}
+          occupiedDateFrom={dateFormat(dates.occupied_date_from[0])}
+          occupiedDateTill={dateFormat(dates.occupied_date_till[0])}
         />
       </div>
 
@@ -325,8 +327,8 @@ const Availability = ({ dates }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Reviews = () => {
   return (
@@ -336,8 +338,8 @@ const Reviews = () => {
         <h1 className="text-[17px]">In Progress...</h1>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const LoadingPulse = () => {
   return (
@@ -375,29 +377,26 @@ const LoadingPulse = () => {
       </div>
       <div></div>
     </div>
-  );
-};
-import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getPropertyDetailById } from "../../../action/property";
+  )
+}
+import { useParams, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getPropertyDetailById } from '../../../action/property'
 const PropertyDetail = () => {
-  const { id } = useParams();
+  const { id } = useParams()
   const navigate = useNavigate()
   console.log(id)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   // console.log(encodeURIComponent(id));
   // const loading = false
-  const { 
-    loading,
-     error } = useSelector((state) => state?.propertyDetail);
+  const { loading, error } = useSelector(state => state?.propertyDetail)
   // console.log(error)
-  const propertyDetails = useSelector((state) => state?.propertyDetail);
-  console.log(propertyDetails);
+  const propertyDetails = useSelector(state => state?.propertyDetail)
+  console.log(propertyDetails)
   // const loading = true
   useEffect(() => {
-
-    dispatch(getPropertyDetailById(id));
-  }, []);
+    dispatch(getPropertyDetailById(id))
+  }, [])
   return (
     <div className="text-white  p-[1rem] md:p-[2rem] exo w-[100%] overflow-hidden">
       {loading ? (
@@ -408,7 +407,10 @@ const PropertyDetail = () => {
             <button className="border border-slate-600 px-4 text-[15px] py-2 h-fit text--600 bg-slate-800">
               De Activate Property
             </button>
-            <button className="border border-sky-600 px-4 text-[15px] py-2 h-fit text--600 bg-sky-800" onClick={() => navigate(`/admin/properties-update/${id}`)}>
+            <button
+              className="border border-sky-600 px-4 text-[15px] py-2 h-fit text--600 bg-sky-800"
+              onClick={() => navigate(`/admin/properties-update/${id}`)}
+            >
               Edit Property
             </button>
             <button className="border border-red-600 px-4 text-[15px] py-2 h-fit text--600 bg-red-800">
@@ -479,7 +481,12 @@ const PropertyDetail = () => {
                 <div className="flex flex-col">
                   <div className="flex flex-col md:grid md:grid-cols-2 w-[100%] mt-6 gap-x-12 gap-y-6">
                     <Element name="about-property" className="element">
-                      <AboutProperty id="about-property" propertyDetails={propertyDetails?.details?.property_information}/>
+                      <AboutProperty
+                        id="about-property"
+                        propertyDetails={
+                          propertyDetails?.details?.property_information
+                        }
+                      />
                     </Element>
                     <Element name="nearby" className="element">
                       <Nearby id="nearby" />
@@ -512,9 +519,11 @@ const PropertyDetail = () => {
             </div>
           </div>
         </div>
-      ) : <p>error</p>}
+      ) : (
+        <p>error</p>
+      )}
     </div>
-  );
-};
+  )
+}
 
-export default PropertyDetail;
+export default PropertyDetail

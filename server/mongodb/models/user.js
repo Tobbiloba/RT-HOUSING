@@ -4,10 +4,11 @@ const UserSchema = new mongoose.Schema({
     activationToken: { type: String, required: false },
     isActivated: { type: Boolean, enum: [true, false], default: false },
     username: { type: String, required: true },
+    firstname: {type: String, required: false},
+    lastname: {type: String, required: false},
     email: { type: String, required: true },
     phoneNo: { type: String, required: true },
     avatar: { type: String, required: false },
-    socials: {type: [String], required: false},
     authentication: {
         password: {type: String, required: true, select: false},
         salt: {type: String, required: true, select: false},

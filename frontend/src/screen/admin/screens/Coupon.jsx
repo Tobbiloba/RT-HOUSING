@@ -1,156 +1,154 @@
-import { CouponTable } from "@/components/admin/table/CouponTable";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaCalendarAlt } from "react-icons/fa";
-import { startOfToday, startOfTomorrow } from "date-fns";
-import Dropdown from "@/components/admin/dropdown/Dropdown";
-import { IoCloseOutline } from "react-icons/io5";
-import { useFormik } from "formik";
-import { couponSchema, tourSchema } from "@/schemas";
-import Input from "@/components/Input";
-import { useDispatch, useSelector } from "react-redux";
-import { createCompanyCoupon, getCompanyCoupon } from "@/action/coupon";
-import { CircularProgress } from "@mui/material";
-import { clear } from "@/action/employee";
+import { CouponTable } from '@/components/admin/table/CouponTable'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { FaCalendarAlt } from 'react-icons/fa'
+import { startOfToday, startOfTomorrow } from 'date-fns'
+import Dropdown from '@/components/admin/dropdown/Dropdown'
+import { IoCloseOutline } from 'react-icons/io5'
+import { useFormik } from 'formik'
+import { couponSchema, tourSchema } from '@/schemas'
+import Input from '@/components/Input'
+import { useDispatch, useSelector } from 'react-redux'
+import { createCompanyCoupon, getCompanyCoupon } from '@/action/coupon'
+import { CircularProgress } from '@mui/material'
+import { clear } from '@/action/employee'
 const couponArray = [
   {
-    id: "bhqecj4p",
-    title: "10% off",
-    status: "active",
-    code: "BDIe4#",
-    discount: "10%",
+    id: 'bhqecj4p',
+    title: '10% off',
+    status: 'active',
+    code: 'BDIe4#',
+    discount: '10%',
   },
   {
-    id: "sdf23dfs",
-    title: "20% off",
-    status: "pending",
-    code: "EFGg6@",
-    discount: "20%",
+    id: 'sdf23dfs',
+    title: '20% off',
+    status: 'pending',
+    code: 'EFGg6@',
+    discount: '20%',
   },
   {
-    id: "ghe9fg8d",
-    title: "Free Shipping",
-    status: "used",
-    code: "XYZr3!",
-    discount: "Free",
+    id: 'ghe9fg8d',
+    title: 'Free Shipping',
+    status: 'used',
+    code: 'XYZr3!',
+    discount: 'Free',
   },
   {
-    id: "fgh45fgs",
-    title: "15% off",
-    status: "used",
-    code: "LMNp2%",
-    discount: "15%",
+    id: 'fgh45fgs',
+    title: '15% off',
+    status: 'used',
+    code: 'LMNp2%',
+    discount: '15%',
   },
   {
-    id: "abc12xyz",
-    title: "25% off",
-    status: "pending",
-    code: "PQRt7@",
-    discount: "25%",
+    id: 'abc12xyz',
+    title: '25% off',
+    status: 'pending',
+    code: 'PQRt7@',
+    discount: '25%',
   },
   {
-    id: "jkl89pqr",
-    title: "Free Gift",
-    status: "inactive",
-    code: "STUv5!",
-    discount: "Free Gift",
+    id: 'jkl89pqr',
+    title: 'Free Gift',
+    status: 'inactive',
+    code: 'STUv5!',
+    discount: 'Free Gift',
   },
   // Add 9 more objects with random data
   {
-    id: "mno34abc",
-    title: "12% off",
-    status: "active",
-    code: "XYZp8#",
-    discount: "12%",
+    id: 'mno34abc',
+    title: '12% off',
+    status: 'active',
+    code: 'XYZp8#',
+    discount: '12%',
   },
   {
-    id: "uvw56def",
-    title: "30% off",
-    status: "active",
-    code: "JKLq1@",
-    discount: "30%",
+    id: 'uvw56def',
+    title: '30% off',
+    status: 'active',
+    code: 'JKLq1@',
+    discount: '30%',
   },
   {
-    id: "rst78ghi",
-    title: "Buy One Get One",
-    status: "pending",
-    code: "ABCw2!",
-    discount: "BOGO",
+    id: 'rst78ghi',
+    title: 'Buy One Get One',
+    status: 'pending',
+    code: 'ABCw2!',
+    discount: 'BOGO',
   },
   {
-    id: "xyz90jkl",
-    title: "5% off",
-    status: "inactive",
-    code: "DEFx4%",
-    discount: "5%",
+    id: 'xyz90jkl',
+    title: '5% off',
+    status: 'inactive',
+    code: 'DEFx4%',
+    discount: '5%',
   },
   {
-    id: "pqr23mno",
-    title: "Free Item",
-    status: "active",
-    code: "GHIy3!",
-    discount: "Free Item",
+    id: 'pqr23mno',
+    title: 'Free Item',
+    status: 'active',
+    code: 'GHIy3!',
+    discount: 'Free Item',
   },
   {
-    id: "lmn45rst",
-    title: "18% off",
-    status: "pending",
-    code: "UVWz6%",
-    discount: "18%",
+    id: 'lmn45rst',
+    title: '18% off',
+    status: 'pending',
+    code: 'UVWz6%',
+    discount: '18%',
   },
   {
-    id: "abc67uvw",
-    title: "Buy Two Get One",
-    status: "active",
-    code: "XYZa7!",
-    discount: "BTGO",
+    id: 'abc67uvw',
+    title: 'Buy Two Get One',
+    status: 'active',
+    code: 'XYZa7!',
+    discount: 'BTGO',
   },
   {
-    id: "def89xyz",
-    title: "7% off",
-    status: "inactive",
-    code: "PQRb8%",
-    discount: "7%",
+    id: 'def89xyz',
+    title: '7% off',
+    status: 'inactive',
+    code: 'PQRb8%',
+    discount: '7%',
   },
   {
-    id: "ghi01pqr",
-    title: "Free Upgrade",
-    status: "active",
-    code: "STUc9!",
-    discount: "Free Upgrade",
+    id: 'ghi01pqr',
+    title: 'Free Upgrade',
+    status: 'active',
+    code: 'STUc9!',
+    discount: 'Free Upgrade',
   },
   {
-    id: "jkl23stu",
-    title: "22% off",
-    status: "inactive",
-    code: "VWXd0%",
-    discount: "22%",
+    id: 'jkl23stu',
+    title: '22% off',
+    status: 'inactive',
+    code: 'VWXd0%',
+    discount: '22%',
   },
   {
-    id: "mno45vwx",
-    title: "Buy Three Get One",
-    status: "pending",
-    code: "YZAe1!",
-    discount: "BTGO",
+    id: 'mno45vwx',
+    title: 'Buy Three Get One',
+    status: 'pending',
+    code: 'YZAe1!',
+    discount: 'BTGO',
   },
-];
+]
 
-const options = ["Fixed", "Percent"];
-const AddCoupon = ({setState}) => {
-  let today = startOfToday();
-  let tomorrow = startOfTomorrow();
+const options = ['Fixed', 'Percent']
+const AddCoupon = ({ setState }) => {
+  let today = startOfToday()
+  let tomorrow = startOfTomorrow()
 
-  const [freeShipping, setFreeShipping] = useState(false);
-  const [discountType, setDiscountType] = useState("--Select--");
+  const [freeShipping, setFreeShipping] = useState(false)
+  const [discountType, setDiscountType] = useState('--Select--')
 
-const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-
-  const onSubmit = (values) => {
-    const id = ""
+  const onSubmit = values => {
+    const id = ''
     console.log(values)
-    dispatch(createCompanyCoupon({values, id}))
-  
+    dispatch(createCompanyCoupon({ values, id }))
   }
 
   const {
@@ -164,54 +162,58 @@ const dispatch = useDispatch()
     setFieldValue, // Access setFieldValue function from useFormik
   } = useFormik({
     initialValues: {
-      code: "",
+      code: '',
       free_shipping: false,
-      discount_type: "",
-      discount_price: "",
-      min_price: ""
+      discount_type: '',
+      discount_price: '',
+      min_price: '',
     },
     validationSchema: couponSchema,
-    onSubmit: (values) => {
+    onSubmit: values => {
       // same shape as initial values
       // console.log(errors)
 
-      console.log(values);
-      onSubmit(values);
+      console.log(values)
+      onSubmit(values)
     },
-  });
-console.log(errors)
-
+  })
+  console.log(errors)
 
   function generateRandomCouponId() {
     const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let couponId = "";
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    let couponId = ''
 
     for (let i = 0; i < 7; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      couponId += characters.charAt(randomIndex);
+      const randomIndex = Math.floor(Math.random() * characters.length)
+      couponId += characters.charAt(randomIndex)
     }
 
-        // Set the generated coupon ID to the formik.values.code
-        setFieldValue('code', couponId);
+    // Set the generated coupon ID to the formik.values.code
+    setFieldValue('code', couponId)
     // return couponId;
   }
 
-  const {status} = useSelector((state) => state?.createCoupon)
+  const { status } = useSelector(state => state?.createCoupon)
   console.log(status)
   useEffect(() => {
-if(status == "successful") {
-  setState(false)
-  dispatch(clear())
-  dispatch(getCompanyCoupon('65a0fc46a3cd4f366e7a3c52'))
-}
+    if (status == 'successful') {
+      setState(false)
+      dispatch(clear())
+      dispatch(getCompanyCoupon('65a0fc46a3cd4f366e7a3c52'))
+    }
   }, [status])
 
-
   return (
-    <form onSubmit={handleSubmit} className="w-[100vw] top-0 left-0 flex items-center justify-center h-[100vh] bg-white/20 z-[100] fixed">
+    <form
+      onSubmit={handleSubmit}
+      className="w-[100vw] top-0 left-0 flex items-center justify-center h-[100vh] bg-white/20 z-[100] fixed"
+    >
       <div className="max-w-[35rem] relative min-h-[40rem] flex flex-col justify-evenly w-[100%]  bg-slate-900 h-fit p-[1rem]">
-      <IoCloseOutline className="absolute -right-4 -top-4 text-black hover:bg-red-500 cursor-pointer bg-white text-[34px]  shadow-md hover:text-white p-[1px]" onClick={() => setState(false)}/>
+        <IoCloseOutline
+          className="absolute -right-4 -top-4 text-black hover:bg-red-500 cursor-pointer bg-white text-[34px]  shadow-md hover:text-white p-[1px]"
+          onClick={() => setState(false)}
+        />
         <h1 className="text-[17px] text-slate-100">Discount Coupon Details</h1>
 
         <div className="flex flex-row text-[15px] gap-4 mt-5 text-slate-300 border-b border-slate-500">
@@ -222,7 +224,7 @@ if(status == "successful") {
           <h1 className="p-2 cursor-not-allowed">Usage</h1>
         </div>
         <div className="grid grid-cols-1  mt-5  justify-between gap-y-9 gap-x-12">
-        {/* <Input
+          {/* <Input
               placeholder="Title"
               type="text"
               label="Coupon Title"
@@ -235,20 +237,16 @@ if(status == "successful") {
               }
               id="title"
             /> */}
-            <Input
-              placeholder="Code"
-              type="text"
-              label="Coupon Code"
-              value={values.code}
-              handleChange={handleChange}
-              error={
-                errors.code && touched.code
-                  ? errors.code
-                  : undefined
-              }
-              id="code"
-            />
-      
+          <Input
+            placeholder="Code"
+            type="text"
+            label="Coupon Code"
+            value={values.code}
+            handleChange={handleChange}
+            error={errors.code && touched.code ? errors.code : undefined}
+            id="code"
+          />
+
           <div className="w-[100%] relative flex flex-row gap-[1rem]  justify-between items-center md:pr-[5%] pr-[1rem]">
             <p className="text-slate-600 flex text-[14px] flex-row items-center gap-4 w-fit">
               <span className="text-white h-4 ">*</span>
@@ -256,28 +254,25 @@ if(status == "successful") {
             </p>
 
             <div className="h-[3rem] relative flex-1  md:min-w-[10rem] md:max-w-[35rem] ml-4 flex flex-row gap-5 items-center text-white">
-            <input
-                  type="checkbox"
-                  className="w-4 h-4"
-                  checked={values.free_shipping}
-                  onChange={(e) => {
-                    handleChange(e);
-                    setFieldValue(
-                      "free_shipping",
-                      !values.free_shipping
-                    );
-                  }}
-                />
+              <input
+                type="checkbox"
+                className="w-4 h-4"
+                checked={values.free_shipping}
+                onChange={e => {
+                  handleChange(e)
+                  setFieldValue('free_shipping', !values.free_shipping)
+                }}
+              />
 
               <h1 className="text-[14px]">Allow Free Shipping</h1>
             </div>
           </div>
 
           <div className="w-[100%] relative flex flex-row gap-[2rem]  justify-between items-center ">
-              <Dropdown
+            <Dropdown
               label="Discount Type"
               data={options}
-              field={{ name: "discount_type", value: values.discount_type }}
+              field={{ name: 'discount_type', value: values.discount_type }}
               form={{ setFieldValue, handleBlur, values, errors, touched }}
               error={
                 errors.discount_type && touched.discount_type
@@ -287,7 +282,7 @@ if(status == "successful") {
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Input
+            <Input
               placeholder="NG"
               type="text"
               label="Discount Price"
@@ -323,32 +318,35 @@ if(status == "successful") {
           >
             Generate Coupon Code
           </button>
-          <button className="bg-green-700 px-4 py-3 text-white border-slate-500" type="submit">
+          <button
+            className="bg-green-700 px-4 py-3 text-white border-slate-500"
+            type="submit"
+          >
             Create Coupon
           </button>
         </div>
       </div>
     </form>
-  );
-};
+  )
+}
 const Coupon = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [showAddCoupon, setShowAddCoupon] = useState(false);
+  const [showAddCoupon, setShowAddCoupon] = useState(false)
 
   useEffect(() => {
     dispatch(getCompanyCoupon('65a0fc46a3cd4f366e7a3c52'))
   }, [])
-  const { loading, coupon} = useSelector((state) => state.fetchCoupon)
+  const { loading, coupon } = useSelector(state => state.fetchCoupon)
   console.log(coupon)
 
   // const loading = true
- 
+
   return (
     <div className="exo  pb-8 w-[100%] p-[1rem] md:p-[2rem] flex">
       <div className="rounded h-fit w-[100%]">
         <div className="flex pb-4 text-slate-100 flex-row gap-x-7 gap-y-4 text-[13px] justify-end">
-        <button className="px-5 py-2 bg-red-600 cursor-not-allowed">
+          <button className="px-5 py-2 bg-red-600 cursor-not-allowed">
             DELETE
           </button>
           <button
@@ -357,19 +355,20 @@ const Coupon = () => {
           >
             ADD COUPON
           </button>
-          
         </div>
 
         <div>
-          {
-            loading ? <div className="flex justify-center">
+          {loading ? (
+            <div className="flex justify-center">
               <CircularProgress />
-            </div> : <CouponTable data={coupon} />
-          }
+            </div>
+          ) : (
+            coupon && <CouponTable data={coupon} />
+          )}
         </div>
-        {showAddCoupon && <AddCoupon setState={setShowAddCoupon}/>}
+        {showAddCoupon && <AddCoupon setState={setShowAddCoupon} />}
       </div>
     </div>
-  );
-};
-export default Coupon;
+  )
+}
+export default Coupon

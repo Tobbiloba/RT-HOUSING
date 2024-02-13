@@ -17,17 +17,18 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const { name, email, avatar, password, phoneNo, socials } = req.body;
-    console.log(name, email, avatar, password, phoneNo, socials)
+    const { username, email, avatar, password, phoneNo, socials } = req.body;
+    console.log(username, email, avatar, password, phoneNo, socials)
     const token = generateRandomToken()
     // console.log(name);
-    if (!email || !password || !name || !phoneNo) {
+    if (!email || !password || !username || !phoneNo) {
       return res.status(500).json({ message: "Pass all parameters" });
     }
 
     const userExists = await getUserByEmail(email);
 
     if (userExists) {
+      console.log('user exist')
       return res.status(500).json({ message: "User already exists" });
     }
 
@@ -35,7 +36,7 @@ const createUser = async (req, res) => {
 
     const newUser = await registerUser({
       activationToken: token,
-      username: name,
+      username,
       email,
       avatar: avatar ? avatar : null,
       phoneNo,
@@ -44,6 +45,7 @@ const createUser = async (req, res) => {
         salt,
         password: authentication(salt, password),
       },
+      isActivated: false
     });
 
     sendVerificationToken('abayomitobiloba410@gmail.com', `http://localhost:5173/user/profile/activate/${newUser._id}/${token}`)
@@ -87,6 +89,9 @@ const loginUser = async (req, res) => {
           domain: "localhost",
           path: "/",
         });
+
+        
+        
         return res.status(200).json(userExists).end();
       }
     } else {
@@ -145,7 +150,9 @@ const updateUserPassword = async (req, res) => {
     }
 
     // Assuming you have a function to get user by email
-    const user = getUserByEmail(email);
+    const user = await getUserByEmail(email);
+
+    console.log(user)
 
     // Check if user exists
     if (!user) {
@@ -162,7 +169,7 @@ const updateUserPassword = async (req, res) => {
     };
 
     // Assuming you have a function to save the updated user
-    saveUser(user);
+    await user.save();
 
     // Send a success response
     return res.status(200).json({ message: "Password updated successfully" });
@@ -172,6 +179,49 @@ const updateUserPassword = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+
+
+const updateUserInfo = async (req, res) => {
+  try {
+    const { email, username, firstname, lastname, avatar, phoneNo } = req.body;
+
+    // Check if required fields are provided
+    if (!email || !username || !firstname || !lastname || !avatar  || !phoneNo) {
+      return res.status(400).json({ message: "Incomplete user information provided" });
+    }
+
+    console.log(email, username, firstname, lastname, avatar, phoneNo)
+
+    // Assuming you have a function to get user by email
+    const user = await getUserByEmail(email);
+
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    console.log(user)
+
+    // Update user information
+    user.username = username;
+    user.firstname = firstname;
+    user.lastname = lastname;
+    user.avatar = avatar;
+    user.phoneNo = phoneNo;
+
+    // // Assuming you have a function to save the updated user
+    await user.save()
+
+    // // Send a success response
+    return res.status(200).json({ message: "User information updated successfully" });
+
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 
 const activateUser = async (req, res) => {
   try {
@@ -204,4 +254,4 @@ if(token != user.activationToken) {
   }
 }
 
-export { getAllUsers, createUser, getUserInfoByID, loginUser, getUserInfoByEmail, updateUserPassword, activateUser };
+export { getAllUsers, createUser, getUserInfoByID, loginUser, getUserInfoByEmail, updateUserPassword, activateUser, updateUserInfo };

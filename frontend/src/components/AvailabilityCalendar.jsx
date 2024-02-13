@@ -1,4 +1,4 @@
-import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
 import {
   add,
   eachDayOfInterval,
@@ -10,84 +10,90 @@ import {
   isToday,
   parse,
   startOfToday,
-} from 'date-fns';
-import { useState } from 'react';
+} from 'date-fns'
+import { useState } from 'react'
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(' ')
 }
 
-const AvailabilityCalendar = ({availableFromDate, availableToDate, unavailableFromDate, unavailableToDate, occupiedDateTill, occupiedDateFrom }) => {
+const AvailabilityCalendar = ({
+  availableFromDate,
+  availableToDate,
+  unavailableFromDate,
+  unavailableToDate,
+  occupiedDateTill,
+  occupiedDateFrom,
+}) => {
   // Get current date
-  let today = startOfToday();
+  let today = startOfToday()
 
   // Initialize state for selected day and current month
-  const [selectedDay, setSelectedDay] = useState(null);
-  const [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
+  const [selectedDay, setSelectedDay] = useState(null)
+  const [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
 
   // Calculate the first day of the current month
-  const firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date());
+  const firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
 
   // Generate an array of days for the current month
   const days = eachDayOfInterval({
     start: firstDayCurrentMonth,
     end: endOfMonth(firstDayCurrentMonth),
-  });
+  })
 
   // Function to handle previous month button click
   const previousMonth = () => {
-    const firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 });
-    setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
-  };
+    const firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 })
+    setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'))
+  }
 
   // Function to handle next month button click
   const nextMonth = () => {
-    const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
-    setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
-  };
+    const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 })
+    setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'))
+  }
 
   // Function to check if a date is available based on props
-  const isDateAvailable = (date) => {
+  const isDateAvailable = date => {
     // Replace these with actual props passed to the component
     // const availableFromDate = '03/01/2024'; // Example date format: 'dd/MM/yyyy'
     // const availableToDate = '08/01/2024';
     // const unavailableFromDate = '13/01/2024';
     // const unavailableToDate = '18/01/2024';
 
- // Current date
- const currentDate = startOfToday();
+    // Current date
+    const currentDate = startOfToday()
 
- // Check if the date is not before the current date
- if (date >= currentDate) {
-   // Implement the availability logic based on props
-   if(
-    occupiedDateFrom &&
-    occupiedDateTill &&
-    date >= parse(occupiedDateFrom, 'dd/MM/yyyy', new Date()) &&
-    date <= parse(occupiedDateTill, 'dd/MM/yyyy', new Date())
-   ) {
-    return 'occupied'
-   }
-   else if (
-     availableFromDate &&
-     availableToDate &&
-     date >= parse(availableFromDate, 'dd/MM/yyyy', new Date()) &&
-     date <= parse(availableToDate, 'dd/MM/yyyy', new Date())
-   ) {
-     return 'available';
-   } else if (
-     unavailableFromDate &&
-     unavailableToDate &&
-     date >= parse(unavailableFromDate, 'dd/MM/yyyy', new Date()) &&
-     date <= parse(unavailableToDate, 'dd/MM/yyyy', new Date())
-   ) {
-     return 'unavailable';
-   }
- }
+    // Check if the date is not before the current date
+    if (date >= currentDate) {
+      // Implement the availability logic based on props
+      if (
+        occupiedDateFrom &&
+        occupiedDateTill &&
+        date >= parse(occupiedDateFrom, 'dd/MM/yyyy', new Date()) &&
+        date <= parse(occupiedDateTill, 'dd/MM/yyyy', new Date())
+      ) {
+        return 'occupied'
+      } else if (
+        availableFromDate &&
+        availableToDate &&
+        date >= parse(availableFromDate, 'dd/MM/yyyy', new Date()) &&
+        date <= parse(availableToDate, 'dd/MM/yyyy', new Date())
+      ) {
+        return 'available'
+      } else if (
+        unavailableFromDate &&
+        unavailableToDate &&
+        date >= parse(unavailableFromDate, 'dd/MM/yyyy', new Date()) &&
+        date <= parse(unavailableToDate, 'dd/MM/yyyy', new Date())
+      ) {
+        return 'unavailable'
+      }
+    }
 
-//  console.log('lol')
- return 'gray';
-  };
+    //  console.log('lol')
+    return 'gray'
+  }
 
   return (
     <div className="w-[23rem] border p-3 shadow-md">
@@ -130,7 +136,7 @@ const AvailabilityCalendar = ({availableFromDate, availableToDate, unavailableFr
                   key={day.toString()}
                   className={classNames(
                     dayIdx === 0 && 'col-start-2',
-                    'py-1.5'
+                    'py-1.5',
                   )}
                 >
                   <button
@@ -138,7 +144,8 @@ const AvailabilityCalendar = ({availableFromDate, availableToDate, unavailableFr
                     className={classNames(
                       isEqual(day, today) && 'text-black',
                       isSameMonth(day, firstDayCurrentMonth) && 'text-gray-900',
-                      !isSameMonth(day, firstDayCurrentMonth) && 'text-gray-400',
+                      !isSameMonth(day, firstDayCurrentMonth) &&
+                        'text-gray-400',
                       'mx-auto flex h-8 w-8 items-center justify-center rounded-sm',
                       isDateAvailable(day) === 'available' && 'bg-green-500',
                       isDateAvailable(day) === 'gray' && 'bg-gray-200',
@@ -157,7 +164,7 @@ const AvailabilityCalendar = ({availableFromDate, availableToDate, unavailableFr
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AvailabilityCalendar;
+export default AvailabilityCalendar

@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { useRef } from "react";
-import { motion, useCycle } from "framer-motion";
-import { AnimatedTabs } from "./DesktopNav";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { useRef } from 'react'
+import { motion, useCycle } from 'framer-motion'
+import { AnimatedTabs } from './DesktopNav'
+import { Link } from 'react-router-dom'
 
 const MenuBar = () => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [sty, setSty] = useState("");
-  const [showDesktopMenu, setShowDesktopMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false)
+  const [sty, setSty] = useState('')
+  const [showDesktopMenu, setShowDesktopMenu] = useState(true)
 
-  const [isOpen, toggleOpen] = useCycle(false, true);
+  const [isOpen, toggleOpen] = useCycle(false, true)
 
   useEffect(() => {
     if (showMenu) {
-      setSty("slide-in");
+      setSty('slide-in')
     } else {
-      setSty("slide-out");
+      setSty('slide-out')
     }
-  }, [showMenu]);
+  }, [showMenu])
 
   const links = [
-    { name: "Home", link: "/" },
-    { name: "Properties", link: "/properties" },
-    { name: "About", link: "/about-us" },
-    { name: "How It works?", link: "/how-it-works" },
-    { name: "Contact", link: "/contact-us" },
-  ];
+    { name: 'Home', link: '/' },
+    { name: 'Properties', link: '/properties' },
+    { name: 'About', link: '/about-us' },
+    { name: 'How It works?', link: '/how-it-works' },
+    { name: 'Contact', link: '/contact-us' },
+  ]
   return (
     <div className="flex relative border exo border-white border-t-gray-100 pt-4 exo items-center justify-center pl-[1rem] md:px-[1rem] mt-4 ">
       <div className="container flex flex-row justify-between items-center relative">
@@ -66,7 +66,7 @@ const MenuBar = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default MenuBar;
+export default MenuBar

@@ -1,72 +1,62 @@
 .slider-container {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-  }
-  
-  .slider-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .slider-item {
-    flex: 0 0 100%;
-    box-sizing: border-box;
-    padding: 20px;
-    /* Add your styling for each slide */
-  }
-  
-  /* Add this class for the sliding effect */
-  .sliding {
-    transform: translateX(-100%);
-  }
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
 
+.slider-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
 
+.slider-item {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  /* Add your styling for each slide */
+}
 
+/* Add this class for the sliding effect */
+.sliding {
+  transform: translateX(-100%);
+}
 
+.slider {
+  position: relative;
+  overflow: hidden;
+}
 
+.slider-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
 
+.slide {
+  min-width: 100%;
+}
 
-  .slider {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .slider-inner {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .slide {
-    min-width: 100%;
-  }
-  
-  .btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  
-  .prev-btn {
-    left: 0px;
-    /* border: 1px solid red; */
-    padding: 12px 15px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    z-index: 50;
-  }
-  
-  .next-btn {
-    right: 0px;
-    padding: 12px 15px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    z-index: 50;
-  }
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
 
+.prev-btn {
+  left: 0px;
+  /* border: 1px solid red; */
+  padding: 12px 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 50;
+}
 
-
-
+.next-btn {
+  right: 0px;
+  padding: 12px 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  z-index: 50;
+}

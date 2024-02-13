@@ -1,11 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 const SearchBox = () => {
-  return (
-    <div>
-      search
-    </div>
-  );
+  return <div>search</div>
 }
 
-export default SearchBox;
+export default SearchBox

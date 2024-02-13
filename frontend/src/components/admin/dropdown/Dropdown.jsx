@@ -1,16 +1,16 @@
 // @ts-nocheck
-import React, { useState } from 'react';
-import { IoIosArrowDown } from "react-icons/io";
+import React, { useState } from 'react'
+import { IoIosArrowDown } from 'react-icons/io'
 
 const Dropdown = ({ field, form, data, height, label, error }) => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false)
 
-  const options = data; // You can use the data prop directly
+  const options = data // You can use the data prop directly
 
-  const handleOptionChange = (option) => {
-    form.setFieldValue(field.name, option);
-    setDropdownOpen(false);
-  };
+  const handleOptionChange = option => {
+    form.setFieldValue(field.name, option)
+    setDropdownOpen(false)
+  }
 
   return (
     <div className="relative exo flex flex-col justify-start text-[13px] w-[100%]">
@@ -21,7 +21,7 @@ const Dropdown = ({ field, form, data, height, label, error }) => {
           onClick={() => setDropdownOpen(!isDropdownOpen)}
         >
           {field.value}
-          {options !== '' && <IoIosArrowDown className='w-5 h-5' />}
+          {options !== '' && <IoIosArrowDown className="w-5 h-5" />}
         </div>
         {isDropdownOpen && (
           <ul className="dropdown-list z-50 w-[100%]">
@@ -29,7 +29,7 @@ const Dropdown = ({ field, form, data, height, label, error }) => {
               <li
                 key={index}
                 onClick={() => handleOptionChange(option)}
-                className='border-b cursor-pointer hover:bg-slate-500  hover:text-white relative -z-50'
+                className="border-b cursor-pointer hover:bg-slate-500  hover:text-white relative -z-50"
               >
                 {option}
               </li>
@@ -39,7 +39,7 @@ const Dropdown = ({ field, form, data, height, label, error }) => {
       </div>
       {error && <div className="text-white text-[13px] mt-1">{error}</div>}
     </div>
-  );
-};
+  )
+}
 
-export default Dropdown;
+export default Dropdown

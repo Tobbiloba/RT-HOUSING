@@ -7,6 +7,7 @@ import {
     getUserInfoByEmail,
     getUserInfoByID,
     loginUser,
+    updateUserInfo,
     updateUserPassword
 } from "../controllers/user.controller.js";
 
@@ -18,6 +19,7 @@ router.route("/activate/token/:id").post(activateUser);
 router.route("/login").post(loginUser);
 router.route("/email").get(getUserInfoByEmail);
 router.route("/update-password").get(updateUserPassword);
+router.route("/update-profile").get(updateUserInfo);
 router.route("/:id").get(getUserInfoByID);
 
 

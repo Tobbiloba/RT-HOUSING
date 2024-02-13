@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import "./stepper.css";
-import { TiTick } from "react-icons/ti";
-const Stepper = ({steps, complete, currentStep}) => {
-  
-
+import React, { useState } from 'react'
+import './stepper.css'
+import { TiTick } from 'react-icons/ti'
+const Stepper = ({ steps, complete, currentStep }) => {
   return (
     <>
       <div className="flex justify-between w-fit">
         {steps?.map((step, i) => (
           <div
             key={i}
-            className={`step-item ${currentStep === i + 1 && ""} ${
-              (i + 1 < currentStep || complete) && "complete"
+            className={`step-item ${currentStep === i + 1 && ''} ${
+              (i + 1 < currentStep || complete) && 'complete'
             } `}
           >
             <div className="step">
@@ -21,9 +19,8 @@ const Stepper = ({steps, complete, currentStep}) => {
           </div>
         ))}
       </div>
-      
     </>
-  );
-};
+  )
+}
 
-export default Stepper;
+export default Stepper

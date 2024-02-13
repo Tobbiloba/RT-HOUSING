@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { FaCalendarAlt } from "react-icons/fa";
-import Calendar from "@/components/Calendar";
-import { startOfToday, startOfTomorrow } from "date-fns";
-import Dropdown from "@/components/home/Dropdown";
+import React, { useState } from 'react'
+import { FaCalendarAlt } from 'react-icons/fa'
+import Calendar from '@/components/Calendar'
+import { startOfToday, startOfTomorrow } from 'date-fns'
+import Dropdown from '@/components/home/Dropdown'
 const Input = ({ state, setState, label, placeholder }) => {
   return (
     <div className="w-[100%] flex flex-row gap-[2rem] justify-between items-center md:pr-[5%] pr-[1rem]">
@@ -13,15 +13,15 @@ const Input = ({ state, setState, label, placeholder }) => {
 
       <input
         className="border flex-1 bg-transparent h-[3rem] md:min-w-[10rem] md:max-w-[35rem] border-slate-500 rounded-sm outline-none pl-3 text-white"
-        onChange={(e) => setState(e.target.value)}
+        onChange={e => setState(e.target.value)}
         value={state}
       />
     </div>
-  );
-};
+  )
+}
 
 const DateSelect = ({ state, setState, label }) => {
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false)
   return (
     <div className="w-[100%] relative flex flex-row gap-[2rem]  justify-between items-center md:pr-[5%] pr-[1rem]">
       <p className="text-slate-400 flex flex-row items-center gap-4 w-fit">
@@ -51,42 +51,35 @@ const DateSelect = ({ state, setState, label }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-
-const options = [
-  "Fixed",
-  "Percent"
-]
+const options = ['Fixed', 'Percent']
 const AddCoupon = () => {
-  let today = startOfToday();
-  let tomorrow = startOfTomorrow();
+  let today = startOfToday()
+  let tomorrow = startOfTomorrow()
 
-  const [title, setTitle] = useState("");
-  const [code, setCode] = useState("");
-  const [startDate, setStartDate] = useState(today);
-  const [endDate, setEndDate] = useState(tomorrow);
-  const [freeShipping, setFreeShipping] = useState(false);
-  const [discountType, setDiscountType] = useState("--Select--");
-
+  const [title, setTitle] = useState('')
+  const [code, setCode] = useState('')
+  const [startDate, setStartDate] = useState(today)
+  const [endDate, setEndDate] = useState(tomorrow)
+  const [freeShipping, setFreeShipping] = useState(false)
+  const [discountType, setDiscountType] = useState('--Select--')
 
   function generateRandomCouponId() {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let couponId = '';
-  
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    let couponId = ''
+
     for (let i = 0; i < 7; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      couponId += characters.charAt(randomIndex);
+      const randomIndex = Math.floor(Math.random() * characters.length)
+      couponId += characters.charAt(randomIndex)
     }
-    
+
     setCode(couponId)
-    return couponId;
+    return couponId
   }
-  
 
-
-  
   return (
     <div className="p-[1rem] md:p-[2rem] exo">
       <div className=" bg-slate-700 p-[1rem] md:p-[2rem]  ">
@@ -125,12 +118,11 @@ const AddCoupon = () => {
             </p>
 
             <div className="h-[3rem] relative flex-1  md:min-w-[10rem] md:max-w-[35rem] flex flex-row gap-5 items-center text-white">
-              <input type="checkbox" className=""/>
+              <input type="checkbox" className="" />
 
               <h1>Allow Free Shipping</h1>
             </div>
           </div>
-
 
           <div className="w-[100%] relative flex flex-row gap-[2rem]  justify-between items-center md:pr-[5%] pr-[1rem]">
             <p className="text-slate-400 flex flex-row items-center gap-4 w-fit">
@@ -139,24 +131,29 @@ const AddCoupon = () => {
             </p>
 
             <div className="h-[3rem] relative flex-1  md:min-w-[10rem] md:max-w-[35rem] flex flex-row gap-5 items-center text-white">
-            <Dropdown
-              data={options}
-              state={discountType}
-              setState={setDiscountType}
-              height="border border-slate-600 py-3 h-fit px-3 w-[100%] rounded-md text-[18px] text-white"
-            />
+              <Dropdown
+                data={options}
+                state={discountType}
+                setState={setDiscountType}
+                height="border border-slate-600 py-3 h-fit px-3 w-[100%] rounded-md text-[18px] text-white"
+              />
             </div>
           </div>
-
         </div>
         <div className="mt-16 flex gap-8 flex-row justify-end">
-          <button className="border px-4 py-3 text-slate-300 border-slate-500" onClick={generateRandomCouponId}>Generate Coupon Code</button>
-          <button className="border px-4 py-3 text-slate-300 border-slate-500" >Create Coupon</button>
+          <button
+            className="border px-4 py-3 text-slate-300 border-slate-500"
+            onClick={generateRandomCouponId}
+          >
+            Generate Coupon Code
+          </button>
+          <button className="border px-4 py-3 text-slate-300 border-slate-500">
+            Create Coupon
+          </button>
         </div>
       </div>
-      
     </div>
-  );
-};
+  )
+}
 
-export default AddCoupon;
+export default AddCoupon

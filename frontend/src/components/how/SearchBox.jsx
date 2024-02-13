@@ -1,43 +1,43 @@
-import React from 'react';
-import TopRated from '../properties/TopRated';
-import { IoSearchOutline } from "react-icons/io5";
+import React from 'react'
+import TopRated from '../properties/TopRated'
+import { IoSearchOutline } from 'react-icons/io5'
 const SearchBox = () => {
   return (
     <div>
-      <div className='w-[22.5rem] exo mb-6 h-fit rounded-md overflow-hidden'>
+      <div className="w-[22.5rem] exo mb-6 h-fit rounded-md overflow-hidden">
+        <div className="border">
+          <h1 className="p-[1rem] text-slate-900 bg-slate-100">Search</h1>
 
-        <div className='border'>
-            <h1 className='p-[1rem] text-slate-900 bg-slate-100'>Search</h1>
-
-            <div className='mt-4 flex flex-row p-3'>
-                <input placeholder='Search Category' className='px-3 py-3 border text-[14px] w-[100%]'/>
-                <div className='bg-slate-900 text-white w-12 flex items-center justify-center'>
-                    <IoSearchOutline className=''/>
-                </div>
-                
+          <div className="mt-4 flex flex-row p-3">
+            <input
+              placeholder="Search Category"
+              className="px-3 py-3 border text-[14px] w-[100%]"
+            />
+            <div className="bg-slate-900 text-white w-12 flex items-center justify-center">
+              <IoSearchOutline className="" />
             </div>
+          </div>
         </div>
 
-        <div className='mt-7 border pb-3'>
-            <h1 className='p-[1rem] text-slate-900 bg-slate-100'>Archives</h1>
+        <div className="mt-7 border pb-3">
+          <h1 className="p-[1rem] text-slate-900 bg-slate-100">Archives</h1>
 
-            <div className='grid text-slate-500 text-[15px] grid-cols-2 mt-4  gap-5 px-6'>
-                <p>. 2019</p>
-                <p>. 2020</p>
-                <p>. 2021</p>
-                <p>. 2022</p>
-                <p>. 2023</p>
-                <p>. 2024</p>
-            </div>
+          <div className="grid text-slate-500 text-[15px] grid-cols-2 mt-4  gap-5 px-6">
+            <p>. 2019</p>
+            <p>. 2020</p>
+            <p>. 2021</p>
+            <p>. 2022</p>
+            <p>. 2023</p>
+            <p>. 2024</p>
+          </div>
         </div>
 
-        <div className='mt-6'>
-           <TopRated /> 
+        <div className="mt-6">
+          <TopRated />
         </div>
-        
       </div>
     </div>
-  );
+  )
 }
 
-export default SearchBox;
+export default SearchBox

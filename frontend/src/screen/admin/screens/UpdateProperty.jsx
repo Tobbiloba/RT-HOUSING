@@ -1,107 +1,107 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
-import Stepper from "../../../components/admin/stepper/Stepper";
+import React, { useEffect, useState } from 'react'
+import Stepper from '../../../components/admin/stepper/Stepper'
 // import Input from "../../../components/Input";
-import Input from "@/components/Input";
-import Dropdown from "../../../components/admin/dropdown/Dropdown";
-import Textarea from "@/components/textarea/Textarea";
-import { Slider } from "@mui/material";
-import { toast } from "react-toastify";
-import Calendar from "../../../components/Calendar";
-import { startOfToday, startOfTomorrow } from "date-fns";
-import Box from "../../../components/admin/box/Box";
-import Dropzone from "../../../components/admin/dropzone/Dropzone";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import Input from '@/components/Input'
+import Dropdown from '../../../components/admin/dropdown/Dropdown'
+import Textarea from '@/components/textarea/Textarea'
+import { Slider } from '@mui/material'
+import { toast } from 'react-toastify'
+import Calendar from '../../../components/Calendar'
+import { startOfToday, startOfTomorrow } from 'date-fns'
+import Box from '../../../components/admin/box/Box'
+import Dropzone from '../../../components/admin/dropzone/Dropzone'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   Clear,
   createProperty,
   getPropertyDetailById,
-} from "../../../action/property";
-import { IoMdCloseCircle } from "react-icons/io";
-import { styled } from "@mui/system";
-import { useMediaQuery } from "react-responsive";
-import { createPropertySchema } from "@/schemas";
-import { AgentCard } from "@/cards";
-import { useFormik } from "formik";
-import { ammenitiesList, add_ons, options, numbers } from "@/components/data";
-import { handleAmmenitiesCheckboxChange } from "@/utils";
+} from '../../../action/property'
+import { IoMdCloseCircle } from 'react-icons/io'
+import { styled } from '@mui/system'
+import { useMediaQuery } from 'react-responsive'
+import { createPropertySchema } from '@/schemas'
+import { AgentCard } from '@/cards'
+import { useFormik } from 'formik'
+import { ammenitiesList, add_ons, options, numbers } from '@/components/data'
+import { handleAmmenitiesCheckboxChange } from '@/utils'
 const agentData = [
   {
-    img: "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D",
-    name: "Tobi Loba",
-    email: "tobiloba.tobi.com",
-    role: "Agent",
-    phone: '07084557988'
+    img: 'https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D',
+    name: 'Tobi Loba',
+    email: 'tobiloba.tobi.com',
+    role: 'Agent',
+    phone: '07084557988',
   },
   {
-    img: "https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGZlbWFsZXxlbnwwfHwwfHx8MA%3D%3D",
-    name: "Ruby Techme",
-    email: "rubytechme.ruby.com",
-    role: "Manager",
-    phone: '07084557988'
+    img: 'https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGZlbWFsZXxlbnwwfHwwfHx8MA%3D%3D',
+    name: 'Ruby Techme',
+    email: 'rubytechme.ruby.com',
+    role: 'Manager',
+    phone: '07084557988',
   },
   {
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fGZlbWFsZXxlbnwwfHwwfHx8MA%3D%3D",
-    name: "Jessica Doe",
-    email: "jessdoe.doe.com",
-    role: "Agent",
-    phone: '07084557988'
+    img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fGZlbWFsZXxlbnwwfHwwfHx8MA%3D%3D',
+    name: 'Jessica Doe',
+    email: 'jessdoe.doe.com',
+    role: 'Agent',
+    phone: '07084557988',
   },
-];
+]
 
 const UpdateProperty = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  let today = startOfToday();
-  let tomorrow = startOfTomorrow();
-  const { id } = useParams();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  let today = startOfToday()
+  let tomorrow = startOfTomorrow()
+  const { id } = useParams()
 
-  const { details } = useSelector((state) => state?.propertyDetail);
-  const { status, property } = useSelector((state) => state.createProperty);
+  const { details } = useSelector(state => state?.propertyDetail)
+  const { status, property } = useSelector(state => state.createProperty)
 
   const [
     show_Property_availability_from_date,
     set_Show_Property_availability_from_date,
-  ] = useState(false);
+  ] = useState(false)
   const [
     show_Property_availability_till_date,
     set_Show_Property_availability_till_date,
-  ] = useState(false);
+  ] = useState(false)
 
   const handleSizeChange = (event, newValue) => {
-    setFieldValue("propertySize", newValue);
-  };
+    setFieldValue('propertySize', newValue)
+  }
 
   function valuetext(value) {
-    return `${value}°C`;
+    return `${value}°C`
   }
 
   useEffect(() => {
-    if (status == "successful") {
-      dispatch(Clear());
-      navigate("/admin/properties");
+    if (status == 'successful') {
+      dispatch(Clear())
+      navigate('/admin/properties')
     }
-  }, [status]);
+  }, [status])
 
   const DarkSlider = styled(Slider)({
-    color: "#0f172a", // Change 'red' to your desired color
-  });
+    color: '#0f172a', // Change 'red' to your desired color
+  })
 
-  const isMobile = useMediaQuery({ maxWidth: 999 });
-  const isDesktop = useMediaQuery({ minWidth: 999 });
+  const isMobile = useMediaQuery({ maxWidth: 999 })
+  const isDesktop = useMediaQuery({ minWidth: 999 })
 
-  const onSubmit = async (values) => {
+  const onSubmit = async values => {
     if (id) {
     } else {
       // console.log('created')
-      dispatch(createProperty("65a0fc46a3cd4f366e7a3c52", values));
+      dispatch(createProperty('65a0fc46a3cd4f366e7a3c52', values))
     }
-  };
+  }
 
   useEffect(() => {
     // dispatch(getPropertyDetailById(id))
-  }, []);
+  }, [])
 
   const {
     values,
@@ -114,9 +114,9 @@ const UpdateProperty = () => {
     setFieldValue, // Access setFieldValue function from useFormik
   } = useFormik({
     initialValues: {
-      propertyName: "Lekki Cottage",
-      propertyDescription: "Nice condo",
-      propertyType: "Apartment",
+      propertyName: 'Lekki Cottage',
+      propertyDescription: 'Nice condo',
+      propertyType: 'Apartment',
       bathrooms: 1,
       bedrooms: 1,
       floors: 1,
@@ -124,81 +124,81 @@ const UpdateProperty = () => {
       adults: 1,
       children: 1,
       infants: 1,
-      pricing: "50000",
-      address: "No 6 Oraka Street",
-      country: "Nigeria",
-      state: "Lagos state",
-      city: "Ikorodu",
-      postalCode: "102222",
-      images: ["ver", "ver", "ver", "ver", "ver", "ver"],
-      amenities: ["Swimming pool", "Wifi", "Garden"],
+      pricing: '50000',
+      address: 'No 6 Oraka Street',
+      country: 'Nigeria',
+      state: 'Lagos state',
+      city: 'Ikorodu',
+      postalCode: '102222',
+      images: ['ver', 'ver', 'ver', 'ver', 'ver', 'ver'],
+      amenities: ['Swimming pool', 'Wifi', 'Garden'],
       availableFromDate: today,
       availableTillDate: tomorrow,
       unavailableFromDate: null, // Set to your initial value
       unavailableTillDate: null, // Set to your initial value
-      reasonForUnavailability: "",
+      reasonForUnavailability: '',
       propertySize: [0, 70],
-      propertyOccupiedFromDate: "", // Set to your initial value
-      propertyOccupiedTillDate: "", // Set to your initial value
+      propertyOccupiedFromDate: '', // Set to your initial value
+      propertyOccupiedTillDate: '', // Set to your initial value
       isUnavailable: false,
       agent: [],
     },
-    onSubmit: (values) => {
+    onSubmit: values => {
       // same shape as initial values
 
       // console.log(values);
-      onSubmit(values);
+      onSubmit(values)
     },
     validationSchema: createPropertySchema,
-  });
+  })
 
-  const test = (e) => {
-    e.preventDefault();
+  const test = e => {
+    e.preventDefault()
     // console.log(errors)
-  };
+  }
 
   useEffect(() => {
     if (details && id) {
       // console.log(details.property_information.availability.available_date_from[0])
-      values.propertyName = details.property_information.property_name;
-      values.propertyType = details.property_information.property_type;
+      values.propertyName = details.property_information.property_name
+      values.propertyType = details.property_information.property_type
       values.propertyDescription =
-        details.property_information.property_description;
-      values.bathrooms = details.property_information.property_no_bathrooms;
-      values.garages = details.property_information.property_no_bedrooms;
-      values.floors = details.property_information.property_no_bathrooms;
-      values.bedrooms = details.property_information.property_no_bedrooms;
-      values.adults = details.property_information.guest?.maximum_adults;
-      values.children = details.property_information.guest.maximum_children;
-      values.infants = details.property_information.guest.maximum_infants;
-      values.pricing = details.property_information.pricing;
-      setProperty_images(details.property_information.property_images);
-      setProperty_amenities(details.property_information.property_amenities);
-      values.address = details.property_information.property_location.address;
-      values.country = details.property_information.property_location.country;
-      values.state = details.property_information.property_location.state;
-      values.city = details.property_information.property_location.city;
+        details.property_information.property_description
+      values.bathrooms = details.property_information.property_no_bathrooms
+      values.garages = details.property_information.property_no_bedrooms
+      values.floors = details.property_information.property_no_bathrooms
+      values.bedrooms = details.property_information.property_no_bedrooms
+      values.adults = details.property_information.guest?.maximum_adults
+      values.children = details.property_information.guest.maximum_children
+      values.infants = details.property_information.guest.maximum_infants
+      values.pricing = details.property_information.pricing
+      setProperty_images(details.property_information.property_images)
+      setProperty_amenities(details.property_information.property_amenities)
+      values.address = details.property_information.property_location.address
+      values.country = details.property_information.property_location.country
+      values.state = details.property_information.property_location.state
+      values.city = details.property_information.property_location.city
       values.postalCode =
-        details.property_information.property_location.postal_code;
-      setProperty_size(details.property_information.property_size);
+        details.property_information.property_location.postal_code
+      setProperty_size(details.property_information.property_size)
       values.property_smoking_policy =
-        details.property_information.property_policy.smoking_policy;
+        details.property_information.property_policy.smoking_policy
       values.property_dog_policy =
-        details.property_information.property_policy.pet_policy;
+        details.property_information.property_policy.pet_policy
       // setProperty_availability_from_date(details.property_information.availability.available_date_from[0])
     }
-  }, [details]);
+  }, [details])
 
-// console.log(errors)
+  // console.log(errors)
   return (
     <div>
       <form
         className={`exo p-4 flex ${
-          isMobile ? "flex-col" : "flex-row px-[5%]"
+          isMobile ? 'flex-col' : 'flex-row px-[5%]'
         } gap-12`}
         onSubmit={handleSubmit}
       >
-        <div className={`${isDesktop && "w-8/12"} `}>
+        <div className={`${isDesktop && 'w-8/12'} `}>
           <div className="bg-slate-500 px-[1rem] py-[2rem] shadow-md">
             <h1 className="text-slate-900 text-xl font-[600]">
               Property Details
@@ -221,7 +221,7 @@ const UpdateProperty = () => {
               <Dropdown
                 label="Property Type"
                 data={options}
-                field={{ name: "propertyType", value: values.propertyType }}
+                field={{ name: 'propertyType', value: values.propertyType }}
                 form={{ setFieldValue, handleBlur, values, errors, touched }}
                 error={
                   errors.propertyType && touched.propertyType
@@ -248,7 +248,7 @@ const UpdateProperty = () => {
               <Dropdown
                 label="Bathrooms"
                 data={numbers}
-                field={{ name: "bathrooms", value: values.bathrooms }}
+                field={{ name: 'bathrooms', value: values.bathrooms }}
                 form={{ setFieldValue, handleBlur, values, errors, touched }}
                 error={
                   errors.bathrooms && touched.bathrooms
@@ -260,7 +260,7 @@ const UpdateProperty = () => {
               <Dropdown
                 label="Bedrooms"
                 data={numbers}
-                field={{ name: "bedrooms", value: values.bedrooms }}
+                field={{ name: 'bedrooms', value: values.bedrooms }}
                 form={{ setFieldValue, handleBlur, values, errors, touched }}
                 error={
                   errors.bedrooms && touched.bedrooms
@@ -271,7 +271,7 @@ const UpdateProperty = () => {
               <Dropdown
                 label="Floors"
                 data={numbers}
-                field={{ name: "floors", value: values.floors }}
+                field={{ name: 'floors', value: values.floors }}
                 form={{ setFieldValue, handleBlur, values, errors, touched }}
                 error={
                   errors.floors && touched.floors ? errors.floors : undefined
@@ -281,7 +281,7 @@ const UpdateProperty = () => {
               <Dropdown
                 label="Garages"
                 data={numbers}
-                field={{ name: "garages", value: values.garages }}
+                field={{ name: 'garages', value: values.garages }}
                 form={{ setFieldValue, handleBlur, values, errors, touched }}
                 error={
                   errors.garages && touched.garages ? errors.garages : undefined
@@ -291,7 +291,7 @@ const UpdateProperty = () => {
                 <Dropdown
                   label="No of adults"
                   data={numbers}
-                  field={{ name: "adults", value: values.adults }}
+                  field={{ name: 'adults', value: values.adults }}
                   form={{ setFieldValue, handleBlur, values, errors, touched }}
                   error={
                     errors.adults && touched.adults ? errors.adults : undefined
@@ -300,7 +300,7 @@ const UpdateProperty = () => {
                 <Dropdown
                   label="No of children"
                   data={numbers}
-                  field={{ name: "children", value: values.children }}
+                  field={{ name: 'children', value: values.children }}
                   form={{ setFieldValue, handleBlur, values, errors, touched }}
                   error={
                     errors.children && touched.children
@@ -312,7 +312,7 @@ const UpdateProperty = () => {
                 <Dropdown
                   label="Infants"
                   data={numbers}
-                  field={{ name: "infants", value: values.infants }}
+                  field={{ name: 'infants', value: values.infants }}
                   form={{ setFieldValue, handleBlur, values, errors, touched }}
                   error={
                     errors.infants && touched.infants
@@ -340,12 +340,12 @@ const UpdateProperty = () => {
                     type="checkbox"
                     className="w-4 h-4"
                     checked={values.property_dog_policy}
-                    onChange={(e) => {
-                      handleChange(e);
+                    onChange={e => {
+                      handleChange(e)
                       setFieldValue(
-                        "property_dog_policy",
-                        !values.property_dog_policy
-                      );
+                        'property_dog_policy',
+                        !values.property_dog_policy,
+                      )
                     }}
                   />
                   <p className="text-[15px] text-white">Pets</p>
@@ -355,12 +355,12 @@ const UpdateProperty = () => {
                     type="checkbox"
                     className="w-4 h-4"
                     checked={values.property_smoking_policy}
-                    onChange={(e) => {
-                      handleChange(e);
+                    onChange={e => {
+                      handleChange(e)
                       setFieldValue(
-                        "property_smoking_policy",
-                        !values.property_smoking_policy
-                      );
+                        'property_smoking_policy',
+                        !values.property_smoking_policy,
+                      )
                     }}
                   />
                   <p className="text-[15px] text-white">Smoking</p>
@@ -371,7 +371,7 @@ const UpdateProperty = () => {
                 <p className="text-slate-400 text-[14px] mb-2"></p>
 
                 <DarkSlider
-                  getAriaLabel={() => "Temperature range"}
+                  getAriaLabel={() => 'Temperature range'}
                   value={values.propertySize}
                   onChange={handleSizeChange}
                   valueLabelDisplay="auto"
@@ -389,7 +389,7 @@ const UpdateProperty = () => {
             <div className="mt-8">
               <div className="w-[100%]">
                 <Dropzone
-                  field={{ name: "images", value: values.images }}
+                  field={{ name: 'images', value: values.images }}
                   form={{ setFieldValue, handleBlur, values, errors, touched }}
                   error={
                     errors.images && touched.images ? errors.images : undefined
@@ -418,8 +418,8 @@ const UpdateProperty = () => {
                       // onClick={() => handleAmmenitiesCheckboxChange(item, values={values}, setFieldValue={setFieldValue})}
                       className={`text-[15px] text-white cursor-pointer ${
                         values.amenities.includes(item)
-                          ? "bg-slate-900 "
-                          : "border"
+                          ? 'bg-slate-900 '
+                          : 'border'
                       } hover:bg-slate-300 px-4 py-1`}
                     >
                       {item}
@@ -433,7 +433,7 @@ const UpdateProperty = () => {
 
         <div
           className={`${
-            isDesktop ? "w-4/12" : "mt-16"
+            isDesktop ? 'w-4/12' : 'mt-16'
           }   grid grid-cols-1 gap-12 h-fit`}
         >
           <div className="mt-0 shadow-md h-fit bg-slate-500 py-[2rem] px-[1rem]">
@@ -609,17 +609,17 @@ Discard
                 // onClick={validateForm}
                 type="submit"
               >
-                {id ? " Update Property" : "Create Property"}
+                {id ? ' Update Property' : 'Create Property'}
               </button>
             </div>
           </div>
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default UpdateProperty;
+export default UpdateProperty
 
 {
   /* <button className="w-5/12 bg-slate-700 text-white shadow-md">

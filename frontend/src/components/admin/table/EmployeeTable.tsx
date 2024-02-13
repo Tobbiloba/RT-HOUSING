@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react'
 import {
   CaretSortIcon,
   ChevronDownIcon,
   DotsHorizontalIcon,
-} from "@radix-ui/react-icons";
+} from '@radix-ui/react-icons'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -15,9 +15,9 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import { Button } from "@/~/components/ui/button";
-import { Checkbox } from "@/~/components/ui/checkbox";
+} from '@tanstack/react-table'
+import { Button } from '@/~/components/ui/button'
+import { Checkbox } from '@/~/components/ui/checkbox'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -26,8 +26,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/~/components/ui/input";
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/~/components/ui/input'
 import {
   Table,
   TableBody,
@@ -35,11 +35,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/~/components/ui/table";
-import { BsClipboard } from "react-icons/bs";
-import { ToastButton } from "@/components/toast/Toast";
-import { useDispatch } from "react-redux";
-import { deleteEmployee } from "@/action/employee";
+} from '@/~/components/ui/table'
+import { BsClipboard } from 'react-icons/bs'
+import { ToastButton } from '@/components/toast/Toast'
+import { useDispatch } from 'react-redux'
+import { deleteEmployee } from '@/action/employee'
 export const columns = [
   // {
   //   accessorKey: "action",
@@ -51,54 +51,65 @@ export const columns = [
   //   ),
   // },
   {
-    accessorKey: "img",
+    accessorKey: 'img',
     header: () => <p className="text-[14px]">Avatar</p>,
     cell: ({ row }) => (
       <div className="capitalize">
-        <img src={row.getValue("img")} className="w-10 rounded- h-10" />
+        <img src={row.getValue('img')} className="w-10 rounded- h-10" />
       </div>
     ),
   },
   {
-    accessorKey: "firstname",
+    accessorKey: 'firstname',
     header: () => <p className="text-[14px]">Firstname</p>,
-    cell: ({ row }) => <h1 className="text-[13px]">{row.getValue("firstname")}</h1>,
+    cell: ({ row }) => (
+      <h1 className="text-[13px]">{row.getValue('firstname')}</h1>
+    ),
   },
   {
-    accessorKey: "lastname",
+    accessorKey: 'lastname',
     header: () => <p className="text-[14px]">Lastname</p>,
-    cell: ({ row }) => <div className="text-[13px]">{row.getValue("lastname")}</div>,
+    cell: ({ row }) => (
+      <div className="text-[13px]">{row.getValue('lastname')}</div>
+    ),
   },
 
   {
-    accessorKey: "email",
+    accessorKey: 'email',
     header: () => <p className="text-[14px]">Email</p>,
-    cell: ({ row }) => <div className="text-[13px]">{row.getValue("email")}</div>,
+    cell: ({ row }) => (
+      <div className="text-[13px]">{row.getValue('email')}</div>
+    ),
   },
   {
-    accessorKey: "status",
+    accessorKey: 'status',
     header: () => <p className="text-[14px]">Status</p>,
-    cell: ({ row }) => <div className="text-[13px]">{row.getValue("status")}</div>,
+    cell: ({ row }) => (
+      <div className="text-[13px]">{row.getValue('status')}</div>
+    ),
   },
   {
-    accessorKey: "job_type",
+    accessorKey: 'job_type',
     header: () => <p className="text-[14px]">Job Type</p>,
-    cell: ({ row }) => <div className="text-[13px]">{row.getValue("job_type")}</div>,
+    cell: ({ row }) => (
+      <div className="text-[13px]">{row.getValue('job_type')}</div>
+    ),
   },
   {
-    accessorKey: "role",
+    accessorKey: 'role',
     header: () => <p className="text-[14px]">Role</p>,
-    cell: ({ row }) => <div className="text-[13px]">{row.getValue("role")}</div>,
+    cell: ({ row }) => (
+      <div className="text-[13px]">{row.getValue('role')}</div>
+    ),
   },
 
   {
-    id: "actions",
+    id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
       const payment = row.original
       const dispatch = useDispatch()
 
- 
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -115,8 +126,15 @@ export const columns = [
             <div className="bg-slate-800 pt-[1rem] w-[10rem] h-fit">
               <h1 className="text-slate-400 ml-[1rem]">Actions</h1>
               <div className="mt-4">
-                <button className="py-3 text-slate-400 text-[14px] hover:bg-slate-600 w-[100%]">Update Status</button>
-                <button onClick={() => dispatch(deleteEmployee(payment._id))} className="py-3 text-slate-400 text-[14px] hover:bg-slate-600 w-[100%]">Delete Employee</button>
+                <button className="py-3 text-slate-400 text-[14px] hover:bg-slate-600 w-[100%]">
+                  Update Status
+                </button>
+                <button
+                  onClick={() => dispatch(deleteEmployee(payment._id))}
+                  className="py-3 text-slate-400 text-[14px] hover:bg-slate-600 w-[100%]"
+                >
+                  Delete Employee
+                </button>
               </div>
             </div>
           </DropdownMenuContent>
@@ -124,15 +142,15 @@ export const columns = [
       )
     },
   },
-];
+]
 export function EmployeeTable({ data }) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+    [],
+  )
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+    React.useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = React.useState({})
   const table = useReactTable({
     data,
     columns,
@@ -150,17 +168,17 @@ export function EmployeeTable({ data }) {
       columnVisibility,
       rowSelection,
     },
-  });
+  })
   return (
     <div className="w-full exo">
       <div className="flex flex-wrap gap-y-4 items-center py-4 ">
         <Input
           placeholder="Filter First name..."
           value={
-            (table.getColumn("first_name")?.getFilterValue() as string) ?? ""
+            (table.getColumn('first_name')?.getFilterValue() as string) ?? ''
           }
-          onChange={(event) =>
-            table.getColumn("property_name")?.setFilterValue(event.target.value)
+          onChange={event =>
+            table.getColumn('property_name')?.setFilterValue(event.target.value)
           }
           className="max-w-sm rounded-none bg-slate-900 border-slate-600 text-white text-[15px] h-[50px] placeholder:text-white"
         />
@@ -176,20 +194,18 @@ export function EmployeeTable({ data }) {
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
+              .filter(column => column.getCanHide())
+              .map(column => {
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
                     className="capitalize"
                     checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
+                    onCheckedChange={value => column.toggleVisibility(!!value)}
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
-                );
+                )
               })}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -197,7 +213,7 @@ export function EmployeeTable({ data }) {
       <div className="rounded-md ">
         <Table>
           <TableHeader className="text-[17px] bg-slate-900 border border-slate-900">
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map(headerGroup => (
               <TableRow
                 key={headerGroup.id}
                 className="border  hover:bg-slate-800 border-slate-900"
@@ -209,10 +225,10 @@ export function EmployeeTable({ data }) {
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
-                  );
+                  )
                 })}
               </TableRow>
             ))}
@@ -220,34 +236,34 @@ export function EmployeeTable({ data }) {
           <TableBody className="">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row, index) => {
-                if (row.original !== "active") {
-                  return null; 
+                if (row.original !== 'active') {
+                  return null
                 }
                 return (
                   <TableRow
                     key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
+                    data-state={row.getIsSelected() && 'selected'}
                     className={`${
                       index % 2 === 0
-                        ? "bg-slate-800 hover:bg-slate-800"
-                        : "bg-slate-900 hover:bg-slate-900"
+                        ? 'bg-slate-800 hover:bg-slate-800'
+                        : 'bg-slate-900 hover:bg-slate-900'
                     } border-0 py-8 bg-black `}
                   >
-                    {row.getVisibleCells().map((cell) => (
+                    {row.getVisibleCells().map(cell => (
                       <TableCell
                         key={cell.id}
                         className={`mt-3 text-slate-600 ${
-                          index % 2 === 0 ? "text-white" : "text-slate-400"
+                          index % 2 === 0 ? 'text-white' : 'text-slate-400'
                         } bg-black`}
                       >
                         {flexRender(
                           cell.column.columnDef.cell,
-                          cell.getContext()
+                          cell.getContext(),
                         )}
                       </TableCell>
                     ))}
                   </TableRow>
-                );
+                )
               })
             ) : (
               <TableRow>
@@ -265,25 +281,25 @@ export function EmployeeTable({ data }) {
               table.getRowModel().rows.map((row, index) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                   className={`${
-                    index % 2 === 0 ? "bg-slate-800" : "bg-slate-950"
+                    index % 2 === 0 ? 'bg-slate-800' : 'bg-slate-950'
                   } border-0 py-8`}
                 >
-                  {row.getVisibleCells().map((cell) => {
+                  {row.getVisibleCells().map(cell => {
                     return (
                       <TableCell
                         key={cell.id}
                         className={` text-slate-600 ${
-                          index % 2 === 0 ? "text-white" : "text-slate-400"
+                          index % 2 === 0 ? 'text-white' : 'text-slate-400'
                         } `}
                       >
                         {flexRender(
                           cell.column.columnDef.cell,
-                          cell.getContext()
+                          cell.getContext(),
                         )}
                       </TableCell>
-                    );
+                    )
                   })}
                 </TableRow>
               ))
@@ -302,7 +318,7 @@ export function EmployeeTable({ data }) {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4 px-[1rem]">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="space-x-2">
@@ -325,5 +341,5 @@ export function EmployeeTable({ data }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

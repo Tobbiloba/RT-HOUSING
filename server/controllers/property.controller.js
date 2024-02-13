@@ -5,10 +5,10 @@ import Property, {
   getPropertyByAdminId,
   updatePropertyById,
   getPropertyByType,
-  getProperties,
+  getProperties
 } from "../mongodb/models/property.js";
 import User, { getUserById } from "../mongodb/models/user.js";
-
+import PropertyModel from "../mongodb/models/property.js";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
@@ -16,17 +16,12 @@ import { random } from "../helpers/index.js";
 import { getAdminUserById, updateAdminUser } from "../mongodb/models/admin.js";
 import { getCompanyByIdSchema } from "../mongodb/models/company.js";
 import { createNotificationModel } from "./notification.controller.js";
+import { getPropertyTypeByName } from "../mongodb/models/type.js";
 dotenv.config();
 
 const getAllProperties = async (req, res) => {
-
-
   try {
-    // const count = await Property.countDocuments(query);
-    // console.log(`Count: ${count}`);
-
-    const properties = await getProperties()
-
+    const properties = await getProperties();
     res.status(200).json(properties);
   } catch (error) {
     console.error(error);
@@ -34,60 +29,177 @@ const getAllProperties = async (req, res) => {
   }
 };
 
+// const getProp = async (req, res) => {
+//   try {
+//     const page = parseInt(req.query.page) || 1;
+//     const limit = parseInt(req.query.limit) || 5;
+//     const search = req.query.search || "";
+//     let sort = req.query.sort || "rating";
+//     let type = req.query.type || "All";
+//     console.log(page, limit);
 
+//     const propertyTypes = [
+//       "apartment",
+//       "condo",
+//       "multi family space",
+//       "single family space",
+//       "farm",
+//       "loft",
+//       "villa",
+//       "townhouse",
+//     ];
+//     console.log(propertyTypes)
+
+//     type === "All"
+//       ? (type = [...propertyTypes])
+//       : (type = req.query.type.split(","));
+
+//     req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
+
+//     let sortBy = {};
+//     if (sort[1]) {
+//       sortBy[sort[0]] = sort[1];
+//     } else {
+//       sortBy[sort[0]] = "asc";
+//     }
+
+//     const properties = await Property.find({
+//       name: { $regex: search, $options: "i" },
+//       type: { $in: type },
+//     })
+//       .sort(sortBy)
+//       .skip(page * limit)
+//       .limit(limit);
+
+//     const total = await Property.countDocuments({
+//       type: { $in: type },
+//       name: { $regex: search, $options: "i" },
+//     });
+
+//     const response = {
+//       error: false,
+//       total,
+//       page: page + 1,
+//       limit,
+//       types: propertyTypes,
+//       properties,
+//     };
+
+//     console.log(response)
+
+//     res.status(200).json(response);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ error: true, message: "Internal Server Error" });
+//   }
+// };
+
+
+
+
+// const getProp = async (req, res) => {
+//   try {
+//     const search = req.query.search || "";
+//     const propertyType = req.query.type || "All";
+//     const property = req.query.property || "";
+//     const propertyNoBathrooms = req.query.property_no_bathrooms || "";
+
+//     const propertyTypes = [
+//       "Apartment",
+//       "Condo",
+//       "Multi family space",
+//       "Single family space",
+//       "Farm",
+//       "Loft",
+//       "Villa",
+//       "Townhouse",
+//     ];
+// // console.log(propertyType)
+//     // let type = propertyType === "All" ? [...propertyTypes] : propertyType.split(",");
+
+//     // // Define the filter criteria
+//     const filterCriteria = {
+//       name: { $regex: search, $options: "i" },
+//       type: { $in: type },
+//     };
+//     // // console.log(type)
+    
+//     // if (property) {
+//     //   filterCriteria['property_information.property'] = property;
+//     // }
+
+//     if (propertyNoBathrooms) {
+//       filterCriteria['property_information.property_no_bathrooms'] = propertyNoBathrooms;
+//     }
+// // console.log(filterCriteria)
+//     const properties = await PropertyModel.find(filterCriteria);
+//     console.log(properties)
+
+// //     const total = await Property.countDocuments(filterCriteria);
+
+// //     const response = {
+// //       error: false,
+// //       total,
+// //       properties,
+// //     };
+// // console.log(response)
+// //     res.status(200).json(response);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ error: true, message: "Internal Server Error" });
+//   }
+// };
 
 const getProp = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 5;
     const search = req.query.search || "";
-    let sort = req.query.sort || "rating";
-    let type = req.query.type || "All";
-    console.log(page, limit);
+    const propertyType = req.query.type || "All";
+    const propertyName = req.query.property_name || "";
+    const propertyNoBathrooms = req.query.property_no_bathrooms || "";
 
     const propertyTypes = [
-      "apartment",
-      "condo",
-      "multi family space",
-      "single family space",
-      "farm",
-      "loft",
-      "villa",
-      "townhouse",
+      "Apartment",
+      "Condo",
+      "Multi family space",
+      "Single family space",
+      "Farm",
+      "Loft",
+      "Villa",
+      "Townhouse",
     ];
 
-    type === "All"
-      ? (type = [...propertyTypes])
-      : (type = req.query.type.split(","));
+    let type = propertyType === "All" ? [...propertyTypes] : propertyType.split(",");
 
-    req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
+    // Define the filter criteria
+    const filterCriteria = {
+      name: { $regex: search, $options: "i" },
+      type: { $in: type },
+    };
 
-    let sortBy = {};
-    if (sort[1]) {
-      sortBy[sort[0]] = sort[1];
-    } else {
-      sortBy[sort[0]] = "asc";
+    // Check if propertyName is provided to add it to the filter criteria
+    if (propertyName) {
+      filterCriteria['property_information.property_name'] = { $regex: propertyName, $options: "i" };
     }
 
-    const properties = await Property.find({
-      name: { $regex: search, $options: "i" },
-      type: { $in: type },
-    })
-      .sort(sortBy)
-      .skip(page * limit)
-      .limit(limit);
+    // Check if propertyNoBathrooms is provided to add it to the filter criteria
+    if (propertyNoBathrooms) {
+      filterCriteria['property_information.property_no_bathrooms'] = propertyNoBathrooms;
+    }
 
-    const total = await Property.countDocuments({
-      type: { $in: type },
-      name: { $regex: search, $options: "i" },
-    });
+    // Check if any filter criteria are provided
+    const shouldFilter = Object.keys(filterCriteria).length > 2; // 2 because 'name' and 'type' are always present
+
+    const properties = shouldFilter
+      ? await PropertyModel.find(filterCriteria)
+      : await PropertyModel.find();
+
+    const total = shouldFilter
+      ? await PropertyModel.countDocuments(filterCriteria)
+      : await PropertyModel.countDocuments();
 
     const response = {
       error: false,
       total,
-      page: page + 1,
-      limit,
-      types: propertyTypes,
       properties,
     };
 
@@ -97,6 +209,10 @@ const getProp = async (req, res) => {
     res.status(500).json({ error: true, message: "Internal Server Error" });
   }
 };
+
+
+
+
 
 const getAllPropertiesUser = async (req, res) => {
   try {
@@ -120,9 +236,15 @@ const getPropertyByAdmin = async (req, res) => {
 const getPropertyByTypeModel = async (req, res) => {
   const { type } = req.params;
   try {
-    if (type) {
-      const property = await getPropertyByType(type);
+    if (!type) {
+      return res.status(500).json({ message: "Input type" });
     }
+    const getType = await getPropertyTypeByName(type);
+    if (!getType) {
+      return res.status(500).json({ message: "Property type not found" });
+    }
+    const property = await getPropertyByType(type);
+    return res.status(500).json(property);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error.message);
@@ -171,7 +293,7 @@ const createProperty = async (req, res) => {
         .status(500)
         .json({ message: "Pass in the necessary parameters" });
     }
-// console.log(property_information?.agent)
+    // console.log(property_information?.agent)
     // console.log(property_information)
 
     // const session = await mongoose.startSession();
@@ -187,44 +309,51 @@ const createProperty = async (req, res) => {
       return res.status(500).end();
     }
 
+    const propertyType = await getPropertyTypeByName(
+      property_information?.propertyType
+    );
+    if (!propertyType) {
+      return res.status(500).json({ messsage: "Property type not found" });
+    }
+
     const getRandomBoolean = () => Math.random() < 0.5;
-// console.log({property_information: {
-//   property_name: property_information?.propertyName,
-//   property_type: property_information?.propertyType,
-//   property_description: property_information?.propertyDescription,
-//   property_no_bedrooms: property_information?.bedrooms,
-//   property_no_bathrooms: property_information?.bathrooms,
-//   property_no_floor: property_information?.floors,
-//   property_no_garages: property_information?.garages,
-//   property_size: property_information?.propertySize, // Assuming you want the upper limit of the size range
-//   property_amenities: property_information?.amenities,
-//   property_images: property_information?.images,
-//   property_location: {
-//     country: property_information?.country,
-//     state: property_information?.state,
-//     city: property_information?.city,
+    // console.log({property_information: {
+    //   property_name: property_information?.propertyName,
+    //   property_type: property_information?.propertyType,
+    //   property_description: property_information?.propertyDescription,
+    //   property_no_bedrooms: property_information?.bedrooms,
+    //   property_no_bathrooms: property_information?.bathrooms,
+    //   property_no_floor: property_information?.floors,
+    //   property_no_garages: property_information?.garages,
+    //   property_size: property_information?.propertySize, // Assuming you want the upper limit of the size range
+    //   property_amenities: property_information?.amenities,
+    //   property_images: property_information?.images,
+    //   property_location: {
+    //     country: property_information?.country,
+    //     state: property_information?.state,
+    //     city: property_information?.city,
 
-//   },
-//   property_policy: {
-//     pet_policy: property_information?.pet_policy,
-//     smoking_policy: property_information?.smoking_policy,
-//   },
-//   pricing: property_information.pricing,
-//   availability: {
-//     available_date_from: property_information?.availableFromDate,
-//     available_date_till: property_information?.availableTillDate,
-//   },
-//   guest: {
-//     maximum_children: property_information?.children,
-//     maximum_adults: property_information?.adults,
-//     maximum_infants: property_information?.infants,
-//   },
-//   booking_status: property_information?.isUnavailable
-//     ? "unavailable"
-//     : "available",
-// },})
+    //   },
+    //   property_policy: {
+    //     pet_policy: property_information?.pet_policy,
+    //     smoking_policy: property_information?.smoking_policy,
+    //   },
+    //   pricing: property_information.pricing,
+    //   availability: {
+    //     available_date_from: property_information?.availableFromDate,
+    //     available_date_till: property_information?.availableTillDate,
+    //   },
+    //   guest: {
+    //     maximum_children: property_information?.children,
+    //     maximum_adults: property_information?.adults,
+    //     maximum_infants: property_information?.infants,
+    //   },
+    //   booking_status: property_information?.isUnavailable
+    //     ? "unavailable"
+    //     : "available",
+    // },})
 
-console.log(property_information.children)
+    console.log(property_information.children);
     const newProperty = await createPropertyAdmin({
       isActive: false,
       property_information: {
@@ -244,7 +373,6 @@ console.log(property_information.children)
           city: property_information?.city,
           postal_code: property_information?.postalCode,
           address: property_information?.address,
-
         },
         property_policy: {
           pet_policy: property_information?.pet_policy,
@@ -275,12 +403,14 @@ console.log(property_information.children)
       created_by: id,
     });
 
-    if(property_information?.agent) {
-      admin.agent = property_information?.agent
-      await admin.save()
-    }
+    // if(property_information?.agent) {
+    //   admin.employee = property_information?.agent
+    //   await admin.save()
+    // }
 
-    
+    propertyType.property_count = propertyType.property_count + 1;
+    await propertyType.save();
+
     console.log(newProperty);
     // notifyEmployees(company);
 
@@ -294,9 +424,8 @@ console.log(property_information.children)
     Thank you for choosing our platform. If you have any further inquiries or require assistance, please feel free to contact our support team.
     
     Best Regards,
-    Febtos`
+    Febtos`,
     });
-    
 
     res.status(200).json(newProperty);
   } catch (error) {
@@ -352,77 +481,111 @@ const updateProperty = async (req, res) => {
     const existingPropertyInformation = await getPropertyById(id);
 
     if (!existingPropertyInformation) {
-      return res.status(500).json({ message: "property doesn't exist" });
+      return res.status(500).json({ message: "Property doesn't exist" });
     }
-    // console.log(existingPropertyInformation.property_information)
 
-    const updateProperty = await updatePropertyById(
-      // const updateProperty = await updatePropertyById(
+    const updatedProperty = await updatePropertyById(
       { _id: id },
       {
         $set: {
           property_information: {
-            /* ...property_information */
+            ...existingPropertyInformation.property_information,
+            ...property_information,
           },
         },
       }
-      //   );
-      // { _id: id },
-      // {
-      //     property_information: {
-      //         ...existingPropertyInformation, // Copy existing properties
-      //         property_name:property_information?.property_name || existingPropertyInformation.property_information.property_name,
-      //         property_type: property_information?.property_type,
-      //         property_description: property_information?.property_description,
-      //         property_no_bedrooms: property_information?.property_no_bedrooms,
-      //         property_no_bathroom: property_information?.property_no_bathroom,
-      //         property_size: property_information?.property_size,
-      //         property_amenities: property_information?.property_amenities,
-      //         property_images: property_information?.property_images,
-      //         property_review: property_information?.property_review,
-      //         property_avg_ratings: property_information?.property_avg_ratings,
-      //         property_location: {
-      //           ...existingPropertyInformation?.property_location, // Copy existing location properties
-      //           country: property_information?.property_location?.country,
-      //           state: property_information?.property_location?.state,
-      //           zip_code: property_information?.property_location?.zip_code,
-      //         },
-      //         property_policy: {
-      //           ...existingPropertyInformation?.property_policy, // Copy existing policy properties
-      //           pet_policy: property_information?.property_policy?.pet_policy,
-      //           smoking_policy: property_information?.property_policy?.smoking_policy,
-      //         },
-      //         pricing: property_information?.pricing,
-      //         availability: {
-      //           ...existingPropertyInformation?.availability, // Copy existing availability properties
-      //           available_date_from: property_information?.availability?.available_date_from,
-      //           available_date_till: property_information?.availability?.available_date_till,
-      //           unavailable_date_from: property_information?.availability?.unavailable_date_from,
-      //           unavailable_date_till: property_information?.availability?.unavailable_date_till,
-      //           occupied_date_from: property_information?.availability?.occupied_date_from,
-      //           occupied_date_till: property_information?.availability?.occupied_date_till,
-      //         },
-      //         guest: {
-      //           ...existingPropertyInformation?.guest, // Copy existing guest properties
-      //           maximum_children: property_information?.guest?.maximum_children,
-      //           maximum_adults: property_information?.guest?.maximum_adults,
-      //           maximum_infants: property_information?.guest?.maximum_infants,
-      //         },
-      //         booking_status: property_information?.booking_status,
-      //       }
-      // },
     );
 
-    console.log(updateProperty);
+    console.log(updatedProperty);
 
     res
       .status(200)
-      .json({ message: "Property updated successfully", updateProperty });
+      .json({ message: "Property updated successfully", updatedProperty });
   } catch (error) {
-    // console.log(error)
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
+
+// const updateProperty = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { property_information } = req.body;
+
+//     const existingPropertyInformation = await getPropertyById(id);
+
+//     if (!existingPropertyInformation) {
+//       return res.status(500).json({ message: "property doesn't exist" });
+//     }
+//     // console.log(existingPropertyInformation.property_information)
+
+//     const updateProperty = await updatePropertyById(
+//       // const updateProperty = await updatePropertyById(
+//       { _id: id },
+//       {
+//         $set: {
+//           property_information: {
+//             /* ...property_information */
+//           },
+//         },
+//       }
+//       //   );
+//       // { _id: id },
+//       // {
+//       //     property_information: {
+//       //         ...existingPropertyInformation, // Copy existing properties
+//       //         property_name:property_information?.property_name || existingPropertyInformation.property_information.property_name,
+//       //         property_type: property_information?.property_type,
+//       //         property_description: property_information?.property_description,
+//       //         property_no_bedrooms: property_information?.property_no_bedrooms,
+//       //         property_no_bathroom: property_information?.property_no_bathroom,
+//       //         property_size: property_information?.property_size,
+//       //         property_amenities: property_information?.property_amenities,
+//       //         property_images: property_information?.property_images,
+//       //         property_review: property_information?.property_review,
+//       //         property_avg_ratings: property_information?.property_avg_ratings,
+//       //         property_location: {
+//       //           ...existingPropertyInformation?.property_location, // Copy existing location properties
+//       //           country: property_information?.property_location?.country,
+//       //           state: property_information?.property_location?.state,
+//       //           zip_code: property_information?.property_location?.zip_code,
+//       //         },
+//       //         property_policy: {
+//       //           ...existingPropertyInformation?.property_policy, // Copy existing policy properties
+//       //           pet_policy: property_information?.property_policy?.pet_policy,
+//       //           smoking_policy: property_information?.property_policy?.smoking_policy,
+//       //         },
+//       //         pricing: property_information?.pricing,
+//       //         availability: {
+//       //           ...existingPropertyInformation?.availability, // Copy existing availability properties
+//       //           available_date_from: property_information?.availability?.available_date_from,
+//       //           available_date_till: property_information?.availability?.available_date_till,
+//       //           unavailable_date_from: property_information?.availability?.unavailable_date_from,
+//       //           unavailable_date_till: property_information?.availability?.unavailable_date_till,
+//       //           occupied_date_from: property_information?.availability?.occupied_date_from,
+//       //           occupied_date_till: property_information?.availability?.occupied_date_till,
+//       //         },
+//       //         guest: {
+//       //           ...existingPropertyInformation?.guest, // Copy existing guest properties
+//       //           maximum_children: property_information?.guest?.maximum_children,
+//       //           maximum_adults: property_information?.guest?.maximum_adults,
+//       //           maximum_infants: property_information?.guest?.maximum_infants,
+//       //         },
+//       //         booking_status: property_information?.booking_status,
+//       //       }
+//       // },
+//     );
+
+//     console.log(updateProperty);
+
+//     res
+//       .status(200)
+//       .json({ message: "Property updated successfully", updateProperty });
+//   } catch (error) {
+//     // console.log(error)
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 // const activateProperty = async (req, res) => {
 //     const {id} = req.params;
@@ -469,13 +632,13 @@ const activateProperty = async (req, res) => {
     // };
 
     // const activated = await updatePropertyById(id, updatedProperty);
-    const property = await getPropertyById(id)
-    if(!property) {
-      return res.status(500).json({message: "Property not found"})
+    const property = await getPropertyById(id);
+    if (!property) {
+      return res.status(500).json({ message: "Property not found" });
     }
-console.log(property)
-    property.isActive = true
-    await property.save()
+    console.log(property);
+    property.isActive = true;
+    await property.save();
     // console.log(activated);
 
     return res.status(201).json({ message: "Successfully activated" });
@@ -490,15 +653,14 @@ const deActivateProperty = async (req, res) => {
   // console.log(id);
 
   try {
-  
     // console.log(activated);
-    const property = await getPropertyById(id)
-    if(!property) {
-      return res.status(500).json({message: "Property not found"})
+    const property = await getPropertyById(id);
+    if (!property) {
+      return res.status(500).json({ message: "Property not found" });
     }
-console.log(property)
-    property.isActive = false
-    await property.save()
+    console.log(property);
+    property.isActive = false;
+    await property.save();
     // console.log(activated);
 
     return res.status(201).json({ message: "Successfully deactivated" });

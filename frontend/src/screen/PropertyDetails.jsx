@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 // import MasonrySlider from '../details/MansorySlider';
-import Carousel from "../components/details/Carousel";
-import { Rating } from "@mui/material";
-import PropertyOptions from "../components/details/PropertyOptions";
-import amenities from "../data/amenities";
-import { useDispatch, useSelector } from "react-redux";
+import Carousel from '../components/details/Carousel'
+import { Rating } from '@mui/material'
+import PropertyOptions from '../components/details/PropertyOptions'
+import amenities from '../data/amenities'
+import { useDispatch, useSelector } from 'react-redux'
 const detail = [
   {
     id: 5,
     featured: true,
     top_rated: true,
-    type: "Villa",
-    name: "Exquisite Lakeside Villa",
+    type: 'Villa',
+    name: 'Exquisite Lakeside Villa',
     star: 5,
     reviews: 150,
     bedroom: 4,
     guests: 8,
-    location: "101 Serenity Lane, Rome, Italy",
-    avatar: "https://cdn-icons-png.flaticon.com/128/2202/2202108.png",
+    location: '101 Serenity Lane, Rome, Italy',
+    avatar: 'https://cdn-icons-png.flaticon.com/128/2202/2202108.png',
     saved: true,
 
     about:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempoer incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nrud exercitation ullamco laboris nisi ute aliquip ex ea commodo consequat duis auete irure dolor in reprehenderit in voluptate velit.",
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempoer incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nrud exercitation ullamco laboris nisi ute aliquip ex ea commodo consequat duis auete irure dolor in reprehenderit in voluptate velit.',
     // guests: 4,
     bedrooms: 3,
     bathrooms: 3,
@@ -29,43 +29,43 @@ const detail = [
     infants: 2,
     adults: 4,
     dimension: 1200,
-    check_in: "9:00 am",
+    check_in: '9:00 am',
     price: 640,
     other_expenses: [
       {
         id: 1,
-        expense: "Car Rental",
+        expense: 'Car Rental',
         price: 50,
       },
       {
         id: 2,
-        expense: "Fresh Grocereis",
+        expense: 'Fresh Grocereis',
         price: 50,
       },
       {
         id: 3,
-        expense: "Medical Representative",
+        expense: 'Medical Representative',
         price: 50,
       },
     ],
     amenities: [
-      "WI-FI",
-      "Air Conditioning",
-      "TV Cable",
-      "Dish Washer",
-      "Laundry",
-      "Fire Extinguisher",
-      "First Aid",
+      'WI-FI',
+      'Air Conditioning',
+      'TV Cable',
+      'Dish Washer',
+      'Laundry',
+      'Fire Extinguisher',
+      'First Aid',
     ],
-    available_date_from: "06/01/2024",
-    available_date_till: "09/01/2024",
+    available_date_from: '06/01/2024',
+    available_date_till: '09/01/2024',
     available: true,
-    un_available_date_from: "10/01/2024",
-    un_available_date_till: "17/01/2024",
-    occupied_date_from: "03/01/2024",
-    occupied_date_till: "05/01/2024",
+    un_available_date_from: '10/01/2024',
+    un_available_date_till: '17/01/2024',
+    occupied_date_from: '03/01/2024',
+    occupied_date_till: '05/01/2024',
   },
-];
+]
 
 const DetailTopCard = ({ detail }) => {
   // console.log(detail);
@@ -101,8 +101,8 @@ const DetailTopCard = ({ detail }) => {
             <div className="mt-3 flex flex-row gap-3 items-center text-[15px]">
               <img src="/send-mail.png" className="w-4" />
               <p className="text-slate-500">
-                {detail.property_location.country},{" "}
-                {detail.property_location.state},{" "}
+                {detail.property_location.country},{' '}
+                {detail.property_location.state},{' '}
                 {detail.property_location.city}
               </p>
             </div>
@@ -134,9 +134,9 @@ const DetailTopCard = ({ detail }) => {
         </div>
       </div>
     </div>
-  );
-};
-import { IoSettingsOutline } from "react-icons/io5";
+  )
+}
+import { IoSettingsOutline } from 'react-icons/io5'
 
 const AboutProperty = ({ detail }) => {
   // console.log(detail)
@@ -214,8 +214,8 @@ const AboutProperty = ({ detail }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 // console.log(amenities[0])
 
@@ -225,7 +225,7 @@ const AmenitiesCard = ({ detail }) => {
   return (
     <div>
       {amenities.map(
-        (item) =>
+        item =>
           item.name === detail && (
             <div
               key={item.id}
@@ -234,11 +234,11 @@ const AmenitiesCard = ({ detail }) => {
               <p className="text-slate-600 font-[600]">{item.name}</p>
               <img className="w-9 h-9" src={item.img} alt={item.name} />
             </div>
-          )
+          ),
       )}
     </div>
-  );
-};
+  )
+}
 
 const Amenities = () => {
   return (
@@ -251,8 +251,8 @@ const Amenities = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Nearby = () => {
   return (
@@ -264,18 +264,18 @@ const Nearby = () => {
         <h1 className="">Feature Not Available...</h1>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Availability = ({ detail }) => {
-  console.log(detail.availability.available_date_from[0].split(""));
-  const convertDate = (dateString) => {
-    const dateObject = new Date(dateString);
+  console.log(detail.availability.available_date_from[0].split(''))
+  const convertDate = dateString => {
+    const dateObject = new Date(dateString)
 
-    const options = { day: "2-digit", month: "2-digit", year: "numeric" };
-    const formattedDate = dateObject.toLocaleDateString("en-GB", options);
-    return formattedDate;
-  };
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
+    const formattedDate = dateObject.toLocaleDateString('en-GB', options)
+    return formattedDate
+  }
 
   // console.log(convertDate(detail.availability.available_date_from[0]))
   return (
@@ -292,22 +292,22 @@ const Availability = ({ detail }) => {
       <div className="mt-8">
         <AvailabilityCalendar
           availableFromDate={convertDate(
-            detail.availability.available_date_from[0]
+            detail.availability.available_date_from[0],
           )}
           availableToDate={convertDate(
-            detail.availability.available_date_till[0]
+            detail.availability.available_date_till[0],
           )}
           unavailableFromDate={convertDate(
-            detail.availability.unavailable_date_from[0]
+            detail.availability.unavailable_date_from[0],
           )}
           unavailableToDate={convertDate(
-            detail.availability.unavailable_date_till[0]
+            detail.availability.unavailable_date_till[0],
           )}
           occupiedDateFrom={convertDate(
-            detail.availability.occupied_date_from[0]
+            detail.availability.occupied_date_from[0],
           )}
           occupiedDateTill={convertDate(
-            detail.availability.occupied_date_till[0]
+            detail.availability.occupied_date_till[0],
           )}
         />
       </div>
@@ -327,8 +327,8 @@ const Availability = ({ detail }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Terms = () => {
   return (
@@ -354,8 +354,8 @@ const Terms = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 const Reviews = () => {
   return (
     <div className="w-[100%] my-10">
@@ -364,8 +364,8 @@ const Reviews = () => {
         <h1 className="text-[13px]">In Progress...</h1>
       </div>
     </div>
-  );
-};
+  )
+}
 
 // import { Link } from 'react-scroll';
 import {
@@ -374,116 +374,112 @@ import {
   Events,
   animateScroll as scroll,
   scrollSpy,
-} from "react-scroll";
-import AvailabilityCalendar from "../components/AvailabilityCalendar";
-import Footer from "../components/home/Footer";
-import { getPropertyDetailById } from "@/action/property";
-import { useParams } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
-import { IoIosArrowDown } from "react-icons/io";
-import Input from "@/components/Input";
+} from 'react-scroll'
+import AvailabilityCalendar from '../components/AvailabilityCalendar'
+import Footer from '../components/home/Footer'
+import { getPropertyDetailById } from '@/action/property'
+import { useParams } from 'react-router-dom'
+import { CircularProgress } from '@mui/material'
+import { IoIosArrowDown } from 'react-icons/io'
+import Input from '@/components/Input'
 // import Textarea from "@/components/textarea/Textarea";
 // import Textarea from "@/components/textarea/Textarea";
-import { tourSchema, contactAgentSchema } from "@/schemas";
-import { useFormik } from "formik";
-import { IoIosArrowRoundForward } from "react-icons/io";
-import Checkbox from "@/components/Checkbox";
-import Textarea from "@/components/textarea/Textarea";
-import { getCurrentTime, getNext7Days } from "@/components/utils";
-import dayjs from 'dayjs';
+import { tourSchema, contactAgentSchema } from '@/schemas'
+import { useFormik } from 'formik'
+import { IoIosArrowRoundForward } from 'react-icons/io'
+import Checkbox from '@/components/Checkbox'
+import Textarea from '@/components/textarea/Textarea'
+import { getCurrentTime, getNext7Days } from '@/components/utils'
+import dayjs from 'dayjs'
 const PropertyDetails = () => {
   useEffect(() => {
     // Scroll to the top of the page when the component mounts
     // window.scrollTo(0, 0);
-  }, []);
+  }, [])
   const images = [
-    "http://amentotech.com/htmls/tenanto/images/property-single/img-01.jpg",
-    "http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg",
-    "http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg",
-    "http://amentotech.com/htmls/tenanto/images/property-single/img-01.jpg",
-    "http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg",
-    "http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg",
-    "http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg",
-    "http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg",
+    'http://amentotech.com/htmls/tenanto/images/property-single/img-01.jpg',
+    'http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg',
+    'http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg',
+    'http://amentotech.com/htmls/tenanto/images/property-single/img-01.jpg',
+    'http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg',
+    'http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg',
+    'http://amentotech.com/htmls/tenanto/images/property-single/img-02.jpg',
+    'http://amentotech.com/htmls/tenanto/images/property-single/img-03.jpg',
     // Add more image URLs as needed
-  ];
+  ]
 
   const [showProperty, setShowProperty] = useState({
     right: true,
-  });
+  })
 
-  const toggleDrawer = (anchor, open) => (event) => {
+  const toggleDrawer = (anchor, open) => event => {
     if (
       event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
     ) {
-      return;
+      return
     }
 
-    setShowProperty({ ...showProperty, [anchor]: open });
-  };
+    setShowProperty({ ...showProperty, [anchor]: open })
+  }
 
-  const anchor = "right";
+  const anchor = 'right'
 
-  const { id } = useParams();
+  const { id } = useParams()
   // console.log(id)
-  const dispatch = useDispatch();
-  const { details, loading, error } = useSelector(
-    (state) => state.propertyDetail
-  );
+  const dispatch = useDispatch()
+  const { details, loading, error } = useSelector(state => state.propertyDetail)
 
   // console.log(details);
   useEffect(() => {
     // if(id) {
     // dispatch(getPropertyDetailById(id))
     // }
-  }, []);
+  }, [])
 
   // const [name, setName] = useState("");
-  const [tourName, setTourName] = useState("");
-  const [tourEmail, setTourEmail] = useState("");
-  const [tourMessage, setTourMessage] = useState("");
-  const [tourPhone, setTourPhone] = useState("");
-  const [tourTime, setTourTime] = useState("10:00 am");
+  const [tourName, setTourName] = useState('')
+  const [tourEmail, setTourEmail] = useState('')
+  const [tourMessage, setTourMessage] = useState('')
+  const [tourPhone, setTourPhone] = useState('')
+  const [tourTime, setTourTime] = useState('10:00 am')
 
-  const [contactName, setContactName] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [contactMessage, setContactMessage] = useState("");
-  const [contactPhone, setContactPhone] = useState("");
+  const [contactName, setContactName] = useState('')
+  const [contactEmail, setContactEmail] = useState('')
+  const [contactMessage, setContactMessage] = useState('')
+  const [contactPhone, setContactPhone] = useState('')
   const [selectedTourDate, setSelectedDateTour] = useState(0)
 
   // Formik instance for contact agent form
   const contactAgentFormik = useFormik({
     initialValues: {
-      name: "",
-      message: "",
-      email: "",
-      phone: "",
-      termsAndConditions: false
+      name: '',
+      message: '',
+      email: '',
+      phone: '',
+      termsAndConditions: false,
     },
     validationSchema: contactAgentSchema,
-    onSubmit: (values) => {
+    onSubmit: values => {
       // Handle contact agent form submission
-      console.log("Contact Agent Form Values:", values);
+      console.log('Contact Agent Form Values:', values)
     },
-  });
+  })
 
   // Formik instance for tour form
   const tourFormik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      phone: ""
-      
+      name: '',
+      email: '',
+      phone: '',
     },
     validationSchema: tourSchema,
-    onSubmit: (values) => {
+    onSubmit: values => {
       // Handle tour form submission
-      console.log("Tour Form Values:", values);
+      console.log('Tour Form Values:', values)
     },
-  });
-
+  })
 
   console.log(details)
   return (
@@ -605,7 +601,10 @@ const PropertyDetails = () => {
                     <IoIosArrowDown className="text-slate-500" />
                   </div>
 
-                  <form onSubmit={contactAgentFormik.handleSubmit} className="flex h-fit flex-col gap-5 mt-6">
+                  <form
+                    onSubmit={contactAgentFormik.handleSubmit}
+                    className="flex h-fit flex-col gap-5 mt-6"
+                  >
                     <Input
                       placeholder=""
                       type="text"
@@ -613,7 +612,8 @@ const PropertyDetails = () => {
                       value={contactAgentFormik.values.name}
                       handleChange={contactAgentFormik.handleChange}
                       error={
-                        contactAgentFormik.errors.name && contactAgentFormik.touched.name
+                        contactAgentFormik.errors.name &&
+                        contactAgentFormik.touched.name
                           ? contactAgentFormik.errors.name
                           : undefined
                       }
@@ -627,7 +627,8 @@ const PropertyDetails = () => {
                       value={contactAgentFormik.values.email}
                       handleChange={contactAgentFormik.handleChange}
                       error={
-                        contactAgentFormik.errors.email && contactAgentFormik.touched.email
+                        contactAgentFormik.errors.email &&
+                        contactAgentFormik.touched.email
                           ? contactAgentFormik.errors.email
                           : undefined
                       }
@@ -641,7 +642,8 @@ const PropertyDetails = () => {
                       value={contactAgentFormik.values.phone}
                       handleChange={contactAgentFormik.handleChange}
                       error={
-                        contactAgentFormik.errors.phone && contactAgentFormik.touched.phone
+                        contactAgentFormik.errors.phone &&
+                        contactAgentFormik.touched.phone
                           ? contactAgentFormik.errors.phone
                           : undefined
                       }
@@ -655,7 +657,8 @@ const PropertyDetails = () => {
                       value={contactAgentFormik.values.phone}
                       handleChange={contactAgentFormik.handleChange}
                       error={
-                        contactAgentFormik.errors.phone && contactAgentFormik.touched.phone
+                        contactAgentFormik.errors.phone &&
+                        contactAgentFormik.touched.phone
                           ? contactAgentFormik.errors.phone
                           : undefined
                       }
@@ -666,15 +669,15 @@ const PropertyDetails = () => {
                     {/* <Textarea 
 
                     /> */}
-                   <Checkbox
-        label="I agree to the terms and conditions"
-        field={tourFormik.getFieldProps('termsAndConditions')}
-        form={{
-          errors: tourFormik.errors.termsAndConditions,
-          touched: tourFormik.touched.termsAndConditions,
-        }}
-        id="termsAndConditions"
-      />
+                    <Checkbox
+                      label="I agree to the terms and conditions"
+                      field={tourFormik.getFieldProps('termsAndConditions')}
+                      form={{
+                        errors: tourFormik.errors.termsAndConditions,
+                        touched: tourFormik.touched.termsAndConditions,
+                      }}
+                      id="termsAndConditions"
+                    />
                     {/* <Input
         type="checkbox"
         label="Accept Terms and Conditions"
@@ -699,27 +702,32 @@ const PropertyDetails = () => {
                       </p>
                     </div> */}
 
-                    <button type="submit" className="flex flex-row gap-4 items-center border py-3 text-white bg-slate-800 justify-center">
+                    <button
+                      type="submit"
+                      className="flex flex-row gap-4 items-center border py-3 text-white bg-slate-800 justify-center"
+                    >
                       Send Message <IoIosArrowRoundForward />
                     </button>
                   </form>
-
-
                 </div>
 
                 <div className="mt-6 border pb-6 p-[1rem]">
                   <h1 className="font-[600]">Property Tour</h1>
 
                   <div className="gap-3 grid grid-cols-3 justify-evenly mt-6">
-                  {
-  getNext7Days().map((item, index) => (
-    <div key={index} onClick={() => setSelectedDateTour(index)} className={`${index === selectedTourDate ? "bg-slate-600 border shadow-xl text-white" : "bg-slate-200 text-slate-500"} hover:rounded-xl cursor-pointer hover:border-b hover:border-t border-slate-500 py-6 text-[14px]  text-center`}>
-      <p className="text-[12px]">{item.dayOfWeek}</p>
-      <h1 className="text-black my-1 font-[600] text-[16px]">{item.dateOfMonth}</h1>
-      <p className="text-[12px]">{item.monthOfYear}</p>
-    </div>
-  ))
-}
+                    {getNext7Days().map((item, index) => (
+                      <div
+                        key={index}
+                        onClick={() => setSelectedDateTour(index)}
+                        className={`${index === selectedTourDate ? 'bg-slate-600 border shadow-xl text-white' : 'bg-slate-200 text-slate-500'} hover:rounded-xl cursor-pointer hover:border-b hover:border-t border-slate-500 py-6 text-[14px]  text-center`}
+                      >
+                        <p className="text-[12px]">{item.dayOfWeek}</p>
+                        <h1 className="text-black my-1 font-[600] text-[16px]">
+                          {item.dateOfMonth}
+                        </h1>
+                        <p className="text-[12px]">{item.monthOfYear}</p>
+                      </div>
+                    ))}
                     {/* <div className="border-b-4 rounded-xl px-8 py-5 text-slate-500 text-[14px] text-center">
                       <p>Sat</p>
                       <h1 className="text-black font-[600] text-[16px]">13</h1>
@@ -774,7 +782,7 @@ const PropertyDetails = () => {
                       }
                       id="phone"
                     />
-                    
+
                     <Input
                       placeholder=""
                       type="text"
@@ -788,7 +796,7 @@ const PropertyDetails = () => {
                       }
                       id="email"
                     />
- {/* <form onSubmit={tourFormik.handleSubmit} className="flex flex-col gap-6 mt-6">
+                    {/* <form onSubmit={tourFormik.handleSubmit} className="flex flex-col gap-6 mt-6">
                     <Input
                       placeholder=""
                       type="text"
@@ -864,7 +872,7 @@ const PropertyDetails = () => {
 
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default PropertyDetails;
+export default PropertyDetails

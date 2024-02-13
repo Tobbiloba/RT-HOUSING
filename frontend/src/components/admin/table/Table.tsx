@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import * as React from "react";
+import * as React from 'react'
 import {
   CaretSortIcon,
   ChevronDownIcon,
   DotsHorizontalIcon,
-} from "@radix-ui/react-icons";
+} from '@radix-ui/react-icons'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -17,11 +17,11 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table'
 
 // import { Button } from "@/components/ui/button"
-import { Button } from "@/~/components/ui/button";
-import { Checkbox } from "@/~/components/ui/checkbox";
+import { Button } from '@/~/components/ui/button'
+import { Checkbox } from '@/~/components/ui/checkbox'
 // import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
@@ -31,9 +31,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu'
 // import { Input } from "@/components/ui/input"
-import { Input } from "@/~/components/ui/input";
+import { Input } from '@/~/components/ui/input'
 import {
   Table,
   TableBody,
@@ -41,7 +41,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/~/components/ui/table";
+} from '@/~/components/ui/table'
 
 // const data: Payment[] = [
 //   {
@@ -146,25 +146,25 @@ import {
 // ];
 
 export type Payment = {
-  id: string;
-  price: string;
-  status: "active" | "inactive" | "declined" | "pending";
-  checkin: string;
-  checkout: string;
-  property_name: string;
-  property_type: string;
-};
+  id: string
+  price: string
+  status: 'active' | 'inactive' | 'declined' | 'pending'
+  checkin: string
+  checkout: string
+  property_name: string
+  property_type: string
+}
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <Checkbox
         checked={
           table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
+          (table.getIsSomePageRowsSelected() && 'indeterminate')
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
         className="border border-slate-500"
       />
@@ -172,7 +172,7 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onCheckedChange={value => row.toggleSelected(!!value)}
         aria-label="Select row"
         className="border-slate-500"
       />
@@ -181,38 +181,47 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "propertyInformation",
-    header: "Property name",
+    accessorKey: 'propertyInformation',
+    header: 'Property name',
     cell: ({ row }) => {
-      const propertyInformation = row.getValue("propertyInformation")
+      const propertyInformation = row.getValue('propertyInformation')
       return (
-        <div className="capitalize text-[13px]">{propertyInformation.propertyName}</div>
+        <div className="capitalize text-[13px]">
+          {propertyInformation.propertyName}
+        </div>
       )
-    }
+    },
   },
   {
-    accessorKey: "propertyInformation",
-    header: "Property type",
+    accessorKey: 'propertyInformation',
+    header: 'Property type',
     cell: ({ row }) => {
-      const propertyInformation = row.getValue("propertyInformation")
+      const propertyInformation = row.getValue('propertyInformation')
       // console.log(propertyInformation.propertyType)
-      return(
-      <div className="capitalize text-[13px]">{propertyInformation.propertyType}</div>
-    )}
+      return (
+        <div className="capitalize text-[13px]">
+          {propertyInformation.propertyType}
+        </div>
+      )
+    },
   },
 
   {
-    accessorKey: "checkinDate",
-    header: "Checkin Date",
+    accessorKey: 'checkinDate',
+    header: 'Checkin Date',
     cell: ({ row }) => (
-      <div className="capitalize text-[13px]">{row.getValue("checkinDate")}</div>
+      <div className="capitalize text-[13px]">
+        {row.getValue('checkinDate')}
+      </div>
     ),
   },
   {
-    accessorKey: "checkoutDate",
-    header: "Checkout Date",
+    accessorKey: 'checkoutDate',
+    header: 'Checkout Date',
     cell: ({ row }) => (
-      <div className="capitalize text-[13px]">{row.getValue("checkoutDate")}</div>
+      <div className="capitalize text-[13px]">
+        {row.getValue('checkoutDate')}
+      </div>
     ),
   },
   // {
@@ -231,34 +240,39 @@ export const columns: ColumnDef<Payment>[] = [
   //   cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   // },
   {
-    accessorKey: "bookingStatus",
-    header: "Status",
+    accessorKey: 'bookingStatus',
+    header: 'Status',
     cell: ({ row }) => (
-      <div className={`capitalize text-start text-[13px] ${row.getValue("bookingStatus") == "active" ? "text-sky-400" : row.getValue("bookingStatus") === "inactive" ? "text-slate-500" : row.getValue("bookingStatus") === "pending" ? "text-slate-500" : "text-red-500"}`}>{row.getValue("bookingStatus")}</div>
+      <div
+        className={`capitalize text-start text-[13px] ${row.getValue('bookingStatus') == 'active' ? 'text-sky-400' : row.getValue('bookingStatus') === 'inactive' ? 'text-slate-500' : row.getValue('bookingStatus') === 'pending' ? 'text-slate-500' : 'text-red-500'}`}
+      >
+        {row.getValue('bookingStatus')}
+      </div>
     ),
   },
   {
-    accessorKey: "pricing",
+    accessorKey: 'pricing',
     header: () => <div className="">Total Price</div>,
     cell: ({ row }) => {
       // console.log("Status:", row.getValue("bookingStatus"));
-      const price = row.getValue("pricing")
+      const price = row.getValue('pricing')
       console.log(price.totalPrice)
       // console.log(row.getValue(`'pricing.'totalPrice'`))
-  console.log("Total Price:", row.getValue("pricing"));
+      console.log('Total Price:', row.getValue('pricing'))
       const statusColor =
-        row.getValue("bookingStatus") === "active"
-          ? "text-sky-400"
-          : row.getValue("bookingStatus") === "inactive" || row.getValue("bookingStatus") === "pending"
-          ? "text-slate-500"
-          : "text-red-500";
-  
+        row.getValue('bookingStatus') === 'active'
+          ? 'text-sky-400'
+          : row.getValue('bookingStatus') === 'inactive' ||
+              row.getValue('bookingStatus') === 'pending'
+            ? 'text-slate-500'
+            : 'text-red-500'
+
       return (
         <div className={`capitalize text- text-[13px] ${statusColor}`}>
           {/* {row.getValue("pricing.totalPrice")} */}
           {price.totalPrice}
         </div>
-      );
+      )
     },
   },
   // {
@@ -271,21 +285,17 @@ export const columns: ColumnDef<Payment>[] = [
 
   // https://cdn-icons-png.flaticon.com/128/6811/6811049.png
 
-// https://cdn-icons-png.flaticon.com/128/4303/4303935.png
+  // https://cdn-icons-png.flaticon.com/128/4303/4303935.png
 
+  // https://cdn-icons-png.flaticon.com/128/2704/2704312.png
 
-
-// https://cdn-icons-png.flaticon.com/128/2704/2704312.png
-
-
-
-// https://cdn-icons-png.flaticon.com/128/2762/2762463.png
+  // https://cdn-icons-png.flaticon.com/128/2762/2762463.png
 
   {
-    id: "actions",
+    id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const payment = row.original
 
       return (
         <DropdownMenu>
@@ -307,19 +317,19 @@ export const columns: ColumnDef<Payment>[] = [
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      );
+      )
     },
   },
-];
+]
 
-export function DataTableDemo2({data}) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+export function DataTableDemo2({ data }) {
+  const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+    [],
+  )
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+    React.useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
     data,
@@ -338,62 +348,71 @@ export function DataTableDemo2({data}) {
       columnVisibility,
       rowSelection,
     },
-  });
+  })
 
   return (
     <div className="w-[100%] exo">
       <div className="flex items-center flex-wrap gap-y-4 py-4">
         <Input
           placeholder="Filter Property name..."
-          value={(table.getColumn("property_name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("property_name")?.setFilterValue(event.target.value)
+          value={
+            (table.getColumn('property_name')?.getFilterValue() as string) ?? ''
+          }
+          onChange={event =>
+            table.getColumn('property_name')?.setFilterValue(event.target.value)
           }
           className="max-w-sm rounded-none  bg-slate-900 border-slate-600 text-white h-[50px] text-[13px] placeholder:text-white"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto rounded-none text-[13px] text-white bg-slate-900 border-slate-600">
+            <Button
+              variant="outline"
+              className="ml-auto rounded-none text-[13px] text-white bg-slate-900 border-slate-600"
+            >
               Columns <ChevronDownIcon className="ml-2 h-4 w-4 " />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
+              .filter(column => column.getCanHide())
+              .map(column => {
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
                     className="capitalize text-[13px]"
                     checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
+                    onCheckedChange={value => column.toggleVisibility(!!value)}
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
-                );
+                )
               })}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
       <div className="rounded-md ">
-        <Table >
+        <Table>
           <TableHeader className="text-[17px] bg-slate-900 ">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="border-b border-slate-900">
-                {headerGroup.headers.map((header) => {
+            {table.getHeaderGroups().map(headerGroup => (
+              <TableRow
+                key={headerGroup.id}
+                className="border-b border-slate-900"
+              >
+                {headerGroup.headers.map(header => {
                   return (
-                    <TableHead key={header.id} className="text-white text-[14px]">
+                    <TableHead
+                      key={header.id}
+                      className="text-white text-[14px]"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
-                  );
+                  )
                 })}
               </TableRow>
             ))}
@@ -403,16 +422,18 @@ export function DataTableDemo2({data}) {
               table.getRowModel().rows.map((row, index) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                   className={`${index % 2 === 0 ? 'bg-slate-800' : 'bg-slate-950'} border-0 py-8`}
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id } className={` text-slate-600 ${index % 2 === 0 ? 'text-white' : 'text-slate-400'}`}>
+                  {row.getVisibleCells().map(cell => (
+                    <TableCell
+                      key={cell.id}
+                      className={` text-slate-600 ${index % 2 === 0 ? 'text-white' : 'text-slate-400'}`}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
-                      
                     </TableCell>
                   ))}
                 </TableRow>
@@ -432,7 +453,7 @@ export function DataTableDemo2({data}) {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="space-x-2">
@@ -457,5 +478,5 @@ export function DataTableDemo2({data}) {
         </div>
       </div>
     </div>
-  );
+  )
 }

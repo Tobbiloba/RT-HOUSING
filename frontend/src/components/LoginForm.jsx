@@ -1,46 +1,44 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Skeleton from "@mui/material/Skeleton";
-import CircularProgress from "@mui/material/CircularProgress";
-import { useSelector, useDispatch } from "react-redux";
-import { login } from "../action/auth";
-import { useFormik } from "formik";
-import { loginSchema } from "@/schemas";
-import Input from "./Input";
+import React, { useEffect, useState } from 'react'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
+import Skeleton from '@mui/material/Skeleton'
+import CircularProgress from '@mui/material/CircularProgress'
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from '../action/auth'
+import { useFormik } from 'formik'
+import { loginSchema } from '@/schemas'
+import Input from './Input'
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-};
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+}
 
 const LoginForm = ({ setShowLogin, showLogin }) => {
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { loading, userInfo } = useSelector((state) => state.login);
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { loading, userInfo } = useSelector(state => state.login)
 
   useEffect(() => {
     if (userInfo) {
       // console.log(userInfo);
-      setShowLogin(false);
+      setShowLogin(false)
     }
-  }, [userInfo]);
+  }, [userInfo])
 
   const onSubmit = async (values, actions) => {
     // console.log(values);
     // dispatch(register({...values}));
-    dispatch(login(values));
-  };
-  const handleLogin = () => {
-    
-  };
+    dispatch(login(values))
+  }
+  const handleLogin = () => {}
 
   const handleClose = () => {
-    setShowLogin(false);
-  };
+    setShowLogin(false)
+  }
 
   const {
     values,
@@ -52,12 +50,12 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validationSchema: loginSchema,
     onSubmit,
-  });
+  })
 
   return (
     <div>
@@ -68,7 +66,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="bg-white text-[14px] exo z-10 rounded-md overflow-hidden w-[90vw] h-fit md:w-[27.5rem] md:h-[37.5rem]">
+          <div className="bg-white text-[14px] exo z-10 rounded-md overflow-hidden w-[90vw] h-fit md:w-[27.5rem] md:h-[38.5rem]">
             <div className="flex flex-row rounded-md justify-between py-4 px-8 bg-gray-100 ">
               <p className="text-slate-900 font-[600] text-[15px]">Login</p>
               <p className="text-red-500 cursor-pointer" onClick={handleClose}>
@@ -78,7 +76,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
             <form
               onSubmit={handleSubmit}
               autoComplete="off"
-              className="md:px-8 px-[1rem] pt-8 flex flex-col"
+              className="md:px-8 px-[1rem] pt-8 gap-3 flex flex-col"
             >
               <Input
                 placeholder="Type in your Email"
@@ -91,7 +89,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
               />
               <Input
                 placeholder="Type in your Password"
-                type="text"
+                type="password"
                 label="Password"
                 value={values.password}
                 handleChange={handleChange}
@@ -108,7 +106,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
                   // onClick={handleLogin}
                   type="submit"
                 >
-                  {!loading ? "Login" : "Loading..."}
+                  {!loading ? 'Login' : 'Loading...'}
                 </button>
                 <div className="flex flex-row gap-4">
                   <input
@@ -154,9 +152,9 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
             </div>
             <div className="mt-8 border px-6 py-5">
               <p className="text-[14px] text-center text-slate-600">
-                By signing in you agree to these{" "}
+                By signing in you agree to these{' '}
                 <span className="text-slate-400">Terms & Conditions</span> &
-                consent to{" "}
+                consent to{' '}
                 <span className="text-slate-400">
                   Cookie Policy & Privacy Policy
                 </span>
@@ -178,7 +176,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
         </Box>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

@@ -1,44 +1,44 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { loginAdmin } from "../../../action/auth";
-import Input from "@/components/Input";
-import { loginSchema } from "@/schemas";
-import { useFormik } from "formik";
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginAdmin } from '../../../action/auth'
+import Input from '@/components/Input'
+import { loginSchema } from '@/schemas'
+import { useFormik } from 'formik'
 const AdminLoginScreen = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isActive, setIsActive] = useState(false);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
     if ((!email, !password)) {
-      setIsActive(false);
+      setIsActive(false)
     } else {
-      setIsActive(true);
+      setIsActive(true)
     }
-  }, [email, password]);
+  }, [email, password])
 
   const handleLoginAdmin = () => {
-    dispatch(loginAdmin(email, password));
-  };
+    dispatch(loginAdmin(email, password))
+  }
 
-  const { adminInfo, loading } = useSelector((state) => state.adminLogin);
+  const { adminInfo, loading } = useSelector(state => state.adminLogin)
 
   useEffect(() => {
     if (adminInfo) {
-      navigate("/admin/dashboard");
+      navigate('/admin/dashboard')
     }
-  }, [adminInfo]);
+  }, [adminInfo])
 
   const onSubmit = async (values, actions) => {
-    console.log(values);
-    dispatch(loginAdmin(values));
+    console.log(values)
+    dispatch(loginAdmin(values))
     // dispatch(register({...values}));
     // dispatch(login(values));
-  };
+  }
 
   const {
     values,
@@ -50,12 +50,12 @@ const AdminLoginScreen = () => {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validationSchema: loginSchema,
     onSubmit,
-  });
+  })
 
   return (
     <div className="flex exo flex-row w-[100vw] min-h-[100vh] overflow-hidden justify-end bg-[#e9e9e9] p-[1rem] md:p-12 relative">
@@ -143,35 +143,34 @@ const AdminLoginScreen = () => {
             </div>
             <div className=" px-[10%] mt-12">
               <button
-              type="submit"
+                type="submit"
                 // disabled={!isActive}
                 className={`border w-[100%] bg-slate-900 py-3 text-white text-[14px] rounded-`}
               >
-                {loading ? "Please wait..." : "Log In"}
+                {loading ? 'Please wait...' : 'Log In'}
               </button>
-             
             </div>
           </form>
           <div className="w-[100%] px-[10%] mt-6 flex justify-center">
-          <button className="flex  w-[100%] flex-row border text-[14px] justify-center gap-4 items-center py-3 rounded- text-slate-600">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/2702/2702602.png"
-                  className="w-5 h-5"
-                />{" "}
-                Login in with Google
-              </button>
-              </div>
+            <button className="flex  w-[100%] flex-row border text-[14px] justify-center gap-4 items-center py-3 rounded- text-slate-600">
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/2702/2702602.png"
+                className="w-5 h-5"
+              />{' '}
+              Login in with Google
+            </button>
+          </div>
         </div>
 
         <Link to="/admin/register" className="mt-6">
           <p className="text-slate-600 text-[14px]">
-            Don't have an account?{" "}
+            Don't have an account?{' '}
             <span className="text-slate-400 ml-2 cursor-pointer">Sign Up</span>
           </p>
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AdminLoginScreen;
+export default AdminLoginScreen

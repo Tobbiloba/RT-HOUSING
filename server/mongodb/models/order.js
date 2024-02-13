@@ -8,7 +8,7 @@ const ExpenseSchema = new mongoose.Schema({
 const OrderSchema = new mongoose.Schema({
   propertyId: { type: String, required: true },
   orderId: { type: String, required: true },
-  companyId: {type: String, required: true},
+  adminId: {type: String, required: true},
   userInformation: {
     userId: { type: String, required: true },
     username: { type: String, required: true },
@@ -58,8 +58,8 @@ const OrderModel = mongoose.model("Order", OrderSchema);
 export const getOrders = (no) => OrderModel.find({}).limit(no);
 export const getOrderByProperty = (id) =>
   OrderModel.find({ property_id: id });
-  export const getOrderByCompany = (id) =>
-  OrderModel.find({ company_id: id });
+  export const getOrderByAdminId = (id) =>
+  OrderModel.find({ adminId: id });
 export const getOrderByUserId = (id) =>
   OrderModel.find({ "userInformation.userId": "659feb1f77db261ec3ea9088" })
 export const getOrderById = (id) => OrderModel.findOne({ _id: id });

@@ -1,7 +1,7 @@
 // @ts-nocheck
-import React, { useState } from "react";
-import { IoEyeSharp } from "react-icons/io5";
-import { BsFillEyeSlashFill } from "react-icons/bs";
+import React, { useState } from 'react'
+import { IoEyeSharp } from 'react-icons/io5'
+import { BsFillEyeSlashFill } from 'react-icons/bs'
 const Input = ({
   placeholder,
   type,
@@ -15,9 +15,10 @@ const Input = ({
   error,
   id,
   formType,
+  errorbg,
   inputType,
 }) => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false)
 
   // const handleInputChange = (e) => {
   //   setValue(e.target.value);
@@ -27,11 +28,11 @@ const Input = ({
   return (
     <>
       <div className={`w-[100%] rounded-sm ${style}`}>
-        <p className={`text-slate-600 ${smallText || "text-[14px]"}`}>
+        <p className={`text-slate-600 ${smallText || 'text-[14px]'}`}>
           {label}
         </p>
         <div className="flex flex-row items-center mt-2 gap-1  relative">
-          {inputType == "textarea" ? (
+          {inputType == 'textarea' ? (
             <textarea
               placeholder={placeholder}
               value={value}
@@ -40,7 +41,7 @@ const Input = ({
               type="text"
               //  onChange={handleInputChange}
               className={`bg-inherit py-1 fill-none text-[14px] resize-x text-black min-w-[100%] h-[17.5rem] ${
-                error ? "bg-red-50 border border-red-500" : "bg-slate-100"
+                error ? 'bg-red-50 border border-red-500' : 'bg-slate-100'
               } py-3 pl-3 outline-none`}
             />
           ) : (
@@ -50,17 +51,17 @@ const Input = ({
               id={id}
               onChange={handleChange}
               type={
-                type === "password" && visible === false ? "password" : "text"
+                type === 'password' && visible === false ? 'password' : 'text'
               }
               //  onChange={handleInputChange}
               className={`bg-inherit fill-none h-[2.5rem] ${
-                bigText || "text-[14px]"
+                bigText || 'text-[14px]'
               } text-black w-[100%] ${
-                error ? "bg-red-50 border border-red-500" : "bg-slate-100"
+                error ? 'bg-red-50 border border-red-500' : 'bg-slate-100'
               } py-3 pl-3 outline-none`}
             />
           )}
-          {type === "password" && value !== "" && (
+          {type === 'password' && value !== '' && (
             <div>
               {visible ? (
                 <IoEyeSharp
@@ -77,10 +78,16 @@ const Input = ({
           )}
         </div>
         {/* <p className=" text-red-500 z-100 bottom-0  text-[12px] py-[3px]">lol</p> */}
-        {error && <p className=" text-white text-[12px] py-[3px]">{error}</p>}
+        {error && (
+          <p
+            className={` ${errorbg ? 'text-red-500' : 'text-white'} text-[12px] py-[3px]`}
+          >
+            {error}
+          </p>
+        )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

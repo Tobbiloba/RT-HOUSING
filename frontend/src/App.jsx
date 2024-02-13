@@ -10,8 +10,8 @@ import {
 import { Toaster } from './~/components/ui/toaster'
 import Properties from './screen/Properties'
 import PropertyDetails from './screen/PropertyDetails'
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import AdminLayout from './screen/admin/Layout'
 import Home from './screen/admin/screens/HomeScreen'
 import AdminProperties from './screen/admin/screens/Properties'
@@ -42,46 +42,238 @@ import Chatbot from './components/chatbot/Chatbot'
 import Aboutus from './screen/Aboutus'
 import Contactus from './screen/Contactus'
 function App() {
-  
   const routes = [
-    <Route path="/" element={<Layout><Homescreen /></Layout>} />,
-    <Route path="/properties" element={<Layout><Properties /></Layout>} />,
-    <Route path="/about-us" element={<Layout><Aboutus /></Layout>} />,
-    <Route path="/contact-us" element={<Layout><Contactus /></Layout>} />,
-    <Route path="/how-it-works" element={<Layout><HowItWorks /></Layout>} />,
-    <Route path="/user/dashboard" element={<Layout><ProfileLayout><Dashboard /></ProfileLayout></Layout>} />,
-    <Route path="/user/orders" element={<Layout><ProfileLayout><UserOrders /></ProfileLayout></Layout>} />,
-    <Route path="/user/dashboard/activate/:id/:token" element={<Layout><UserActivation /></Layout>} />,
-    <Route path="/admin/profile/activate/:id/:token" element={<AdminActivation />} />,
-    <Route path="/user/change-password" element={<Layout><ProfileLayout><ChangePassword /></ProfileLayout></Layout>} />,
-    <Route path="/user/update-profile" element={<Layout><ProfileLayout><UpdateProfile /></ProfileLayout></Layout>} />,
-    <Route path="/property-detail/:id" element={<Layout><PropertyDetails /></Layout>} />,
-    <Route path="/admin/dashboard" element={<AdminLayout><Home /></AdminLayout>} />,
-    <Route path="/admin/properties" element={<AdminLayout><AdminProperties /></AdminLayout>} />,
-    <Route path="/admin/properties/create" element={<AdminLayout><UpdateProperty /></AdminLayout>} />,
-    <Route path="/admin/property/update/:id" element={<AdminLayout><UpdateProperty /></AdminLayout>} />,
-    <Route path="/admin/payments" element={<AdminLayout><Payments /></AdminLayout>} />,
-    <Route path="/admin/property-detail/:id" element={<AdminLayout><PropertyDetail /></AdminLayout>} />,
-    <Route path="/admin/transactions" element={<AdminLayout><Transactions /></AdminLayout>} />,
-    <Route path="/admin/coupon/create-coupon" element={<AdminLayout><AddCoupon /></AdminLayout>} />,
-    <Route path="/admin/profile" element={<AdminLayout><Profile /></AdminLayout>} />,
-    <Route path="/admin/coupon" element={<AdminLayout><Coupon /></AdminLayout>} />,
-    <Route path="/admin/employees" element={<AdminLayout><Employees /></AdminLayout>} />,
-    <Route path="/admin/employees/add-employee" element={<AdminLayout><AddEmployee /></AdminLayout>} />,
-    <Route path="/admin/orders" element={<AdminLayout><Orders /></AdminLayout>} />,
-    <Route path="/admin/profile" element={<AdminLayout><AdminProfile /></AdminLayout>} />,
+    <Route
+      path="/"
+      element={
+        <Layout>
+          <Homescreen />
+        </Layout>
+      }
+    />,
+    <Route
+      path="/properties"
+      element={
+        <Layout>
+          <Properties />
+        </Layout>
+      }
+    />,
+    <Route
+      path="/about-us"
+      element={
+        <Layout>
+          <Aboutus />
+        </Layout>
+      }
+    />,
+    <Route
+      path="/contact-us"
+      element={
+        <Layout>
+          <Contactus />
+        </Layout>
+      }
+    />,
+    <Route
+      path="/how-it-works"
+      element={
+        <Layout>
+          <HowItWorks />
+        </Layout>
+      }
+    />,
+    <Route
+      path="/user/dashboard"
+      element={
+        <Layout>
+          <ProfileLayout>
+            <Dashboard />
+          </ProfileLayout>
+        </Layout>
+      }
+    />,
+    <Route
+      path="/user/orders"
+      element={
+        <Layout>
+          <ProfileLayout>
+            <UserOrders />
+          </ProfileLayout>
+        </Layout>
+      }
+    />,
+    <Route
+      path="/user/dashboard/activate/:id/:token"
+      element={
+        <Layout>
+          <UserActivation />
+        </Layout>
+      }
+    />,
+    <Route
+      path="/admin/profile/activate/:id/:token"
+      element={<AdminActivation />}
+    />,
+    <Route
+      path="/user/change-password"
+      element={
+        <Layout>
+          <ProfileLayout>
+            <ChangePassword />
+          </ProfileLayout>
+        </Layout>
+      }
+    />,
+    <Route
+      path="/user/update-profile"
+      element={
+        <Layout>
+          <ProfileLayout>
+            <UpdateProfile />
+          </ProfileLayout>
+        </Layout>
+      }
+    />,
+    <Route
+      path="/property-detail/:id"
+      element={
+        <Layout>
+          <PropertyDetails />
+        </Layout>
+      }
+    />,
+    <Route
+      path="/admin/dashboard"
+      element={
+        <AdminLayout>
+          <Home />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/properties"
+      element={
+        <AdminLayout>
+          <AdminProperties />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/properties/create"
+      element={
+        <AdminLayout>
+          <UpdateProperty />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/property/update/:id"
+      element={
+        <AdminLayout>
+          <UpdateProperty />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/payments"
+      element={
+        <AdminLayout>
+          <Payments />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/property-detail/:id"
+      element={
+        <AdminLayout>
+          <PropertyDetail />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/transactions"
+      element={
+        <AdminLayout>
+          <Transactions />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/coupon/create-coupon"
+      element={
+        <AdminLayout>
+          <AddCoupon />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/profile"
+      element={
+        <AdminLayout>
+          <Profile />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/coupon"
+      element={
+        <AdminLayout>
+          <Coupon />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/employees"
+      element={
+        <AdminLayout>
+          <Employees />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/employees/add-employee"
+      element={
+        <AdminLayout>
+          <AddEmployee />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/orders"
+      element={
+        <AdminLayout>
+          <Orders />
+        </AdminLayout>
+      }
+    />,
+    <Route
+      path="/admin/profile"
+      element={
+        <AdminLayout>
+          <AdminProfile />
+        </AdminLayout>
+      }
+    />,
     <Route path="/admin/login" element={<AdminLoginScreen />} />,
     <Route path="/admin/register" element={<AdminRegisterScreen />} />,
-    <Route path="*" element={<Layout><NotFound /></Layout>} />,
+    <Route
+      path="*"
+      element={
+        <Layout>
+          <NotFound />
+        </Layout>
+      }
+    />,
   ]
 
   const router = createBrowserRouter(createRoutesFromElements(routes))
   return (
     <>
-     <ToastContainer />
-     <Toaster />
-     <Chatbot />
-       <RouterProvider router={router} />
+      <ToastContainer />
+      <Toaster />
+      <Chatbot />
+      <RouterProvider router={router} />
     </>
   )
 }
