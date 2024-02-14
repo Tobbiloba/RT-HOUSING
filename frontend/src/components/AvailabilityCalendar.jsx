@@ -20,10 +20,6 @@ function classNames(...classes) {
 const AvailabilityCalendar = ({
   availableFromDate,
   availableToDate,
-  unavailableFromDate,
-  unavailableToDate,
-  occupiedDateTill,
-  occupiedDateFrom,
 }) => {
   // Get current date
   let today = startOfToday()
@@ -67,28 +63,14 @@ const AvailabilityCalendar = ({
     // Check if the date is not before the current date
     if (date >= currentDate) {
       // Implement the availability logic based on props
-      if (
-        occupiedDateFrom &&
-        occupiedDateTill &&
-        date >= parse(occupiedDateFrom, 'dd/MM/yyyy', new Date()) &&
-        date <= parse(occupiedDateTill, 'dd/MM/yyyy', new Date())
-      ) {
-        return 'occupied'
-      } else if (
+       if (
         availableFromDate &&
         availableToDate &&
         date >= parse(availableFromDate, 'dd/MM/yyyy', new Date()) &&
         date <= parse(availableToDate, 'dd/MM/yyyy', new Date())
       ) {
         return 'available'
-      } else if (
-        unavailableFromDate &&
-        unavailableToDate &&
-        date >= parse(unavailableFromDate, 'dd/MM/yyyy', new Date()) &&
-        date <= parse(unavailableToDate, 'dd/MM/yyyy', new Date())
-      ) {
-        return 'unavailable'
-      }
+      } 
     }
 
     //  console.log('lol')

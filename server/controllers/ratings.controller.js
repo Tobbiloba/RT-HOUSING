@@ -87,7 +87,8 @@ const createRating = async (req, res) => {
             ratings_id: random(), // Assuming random() generates a unique ID
             property_ratings: {
                 rating: property_ratings.rating,
-                review: property_ratings.review
+                review: property_ratings.review,
+                likes: 0
             },
             status: 'Successful'
         });
@@ -102,6 +103,22 @@ const createRating = async (req, res) => {
 };
 
 
+export const likeRating  = async (req, res) => {
+    try{
+        const {id} = req.params;
+        const rating = await getRatingsById(id)
+        if(!rating) {
+            return res.status(500).json({message: "Rating not found"})
+        }
+        rating.property_ratings.likes = rating.property_ratings.likes + 1;
+        await rating.save()
+
+        return res.status(200).json(rating)
+    } catch(error) {
+        console.log(error.message)
+        return res.status(500).json(error.message)
+    }
+}
 
 const updateRatings = async (req, res) => {
     const { id } = req.params;

@@ -21,6 +21,7 @@ const getAllCouponsModel = async(req, res) => {
 const getAdminCouponByIdModel = async (req, res) => {
     try {
         const {id} = req.params;
+        console.log(id)
 
         const coupons = await getAdminCouponByIdSchema(id)
 
@@ -37,6 +38,7 @@ const getAdminCouponByIdModel = async (req, res) => {
 const createCouponModel = async (req, res) => {
     try {
         const { id } = req.params;
+        
         const {  coupon_code, free_shipping, quantity, min_purchase, discount_type, status, discount_price } = req.body;
         console.log(id, coupon_code, free_shipping, quantity, min_purchase, discount_type, status, discount_price)
         if (!id || !discount_price || !coupon_code  || !min_purchase || !discount_type || !status || !quantity) {

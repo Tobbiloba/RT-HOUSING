@@ -236,6 +236,7 @@ const getPropertyByAdmin = async (req, res) => {
 const getPropertyByTypeModel = async (req, res) => {
   const { type } = req.params;
   try {
+    console.log(type)
     if (!type) {
       return res.status(500).json({ message: "Input type" });
     }
@@ -244,7 +245,8 @@ const getPropertyByTypeModel = async (req, res) => {
       return res.status(500).json({ message: "Property type not found" });
     }
     const property = await getPropertyByType(type);
-    return res.status(500).json(property);
+    console.log(property)
+    return res.status(200).json(property);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error.message);

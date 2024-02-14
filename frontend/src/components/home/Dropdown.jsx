@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Dropdown.css' // Import your CSS file for styling
-
+import { IoIosArrowDown } from "react-icons/io";
 const Dropdown = ({ state, setState, data, height }) => {
   const [selectedOption, setSelectedOption] = useState('Select an option')
   const [isDropdownOpen, setDropdownOpen] = useState(false)
@@ -26,7 +26,7 @@ const Dropdown = ({ state, setState, data, height }) => {
 
           {options != '' && (
             //   <span className="down-button">&#9660;</span>
-            <img src="/down-arrow.png" className="w-5 h-5" />
+            <IoIosArrowDown className='text-[17px]'/>
           )}
         </div>
         {isDropdownOpen && (

@@ -8,11 +8,8 @@ import PropertiesList from '../components/properties/PropertiesList'
 import SortByOptions from '../components/properties/SortByOptions'
 import Footer from '../components/home/Footer'
 import { useMediaQuery } from 'react-responsive'
-import BreadCrumb from '@/components/admin/breadcrumb/BreadCrumb'
-import { CircularProgress } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProperties } from '@/action/property'
-import Map from '@/components/map/MapScreen'
 import { fetchPropertyType } from '@/action/type'
 import PropertyLocationCard from '@/components/propertyCard/PropertyLocationCard'
 const LoadingCard = ({ viewMode }) => {
@@ -99,7 +96,6 @@ const Properties = () => {
     setShowProperty({ ...showProperty, [anchor]: open })
   }
 
-  const anchor = 'right'
 
   const isMobile = useMediaQuery({ maxWidth: 1270 })
   const isDesktop = useMediaQuery({ minWidth: 1271 })
@@ -166,10 +162,10 @@ const Properties = () => {
         </div>
       )}
       {/* <Map /> */}
-      <div className="w-[100%] items-center mt-8 justify-center px-[1rem] md:px-[5%] flex flex-col gap-20">
-        <PropertyLocationCard title="Ikeja" />
-        <PropertyLocationCard title="Victoria Island" />
-        <PropertyLocationCard title="Lekki" />
+      <div className="w-[100%] items-center mt-8 justify-center px-[1rem] md:px-[4%] flex flex-col gap-20">
+        <PropertyLocationCard title="Apartment" />
+        <PropertyLocationCard title="Condos" />
+        <PropertyLocationCard title="Duplex" />
       </div>
 
       <div className="mt-6 ">

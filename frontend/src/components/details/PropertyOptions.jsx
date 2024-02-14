@@ -203,20 +203,20 @@ const PropertyOptionCard = ({ items }) => {
         <div className="flex flex-col gap-6">
           <FilterBox title="Pricing">
             <div>
-              <h1 className="text-[20px]  text-slate-500">
-                ${calculateTotalPrice()}{' '}
-                <span className="text-[14px] text-slate-500 font-[500]">
-                  / for 0
+              <h1 className="text-[18px]  text-slate-500">
+              ₦{calculateTotalPrice()}{' '}
+                <span className="text-[13px] text-slate-500 font-[500]">
+                  / {" "}
                   {calculateDayDifference(
                     checkInDate.toLocaleDateString(),
                     checkOutDate.toLocaleDateString(),
                   )}{' '}
-                  nights
+                  night
                 </span>
               </h1>
 
               <div className="flex flex-row justify-between items-center mt-5">
-                <p className="text-slate-500 text-[13px]">
+                <p className="text-slate-600 text-[13px]">
                   {items.price} x{' '}
                   {calculateDayDifference(
                     checkInDate.toLocaleDateString(),
@@ -225,8 +225,8 @@ const PropertyOptionCard = ({ items }) => {
                   nights
                 </p>
 
-                <p className="font-[600] text-slate-600 text-[14px]">
-                  $
+                <p className=" text-slate-600 text-[14px]">
+                ₦
                   {items.pricing *
                     calculateDayDifference(
                       checkInDate.toLocaleDateString(),
@@ -245,7 +245,7 @@ const PropertyOptionCard = ({ items }) => {
                         <p className="text-slate-600 text-[13px]">{itm.name}</p>
 
                         <p className=" text-slate-600 text-[14px]">
-                          ${itm.price}
+                        ₦{itm.price}
                         </p>
                       </div>
                     )}
@@ -254,15 +254,15 @@ const PropertyOptionCard = ({ items }) => {
 
                 <div className="flex flex-row justify-between items-center mt-6 border border-x-slate-50 py-3">
                   <p className="text-slate-600 text-[13px]">Taxes & Fees</p>
-                  <p className="font-[600] text-slate-600 text-[14px]">
-                    ${calculateTotalPrice() * 0.05}
+                  <p className=" text-slate-600 text-[14px]">
+                  ₦{calculateTotalPrice() * 0.05}
                   </p>
                 </div>
 
                 <div className="flex flex-row justify-between items-center mt-4 mb-2">
                   <p className="text-red-500 text-[13px]">Total</p>
-                  <p className="font-[600] text-red-500 text-[14px]">
-                    ${calculateTotalPrice()}
+                  <p className=" text-red-500 text-[14px]">
+                  ₦{calculateTotalPrice() + (calculateTotalPrice() * 0.05)}
                   </p>
                 </div>
               </div>
@@ -271,28 +271,28 @@ const PropertyOptionCard = ({ items }) => {
 
           <FilterBox title="Date">
             <div className="my- px-3 relative">
-              <h1 className="text-slate-900 text-[13px]">When To Check In?</h1>
+              <h1 className="text-slate-600 text-[13px]">When To Check In?</h1>
 
               <div className="flex flex-col mt-3">
                 <div
-                  className=" border-b flex justify-center px-2 py-2 flex-col"
+                  className=" border-b flex justify-center px-2 py-4 flex-col"
                   onClick={() => (
                     setShowCheckInCalendar(true), setShowCheckOutCalendar(false)
                   )}
                 >
                   <p className="text-[13px] text-slate-500">Check-In:</p>
-                  <h1 className="text-[14px] text-slate-600 cursor-text">
+                  <h1 className="text-[13px] text-slate-600 cursor-text">
                     {checkInDate.toLocaleDateString()}
                   </h1>
                 </div>
                 <div
-                  className=" border-b flex justify-center px-2 py-2 flex-col"
+                  className=" border-b flex justify-center px-2 py-4 flex-col"
                   onClick={() => (
                     setShowCheckOutCalendar(true), setShowCheckInCalendar(false)
                   )}
                 >
-                  <p className="text-[13px] text-slate-500">Check-Out:</p>
-                  <h1 className="text-[14px] text-slate-600 cursor-text">
+                  <p className="text-[12px] text-slate-500">Check-Out:</p>
+                  <h1 className="text-[13px] text-slate-600 cursor-text">
                     {checkOutDate.toLocaleDateString()}
                   </h1>
                 </div>
@@ -329,7 +329,7 @@ const PropertyOptionCard = ({ items }) => {
                   <h1 className="w-7/12 border px-4 flex items-center text-[13px] text-slate-600">
                     Adults
                   </h1>
-                  <p className="w-5/12 border px-4 py-3 border-l-slate-600  rounded-tr-md text-[13px] text-slate-400">
+                  <p className="w-5/12 border px-4 py-3 text-[13px] text-slate-400">
                     01
                   </p>
                 </div>
@@ -340,18 +340,18 @@ const PropertyOptionCard = ({ items }) => {
                       (Age 2-12)
                     </span>
                   </h1>
-                  <p className="w-5/12 border px-4 py-3 border-l-slate-600   text-[13px] text-slate-400">
+                  <p className="w-5/12 border px-4 py-3   text-[13px] text-slate-400">
                     01
                   </p>
                 </div>
                 <div className="flex flex-row">
-                  <h1 className="w-7/12 border px-4 rounded-bl-md flex items-center text-[13px] text-slate-600">
+                  <h1 className="w-7/12 border px-4 flex items-center text-[13px] text-slate-600">
                     Infants{' '}
                     <span className="font-[500] text-[12px] text-slate-400 ml-2">
                       (Age 0-2)
                     </span>
                   </h1>
-                  <p className="w-5/12 border px-4 py-3 border-l-slate-600 text-[13px] text-slate-400">
+                  <p className="w-5/12 border px-4 py-3  text-[13px] text-slate-400">
                     01
                   </p>
                 </div>
@@ -361,19 +361,19 @@ const PropertyOptionCard = ({ items }) => {
 
           <FilterBox title="Add-on Services">
             <div className="my-6 px-3">
-              {/* <h1 className="text-slate-900 font-[600]">Add-on Services</h1> */}
+              {/* <h1 className="text-slate-900 ">Add-on Services</h1> */}
               <div className="grid mt-5 grid-cols-1 gap-3">
                 {add_ons.map((item, index) => (
                   <div className="flex gap-3" key={index}>
                     <input
                       type="checkbox"
-                      className="custom-checkbox bg-blue-500"
+                      className="custom-checkbox  bg-blue-500"
                       onChange={() =>
                         handleAddOnsCheckboxChange(item.name, item.price)
                       } // Assuming a fixed price of 50
                       checked={addOns.some(addOn => addOn.name === item.name)}
                     />
-                    <p className="text-[13px]">{item.name}</p>
+                    <p className="text-[13px] text-slate-500">{item.name}</p>
                   </div>
                 ))}
               </div>
@@ -416,7 +416,7 @@ const PropertyOptionCard = ({ items }) => {
   )
 }
 
-import FilterOption from '../properties/FilterOptions'
+// import FilterOption from '../properties/FilterOptions'
 import { Drawer } from '@mui/material'
 import Calendar from '../Calendar'
 export default function PropertyOptions({ state, setState, item }) {

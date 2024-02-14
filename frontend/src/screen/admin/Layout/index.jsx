@@ -31,9 +31,9 @@ const AdminLayout = ({ children }) => {
     //   navigate("/admin");
     // }
 
-    // if (!data) {
-    //   navigate("/admin/login", { replace: true });
-    // }
+    if (!data) {
+      navigate("/admin/login", { replace: true });
+    }
 
     setLoading(false)
   }, [data])
@@ -51,7 +51,7 @@ const AdminLayout = ({ children }) => {
         <div>
           <Loading />
         </div>
-      ) : !data ? (
+      ) : data ? (
         <div className="flex flex-row bg-slate-900 gap-2">
           <div
             className={`${

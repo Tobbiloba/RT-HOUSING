@@ -75,7 +75,6 @@ const FilterOption = ({ data, setData }) => {
   const { types, loading } = useSelector(state => state.propertyTypes)
   // console.log(types)
 
-  const numberOptions = [1, 2, 3, 4, 5]
 
   const room = [
     {
@@ -93,16 +92,6 @@ const FilterOption = ({ data, setData }) => {
       type: 'Entire Place',
       img: '/bungalow.png',
     },
-  ]
-  const accomodation = [
-    'Apartment',
-    'Condo',
-    'Multi Family Space',
-    'Single Family Space',
-    'Farm',
-    'Loft',
-    'Villa',
-    'Townhouse',
   ]
 
   const ammenitiesList = [
@@ -127,54 +116,46 @@ const FilterOption = ({ data, setData }) => {
   ]
   const { properties } = useSelector(state => state.allProperties)
 
-  // const handleAccomodationCheckboxChange = (item) => {
-  //   // Check if the item is already in the state
-  //   if (accomodationType.includes(item)) {
-  //     // If yes, remove it
-  //     // setData(data.filter((item) => {
-
-  //     // }))
-  //     // console.log(data)
-  //     let match = data.filter((items) => {
-  //       // Replace 'yourPropertyValue' with the value you are looking for
-  //       return items.property_information.property_type != item;
-  //     });
-
-  //     if(accomodationType.length <= 1) {
-  //       setData(properties)
-  //     } else {
-  //       setData(match)
-  //     }
-
-  //     setAccomodationType(accomodationType.filter((type) => type !== item));
-  //   } else {
-  //     // If not, add it
-  //     if(properties) {
-  //       // console.log(data)
-  // let match = properties.filter((items) => {
-  //   // Replace 'yourPropertyValue' with the value you are looking for
-  //   return items.property_information.property_type === item;
-  // });
-
-  //       if(accomodationType.length) {
-  //         setData(data, match)
-  //       } else {
-  //         setData(match)
-  //       }
-
-  //     // console.log(match);
-  //     }
-  //     setAccomodationType([...accomodationType, item]);
-  //   }
-  // };
-  const handleAccomodationCheckboxChange = item => {
+  const handleAccomodationCheckboxChange = (item) => {
     // Check if the item is already in the state
     if (accomodationType.includes(item)) {
-      setAccomodationType(accomodationType.filter(type => type !== item))
+      // If yes, remove it
+      // setData(data.filter((item) => {
+
+      // }))
+      // console.log(data)
+      let match = data.filter((items) => {
+        // Replace 'yourPropertyValue' with the value you are looking for
+        return items.property_information.property_type != item;
+      });
+
+      if(accomodationType.length <= 1) {
+        setData(properties)
+      } else {
+        setData(match)
+      }
+
+      setAccomodationType(accomodationType.filter((type) => type !== item));
     } else {
-      setAccomodationType([...accomodationType, item])
+      // If not, add it
+      if(properties) {
+        // console.log(data)
+  let match = properties.filter((items) => {
+    // Replace 'yourPropertyValue' with the value you are looking for
+    return items.property_information.property_type === item;
+  });
+
+        if(accomodationType.length) {
+          setData(data, match)
+        } else {
+          setData(match)
+        }
+
+      // console.log(match);
+      }
+      setAccomodationType([...accomodationType, item]);
     }
-  }
+  };
 
   const handleFacilitiesCheckboxChange = item => {
     // Check if the item is already in the state
@@ -182,6 +163,13 @@ const FilterOption = ({ data, setData }) => {
       // If yes, remove it
       setFacilities(facilities.filter(type => type !== item))
     } else {
+      // console.log(data)
+      // let match = properties.filter(items => {
+      //   // Replace 'yourPropertyValue' with the value you are looking for
+      //   console.log(items.property_information?.guest?.maximum_adults)
+      //   // return items.property_information?.guest?.maximum_adults == adults
+      // })
+      // setData(match)
       // If not, add it
       setFacilities([...facilities, item])
     }
@@ -264,7 +252,7 @@ const FilterOption = ({ data, setData }) => {
               <div className="grid grid-cols-1 gap-4">
                 {types &&
                   types.map((item, index) => (
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center" key={index}>
                       <div className="flex gap-3">
                         <input
                           type="checkbox"
@@ -356,8 +344,9 @@ const FilterOption = ({ data, setData }) => {
                   <input
                     type="checkbox"
                     className="custom-checkbox"
+                    disabled
                     onChange={() => handleAmmenitiesCheckboxChange(item)}
-                    checked={amenities.includes(item)}
+                    checked
                   />
                   <p className="text-[13px]">{item}</p>
                 </div>
@@ -371,9 +360,10 @@ const FilterOption = ({ data, setData }) => {
                 <div className="flex gap-3" key={index}>
                   <input
                     type="checkbox"
+                    disabled
                     className="custom-checkbox"
                     onChange={() => handleFacilitiesCheckboxChange(item)}
-                    checked={facilities.includes(item)}
+                    checked
                   />
                   <p className="text-[13px]">{item}</p>
                 </div>
@@ -383,11 +373,12 @@ const FilterOption = ({ data, setData }) => {
 
           <div className="px-4 py-10 bg-gray-100 text-center items-center justify-center flex flex-col">
             <p className="text-[15px] text-gray-500">
-              Click "Apply Filter" button to get <br /> desired search result
+              Click Apply Filter button to get <br /> desired search result
             </p>
             <button
-              className="mt-4 border-[3px] text-slate-500 cursor-pointer border-slate-500 hover:text-white hover:bg-slate-500 px-10 py-3 w-fit"
+              className="mt-4 border-[3px] text-slate-500 cursor-not-allowed border-slate-500 hover:text-white px-10 py-3 w-fit"
               onClick={handleApplyFilters}
+
             >
               Apply Filters
             </button>

@@ -297,18 +297,18 @@ const Availability = ({ detail }) => {
           availableToDate={convertDate(
             detail.availability.available_date_till[0],
           )}
-          unavailableFromDate={convertDate(
-            detail.availability.unavailable_date_from[0],
-          )}
-          unavailableToDate={convertDate(
-            detail.availability.unavailable_date_till[0],
-          )}
-          occupiedDateFrom={convertDate(
-            detail.availability.occupied_date_from[0],
-          )}
-          occupiedDateTill={convertDate(
-            detail.availability.occupied_date_till[0],
-          )}
+          // unavailableFromDate={convertDate(
+          //   detail.availability.unavailable_date_from[0],
+          // )}
+          // unavailableToDate={convertDate(
+          //   detail.availability.unavailable_date_till[0],
+          // )}
+          // occupiedDateFrom={convertDate(
+          //   detail.availability.occupied_date_from[0],
+          // )}
+          // occupiedDateTill={convertDate(
+          //   detail.availability.occupied_date_till[0],
+          // )}
         />
       </div>
 
@@ -434,21 +434,11 @@ const PropertyDetails = () => {
   // console.log(details);
   useEffect(() => {
     // if(id) {
-    // dispatch(getPropertyDetailById(id))
+    dispatch(getPropertyDetailById(id))
     // }
   }, [])
 
-  // const [name, setName] = useState("");
-  const [tourName, setTourName] = useState('')
-  const [tourEmail, setTourEmail] = useState('')
-  const [tourMessage, setTourMessage] = useState('')
-  const [tourPhone, setTourPhone] = useState('')
-  const [tourTime, setTourTime] = useState('10:00 am')
-
-  const [contactName, setContactName] = useState('')
-  const [contactEmail, setContactEmail] = useState('')
-  const [contactMessage, setContactMessage] = useState('')
-  const [contactPhone, setContactPhone] = useState('')
+ 
   const [selectedTourDate, setSelectedDateTour] = useState(0)
 
   // Formik instance for contact agent form
@@ -603,7 +593,7 @@ const PropertyDetails = () => {
 
                   <form
                     onSubmit={contactAgentFormik.handleSubmit}
-                    className="flex h-fit flex-col gap-5 mt-6"
+                    className="flex h-fit flex-col md:grid grid-cols-2 lg:flex gap-5 mt-6"
                   >
                     <Input
                       placeholder=""
@@ -650,6 +640,7 @@ const PropertyDetails = () => {
                       id="phone"
                       // formType="custom"
                     />
+                    <div className='col-span-2'>
                     <Input
                       placeholder=""
                       type="text"
@@ -666,6 +657,7 @@ const PropertyDetails = () => {
                       inputType="textarea"
                       // formType="custom"
                     />
+                    </div>
                     {/* <Textarea 
 
                     /> */}
@@ -719,7 +711,7 @@ const PropertyDetails = () => {
                       <div
                         key={index}
                         onClick={() => setSelectedDateTour(index)}
-                        className={`${index === selectedTourDate ? 'bg-slate-600 border shadow-xl text-white' : 'bg-slate-200 text-slate-500'} hover:rounded-xl cursor-pointer hover:border-b hover:border-t border-slate-500 py-6 text-[14px]  text-center`}
+                        className={`${index === selectedTourDate ? 'bg-slate-600 border shadow-xl text-white' : 'bg-slate-200 text-slate-500'} cursor-pointer hover:border-b hover:border-t border-slate-500 py-6 text-[14px]  text-center`}
                       >
                         <p className="text-[12px]">{item.dayOfWeek}</p>
                         <h1 className="text-black my-1 font-[600] text-[16px]">
@@ -748,7 +740,7 @@ const PropertyDetails = () => {
                     <p>In Person</p>
                     <p>Video Chat</p>
                   </div>
-                  <div className="flex flex-col gap-6 mt-4">
+                  <form className="flex flex-col md:grid grid-cols-2 lg:flex gap-6 mt-4">
                     {/* <Input
                       value={tourTime}
                       setValue={setTourTime}
@@ -796,6 +788,7 @@ const PropertyDetails = () => {
                       }
                       id="email"
                     />
+                    <button type='submit'>REQUEST TOUR</button>
                     {/* <form onSubmit={tourFormik.handleSubmit} className="flex flex-col gap-6 mt-6">
                     <Input
                       placeholder=""
@@ -855,7 +848,7 @@ const PropertyDetails = () => {
                       setValue={setTourMessage}
                       label="Message"
                     /> */}
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>

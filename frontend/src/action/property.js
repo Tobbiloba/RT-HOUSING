@@ -97,13 +97,13 @@ export const getMyProperties = () => async dispatch => {
   }
 }
 
-export const getPropertyByType = type => async dispatch => {
+export const getPropertyByType = (type) => async dispatch => {
   dispatch({
     type: FETCH_PROPERTY_TYPE,
   })
   console.log('called')
   try {
-    const { data } = await Axios.get(`${BASE_URL}/properties/type/${'type'}`)
+    const { data } = await Axios.get(`${BASE_URL}/properties/type/${type}`)
     dispatch({
       type: FETCH_PROPERTY_TYPE_SUCCESSFUL,
       payload: data,

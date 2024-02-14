@@ -26,6 +26,7 @@ import { AgentCard } from '@/cards'
 import { useFormik } from 'formik'
 import { ammenitiesList, add_ons, options, numbers } from '@/components/data'
 import { handleAmmenitiesCheckboxChange } from '@/utils'
+import amenities from '@/data/amenities'
 const agentData = [
   {
     img: 'https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D',
@@ -405,24 +406,24 @@ const UpdateProperty = () => {
                 Available Ammenities
               </h1>
               <div className=" mt-8 flex flex-row flex-wrap gap-x-6 gap-y-3">
-                {ammenitiesList.map((item, index) => (
-                  <div className="flex gap-4" key={index}>
+                {amenities.map((item) => (
+                  <div className="flex gap-4" key={item.id}>
                     <p
                       onClick={() =>
                         handleAmmenitiesCheckboxChange({
-                          item,
+                          item: item.name,
                           values,
                           setFieldValue,
                         })
                       }
                       // onClick={() => handleAmmenitiesCheckboxChange(item, values={values}, setFieldValue={setFieldValue})}
                       className={`text-[15px] text-white cursor-pointer ${
-                        values.amenities.includes(item)
+                        values.amenities.includes(item.name)
                           ? 'bg-slate-900 '
                           : 'border'
                       } hover:bg-slate-300 px-4 py-1`}
                     >
-                      {item}
+                      {item.name}
                     </p>
                   </div>
                 ))}

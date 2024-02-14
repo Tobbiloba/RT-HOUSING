@@ -1,112 +1,32 @@
 // @ts-nocheck
 import { getPropertyByType } from '@/action/property'
-import React, { useEffect, useState, slate, Suspense, lazy } from 'react'
+import React, { useEffect, useState, Suspense, lazy } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useMediaQuery } from 'react-responsive'
 import { FaBath } from 'react-icons/fa'
 import { IoBedSharp } from 'react-icons/io5'
 import { SlSizeActual } from 'react-icons/sl'
-
-const properties = [
-  {
-    id: 1,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'sale',
-    paymentPlan: 'month',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2',
-  },
-  {
-    id: 2,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'rent',
-    paymentPlan: 'week',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2',
-  },
-  {
-    id: 3,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'sale',
-    paymentPlan: 'night',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2',
-  },
-  {
-    id: 4,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'rent',
-    paymentPlan: 'month',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2',
-  },
-  {
-    id: 5,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'sale',
-    paymentPlan: 'night',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2',
-  },
-  {
-    id: 6,
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
-    price: '$100,000',
-    purpose: 'sale',
-    paymentPlan: 'month',
-    city: 'Tranquil Countryside Estate',
-    state: 'New York',
-    bedroom: '4',
-    bathroom: '3',
-    size: '78 m2',
-  },
-]
-const categories = ['Residential', 'Commercial', 'Apartments', 'Office Space']
-
-const CategoryCard = ({ property }) => {
-  return <div className="w-[100%] rounded-xl p-2 bg-white"></div>
-}
-import { useRef } from 'react'
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/pagination'
-
 import { FaLocationDot } from 'react-icons/fa6'
-
+// import './categories.css'
 // import required modules
 import { FreeMode, Pagination } from 'swiper/modules'
-import { Item } from '@radix-ui/react-dropdown-menu'
-// const slateLoadedImage = slate(() => import("../LazyLoadedImage"));
 const LazyLoadedImage = lazy(() => import('../LazyLoadedImage'))
 const SwiperContainer = () => {
   const one = useMediaQuery({ maxWidth: 508 })
   const two = useMediaQuery({ maxWidth: 788 })
   const three = useMediaQuery({ maxWidth: 920 })
   const four = useMediaQuery({ minWidth: 1024 })
+
+
+
+  const {properties} = useSelector(state => state.propertyType)
+  // console.log(properties[0])
   return (
     <>
       <Swiper
@@ -117,34 +37,25 @@ const SwiperContainer = () => {
           clickable: true,
         }}
         modules={[FreeMode, Pagination]}
-        className="mySwiper"
+        className="mySwiper pb-[2rem]"
       >
-        {/* <SwiperSlide className="border">Slide 1</SwiperSlide>
-        <SwiperSlide className="border">Slide 1</SwiperSlide>
-        <SwiperSlide className="border">Slide 1</SwiperSlide>
-        <SwiperSlide className="border">Slide 1</SwiperSlide>
-        <SwiperSlide className="border">Slide 1</SwiperSlide> */}
 
-        {properties.map((property, index) => {
+        {properties && properties.map((property, index) => {
           // console.log(property);
-
+          console.log(property.property_information.property_size)
           return (
             <SwiperSlide
               key={index}
-              className="hover:border-b hover:shadow-md border-slate-500 rounded-xl"
+              className="hover:border-b hover:shadow-md border-slate-500 "
             >
               <div className="relative  max-h-[15rem] overflow-hidden">
-                {/* <img src={property.img} className="w-[100%] h-auto" /> */}
-                {/* <slateLoadedImage
-                  src={property.img}
-                  className=" w-[100%] h-auto rounded-md"
-                /> */}
+               
 
-                <div className="w-[100%]">
+                <div className="w-[100%] h-[15rem]">
                   <Suspense
                     fallback={<div className="h-[15rem] w-[100%]"></div>}
                   >
-                    <LazyLoadedImage src={property.img} className=" " />
+                    <LazyLoadedImage src={property.property_information.property_images[0]} className=" " />
                   </Suspense>
                 </div>
                 <div className="w-[100%] h-[100%] z-[50] bg-black/50 absolute top-0 left-0"></div>
@@ -152,30 +63,30 @@ const SwiperContainer = () => {
 
               <div className=" p-[1.25rem] py-[2rem]">
                 <p className="text-[18px] font-[600]">
-                  {property.price}{' '}
+                  {property.property_information.pricing}{' '}
                   <span className="text-slate-500 text-[13px]">
-                    / {property.paymentPlan}
+                    / night
                   </span>
                 </p>
 
                 <div className="flex flex-row mt-3 gap-4 items-center justify-between">
                   <p className="text-[16px] gap-3 items-center  flex flex-row">
                     <FaBath className="text-slate-500" />
-                    {property.bathroom}
+                    {property.property_information.property_no_bathrooms}
                   </p>
                   <p className="text-[16px] gap-3 items-center  flex flex-row">
                     <IoBedSharp className="text-slate-500" />
-                    {property.bedroom}
+                    {property.property_information.property_no_bedrooms}
                   </p>
                   <p className="text-[16px] gap-3 items-center  flex flex-row">
                     <SlSizeActual className="text-slate-500" />
-                    {property.size}
+                    {property.property_information.property_size}
                   </p>
                 </div>
 
                 <div className="flex mt-4 flex-row items-center gap-3">
                   <FaLocationDot className="text-slate-500" />
-                  <h1 className="text-[16px]">{property.city}</h1>
+                  <h1 className="text-[16px]">{property.property_information.property_location.city}</h1>
                 </div>
               </div>
             </SwiperSlide>
@@ -192,10 +103,10 @@ const Categories = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getPropertyByType('lol'))
+    dispatch(getPropertyByType('Apartment'))
   }, [])
 
-  const property = useSelector(state => state.propertyType)
+  
 
   return (
     <div className="flex items-center justify-center exo bg-gray-100 h-fit py-6 lg:py-12 ">

@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clear, createEmployee } from '@/action/employee'
 import { useNavigate } from 'react-router-dom'
+import { CircularProgress } from '@mui/material'
 const AddEmployee = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -39,6 +40,7 @@ const AddEmployee = () => {
     console.log(values)
     dispatch(createEmployee(values))
   }
+  const loading = true
 
   const employee = useSelector(state => state.createEmployee)
   // console.log(employee.status)
@@ -215,10 +217,16 @@ const AddEmployee = () => {
         </div>
         <div className="mt-16 text-[14px] flex gap-8 flex-row">
           <button
-            className="bg-green-700 px-4 py-3 text-white border-slate-500"
+            className="bg-slate-600 px-6 py-3 text-white border-slate-500"
             type="submit"
+            disabled={employee.loading}
           >
-            Add Employee
+            {
+              employee.loading ? <div className='flex items-center cursor-not-allowed gap-4 px-4'>
+                <CircularProgress size="1.5rem"/>
+                <p>Loading...</p>
+              </div> : 'Add Employee'
+            }
           </button>
         </div>
       </div>

@@ -10,7 +10,6 @@ import FeaturedProp from '../components/home/FeaturedProp'
 import FloorPlans from '../components/home/FloorPlans'
 import Footer from '../components/home/Footer'
 import HomePage from '../components/home/HomePage'
-import Home from '@/components/home/Home'
 
 const Homescreen = () => {
   return (
@@ -22,8 +21,8 @@ const Homescreen = () => {
       <FloorPlans />
       <Estimate />
       <Tip />
-      {/* <FeaturedProp />
-    <Articles /> */}
+      {/* <FeaturedProp /> */}
+    {/* <Articles /> */}
       <Footer />
     </div>
   )

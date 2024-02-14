@@ -111,27 +111,23 @@ export const columns = [
       const dispatch = useDispatch()
 
       return (
-        <DropdownMenu>
+        <DropdownMenu >
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
+              <DotsHorizontalIcon className="h-4 w-4 rounded-none" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            {/* <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Update Status</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => dispatch(deleteEmployee(payment._id))}>Delete Employee </DropdownMenuItem> */}
             <div className="bg-slate-800 pt-[1rem] w-[10rem] h-fit">
               <h1 className="text-slate-400 ml-[1rem]">Actions</h1>
               <div className="mt-4">
-                <button className="py-3 text-slate-400 text-[14px] hover:bg-slate-600 w-[100%]">
+                <button className="py-3 text-slate-400 text-start px-[1rem]  text-[14px] hover:bg-slate-600 w-[100%]">
                   Update Status
                 </button>
                 <button
                   onClick={() => dispatch(deleteEmployee(payment._id))}
-                  className="py-3 text-slate-400 text-[14px] hover:bg-slate-600 w-[100%]"
+                  className="py-3 text-slate-400 text-start px-[1rem] text-[14px] hover:bg-red-600 hover:text-white w-[100%]"
                 >
                   Delete Employee
                 </button>
@@ -188,7 +184,7 @@ export function EmployeeTable({ data }) {
               variant="outline"
               className="ml-auto rounded-none text-white bg-slate-900 border-slate-600"
             >
-              Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
+              Columns <ChevronDownIcon className="ml-2 h-4 w-4 rounded-none" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -212,11 +208,11 @@ export function EmployeeTable({ data }) {
       </div>
       <div className="rounded-md ">
         <Table>
-          <TableHeader className="text-[17px] bg-slate-900 border border-slate-900">
+          <TableHeader className="bg-slate-950 h-[3rem]">
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow
                 key={headerGroup.id}
-                className="border  hover:bg-slate-800 border-slate-900"
+                className="hover:bg-slate-800 text-[13px]"
               >
                 {headerGroup.headers.map((header, index) => {
                   return (
@@ -245,8 +241,8 @@ export function EmployeeTable({ data }) {
                     data-state={row.getIsSelected() && 'selected'}
                     className={`${
                       index % 2 === 0
-                        ? 'bg-slate-800 hover:bg-slate-800'
-                        : 'bg-slate-900 hover:bg-slate-900'
+                        ? 'bg-slate-700 hover:bg-slate-800'
+                        : 'bg-slate-800 hover:bg-slate-900'
                     } border-0 py-8 bg-black `}
                   >
                     {row.getVisibleCells().map(cell => (
@@ -283,16 +279,18 @@ export function EmployeeTable({ data }) {
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                   className={`${
-                    index % 2 === 0 ? 'bg-slate-800' : 'bg-slate-950'
+                    index % 2 === 0
+                      ? 'bg-slate-700 text-slate-400 hover:text-slate-800'
+                      : 'bg-slate-800 text-slate-700'
                   } border-0 py-8`}
                 >
                   {row.getVisibleCells().map(cell => {
                     return (
                       <TableCell
                         key={cell.id}
-                        className={` text-slate-600 ${
-                          index % 2 === 0 ? 'text-white' : 'text-slate-400'
-                        } `}
+                        // className={` text-slate-600 ${
+                        //   index % 2 === 0 ? 'text-white' : 'text-slate-400'
+                        // } `}
                       >
                         {flexRender(
                           cell.column.columnDef.cell,
@@ -327,6 +325,7 @@ export function EmployeeTable({ data }) {
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
+            className="rounded-none"
           >
             Previous
           </Button>
@@ -335,6 +334,7 @@ export function EmployeeTable({ data }) {
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            className="rounded-none"
           >
             Next
           </Button>

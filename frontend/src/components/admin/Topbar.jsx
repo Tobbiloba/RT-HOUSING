@@ -19,7 +19,11 @@ const Topbar = ({ setShowSlide, showSlide }) => {
     // dispatch(getNotifications('65c77993a24964910729d98d'))
   }, [])
   const { notifications } = useSelector(state => state.getNotifications)
-  console.log(notifications)
+  // console.log(notifications)
+  const data =  JSON.parse(sessionStorage.getItem('adminInfo'))
+
+  console.log(data.profile_img)
+ 
   return (
     <div
       className={` bg-slate-600 z-[499] md:z-[100] exo ml-auto px-[1rem] md:px-[2%] md: shadow-b-md h-fit md:h-[4.25rem] flex flex-col md:flex-row md:items-center justify-between  ${
@@ -61,10 +65,12 @@ const Topbar = ({ setShowSlide, showSlide }) => {
               <LuMessageSquare />
             </div>
             <div className="">
-              <img
-                src="https://angular.pixelstrap.com/multikart-admin/assets/images/dashboard/man.png"
-                className="w-12 h-12 rounded-full"
-              />
+            {
+            data.profile_img ? <img
+            src={data.profile_img}
+            className="w-12 h-12"
+          /> : <p className='w-12 h-12 flex items-center justify-center bg-slate-800'>{data.lastname[0]}{data.firstname[0]}</p>
+          }
             </div>
           </div>
         </div>
@@ -100,10 +106,12 @@ const Topbar = ({ setShowSlide, showSlide }) => {
           {showNotification && <Notification />}
         </div>
         <div className="ml-4">
-          <img
-            src="https://angular.pixelstrap.com/multikart-admin/assets/images/dashboard/man.png"
-            className="w-12 h-12 rounded-full"
-          />
+          {
+            data.profile_img ? <img
+            src={data.profile_img}
+            className="w-12 h-12"
+          /> : <p className='w-12 h-12 flex items-center justify-center bg-slate-800'>{data.lastname[0]}{data.firstname[0]}</p>
+          }
         </div>
       </div>
     </div>
