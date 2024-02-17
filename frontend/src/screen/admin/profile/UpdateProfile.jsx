@@ -72,7 +72,7 @@ const UpdateAdminProfile = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="exo  pb-8  m-[1rem] p-[1rem] bg-slate-900 md:p-[2rem] flex"
+      className="exo  pb-8   bg-slate-900 md:p-[2rem] flex"
     >
       <div className="w-[100%] relative min-h-[40rem] flex flex-col justify-evenly h-fit p-[1rem]">
         <h1 className="text-[17px] text-slate-100">Update User Profile</h1>
