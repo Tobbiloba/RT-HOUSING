@@ -1,3 +1,4 @@
+// @ts-nocheck
 import ReactApexChart from 'react-apexcharts'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'

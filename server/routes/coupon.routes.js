@@ -6,7 +6,7 @@ const router = express.Router()
 
 
 router.route("/create/:id").post(createCouponModel);
-router.route("/activate/:id").put(verifyCouponModel);
+router.route("/activate").put(verifyCouponModel);
 router.route("/:id").get(getAdminCouponByIdModel);
 router.route("/").get(getAllCouponsModel);
 export default router

@@ -24,6 +24,7 @@ import {
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL
 
 const customId = 'custom-id-yes'
+const adminId = "659ff1167d551e2588859520"
 
 // console.log(BASE_URL)
 
@@ -67,7 +68,7 @@ export const getMyProperties = () => async dispatch => {
   console.log('called')
   try {
     const { data } = await Axios.get(
-      `${BASE_URL}/properties/company/65a0fc46a3cd4f366e7a3c52`,
+      `${BASE_URL}/properties/admin/${adminId}`,
     )
     dispatch({
       type: FETCH_MY_PROPERTIES_SUCCESSFUL,
@@ -140,7 +141,7 @@ export const createProperty = (id, property_information) => async dispatch => {
   // console.log(id, property_information)
 
   try {
-    const { data } = await Axios.post(`${BASE_URL}/properties/${id}`, {
+    const { data } = await Axios.post(`${BASE_URL}/properties/${adminId}`, {
       // id,
       property_information: property_information,
     })

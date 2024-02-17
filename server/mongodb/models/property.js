@@ -6,9 +6,9 @@ import mongoose from "mongoose";
 //     c
 // })
 const AgentSchema = new mongoose.Schema({
-    name: {type: String, required: true},
+    username: {type: String, required: true},
     email: {type: String, required: true},
-    phone: {type: String, required: true},
+    phone_no: {type: String, required: true},
     img: {type: String, required: true}
 })
 const PropertySchema = new mongoose.Schema({

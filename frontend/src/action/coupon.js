@@ -19,8 +19,8 @@ import {
 const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/coupon`
 
 const customId = 'custom-id-yes'
-
-console.log(BASE_URL)
+const id =  "65c77993a24964910729d98d"
+// console.log(BASE_URL)
 
 export const getCompanyCoupon = id => async dispatch => {
   dispatch({
@@ -98,7 +98,7 @@ export const createCompanyCoupon =
   ({ values, id }) =>
   async dispatch => {
     dispatch({
-      type: GET_COMPANY_COUPON,
+      type: CREATE_COUPON_CODE,
     })
     console.log(values)
     try {
@@ -141,6 +141,67 @@ export const createCompanyCoupon =
         error.response && error.response.data[0]
           ? error.response.data[0]
           : error.message,
+        {
+          toastId: customId,
+          position: 'bottom-right',
+          theme: 'colored',
+        },
+      )
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  export const verifyCouponCode = ({amount, couponCode}) => async dispatch => {
+    dispatch({
+      type: VERIFY_COUPON_CODE,
+    })
+    console.log(`${BASE_URL}/activate`)
+    try {
+      const { data } = await Axios.put(`${BASE_URL}/activate`, {
+        couponCode,
+          amount
+      })
+      dispatch({
+        type: VERIFY_COUPON_CODE_SUCCESSFUL,
+        payload: data,
+      })
+  
+      toast.success(
+        'Successfully activated coupon.',
+        {
+          toastId: customId,
+          position: 'bottom-right',
+          theme: 'colored',
+        },
+      )
+    } catch (error) {
+      console.log(error.message)
+  
+      dispatch({
+        type: VERIFY_COUPON_CODE_FAILED,
+        payload:
+          error.response && error.response.data[0]
+            ? error.response.data.message
+            : error.message,
+      })
+  
+      toast.error(
+        error,
         {
           toastId: customId,
           position: 'bottom-right',

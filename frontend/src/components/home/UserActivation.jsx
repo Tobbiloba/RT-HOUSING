@@ -1,12 +1,10 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { activateUser } from '@/action/auth'
-// https://cdn.dribbble.com/users/2424774/screenshots/16856955/media/491d19acfd3e34a05d9eb5ec640595c4.mp4
 const UserActivation = () => {
-  // const history = useHistory();
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [countdown, setCountdown] = useState(4)
@@ -15,8 +13,8 @@ const UserActivation = () => {
 
   useEffect(() => {
     dispatch(activateUser(id, token))
-    console.log(id, token)
   }, [id])
+
   useEffect(() => {
     if (!loading && !error && countdown >= 0) {
       const countdownInterval = setInterval(() => {
@@ -25,17 +23,12 @@ const UserActivation = () => {
 
       if (countdown === 0) {
         clearInterval(countdownInterval)
-        // Use history.push for redirection
-        //   history.push('/');
-        console.log('working')
         navigate('/')
       }
 
       return () => clearInterval(countdownInterval)
     }
   }, [loading, error, countdown, history])
-
-  // console.log(countdown);
   return (
     <div className="px-[1rem] min-h-[40rem] flex justify-center items-center">
       <div className="container flex flex-col items-center justify-center">

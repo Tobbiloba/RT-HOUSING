@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from './components/Layout'
-import Homescreen from './screen/Homescreen'
+import Homescreen from './screen/user/home/Homescreen'
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -8,39 +8,39 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import { Toaster } from './~/components/ui/toaster'
-import Properties from './screen/Properties'
-import PropertyDetails from './screen/PropertyDetails'
+import Properties from './screen/user/property/Properties'
+import PropertyDetails from './screen/user/property/PropertyDetails'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import AdminLayout from './screen/admin/Layout'
-import Home from './screen/admin/screens/HomeScreen'
-import AdminProperties from './screen/admin/screens/Properties'
-import AddProperty from './screen/admin/screens/AddProperty'
-import PropertyDetail from './screen/admin/screens/PropertyDetail'
-import AdminLoginScreen from './screen/admin/screens/LoginScreen'
-import AdminRegisterScreen from './screen/admin/screens/RegisterScreen'
-import NotFound from './screen/NotFound'
-import Orders from './screen/admin/screens/Orders'
-import Payments from './screen/admin/screens/Payments'
-import AdminProfile from './screen/admin/screens/AdminProfile'
-import Transactions from './screen/admin/screens/Transactions'
-import AddCoupon from './screen/admin/screens/AddCoupon'
-import Profile from './screen/admin/screens/Profile'
-import Coupon from './screen/admin/screens/Coupon'
-import Employees from './screen/admin/screens/Employees'
-import AddEmployee from './screen/admin/screens/AddEmployee'
-import Dashboard from './screen/profile/Dashboard'
-import UserOrders from './screen/profile/Orders'
-import ChangePassword from './screen/profile/ChangePassword'
-import UpdateProfile from './screen/profile/UpdateProfile'
-import ProfileLayout from './components/userLayout/ProfileLayout'
-import HowItWorks from './screen/HowItWorks'
+import AdminLayout from './components/Layouts/admin'
+import Home from './screen/admin/home/HomeScreen'
+import AdminProperties from './screen/admin/property/Properties'
+// import AddProperty from './screen/admin/property/AddProperty'
+import PropertyDetail from './screen/admin/property/PropertyDetail'
+import AdminLoginScreen from './screen/admin/auth/LoginScreen'
+import AdminRegisterScreen from './screen/admin/auth/RegisterScreen'
+import NotFound from './screen/user/404/NotFound'
+import Orders from './screen/admin/orders/Orders'
+import Payments from './screen/admin/payment/Payments'
+import AdminProfile from './screen/admin/profile/AdminProfile'
+import Transactions from './screen/admin/payment/Transactions'
+import AddCoupon from './screen/admin/coupon/AddCoupon'
+import Profile from './screen/admin/profile/Profile'
+import Coupon from './screen/admin/coupon/Coupon'
+import Employees from './screen/admin/employee/Employees'
+import AddEmployee from './screen/admin/employee/AddEmployee'
+import Dashboard from './screen/user/profile/dashboard/Dashboard'
+import UserOrders from './screen/user/profile/order/Orders'
+import ChangePassword from './screen/user/profile/change password/ChangePassword'
+import UpdateProfile from './screen/user/profile/update profile/UpdateProfile'
+import ProfileLayout from './components/Layouts/user/ProfileLayout'
+import HowItWorks from './screen/user/how it works/HowItWorks'
 import UserActivation from './components/home/UserActivation'
-import AdminActivation from './screen/admin/screens/Activation'
-import UpdateProperty from './screen/admin/screens/UpdateProperty'
+import AdminActivation from './screen/admin/activation/Activation'
+import UpdateProperty from './screen/admin/property/UpdateProperty'
 import Chatbot from './components/chatbot/Chatbot'
-import Aboutus from './screen/Aboutus'
-import Contactus from './screen/Contactus'
+import Aboutus from './screen/user/about us/Aboutus'
+import Contactus from './screen/user/contact us/Contactus'
 function App() {
   const routes = [
     <Route
@@ -187,7 +187,7 @@ function App() {
       path="/admin/property-detail/:id"
       element={
         <AdminLayout>
-          <PropertyDetail />
+          <PropertyDetails />
         </AdminLayout>
       }
     />,

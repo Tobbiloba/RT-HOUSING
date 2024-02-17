@@ -5,7 +5,8 @@ const WishlistSchema = new mongoose.Schema({
     user_id: {type: String, required: true},
     property_id: {type: String, required: true},
     created_at: { type: Date, default: Date.now },
-    status: {type: String, required: true}
+    status: {type: String, required: true},
+    created_at: { type: Date, default: Date.now },
 })
 
 

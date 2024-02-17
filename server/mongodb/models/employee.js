@@ -12,7 +12,8 @@ const EmployeeSchema = new mongoose.Schema({
     status: {type: String, required: true},
     employer_id: {type: String, required: true},
     employer_email: {type: String, required: true},
-    img: {type: String, required: true}
+    img: {type: String, required: true},
+    created_at: { type: Date, default: Date.now },
 })
 
 const employeeModel = mongoose.model("Employee", EmployeeSchema);
@@ -21,6 +22,7 @@ const employeeModel = mongoose.model("Employee", EmployeeSchema);
 
 export const getAllEmployeesSchema = () => employeeModel.find();
 export const getEmployeeByIdSchema = (id) => employeeModel.findOne({"_id": id });
+export const getAgentByAdminSchema = (id) => employeeModel.find({"role": "Agent", employer_id: id });
 export const getEmployeeByEmailSchema = (email) => employeeModel.findOne({"email": email });
 export const getEmployeeByEmployerIdSchema = (id) => employeeModel.find({"employer_id": id });
 export const getEmployeeByEmployerEmailSchema = (email) => employeeModel.findOne({"employer_email": email });

@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
 
 const ExpenseSchema = new mongoose.Schema({
+  name: { type: String, required: false },
   price: { type: String, required: false },
-  description: { type: String, required: false },
 });
 
 const OrderSchema = new mongoose.Schema({
   propertyId: { type: String, required: true },
-  orderId: { type: String, required: true },
   adminId: {type: String, required: true},
   userInformation: {
     userId: { type: String, required: true },
@@ -61,7 +60,13 @@ export const getOrderByProperty = (id) =>
   export const getOrderByAdminId = (id) =>
   OrderModel.find({ adminId: id });
 export const getOrderByUserId = (id) =>
-  OrderModel.find({ "userInformation.userId": "659feb1f77db261ec3ea9088" })
+  OrderModel.find({ "userInformation.userId": id })
+  export const getActiveOrderByUserId = (id, propertyId) =>
+  OrderModel.findOne({
+    "userInformation.userId": id,
+    bookingStatus: { $in: ["active", "ongoing", "pending"] },
+    "propertyId": propertyId
+  });
 export const getOrderById = (id) => OrderModel.findOne({ _id: id });
 export const createOrder = (values) =>
   new OrderModel(values).save().then((user) => user.toObject());

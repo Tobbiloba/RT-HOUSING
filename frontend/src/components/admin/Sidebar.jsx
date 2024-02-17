@@ -88,10 +88,10 @@ const Sidebar = ({ showSlide, setShowSlide }) => {
     >
       <div className="flex flex-col items-center mt-3">
         <Link to="/admin/dashboard" className="flex justify-center">
-          <h1 className=" flex text-[28px] text-slate-400 flex-row pt-0 capitalized">
+          <h1 className={`flex ${!showSlide ? 'text-[18px]' : 'text-[24px]'} text-slate-400 flex-row pt-0 capitalized`}>
             Fe
-            <div className="rotate-12 w-[30px] h-[60px] flex flex-col items-center justify-center">
-              <div className="w-[10px] h-[10px]  bg-white"></div>
+            <div className={`rotate-12 ${!showSlide ? "w-[22px]" : "w-[30px]"} h-[60px] flex flex-col items-center justify-center`}>
+              <div className="w-[10px] h-[10px]  bg-white mb-1"></div>
               <span className="text-white relative bottom-2">bt</span>
             </div>
             oS

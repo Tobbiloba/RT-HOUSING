@@ -149,7 +149,7 @@ export const createPropertySchema = yup.object().shape({
     .min(3, 'At least 3 amenities are required'),
   availableFromDate: yup.date().required('Available From Date is required'),
   availableTillDate: yup.date().required('Available From Date is required'),
-  agent: yup.array(),
+  agent: yup.object().nullable(true)
   // unavailableFromDate: yup.date(),
   // unavailableTillDate: yup.date()
   // .when('unavailableFromDate', {
@@ -226,4 +226,16 @@ export const updateAdminProfileSchema = yup.object().shape({
     .min(5, 'Password must be at least 5 characters')
     .matches(passwordRules, 'Please create a stronger password')
     .required('Required'),
+})
+
+
+
+
+
+export const createOrderSchema = yup.object().shape({
+  pricing: yup.array(),
+  checkoutDate: yup.string().required('Required'),
+  checkinDate: yup.string().required('Required'),
+  couponCode: yup.string(),
+  checkBox: yup.boolean().oneOf([true], 'Checkbox must be checked').required('Checkbox is required'),
 })

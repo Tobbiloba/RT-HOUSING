@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   VERIFY_COUPON_CODE,
   VERIFY_COUPON_CODE_FAILED,
@@ -13,7 +14,7 @@ import {
 import { CLEAR } from '../constant/employee'
 
 export const createCouponReducer = (
-  state = { loading: true, error: null },
+  state = { loading: null, error: null },
   action,
 ) => {
   switch (action.type) {
@@ -41,7 +42,7 @@ export const createCouponReducer = (
 }
 
 export const fetchCouponReducer = (
-  state = { loading: true, error: null },
+  state = { loading: null, error: null },
   action,
 ) => {
   switch (action.type) {
@@ -59,6 +60,39 @@ export const fetchCouponReducer = (
     case GET_COMPANY_COUPON_FAILED:
       return {
         loading: false,
+        error: true,
+      }
+    default:
+      return state
+  }
+}
+
+
+
+
+
+
+
+
+export const verifyCouponReducer = (
+  state = { verificationLoader: null, error: null },
+  action,
+) => {
+  switch (action.type) {
+    case VERIFY_COUPON_CODE:
+      return {
+        verificationLoader: true,
+        error: null,
+      }
+    case VERIFY_COUPON_CODE_SUCCESSFUL:
+      return {
+        verificationLoader: false,
+        coupon: action.payload,
+        status: 'successful',
+      }
+    case VERIFY_COUPON_CODE_FAILED:
+      return {
+        verificationLoader: false,
         error: true,
       }
     default:

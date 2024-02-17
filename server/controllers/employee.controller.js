@@ -1,5 +1,5 @@
 import { getAdminUserById } from "../mongodb/models/admin.js";
-import { createEmployeeSchema, getAllEmployeesSchema, getEmployeeByEmployerIdSchema, getEmployeeByEmailSchema, getEmployeeByEmployerEmailSchema, getEmployeeByIdSchema, deleteEmployeeByIdSchema } from "../mongodb/models/employee.js";
+import { createEmployeeSchema, getAllEmployeesSchema, getEmployeeByEmployerIdSchema, getEmployeeByEmailSchema, getEmployeeByEmployerEmailSchema, getEmployeeByIdSchema, deleteEmployeeByIdSchema, getAgentByAdminSchema } from "../mongodb/models/employee.js";
 import { createNotificationModel } from "./notification.controller.js";
 
 const getAllEmployeesModel = async(req, res) => {
@@ -32,6 +32,20 @@ const getEmployeeByIdModel = async(req, res) => {
     }
 }
 
+const getAgentByEmployerIdModel = async(req, res) => {
+
+    try {
+        const {id} = req.params;
+        console.log('lol')
+        const agents = await getAgentByAdminSchema(id)
+        console.log(agents)
+
+            return res.status(200).json(agents)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(error.message)
+    }
+}
 
 const getAllEmployeeByEmailModel = async(req, res) => {
 
@@ -63,8 +77,6 @@ const getAllEmployeeByEmployerIdModel = async(req, res) => {
         return res.status(500).json(error.message)
     }
 }
-
-
 
 const createEmployeeModel = async(req, res) => {
 
@@ -212,5 +224,6 @@ export {
     deleteEmplyeeModel,
     updateEmployeeStatusModel,
     getAllEmployeesModel,
-    getEmployeeByIdModel
+    getEmployeeByIdModel,
+    getAgentByEmployerIdModel
 }

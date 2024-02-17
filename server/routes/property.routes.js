@@ -30,7 +30,7 @@ router.route("/:id").patch(updateProperty);
 router.route("/:id").delete(deleteProperty);
 router.route("/activate/:id").post(activateProperty);
 router.route("/deactivate/:id").post(deActivateProperty);
-router.route("/company/:id").get(getPropertyByAdmin);
+router.route("/admin/:id").get(getPropertyByAdmin);
 
 
 

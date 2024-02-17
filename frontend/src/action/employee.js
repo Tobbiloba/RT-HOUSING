@@ -17,6 +17,9 @@ import {
   CREATE_EMPLOYEE_SUCCESSFUL,
   CREATE_EMPLOYEE_FAILED,
   CLEAR,
+  GET_AGENT,
+  GET_AGENT_FAILED,
+  GET_AGENT_SUCCESSFUL
 } from '@/constant/employee'
 
 const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/employee`
@@ -81,6 +84,45 @@ export const getAllEmployee = () => async dispatch => {
 
     dispatch({
       type: FETCH_ALL_EMPLOYEES_FAILED,
+      payload:
+        error.response && error.response.data[0]
+          ? error.response.data.message
+          : error.message,
+    })
+
+    toast.error(
+      error.response && error.response.data[0]
+        ? error.response.data[0]
+        : error.message,
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
+  }
+}
+
+
+
+
+export const getAgent = (id) => async dispatch => {
+  dispatch({
+    type: GET_AGENT,
+  })
+  try {
+    const { data } = await Axios.get(`${BASE_URL}/agent/${id}`)
+    dispatch({
+      type: GET_AGENT_SUCCESSFUL,
+      payload: data,
+    })
+
+    console.log(data)
+  } catch (error) {
+    console.log(error.message)
+
+    dispatch({
+      type: GET_AGENT_FAILED,
       payload:
         error.response && error.response.data[0]
           ? error.response.data.message

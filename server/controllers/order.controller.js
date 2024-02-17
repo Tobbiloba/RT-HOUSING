@@ -8,6 +8,7 @@ import {
   getOrderById,
   // getOrderByCompany,
   getOrderByAdminId,
+  getActiveOrderByUserId,
 } from "../mongodb/models/order.js";
 import PropertyModel, { getPropertyByAdminId } from "../mongodb/models/property.js";
 import moment from "moment";
@@ -15,6 +16,8 @@ import {
   random,
   sendOrderConfirmation,
   sendOrderEnd,
+  sendOrderVerificationAdmin,
+  sendOrderVerificationUser,
 } from "../helpers/index.js";
 import { getAdminUserById } from "../mongodb/models/admin.js";
 import { getPropertyById } from "../mongodb/models/property.js";
@@ -87,10 +90,10 @@ const getOrdersByAdmin = async (req, res) => {
 
 const createUserOrder = async (req, res) => {
   const { id } = req.params;
-  const { pricing, promotions, user_id, checkinDate, checkoutDate } = req.body;
+  const { expense, user_id, checkinDate, checkoutDate, couponCode, totalPrice } = req.body;
 
   const extractNecessaryPropertyInfo = (property) => {
-    console.log(property);
+    // console.log(property);
     const { property_name, property_type, property_location, property_images } =
       property.property_information;
     return {
@@ -102,11 +105,15 @@ const createUserOrder = async (req, res) => {
   };
 
   try {
-    if (!id || !pricing || !user_id || !checkinDate || !checkoutDate) {
+    console.log(expense)
+    if (!id || !expense || !user_id || !checkinDate || !checkoutDate || !totalPrice) {
+      // console.log('error')
       return res.status(500).json({ message: "Pass all necessary parameters" });
     }
+    // console.log('working')
     const user = await getUserById(user_id);
     const property = await getPropertyById(id);
+    const coupon = await getCouponByCodeSchema(couponCode)
 
     if (!user) {
       return res.status(500).json({ message: "User not found" });
@@ -114,9 +121,9 @@ const createUserOrder = async (req, res) => {
     if (!property) {
       return res.status(500).json({ message: "Property not found" });
     }
-
+// console.log(property)
     const necessaryPropertyInfo = extractNecessaryPropertyInfo(property);
-    console.log(property.property_information.booking_status);
+    // console.log(necessaryPropertyInfo);
     if (
       property &&
       property.property_information.booking_status !== "available"
@@ -126,11 +133,11 @@ const createUserOrder = async (req, res) => {
         message: "Property unavailable at the moment. Please check back later.",
       });
     }
+console.log(expense)
 
     const newOrder = await createOrder({
-      orderId: random(),
       propertyId: id,
-      companyId: property.company_id,
+      adminId: property.admin_id,
       userInformation: {
         userId: user._id,
         username: user.username,
@@ -145,49 +152,80 @@ const createUserOrder = async (req, res) => {
         propertyType: necessaryPropertyInfo.propertyType,
         propertyImage: necessaryPropertyInfo.propertyImage,
       },
-      promotions: {
-        couponCode: promotions.couponCode || null,
-        discount: promotions.discount || null,
-      },
       pricing: {
-        ...pricing,
+        expenses: expense,
+        totalPrice,
+        rentalPrice: property.property_information.pricing
+
       },
+      promotions: {
+        couponCode: couponCode || null,
+        discount: (coupon && coupon.discount_price) ? coupon.discount_price : null
+      }
     });
 
-    // console.log({
-    //   orderId: random(),
-    //   propertyId: id,
-    //   companyId: property.company_id,
-    //   userInformation: {
-    //     userId: user._id,
-    //     username: user.username,
-    //     email: user.email,
-    //     phoneNo: user.phoneNo
-    //   },
-    //   propertyInformation: {
-    //     propertyName: necessaryPropertyInfo.propertyName,
-    //     propertyLocation: necessaryPropertyInfo.propertyLocation,
-    //     propertyType: necessaryPropertyInfo.propertyType,
-    //     propertyImage: necessaryPropertyInfo.propertyImage,
-    //     checkinDate: checkinDate,
-    //     checkoutDate: checkoutDate
-    //   },
-    //   promotions: {
-    //     couponCode: promotions.couponCode || null,
-    //     discount: promotions.discount || null
-    //   },
-    //   pricing: {
-    //     ...pricing
-    //   }
-    // })
+    // console.log(newOrder.pricing.expenses)
 
-    console.log(newOrder);
+    const checkin = new Date(newOrder.checkinDate);
+    const checkout = new Date(newOrder.checkoutDate);
+    // console.log(check.toLocaleDateString())
+// console.log(property.property_information.guest.)
+    const order = {
+      orderId: newOrder._id,
+      propertyName: newOrder.propertyInformation.propertyName,
+      propertyAddress: `${newOrder.propertyInformation.propertyLocation.country}, ${newOrder.propertyInformation.propertyLocation.state}, ${newOrder.propertyInformation.propertyLocation.city}`,
+      expenses: newOrder.pricing.expenses,
+      usedDiscount: {
+        couponId: newOrder.promotions.couponCode || null,
+        couponDiscount: newOrder.promotions.discount || null,
+      },
+      totalPrice: newOrder.pricing.totalPrice,
+      checkinDate: checkin.toLocaleDateString(),
+      checkoutDate: checkout.toLocaleDateString(),
+      status: newOrder.bookingStatus,
+      reason: newOrder.reason,
+    };
+
+    sendOrderVerificationAdmin("abayomitobiloba410@gmail.com", order, property.property_information.property_name);
+    sendOrderVerificationUser("abayomitobiloba410@gmail.com", order);
+    createNotificationModel({useId: property.admin_id, title: "Property Order Notification", title: "Property Order Notification", message: "Hello Admin, a new order has been placed for your property. Please review and take necessary actions."})
+console.log(order)
+   
+    
     return res.status(201).json({ order: newOrder });
   } catch (error) {
     console.error("Error creating order:", error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+const getUserActiveOrderById = async (req, res) => {
+  try{
+    const {id} = req.params;
+    const {propertyId} = req.body;
+
+    // console.log(id)
+
+
+    const orders = await getActiveOrderByUserId(id, propertyId);
+    console.log(orders)
+
+    return res.status(200).json(orders)
+
+  } catch(error) {
+    console.log(error.message)
+    return res.status(500).json(error.message)
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -205,8 +243,8 @@ const updateBookingStatus = async (orderId, newStatus) => {
       console.log("expired", newStatus);
       
     }
-    
-console.log(newStatus)
+  
+
     const order = {
       orderId: orderDetails._id,
       propertyName: orderDetails.propertyInformation.propertyName,
@@ -265,6 +303,8 @@ const scheduleJobHandler = (minute, hour, dayOfMonth, month, propertyId, status)
 
 
 import cron from "node-cron";
+import { getCouponByCodeSchema } from "../mongodb/models/coupon.js";
+import { createNotificationModel } from "./notification.controller.js";
 // Function to schedule a job to update booking status on check-in and check-out dates
 const scheduleBookingStatusUpdate = (checkinDate, checkoutDate, propertyId) => {
   console.log('called')
@@ -415,4 +455,5 @@ export {
   getUserOrder,
   getAllOrders,
   updateOrderStatus,
+  getUserActiveOrderById
 };

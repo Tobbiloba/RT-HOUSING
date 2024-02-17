@@ -5,7 +5,7 @@ import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import Loading from './Loading'
 import { useLocation } from 'react-router-dom'
-import Footer from './home/Footer'
+import Footer from './Footer/Footer'
 
 const Layout = ({ children }) => {
   const location = useLocation()
@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
-    // setIsLoading(true)
+    setIsLoading(true)
 
     setTimeout(() => {
       setIsLoading(false)

@@ -102,5 +102,149 @@ const ammenitiesList = [
   'Tech Hub',
   'Virtual Reality Room',
 ]
-
-export { ammenitiesList, add_ons, options, numbers }
+const facilities = [
+  {
+    id: 1,
+    title: 'Concrete Tile',
+    text: 'The property boasts state-of-the-art amenities, including a sleek fitness center, smart home technology.',
+    img: 'https://wpolive.com/suqat/wp-content/uploads/2023/09/Concrete-Tile.svg',
+  },
+  {
+    id: 2,
+    title: 'Family Room',
+    text: 'Spacious family room with cozy décor, ample seating, and entertainment options for quality bonding.',
+    img: 'https://wpolive.com/suqat/wp-content/uploads/2023/09/Family-Room.svg',
+  },
+  {
+    id: 3,
+    title: 'Guest Quaters',
+    text: 'Elegant guest quarters with all the comforts of home, ensuring a memorable stay for visitors.',
+    img: 'https://wpolive.com/suqat/wp-content/uploads/2023/09/Heated-Floors.svg',
+  },
+  {
+    id: 4,
+    title: 'Heated Floors',
+    text: 'Heated floors provide a warm, cozy ambiance, especially in colder seasons, enhancing comfort.',
+    img: 'https://wpolive.com/suqat/wp-content/uploads/2023/09/Concrete-Tile.svg',
+  },
+  {
+    id: 5,
+    title: 'Ocean View',
+    text: 'Ocean view from every room, creating a serene and captivating backdrop for an unforgettable stay.',
+    img: 'https://wpolive.com/suqat/wp-content/uploads/2023/09/Ocean-View.svg',
+  },
+  {
+    id: 6,
+    title: 'Swimming Pool',
+    text: 'The sparkling swimming pool offers a refreshing escape, complete with loungers, and stunning views.',
+    img: 'https://wpolive.com/suqat/wp-content/uploads/2023/09/Swimming-Pool.svg',
+  },
+]
+const floors = [
+  {
+    id: 1,
+    floor: 'BASEMENT',
+    ft: '2,537',
+    parking: '2',
+    half_bath: '3',
+    full_bath: '1',
+    bed_room: '3',
+    top: 1,
+  },
+  {
+    id: 2,
+    floor: 'GROUND FLOOR',
+    ft: '5,537',
+    parking: '4',
+    half_bath: '2',
+    full_bath: '5',
+    bed_room: '4',
+    top: 20,
+  },
+  {
+    id: 3,
+    floor: '1ST FLOOR',
+    ft: '2,537',
+    parking: '2',
+    half_bath: '3',
+    full_bath: '1',
+    bed_room: '3',
+    top: 36,
+  },
+  {
+    id: 4,
+    floor: '2ND FLOOR',
+    ft: '27,764',
+    parking: '2',
+    half_bath: '3',
+    full_bath: '1',
+    bed_room: '3',
+    top: 56,
+  },
+  {
+    id: 5,
+    floor: 'ROOFTOP',
+    ft: '6,464',
+    parking: '6',
+    half_bath: '3',
+    full_bath: '1',
+    bed_room: '3',
+    top: 72,
+  },
+]
+const tips = [
+  {
+    id: 1,
+    userName: 'Dianne Russel',
+    title: 'Things We Need to check when we want to rent an apartment',
+    time: '4 mins',
+    date: '25 Apr 2021',
+    img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGhvdXNlfGVufDB8fDB8fHww',
+    userImg:
+      'https://leadership.ng/wp-content/uploads/2024/01/IMG-20240101-WA0035-jpg.webp',
+  },
+  {
+    id: 2,
+    userName: 'Dianne Russel',
+    title: 'Things We Need to check when we want to rent an apartment',
+    time: '4 mins',
+    date: '25 Apr 2021',
+    img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGhvdXNlfGVufDB8fDB8fHww',
+    userImg:
+      'https://leadership.ng/wp-content/uploads/2024/01/IMG-20240101-WA0035-jpg.webp',
+  },
+  {
+    id: 3,
+    userName: 'Dianne Russel',
+    title: 'Things We Need to check when we want to rent an apartment',
+    time: '4 mins',
+    date: '25 Apr 2021',
+    img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGhvdXNlfGVufDB8fDB8fHww',
+    userImg:
+      'https://leadership.ng/wp-content/uploads/2024/01/IMG-20240101-WA0035-jpg.webp',
+  },
+  {
+    id: 4,
+    userName: 'Dianne Russel',
+    title: 'Things We Need to check when we want to rent an apartment',
+    time: '4 mins',
+    date: '25 Apr 2021',
+    img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGhvdXNlfGVufDB8fDB8fHww',
+    userImg:
+      'https://leadership.ng/wp-content/uploads/2024/01/IMG-20240101-WA0035-jpg.webp',
+    description:
+      'In this insightful article, Dianne Russel guides us through the crucial factors to consider when searching for an apartment to rent. From budgeting and location preferences to amenities and lease terms, .',
+  },
+]
+const footerImages = [
+  'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-1.jpg',
+  'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-2.jpg',
+  'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-3.jpg',
+  'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-4.jpg',
+  'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-5.jpg',
+  'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-6.jpg',
+  'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-7.jpg',
+  'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-8.jpg',
+  'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-10.jpg',
+]
+export { ammenitiesList, add_ons, options, numbers, facilities, floors, tips, footerImages }

@@ -80,23 +80,14 @@ const createCouponModel = async (req, res) => {
     }
 };
 
-
-
-
-
-
-
-
-
-
-
-
 const verifyCouponModel = async (req, res) => {
     try {
-        const {id} = req.params;
-        const {amount} = req.body;
+        // const {id} = req.params;
+        const {amount, couponCode} = req.body;
 
-        const isCoupon =  await getCouponById(id)
+        const isCoupon =  await getCouponByCodeSchema(couponCode)
+
+        // console.log(isCoupon)
 
         if(!isCoupon) {
             return res.status(500).json({message: "Coupon doesn't exist"})

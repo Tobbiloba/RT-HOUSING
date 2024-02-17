@@ -1,3 +1,5 @@
+// @ts-nocheck
+import React from 'react'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
@@ -70,7 +72,6 @@ const PropertyReferrals = () => {
       p={4}
       bgcolor="#fcfcfc"
       id="chart"
-      // minWidth={320}
       display="flex"
       flexDirection="column"
       width="100%"

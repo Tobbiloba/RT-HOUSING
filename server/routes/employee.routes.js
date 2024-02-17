@@ -8,11 +8,12 @@ import {
   getAllEmployeesModel,
   updateEmployeeStatusModel,
   deleteEmplyeeModel,
+  getAgentByEmployerIdModel,
 } from "../controllers/employee.controller.js";
 
 const router = express.Router();
 
-
+router.route("/agent/:id").get(getAgentByEmployerIdModel);
 router.route("/:id").post(createEmployeeModel);
 router.route("/:id").delete(deleteEmplyeeModel)
 router.route("/:id").put(updateEmployeeStatusModel);

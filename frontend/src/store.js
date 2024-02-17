@@ -17,16 +17,18 @@ import {
 import {
   createOrder,
   getAdminOrder,
+  getUserActiveOrder,
   getUserOrder,
   updateOrder,
 } from './reducer/order'
-import { createCouponReducer, fetchCouponReducer } from './reducer/coupon'
+import { createCouponReducer, fetchCouponReducer, verifyCouponReducer } from './reducer/coupon'
 import {
   createEmployeeReducer,
   fetchAdminEmployeeReducer,
   fetchAllEmployeeReducer,
   updateEmployeeStatusReducer,
   deleteEmployeeReducer,
+  fetchAdminAgentReducer,
 } from './reducer/employee'
 import {
   getNotificationReducer,
@@ -61,6 +63,9 @@ const rootReducer = combineReducers({
   getAdminInfo: getAdminInfoReducer,
   updateAdminInfo: updateAdminInfoReducer,
   propertyTypes: fetchPropertyTypeReducer,
+  verifyCoupon: verifyCouponReducer,
+  activeUserOrder: getUserActiveOrder,
+  agent: fetchAdminAgentReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

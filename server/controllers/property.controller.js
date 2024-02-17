@@ -288,8 +288,7 @@ const createProperty = async (req, res) => {
 
     const { property_information } = req.body;
 
-    // console.log(id, property_information)
-
+console.log(id, property_information)
     if (!id || !property_information) {
       return res
         .status(500)
@@ -317,7 +316,7 @@ const createProperty = async (req, res) => {
     if (!propertyType) {
       return res.status(500).json({ messsage: "Property type not found" });
     }
-
+    console.log('1')
     const getRandomBoolean = () => Math.random() < 0.5;
     // console.log({property_information: {
     //   property_name: property_information?.propertyName,
@@ -355,7 +354,6 @@ const createProperty = async (req, res) => {
     //     : "available",
     // },})
 
-    console.log(property_information.children);
     const newProperty = await createPropertyAdmin({
       isActive: false,
       property_information: {
@@ -404,7 +402,7 @@ const createProperty = async (req, res) => {
       admin_id: admin._id,
       created_by: id,
     });
-
+    console.log('1')
     // if(property_information?.agent) {
     //   admin.employee = property_information?.agent
     //   await admin.save()
@@ -412,7 +410,7 @@ const createProperty = async (req, res) => {
 
     propertyType.property_count = propertyType.property_count + 1;
     await propertyType.save();
-
+    console.log('newProperty');
     console.log(newProperty);
     // notifyEmployees(company);
 
@@ -431,7 +429,7 @@ const createProperty = async (req, res) => {
 
     res.status(200).json(newProperty);
   } catch (error) {
-    // console.log(error.message);
+    console.log(error.message);
     res.status(500).json({ message: error.message });
   }
 };

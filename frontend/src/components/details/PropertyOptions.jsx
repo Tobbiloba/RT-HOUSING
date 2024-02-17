@@ -1,10 +1,15 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
-import Dropdown from '../home/Dropdown'
-import Slider from '@mui/material/Slider'
-import FilterOptions from '../home/FilterOptions'
-import { useMediaQuery } from 'react-responsive'
 import { startOfToday, startOfTomorrow } from 'date-fns'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { CircularProgress, Drawer } from '@mui/material'
+import Calendar from '../Calendar'
+import { toast } from 'react-toastify'
+import { createUserOrder, getUserActiveOrder } from '@/action/order'
+import add_ons from '@/data/add_ons'
+// import amenities from '@/data/amenities'
 const FilterBox = ({ children, title }) => {
   const [showChildren, setShowChildren] = useState(true)
   return (
@@ -13,7 +18,7 @@ const FilterBox = ({ children, title }) => {
         className="flex flex-row justify-between cursor-pointer"
         onClick={() => setShowChildren(!showChildren)}
       >
-        <h1 className="text-slate-900 text-[14px]">{title}:</h1>
+        <h1 className="text-slate-600 text-[14px]">{title}:</h1>
         {showChildren ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
       </div>
 
@@ -33,35 +38,16 @@ const FilterBox = ({ children, title }) => {
   )
 }
 
-function valuetext(value) {
-  return `${value}°C`
-}
-
+import { useFormik } from 'formik'
+import { createOrderSchema } from '@/schemas'
+import { verifyCouponCode } from '@/action/coupon'
+import Spinner from '../spinner/Spinner'
 const PropertyOptionCard = ({ items }) => {
-  console.log(items)
   let today = startOfToday()
   let tomorrow = startOfTomorrow()
-  const [adults, setAdults] = useState('No. Of Adults')
-  const [children, setChildren] = useState('No. Of Children (Ages 2-12)')
-  const [infants, setInfants] = useState('No. Of Children (Ages 0-2)')
-  const [roomType, setRoomType] = useState('Private Room')
-  const [accomodationType, setAccomodationType] = useState([])
-  const [areaSize, setAreaSize] = useState([20, 70])
-  const [bathrooms, setBathrooms] = useState('Other')
-  const [bedroom, setBedroom] = useState('Other')
-  const [priceRange, setPriceRange] = useState([300, 1200])
-  const [amenities, setAmenities] = useState([])
-  const [addOns, setAddOns] = useState([{ name: 'initialName', price: 0 }])
   const [showCheckInCalendar, setShowCheckInCalendar] = useState(false)
   const [showCheckOutCalendar, setShowCheckOutCalendar] = useState(false)
-  let [checkInDate, setCheckInDate] = useState(today)
-  let [checkOutDate, setCheckOutDate] = useState(tomorrow)
 
-  console.log(addOns)
-
-  const numberOptions = [1, 2, 3, 4, 5]
-
-  // console.log(items);
   const ammenitiesList = [
     'WI-FI',
     'Air Conditioning',
@@ -72,95 +58,11 @@ const PropertyOptionCard = ({ items }) => {
     'Dish Washer',
     'Gym',
     'Laundry',
-    // "Airport Transportation"
   ]
 
-  const add_ons = [
-    { name: 'Airport Transportation', price: 50 },
-    { name: 'Car Rental', price: 75 },
-    { name: 'Fresh Groceries', price: 30 },
-    { name: 'Driver', price: 60 },
-    { name: 'Medical Representative', price: 45 },
-    { name: 'Masseurs', price: 80 },
-    { name: 'Personal Chef or Catering', price: 100 },
-    { name: 'Concierge Service', price: 55 },
-    { name: 'Local Recommendations or Guidebooks', price: 25 },
-    { name: 'Fitness Facilities or Gym Access', price: 70 },
-    { name: 'High-Speed Internet', price: 40 },
-    { name: 'Desk and Office Space', price: 65 },
-    { name: 'Streaming Services (Netflix, Hulu, etc.)', price: 35 },
-    { name: 'Smart Home Features (Smart Locks, Thermostat)', price: 90 },
-    { name: 'Board Games or Gaming Console', price: 50 },
-    { name: 'Swimming Pool or Hot Tub', price: 120 },
-    { name: 'Bicycles or Sports Equipment', price: 55 },
-    { name: 'Barbecue Grill or Outdoor Kitchen', price: 80 },
-    { name: 'Event Space or Banquet Hall', price: 150 },
-    { name: 'Celebration Decorations', price: 30 },
-    { name: 'Specialized Services for Events', price: 100 },
-    { name: 'Wheelchair Accessibility', price: 40 },
-    { name: 'Elevator or Ground-Floor Access', price: 50 },
-    { name: 'Security System', price: 80 },
-    { name: 'Safe for Valuables', price: 30 },
-    { name: 'Local Experience or Guided Tours', price: 60 },
-    { name: 'Community Events or Workshops', price: 25 },
-    { name: 'Pet-Friendly Accommodations', price: 45 },
-    { name: 'Pet Supplies (Bowls, Beds)', price: 20 },
-  ]
+  const dispatch = useDispatch()
 
-  // console.log(add_ons);
-
-  const facility = [
-    'Free Parking',
-    'Beachside',
-    'Markets',
-    'Pharmacy',
-    'Playground',
-  ]
-
-  const handleAccomodationCheckboxChange = item => {
-    // Check if the item is already in the state
-    if (accomodationType.includes(item)) {
-      // If yes, remove it
-      setAccomodationType(accomodationType.filter(type => type !== item))
-    } else {
-      // If not, add it
-      setAccomodationType([...accomodationType, item])
-    }
-  }
-
-  const handleAmmenitiesCheckboxChange = item => {
-    // Check if the item is already in the state
-    if (amenities.includes(item)) {
-      // If yes, remove it
-      setAmenities(amenities.filter(type => type !== item))
-    } else {
-      // If not, add it
-      setAmenities([...amenities, item])
-    }
-  }
-
-  // console.log(checkInDate)
-
-  const handleAddOnsCheckboxChange = (name, price) => {
-    // Check if the item is already in the state based on name
-    const isItemInState = addOns.some(addOn => addOn.name === name)
-
-    if (isItemInState) {
-      // If yes, remove it
-      setAddOns(addOns.filter(addOn => addOn.name !== name))
-      console.log('removed', name)
-    } else {
-      // If not, add it with name and price
-      setAddOns([...addOns, { name, price }])
-      console.log('added', name)
-    }
-  }
-  const handleSizeChange = (event, newValue) => {
-    setAreaSize(newValue)
-    console.log(newValue)
-  }
-  // console.log(checkOutDate.toLocaleDateString())
-  function calculateDayDifference(checkinDate, checkoutDate) {
+  const calculateDayDifference = (checkinDate, checkoutDate) => {
     const [checkinDay, checkinMonth, checkinYear] = checkinDate
       .split('/')
       .map(Number)
@@ -180,7 +82,6 @@ const PropertyOptionCard = ({ items }) => {
     const differenceInDays = Math.floor(
       differenceInMilliseconds / (24 * 60 * 60 * 1000),
     )
-    console.log(differenceInDays)
     return differenceInDays
   }
 
@@ -188,28 +89,111 @@ const PropertyOptionCard = ({ items }) => {
 
   const calculateTotalPrice = () => {
     return (
-      addOns.reduce((total, addOn) => total + addOn.price, 0) +
+      values.expenses.reduce((total, addOn) => total + addOn.price, 0) +
       items.pricing *
         calculateDayDifference(
-          checkInDate.toLocaleDateString(),
-          checkOutDate.toLocaleDateString(),
+          values.checkinDate.toLocaleDateString(),
+          values.checkoutDate.toLocaleDateString(),
         )
     )
   }
 
+  const { id } = useParams()
+  const onSubmit = e => {
+    e.preventDefault()
+    // console.log({id, expenses: values.expenses, checkinDate: values.checkinDate, checkoutDate: values.checkoutDate, couponCode: values.couponCode })
+    dispatch(
+      createUserOrder({
+        id,
+        expenses: values.expenses,
+        checkinDate: values.checkinDate,
+        checkoutDate: values.checkoutDate,
+        couponCode: values.couponCode,
+        totalPrice: coupon
+          ? calculateTotalPrice() +
+            calculateTotalPrice() * 0.05 -
+            coupon.discount_price
+          : calculateTotalPrice() + calculateTotalPrice() * 0.05,
+      }),
+    )
+  }
+
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    setFieldValue, // Access setFieldValue function from useFormik
+  } = useFormik({
+    initialValues: {
+      expenses: [],
+      checkoutDate: tomorrow,
+      checkinDate: today,
+      couponCode: '3fs3rc5cvt',
+      checkBox: false,
+    },
+    validationSchema: createOrderSchema,
+    onSubmit,
+  })
+  const { details, loading } = useSelector(state => state.createOrder)
+  const { coupon, verificationLoader } = useSelector(
+    state => state.verifyCoupon,
+  )
+  const {orders} = useSelector((state) => state.activeUserOrder)
+
+  useEffect(() => {
+   
+    dispatch(getUserActiveOrder("65ca388cf1369640b78fbeb5", id))
+  }, [details])
+
+
+  const handleAddOnsCheckboxChange = (name, price) => {
+    // Check if the item is already in the state based on name
+    const isItemInState = values.expenses.some(addOn => addOn.name === name)
+
+    if (isItemInState) {
+      // If yes, remove it
+      setFieldValue(
+        'expenses',
+        values.expenses.filter(addOn => addOn.name !== name),
+      )
+      console.log('removed', name)
+    } else {
+      // If not, add it with name and price
+      // Create a new array with the existing add-ons and the new one
+      setFieldValue('expenses', [...values.expenses, { name, price }])
+      console.log('added', name)
+    }
+  }
+
+  const [couponCode, setCouponCode] = useState('')
+
+  const handleSubmitCoupon = () => {
+    if (couponCode) {
+      dispatch(verifyCouponCode({ amount: calculateTotalPrice(), couponCode }))
+    } else {
+      toast.info('Please input your coupon code')
+    }
+  }
+  useEffect(() => {
+    if (coupon && coupon.couponCode) {
+      values.couponCode = coupon.couponCode
+    }
+  }, [coupon])
   return (
-    <div className="">
+    <form onSubmit={onSubmit} className="">
       <div className="w-[22.5rem] exo mb-6 h-fit overflow-hidden">
         <div className="flex flex-col gap-6">
           <FilterBox title="Pricing">
             <div>
               <h1 className="text-[18px]  text-slate-500">
-              ₦{calculateTotalPrice()}{' '}
+                ₦{calculateTotalPrice()}{' '}
                 <span className="text-[13px] text-slate-500 font-[500]">
-                  / {" "}
+                  /{' '}
                   {calculateDayDifference(
-                    checkInDate.toLocaleDateString(),
-                    checkOutDate.toLocaleDateString(),
+                    values.checkinDate.toLocaleDateString(),
+                    values.checkoutDate.toLocaleDateString(),
                   )}{' '}
                   night
                 </span>
@@ -219,33 +203,30 @@ const PropertyOptionCard = ({ items }) => {
                 <p className="text-slate-600 text-[13px]">
                   {items.price} x{' '}
                   {calculateDayDifference(
-                    checkInDate.toLocaleDateString(),
-                    checkOutDate.toLocaleDateString(),
+                    values.checkinDate.toLocaleDateString(),
+                    values.checkoutDate.toLocaleDateString(),
                   )}{' '}
                   nights
                 </p>
 
                 <p className=" text-slate-600 text-[14px]">
-                ₦
+                  ₦
                   {items.pricing *
                     calculateDayDifference(
-                      checkInDate.toLocaleDateString(),
-                      checkOutDate.toLocaleDateString(),
+                      values.checkinDate.toLocaleDateString(),
+                      values.checkoutDate.toLocaleDateString(),
                     )}
                 </p>
               </div>
               <div className="">
-                {addOns.map((itm, index) => (
-                  <div>
+                {values.expenses.map((itm, index) => (
+                  <div key={index}>
                     {index !== 0 && (
-                      <div
-                        key={index}
-                        className="flex flex-row justify-between items-center mt-3"
-                      >
+                      <div className="flex flex-row justify-between items-center mt-3">
                         <p className="text-slate-600 text-[13px]">{itm.name}</p>
 
                         <p className=" text-slate-600 text-[14px]">
-                        ₦{itm.price}
+                          ₦{itm.price}
                         </p>
                       </div>
                     )}
@@ -255,15 +236,38 @@ const PropertyOptionCard = ({ items }) => {
                 <div className="flex flex-row justify-between items-center mt-6 border border-x-slate-50 py-3">
                   <p className="text-slate-600 text-[13px]">Taxes & Fees</p>
                   <p className=" text-slate-600 text-[14px]">
-                  ₦{calculateTotalPrice() * 0.05}
+                    ₦{calculateTotalPrice() * 0.05}
                   </p>
                 </div>
 
+                {coupon && (
+                  <div className="flex flex-row justify-between items-center border-b border-x-slate-50 py-3">
+                    <p className="text-slate-600 text-[13px]">
+                      Coupon discount
+                    </p>
+                    <p className=" text-slate-600 text-[14px]">
+                      ₦{coupon.discount_price}
+                    </p>
+                  </div>
+                )}
+
                 <div className="flex flex-row justify-between items-center mt-4 mb-2">
                   <p className="text-red-500 text-[13px]">Total</p>
-                  <p className=" text-red-500 text-[14px]">
-                  ₦{calculateTotalPrice() + (calculateTotalPrice() * 0.05)}
-                  </p>
+                  {coupon ? (
+                    <p className=" text-red-500 text-[14px] flex flex-col">
+                      <span className="line-through">
+                        ₦ {calculateTotalPrice() + calculateTotalPrice() * 0.05}
+                      </span>
+                      ₦
+                      {calculateTotalPrice() +
+                        calculateTotalPrice() * 0.05 -
+                        coupon.discount_price}
+                    </p>
+                  ) : (
+                    <p className=" text-red-500 text-[14px]">
+                      ₦{calculateTotalPrice() + calculateTotalPrice() * 0.05}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -282,7 +286,7 @@ const PropertyOptionCard = ({ items }) => {
                 >
                   <p className="text-[13px] text-slate-500">Check-In:</p>
                   <h1 className="text-[13px] text-slate-600 cursor-text">
-                    {checkInDate.toLocaleDateString()}
+                    {values.checkinDate.toLocaleDateString()}
                   </h1>
                 </div>
                 <div
@@ -293,27 +297,25 @@ const PropertyOptionCard = ({ items }) => {
                 >
                   <p className="text-[12px] text-slate-500">Check-Out:</p>
                   <h1 className="text-[13px] text-slate-600 cursor-text">
-                    {checkOutDate.toLocaleDateString()}
+                    {values.checkoutDate.toLocaleDateString()}
                   </h1>
                 </div>
-
-                {/* <div className=" border flex items-center justify-center">
-                <img src="/calendar.png" className="w-5" />
-              </div> */}
               </div>
               <div className="absolute z-[100]  drop-shadow-md rounded-md bg-white w-fit">
                 {showCheckInCalendar && (
                   <Calendar
-                    selectedDay={checkInDate}
-                    setSelectedDay={setCheckInDate}
+                    selectedDay={values.checkinDate}
                     setShowCalendar={setShowCheckInCalendar}
+                    id="checkinDate"
+                    setFieldValue={setFieldValue}
                   />
                 )}
                 {showCheckOutCalendar && (
                   <Calendar
-                    selectedDay={checkOutDate}
-                    setSelectedDay={setCheckOutDate}
+                    selectedDay={values.checkoutDate}
                     setShowCalendar={setShowCheckOutCalendar}
+                    id="checkoutDate"
+                    setFieldValue={setFieldValue}
                   />
                 )}
               </div>
@@ -322,15 +324,13 @@ const PropertyOptionCard = ({ items }) => {
 
           <FilterBox title="Guests">
             <div className="my-6 px-3">
-              {/* <h1 className="text-slate-900">Guests</h1> */}
-
               <div className="mt-4">
                 <div className="flex flex-row">
                   <h1 className="w-7/12 border px-4 flex items-center text-[13px] text-slate-600">
                     Adults
                   </h1>
                   <p className="w-5/12 border px-4 py-3 text-[13px] text-slate-400">
-                    01
+                    {items.guest.maximum_adults}
                   </p>
                 </div>
                 <div className="flex flex-row">
@@ -341,7 +341,7 @@ const PropertyOptionCard = ({ items }) => {
                     </span>
                   </h1>
                   <p className="w-5/12 border px-4 py-3   text-[13px] text-slate-400">
-                    01
+                    {items.guest.maximum_children}
                   </p>
                 </div>
                 <div className="flex flex-row">
@@ -352,7 +352,7 @@ const PropertyOptionCard = ({ items }) => {
                     </span>
                   </h1>
                   <p className="w-5/12 border px-4 py-3  text-[13px] text-slate-400">
-                    01
+                    {items.guest.maximum_infants}
                   </p>
                 </div>
               </div>
@@ -361,7 +361,6 @@ const PropertyOptionCard = ({ items }) => {
 
           <FilterBox title="Add-on Services">
             <div className="my-6 px-3">
-              {/* <h1 className="text-slate-900 ">Add-on Services</h1> */}
               <div className="grid mt-5 grid-cols-1 gap-3">
                 {add_ons.map((item, index) => (
                   <div className="flex gap-3" key={index}>
@@ -370,8 +369,10 @@ const PropertyOptionCard = ({ items }) => {
                       className="custom-checkbox  bg-blue-500"
                       onChange={() =>
                         handleAddOnsCheckboxChange(item.name, item.price)
-                      } // Assuming a fixed price of 50
-                      checked={addOns.some(addOn => addOn.name === item.name)}
+                      }
+                      checked={values.expenses.some(
+                        addOn => addOn.name === item.name,
+                      )}
                     />
                     <p className="text-[13px] text-slate-500">{item.name}</p>
                   </div>
@@ -382,17 +383,9 @@ const PropertyOptionCard = ({ items }) => {
 
           <FilterBox title="Available Amenitites">
             <div className="my-6 px-3">
-              {/* <h1 className="text-slate-900 font-[600]">Available Ammenities</h1> */}
               <div className="mt-5 flex flex-row flex-wrap gap-3">
-                {ammenitiesList.map((item, index) => (
+                {items.property_amenities.map((item, index) => (
                   <div className="flex gap-3" key={index}>
-                    {/* <input
-                    type="checkbox"
-                    className="bg-blue-500"
-                    // onChange={() => handleAmmenitiesCheckboxChange(item)}
-                    checked={items.property_amenities.includes(item)}
-                    disabled={!items.property_amenities.includes(item)}
-                  /> */}
                     <p className="text-[13px] px-3 py-1 bg-slate-600 text-white">
                       {item}
                     </p>
@@ -401,25 +394,88 @@ const PropertyOptionCard = ({ items }) => {
               </div>
             </div>
           </FilterBox>
-          <div className="flex gap-5 items-center">
-            <input type="checkbox" className="" />
-            <p className="text-slate-600 text-[13px]">
-              I agree to the terms and condition
-            </p>
+
+          <FilterBox title="Apply Coupon">
+            <div className="my-6 px-3">
+              <div className="mt-5 flex flex-col gap-3">
+                <input
+                  placeholder="Coupon Code"
+                  className="p-3 outline-none"
+                  value={couponCode}
+                  onChange={e => setCouponCode(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className={`bg-slate-600 w-fit text-white px-12 py-2 ${coupon && 'cursor-not-allowed'}`}
+                  onClick={handleSubmitCoupon}
+                  disabled={coupon}
+                >
+                  {verificationLoader ? (
+                    <div className="flex gap-3 item-center py-1">
+                      <CircularProgress size="1rem" color="info" />
+                      Please wait
+                    </div>
+                  ) : (
+                    'Activate Coupon'
+                  )}
+                </button>
+              </div>
+
+              {coupon && (
+                <div className="mt-4">
+                  <h1 className="text-green-500 text-[15px]">
+                    Successfully activated coupon!
+                  </h1>
+                  <p className="text-[13px]">
+                    You have gotten a discount of #{coupon.discount_price}
+                  </p>
+                </div>
+              )}
+            </div>
+          </FilterBox>
+          <div>
+            <div className="flex gap-5 items-center">
+              <input
+                type="checkbox"
+                className=""
+                name="checkBox"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                checked={values.checkBox}
+              />
+
+              <p className="text-slate-600 text-[13px]">
+                I agree to the terms and condition
+              </p>
+            </div>
+
+            {touched.checkBox && errors.checkBox && (
+              <p className="text-red-500 text-[12px] mt-2">{errors.checkBox}</p>
+            )}
           </div>
         </div>
-        <button className="border w-[100%] bg-slate-500 text-white py-3 mt-5">
-          Book Now
+        <button
+          className={`border w-[100%] bg-slate-500 text-white py-3 mt-5 ${loading || orders?.bookingStatus && 'cursor-not-allowed'}`}
+          type="submit"
+          disabled={orders?.bookingStatus || loading}
+        >
+          {loading ? (
+            <div className="flex gap-3 item-center justify-center">
+              <Spinner style="w-6 h-6" />
+              <p>Please wait...</p>
+            </div>
+          ) : orders?.bookingStatus ? <p className='uppercase'>
+            {orders?.bookingStatus}
+          </p> : (
+            'Book Now'
+          )}
         </button>
       </div>
-    </div>
+    </form>
   )
 }
 
-// import FilterOption from '../properties/FilterOptions'
-import { Drawer } from '@mui/material'
-import Calendar from '../Calendar'
-export default function PropertyOptions({ state, setState, item }) {
+const PropertyOptions = ({ state, setState, item }) => {
   const toggleDrawer = (anchor, open) => event => {
     if (
       event &&
@@ -433,20 +489,11 @@ export default function PropertyOptions({ state, setState, item }) {
   }
 
   const anchor = 'right' // Set your desired anchor position (e.g., 'right', 'left', 'top', 'bottom')
-  const isMobile = useMediaQuery({ maxWidth: 999 })
-  const isDesktop = useMediaQuery({ minWidth: 999 })
 
-  useEffect(() => {
-    if (isDesktop) {
-      // toggleDrawer(anchor, false)
-    }
-  }, [isMobile, isDesktop])
+  // }, [isMobile, isDesktop])
+
   return (
     <div className="border bg-slate-100 z-50">
-      {/* <button onClick={toggleDrawer(anchor, true)}>Open Filter</button> */}
-      {/* {
-        isMobile && */}
-
       <Drawer
         anchor={anchor}
         open={state[anchor]}
@@ -457,18 +504,10 @@ export default function PropertyOptions({ state, setState, item }) {
           className="py-[1.5rem] flex justify-center relative"
         >
           <PropertyOptionCard items={item} />
-
-          {/* <div className='w-6 h-6 rounded-full absolute bg-slate-900 top-24  -left-1'></div> */}
         </div>
       </Drawer>
-      {/* } */}
-
-      {/* {
-  isDesktop && <div style={{ width: "24.5rem" }} className="  pl-4 relative">
-  <PropertyOptionCard items={item} /> </div>
-} */}
     </div>
   )
 }
 
-// export default PropertyOptions;
+export default PropertyOptions

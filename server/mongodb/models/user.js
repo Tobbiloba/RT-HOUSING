@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema({
         password: {type: String, required: true, select: false},
         salt: {type: String, required: true, select: false},
     },
+    created_at: { type: Date, default: Date.now },
 });
 
 const userModel = mongoose.model("User", UserSchema);

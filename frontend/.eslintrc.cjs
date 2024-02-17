@@ -42,7 +42,7 @@ module.exports = {
     'react/prop-types': 'off', // If you're using TypeScript, you can turn this off
     'react/react-in-jsx-scope': 'off',
     'react/jsx-no-undef': ['error', { allowGlobals: true }],
-    'react-hooks/exhaustive-deps': 'warn',
+    // 'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
   },
 

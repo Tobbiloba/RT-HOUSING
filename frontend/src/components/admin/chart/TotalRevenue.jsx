@@ -1,10 +1,10 @@
+// @ts-nocheck
+import React from 'react'
 import ReactApexChart from 'react-apexcharts'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
-// import ArrowCircleUpRounded from "@mui/icons-material/ArrowCircleUpRounded";
 import { MdArrowCircleUp } from 'react-icons/md'
-
 import { TotalRevenueOptions, TotalRevenueSeries } from './chart.config'
 
 const TotalRevenue = () => {

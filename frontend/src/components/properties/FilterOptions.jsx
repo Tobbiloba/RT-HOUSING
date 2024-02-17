@@ -1,14 +1,10 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
-import Dropdown from '../home/Dropdown'
 import Slider from '@mui/material/Slider'
 import FilterOptions from '../home/FilterOptions'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchPropertyType } from '@/action/type'
+import {  useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
-import { useLocation } from 'react-router-dom'
 const FilterBox = ({ children, title }) => {
   const [showChildren, setShowChildren] = useState(true)
   return (
@@ -37,12 +33,9 @@ const FilterBox = ({ children, title }) => {
   )
 }
 
-function valuetext(value) {
-  return `${value}°C`
-}
+
 
 const FilterOption = ({ data, setData }) => {
-  const dispatch = useDispatch()
   const [adults, setAdults] = useState('')
   const [children, setChildren] = useState('')
   const [infants, setInfants] = useState('')
@@ -51,29 +44,14 @@ const FilterOption = ({ data, setData }) => {
   const [areaSize, setAreaSize] = useState([0, 100])
   const [bathrooms, setBathrooms] = useState('')
   const [bedroom, setBedroom] = useState('')
-  const [priceRange, setPriceRange] = useState([300, 1200])
-  const [amenities, setAmenities] = useState([])
   const [facilities, setFacilities] = useState([])
 
-  const navigate = useNavigate()
-
-  // Get the current location
-  // const history = useHistory();
-  // const navigate = useNavigate()
-
-  // Parse the query parameters
-  // const queryParams = new URLSearchParams(location.search);
-
-  //  // Access individual query parameters
-  //  const typeParam = new URLSearchParams(location.search).get('type');
-
-  //  // useEffect to log typeParam when it changes
-  //  useEffect(() => {
-  //    console.log('Type Parameter:', typeParam);
-  //  }, [typeParam]);
+  // eslint-disable-next-line no-restricted-syntax
+  function valuetext(value) {
+    return `${value}°C`
+  }
 
   const { types, loading } = useSelector(state => state.propertyTypes)
-  // console.log(types)
 
 
   const room = [
@@ -119,11 +97,6 @@ const FilterOption = ({ data, setData }) => {
   const handleAccomodationCheckboxChange = (item) => {
     // Check if the item is already in the state
     if (accomodationType.includes(item)) {
-      // If yes, remove it
-      // setData(data.filter((item) => {
-
-      // }))
-      // console.log(data)
       let match = data.filter((items) => {
         // Replace 'yourPropertyValue' with the value you are looking for
         return items.property_information.property_type != item;
@@ -139,7 +112,6 @@ const FilterOption = ({ data, setData }) => {
     } else {
       // If not, add it
       if(properties) {
-        // console.log(data)
   let match = properties.filter((items) => {
     // Replace 'yourPropertyValue' with the value you are looking for
     return items.property_information.property_type === item;
@@ -150,33 +122,22 @@ const FilterOption = ({ data, setData }) => {
         } else {
           setData(match)
         }
-
-      // console.log(match);
       }
       setAccomodationType([...accomodationType, item]);
     }
   };
 
-  const handleFacilitiesCheckboxChange = item => {
-    // Check if the item is already in the state
-    if (facilities.includes(item)) {
-      // If yes, remove it
-      setFacilities(facilities.filter(type => type !== item))
-    } else {
-      // console.log(data)
-      // let match = properties.filter(items => {
-      //   // Replace 'yourPropertyValue' with the value you are looking for
-      //   console.log(items.property_information?.guest?.maximum_adults)
-      //   // return items.property_information?.guest?.maximum_adults == adults
-      // })
-      // setData(match)
-      // If not, add it
-      setFacilities([...facilities, item])
-    }
-  }
+  // const handleFacilitiesCheckboxChange = item => {
+  //   // Check if the item is already in the state
+  //   if (facilities.includes(item)) {
+  //     // If yes, remove it
+  //     setFacilities(facilities.filter(type => type !== item))
+  //   } else {
+  //     setFacilities([...facilities, item])
+  //   }
+  // }
   const handleSizeChange = (event, newValue) => {
     setAreaSize(newValue)
-    console.log(newValue)
   }
 
   const handleApplyFilters = () => {
@@ -191,15 +152,9 @@ const FilterOption = ({ data, setData }) => {
         return items.property_information?.guest?.maximum_adults == adults
       })
       setData(match)
-      // console.log(properties[0].property_information.guest.maximum_adults)
     }
     if (children) {
       let match = properties.filter(items => {
-        // Replace 'yourPropertyValue' with the value you are looking for
-        console.log(
-          items.property_information?.guest?.maximum_children,
-          children,
-        )
         return items.property_information?.guest?.maximum_children == children
       })
       setData(match)
@@ -213,7 +168,6 @@ const FilterOption = ({ data, setData }) => {
         return items.property_information?.guest?.maximum_infants == infants
       })
       setData(match)
-      // console.log(properties[0].property_information.guest.maximum_infants)
     }
 
     if (bathrooms) {
@@ -232,11 +186,9 @@ const FilterOption = ({ data, setData }) => {
     if (bedroom) {
       let match = properties.filter(items => {
         // Replace 'yourPropertyValue' with the value you are looking for
-        console.log(items.property_information?.property_no_bedrooms, bedroom)
         return items.property_information?.property_no_bedrooms == bedroom
       })
       setData(match)
-      // console.log(properties[0].property_information.guest.maximum_infants)
     }
   }, [adults, children, infants, bathrooms, bedroom])
   return (
@@ -257,9 +209,9 @@ const FilterOption = ({ data, setData }) => {
                         <input
                           type="checkbox"
                           className="custom-checkbox"
-                          onChange={() =>
-                            handleAccomodationCheckboxChange(item.name)
-                          }
+                          // onChange={() =>
+                          //   handleAccomodationCheckboxChange(item.name)
+                          // }
                           checked={accomodationType.includes(item.name)}
                         />
                         <p className="text-[15px]">{item.name}</p>
@@ -283,12 +235,6 @@ const FilterOption = ({ data, setData }) => {
           <FilterBox title="Number of Infants">
             <FilterOptions type="" value={infants} setValue={setInfants} />
           </FilterBox>
-
-          {/* <FilterBox title="Number Of Guests">
-            <Dropdown state={adults} setState={setAdults} data={numberOptions}/>
-            <Dropdown state={children} setState={setChildren} data={numberOptions}/>
-            <Dropdown state={infants} setState={setInfants} data={numberOptions}/>
-          </FilterBox> */}
 
           <FilterBox title="Room Type">
             <div className="flex flex-col">
@@ -345,7 +291,7 @@ const FilterOption = ({ data, setData }) => {
                     type="checkbox"
                     className="custom-checkbox"
                     disabled
-                    onChange={() => handleAmmenitiesCheckboxChange(item)}
+                    // onChange={() => handleAmmenitiesCheckboxChange(item)}
                     checked
                   />
                   <p className="text-[13px]">{item}</p>

@@ -1,20 +1,14 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react'
-// import Logo from './Logo';
-import TopBar from './TopBar'
-import MenuBar from './MenuBar'
-// import Swiper from './Swiper'
 import Slider from './slider'
 import DropDown from './Dropdown'
 import Calendar from './Calendar'
 import dayjs from 'dayjs'
 import FilterOptions from './FilterOptions'
-import AvailableCard from './AvailableCard'
 const HomePage = () => {
   const [currentSwiper, setCurrentSwiper] = useState(1)
   const [selectedLocation, setSelectedLocation] = useState('Select a Location')
   const [showCheckInCalendar, setShowCheckInCalendar] = useState(false)
-  const [showCheckOutCalendar, setShowCheckOutCalendar] = useState(false)
   const locations = ['Lekki', 'Ikoyi', 'Ajah', 'Banana Island']
   const [checkInDate, setCheckInDate] = useState(dayjs('2022-04-17'))
   const [checkOutDate, setCheckOutDate] = useState(dayjs('2022-04-17'))
@@ -59,13 +53,12 @@ const HomePage = () => {
       setShowCheckInCalendar(false)
     }
   }, [checkInDate])
-  // console.log(checkInDate?.$d)
   const checkinDate = checkInDate?.$d.toDateString()
   return (
     <div className="relative w-[100vw] exo border-red-500 h-[67.5rem] md:h-[65rem] justify-center lg:justify-start lg:h-[55rem] flex items-center lg:px-[2rem]">
       <Slider />
 
-      <div className="md:h-[50rem] h-[61rem] md:bottom-20 lg:bottom-0 w-[90%] lg:w-[33.5rem] bg-white z-[30] relative p-7 rounded-md">
+      <div className="md:h-[50rem] h-[61rem] md:bottom-20 lg:bottom-0 w-[90%] lg:w-[33.5rem] bg-white z-[30] relative p-7">
         <p className="text-slate-900">Find Exoctic & Affordable.</p>
         <h1 className="text-slate-600 text-xl my-2">Hotel Rooms Instantly</h1>
         <div className="mt-5">
@@ -159,7 +152,6 @@ const HomePage = () => {
               <p>(18,550)</p>
             </div>
             <div className="border w-6 h-6 rounded-full">
-              {/* <img src='/checked.png' alt="checked" className='w-5'/> */}
             </div>
           </div>
           <div className="flex flex-row justify-between mt-4 hover:border cursor-pointer border-white border-b-slate-500 hover:shadow-sm py-1 items-center">
@@ -169,11 +161,9 @@ const HomePage = () => {
               <p>(8,150)</p>
             </div>
             <div className="border w-6 h-6 rounded-full">
-              {/* <img src='/checked.png' alt="checked" className='w-5'/> */}
             </div>
           </div>
         </div>
-        {/* <Dropdown state={location} setState={setLocation} data={locations} label='locations'/> */}
       </div>
 
       <div className="hidden exo md:flex flex-row absolute bottom-0 right-0 z-[10] justify-end items-end">

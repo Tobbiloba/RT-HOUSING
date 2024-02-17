@@ -11,7 +11,8 @@ const CouponSchema = new mongoose.Schema({
     status: {type: String, enum: ['active', 'inactive'], default: 'active'},
     created_at: { type: Date, default: Date.now },
     admin_id: {type: String, required: true},
-    admin_name: {type: String, required: true}
+    admin_name: {type: String, required: true},
+    created_at: { type: Date, default: Date.now },
 })
 
 const CouponModel = mongoose.model("Coupon", CouponSchema)

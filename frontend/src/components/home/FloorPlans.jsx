@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useState } from 'react'
+import { floors } from '../data'
 const FloorPlans = () => {
   const [currentTab, setCurrentTab] = useState({
     id: 1,
@@ -11,62 +11,8 @@ const FloorPlans = () => {
     bed_room: '3',
     top: 1,
   })
-  const [currentFloorPlac, setCurrentFloorPlan] = useState('')
 
-  const floors = [
-    {
-      id: 1,
-      floor: 'BASEMENT',
-      ft: '2,537',
-      parking: '2',
-      half_bath: '3',
-      full_bath: '1',
-      bed_room: '3',
-      top: 1,
-    },
-    {
-      id: 2,
-      floor: 'GROUND FLOOR',
-      ft: '5,537',
-      parking: '4',
-      half_bath: '2',
-      full_bath: '5',
-      bed_room: '4',
-      top: 20,
-    },
-    {
-      id: 3,
-      floor: '1ST FLOOR',
-      ft: '2,537',
-      parking: '2',
-      half_bath: '3',
-      full_bath: '1',
-      bed_room: '3',
-      top: 36,
-    },
-    {
-      id: 4,
-      floor: '2ND FLOOR',
-      ft: '27,764',
-      parking: '2',
-      half_bath: '3',
-      full_bath: '1',
-      bed_room: '3',
-      top: 56,
-    },
-    {
-      id: 5,
-      floor: 'ROOFTOP',
-      ft: '6,464',
-      parking: '6',
-      half_bath: '3',
-      full_bath: '1',
-      bed_room: '3',
-      top: 72,
-    },
-  ]
 
-  //   console.log(currentTab)
   return (
     <div className="flex items-center exo justify-center py-12 bg-slate-50">
       <div className="container flex px-[5%] md:px-0 flex-col gap-y-24 w-[100%] lg:flex-row justify-evenly items-center gap-4">
