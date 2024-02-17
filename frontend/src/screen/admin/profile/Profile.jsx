@@ -22,7 +22,7 @@ const Profile = () => {
         <div className="flex justify-center py-6">
           <CircularProgress />
         </div>
-      ) : (
+      ) : detail && (
         <div className="exo  pb-8 w-[100%] p-[] md:p-[2rem] flex">
           <div className=" h-fit w-[100%] relative bg-slate-900 p-[1rem] flex flex-col lg:flex-row gap-[5%]">
             <div className="lg:max-w-[25rem] w-[100%] h-fit">
