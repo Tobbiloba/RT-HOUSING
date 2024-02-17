@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
@@ -15,7 +16,6 @@ const Profile = () => {
   }, [])
 
   const { detail, loading } = useSelector(state => state?.getAdminInfo)
-  console.log(detail)
   return (
     <>
       {loading ? (
@@ -24,7 +24,7 @@ const Profile = () => {
         </div>
       ) : (
         <div className="exo  pb-8 w-[100%] p-[] md:p-[2rem] flex">
-          <div className=" h-fit w-[100%] relative bg-slate-500 flex flex-col lg:flex-row gap-[5%]">
+          <div className=" h-fit w-[100%] relative bg-slate-900 p-[1rem] flex flex-col lg:flex-row gap-[5%]">
             <div className="lg:max-w-[25rem] w-[100%] h-fit">
               <div className="lg:h-[27.5rem] bg-slate-800 p-2 flex flex-col justify-between">
                 <img
@@ -60,7 +60,7 @@ const Profile = () => {
 
             <div className="flex-1">
               <div className="md:p-[1rem]">
-                <h1 className="text-xl p-[2rem] lg:p-0 text-slate-800">
+                <h1 className="text-xl p-[2rem] lg:p-0 text-slate-200">
                   Bio Graph
                 </h1>
 
@@ -97,7 +97,7 @@ const Profile = () => {
               </div>
 
               <div className="flex-1 mt-[1.75rem]">
-                <h1 className="text-xl p-[1rem] md:px-[1rem] md:p-0 text-slate-800">
+                <h1 className="text-xl p-[1rem] md:px-[1rem] md:p-0 text-slate-200">
                   Informations
                 </h1>
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import './textarea.css'
 const Textarea = ({
@@ -12,7 +13,7 @@ const Textarea = ({
   id,
 }) => {
   return (
-    <div className={`px-3 w-[100%]  py-1 rounded-sm ${style}`}>
+    <div className={`w-[100%]  py-1 rounded-sm ${style}`}>
       <p className={`text-slate-600 text-[14px]`}>{label}</p>
       <div className="flex flex-row items-center gap-1">
         <textarea

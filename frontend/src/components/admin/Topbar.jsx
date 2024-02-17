@@ -1,17 +1,18 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react'
-import { IoMdSearch } from 'react-icons/io'
+// import { IoMdSearch } from 'react-icons/io'
 import { HiOutlineMenuAlt2 } from 'react-icons/hi'
 import { FaRegBell } from 'react-icons/fa6'
 import { LuMessageSquare } from 'react-icons/lu'
 import { CiMenuKebab } from 'react-icons/ci'
 // import Input from "../Input";
-import Input from '../Input'
+// import Input from '../Input'
 import Notification from '../notification/Notification'
 import { useDispatch, useSelector } from 'react-redux'
 import { getNotifications } from '@/action/notification'
 const Topbar = ({ setShowSlide, showSlide }) => {
   const dispatch = useDispatch()
-  const [search, setSearch] = useState('')
+  // const [search, setSearch] = useState('')
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
 
@@ -22,7 +23,7 @@ const Topbar = ({ setShowSlide, showSlide }) => {
   // console.log(notifications)
   const data =  JSON.parse(sessionStorage.getItem('adminInfo'))
 
-  console.log(data.profile_img)
+  // console.log(data.profile_img)
  
   return (
     <div
@@ -45,7 +46,7 @@ const Topbar = ({ setShowSlide, showSlide }) => {
         </div>
       </div>
       {showMobileMenu && (
-        <div className="flex md:hidden  mb-4 mt-2 justify-end flex-col px-[1rem]  items-center text-slate-100">
+        <div className="flex md:hidden  mb-4 mt-2 justify-end flex-col  items-center text-slate-100">
           <input
             placeholder="search"
             className="bg-slate-700 w-[100%] border-slate-500 border px-6 py-2 rounded-md"

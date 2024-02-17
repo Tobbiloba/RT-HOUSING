@@ -59,11 +59,12 @@ const updateAdminUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { newFields } = req.body;
-    // console.log(newFields)
+    console.log(id)
 
     if (!id || !newFields) {
       return res.status(400).json({ message: "Pass necessary parameters" });
     }
+
 
     const existingUser = await getAdminUserById(id);
     if (!existingUser) {
@@ -71,9 +72,9 @@ const updateAdminUser = async (req, res) => {
     }
 
     // Check if email is being updated in newFields
-    if (newFields.email) {
-      return res.status(400).json({ message: "Cannot update email address" });
-    }
+    // if (newFields.email) {
+    //   return res.status(400).json({ message: "Cannot update email address" });
+    // }
 
     // Update user fields
     for (const key in newFields) {

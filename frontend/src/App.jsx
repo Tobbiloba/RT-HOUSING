@@ -42,7 +42,7 @@ import Chatbot from './components/chatbot/Chatbot'
 import Aboutus from './screen/user/about us/Aboutus'
 import Contactus from './screen/user/contact us/Contactus'
 import UpdateAdminProfile from './screen/admin/profile/UpdateProfile'
-function App() {
+const App = () => {
   const routes = [
     <Route
       path="/"
@@ -281,7 +281,7 @@ function App() {
     <>
       <ToastContainer />
       <Toaster />
-      <Chatbot />
+      
       <RouterProvider router={router} />
     </>
   )

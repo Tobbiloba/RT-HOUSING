@@ -1,8 +1,10 @@
-import { IoCloseOutline, IoCheckmarkDoneOutline } from 'react-icons/io5'
-import { RiDeleteBin4Line } from 'react-icons/ri'
+// @ts-nocheck
+import React from 'react'
+// import { IoCloseOutline, IoCheckmarkDoneOutline } from 'react-icons/io5'
+// import { RiDeleteBin4Line } from 'react-icons/ri'
 import Input from '@/components/Input'
-import { startOfToday, startOfTomorrow } from 'date-fns'
-import { FaCalendarAlt } from 'react-icons/fa'
+import {  startOfTomorrow } from 'date-fns'
+// import { FaCalendarAlt } from 'react-icons/fa'
 import Calendar from '@/components/Calendar'
 import { useFormik } from 'formik'
 import { createEmployeeSchema } from '@/schemas'
@@ -40,7 +42,6 @@ const AddEmployee = () => {
     console.log(values)
     dispatch(createEmployee(values))
   }
-  const loading = true
 
   const employee = useSelector(state => state.createEmployee)
   // console.log(employee.status)
@@ -55,7 +56,6 @@ const AddEmployee = () => {
     values,
     errors,
     touched,
-    isSubmitting,
     handleBlur,
     handleChange,
     handleSubmit,
@@ -74,7 +74,7 @@ const AddEmployee = () => {
       img: '',
     },
     validationSchema: createEmployeeSchema,
-    onSubmit: values => {
+    onSubmit: () => {
       // same shape as initial values
       // console.log(errors)
 
@@ -86,10 +86,9 @@ const AddEmployee = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="exo  pb-8 w-[100%] p-[1rem] md:p-[2%] flex"
+      className="exo  pb-8 w-[100%] md:p-[1rem] md:p-[2%] flex"
     >
       <div className=" relative min-h-[40rem] flex flex-col justify-evenly w-[100%]  bg-slate-900 h-fit p-[1rem]">
-        {/* <IoCloseOutline className="absolute -right-4 -top-4 text-black hover:bg-red-500 cursor-pointer bg-white text-[34px]  shadow-md hover:text-white p-[1px]" onClick={() => setState(false)}/> */}
         <h1 className="text-[17px] text-slate-100">Employee details</h1>
 
         <div className="flex flex-row text-[15px] gap-4 mt-5 text-slate-300 border-b border-slate-500">
@@ -97,7 +96,7 @@ const AddEmployee = () => {
             General
           </h1>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5  justify-between gap-y-9 gap-x-12">
+        <div className="md:grid flex flex-col md:grid-cols-2 lg:grid-cols-3 mt-5 gap-y-9 gap-x-12">
           <Input
             placeholder="Firstname"
             type="text"

@@ -1,20 +1,28 @@
+// @ts-nocheck
 import React, { useEffect } from 'react'
-import { IoCloseOutline } from 'react-icons/io5'
 import { useFormik } from 'formik'
 import { updateAdminProfileSchema } from '@/schemas'
 import Input from '@/components/Input'
 import { useDispatch, useSelector } from 'react-redux'
 import Dropzone from '@/components/admin/dropzone/Dropzone'
 import Spinner from '@/components/spinner/Spinner'
+import { updateAdminInfo } from '@/action/admin'
+import { useNavigate } from 'react-router-dom'
+import { clear } from '@/action/employee'
 const UpdateAdminProfile = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const onSubmit = () => {
-    // e.preventDefault()
-    dispatch('65c77993a24964910729d98d', values)
-    console.log('lol')
+    dispatch(updateAdminInfo('65c77993a24964910729d98d', values))
   }
   const { loading, status } = useSelector(state => state?.updateAdminInfo)
-  console.log(status)
+
+  useEffect(() => {
+    if(status == "successful") {
+      navigate("/admin/profile")
+      dispatch(clear())
+    }
+  }, [status])
   const {
     values,
     errors,
@@ -38,10 +46,6 @@ const UpdateAdminProfile = () => {
     },
     validationSchema: updateAdminProfileSchema,
     onSubmit: () => {
-      // same shape as initial values
-      // console.log(errors)
-
-      // console.log(values);
       onSubmit()
     },
   })
@@ -65,13 +69,12 @@ const UpdateAdminProfile = () => {
       })
     }
   }, [detail, setValues])
-  // console.log(detail.user)
   return (
     <form
       onSubmit={handleSubmit}
       className="exo  pb-8  m-[1rem] p-[1rem] bg-slate-900 md:p-[2rem] flex"
     >
-      <div className="border w-[100%] relative min-h-[40rem] flex flex-col justify-evenly h-fit p-[1rem]">
+      <div className="w-[100%] relative min-h-[40rem] flex flex-col justify-evenly h-fit p-[1rem]">
         <h1 className="text-[17px] text-slate-100">Update User Profile</h1>
 
         <div className="flex flex-row text-[15px] gap-4 mt-5 text-slate-300 border-b border-slate-500">

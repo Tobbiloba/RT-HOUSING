@@ -21,7 +21,7 @@ import {
 } from '@/constant/employee'
 
 export const fetchAllEmployeeReducer = (
-  state = { loading: true, error: null },
+  state = { loading: null, error: null },
   action,
 ) => {
   switch (action.type) {
@@ -51,7 +51,7 @@ export const fetchAllEmployeeReducer = (
 }
 
 export const fetchAdminEmployeeReducer = (
-  state = { loading: true, error: null },
+  state = { loading: null, error: null },
   action,
 ) => {
   switch (action.type) {
@@ -119,7 +119,7 @@ export const fetchAdminAgentReducer = (
 
 
 export const createEmployeeReducer = (
-  state = { loading: true, error: null },
+  state = { loading: null, error: null },
   action,
 ) => {
   switch (action.type) {
@@ -149,7 +149,7 @@ export const createEmployeeReducer = (
 }
 
 export const updateEmployeeStatusReducer = (
-  state = { loading: true, error: null },
+  state = { loading: null, error: null },
   action,
 ) => {
   switch (action.type) {

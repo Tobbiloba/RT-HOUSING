@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import Sidebar from '@/components/admin/Sidebar'
 import './index.css'
@@ -10,7 +11,6 @@ import BreadCrumb from '@/components/admin/breadcrumb/BreadCrumb'
 const AdminLayout = ({ children }) => {
   const navigate = useNavigate()
   const location = useLocation()
-  console.log(location.state)
   const pathname = location.pathname.split('/')
   const [toggleOpen, setToggleOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -41,7 +41,7 @@ const AdminLayout = ({ children }) => {
           </div>
 
           <div
-            className={`h-fit bg-slate-600 mx-2 my-4 overflow-x-hidden relative flex flex-col items-end  min-h-[100vh] ${
+            className={`h-fit bg-slate-600 md:mx-2 md:my-4 overflow-x-hidden relative flex flex-col items-end  min-h-[100vh] ${
               toggleOpen
                 ? 'sidebar-slide-in-topbar'
                 : 'sidebar-slide-out-in-topbar '

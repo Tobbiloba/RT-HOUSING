@@ -112,7 +112,7 @@ const UpdateProperty = () => {
     onSubmit,
     validationSchema: createPropertySchema,
   })
-  console.log(errors)
+  // console.log(errors)
   useEffect(() => {
         // dispatch(getPropertyDetailById(id))
     dispatch(getAgent('65c77993a24964910729d98d'))
@@ -156,7 +156,7 @@ const UpdateProperty = () => {
   return (
     <div>
       <form
-        className={`exo p-4 flex ${
+        className={`exo md:p-4 flex ${
           isMobile ? 'flex-col' : 'flex-row px-[5%]'
         } gap-12`}
         onSubmit={handleSubmit}
@@ -166,7 +166,7 @@ const UpdateProperty = () => {
             <h1 className="text-slate-900 text-xl font-[600]">
               Property Details
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
+            <div className="md:grid flex flex-col grid-cols-1 md:grid-cols-2 gap-10 mt-8">
               <Input
                 placeholder="Title"
                 type="text"

@@ -7,13 +7,13 @@ import RegisterForm from './RegisterForm'
 import Loading from './Loading'
 import { useLocation } from 'react-router-dom'
 import Footer from './Footer/Footer'
-
+import Chatbot from './chatbot/Chatbot'
 const Layout = ({ children }) => {
   const location = useLocation()
   const [showLogin, setShowLogin] = useState(false)
   const [showRegister, setShowRegister] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     setIsLoading(true)
 
@@ -33,6 +33,7 @@ const Layout = ({ children }) => {
             showRegister={showRegister}
           />
           <MenuBar />
+          <Chatbot />
           {children}
           <Footer />
         </div>

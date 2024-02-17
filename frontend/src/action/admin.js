@@ -41,8 +41,8 @@ export const updateAdminInfo = (id, values) => async dispatch => {
     type: UPDATE_ADMIN_PROFILE,
   })
   try {
-    const { data } = await Axios.get(`${BASE_URL}/${id}`, {
-      values,
+    const { data } = await Axios.put(`${BASE_URL}/${id}`, {
+      newFields: values,
     })
     dispatch({
       type: UPDATE_ADMIN_PROFILE_SUCCESSFUL,

@@ -10,7 +10,7 @@ import {
 import { CLEAR } from '../constant/employee'
 
 export const getAdminInfoReducer = (
-  state = { loading: true, error: null },
+  state = { loading: null, error: null },
   action,
 ) => {
   switch (action.type) {

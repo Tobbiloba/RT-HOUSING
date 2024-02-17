@@ -1,12 +1,10 @@
+// @ts-nocheck
 import { CouponTable } from '@/components/admin/table/CouponTable'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { FaCalendarAlt } from 'react-icons/fa'
-import { startOfToday, startOfTomorrow } from 'date-fns'
 import Dropdown from '@/components/admin/dropdown/Dropdown'
 import { IoCloseOutline } from 'react-icons/io5'
 import { useFormik } from 'formik'
-import { couponSchema, tourSchema } from '@/schemas'
+import { couponSchema } from '@/schemas'
 import Input from '@/components/Input'
 import { useDispatch, useSelector } from 'react-redux'
 import { createCompanyCoupon, getCompanyCoupon } from '@/action/coupon'
@@ -15,11 +13,6 @@ import { clear } from '@/action/employee'
 
 const options = ['Fixed', 'Percent']
 const AddCoupon = ({ setState }) => {
-  let today = startOfToday()
-  let tomorrow = startOfTomorrow()
-
-  const [freeShipping, setFreeShipping] = useState(false)
-  const [discountType, setDiscountType] = useState('--Select--')
 
   const dispatch = useDispatch()
 
@@ -33,7 +26,6 @@ const AddCoupon = ({ setState }) => {
     values,
     errors,
     touched,
-    isSubmitting,
     handleBlur,
     handleChange,
     handleSubmit,
@@ -47,17 +39,13 @@ const AddCoupon = ({ setState }) => {
       min_price: '',
     },
     validationSchema: couponSchema,
-    onSubmit: values => {
+    onSubmit: () => {
       // same shape as initial values
-      // console.log(errors)
-
-      console.log(values)
       onSubmit(values)
     },
   })
-  console.log(errors)
 
-  function generateRandomCouponId() {
+  const generateRandomCouponId = () => {
     const characters =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     let couponId = ''
@@ -69,11 +57,10 @@ const AddCoupon = ({ setState }) => {
 
     // Set the generated coupon ID to the formik.values.code
     setFieldValue('code', couponId)
-    // return couponId;
   }
 
   const { status } = useSelector(state => state?.createCoupon)
-  console.log(status)
+  // console.log(status)
   useEffect(() => {
     if (status == 'successful') {
       setState(false)
@@ -85,11 +72,11 @@ const AddCoupon = ({ setState }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-[100vw] top-0 left-0 flex items-center justify-center h-[100vh] bg-white/20 z-[100] fixed"
+      className="w-[100vw] z-[100] overflow-y-scroll pt-[10rem] p-[.5rem] top-0 left-0 flex items-center justify-center h-[100vh] bg-black/20 fixed"
     >
-      <div className="max-w-[35rem] relative min-h-[40rem] flex flex-col justify-evenly w-[100%]  bg-slate-900 h-fit p-[1rem]">
+      <div className="lg:max-w-[35rem] min-h-[40rem] flex flex-col justify-evenly w-[100%] relative z-[10] bg-slate-900 h-fit p-[1rem]">
         <IoCloseOutline
-          className="absolute -right-4 -top-4 text-black hover:bg-red-500 cursor-pointer bg-white text-[34px]  shadow-md hover:text-white p-[1px]"
+          className="absolute -right-0 -top-0 text-black hover:bg-red-500 cursor-pointer bg-white text-[34px]  shadow-md hover:text-white p-[1px]"
           onClick={() => setState(false)}
         />
         <h1 className="text-[17px] text-slate-100">Discount Coupon Details</h1>
@@ -102,19 +89,7 @@ const AddCoupon = ({ setState }) => {
           <h1 className="p-2 cursor-not-allowed">Usage</h1>
         </div>
         <div className="grid grid-cols-1  mt-5  justify-between gap-y-9 gap-x-12">
-          {/* <Input
-              placeholder="Title"
-              type="text"
-              label="Coupon Title"
-              value={values.title}
-              handleChange={handleChange}
-              error={
-                errors.title && touched.title
-                  ? errors.title
-                  : undefined
-              }
-              id="title"
-            /> */}
+       
           <Input
             placeholder="Code"
             type="text"
@@ -188,7 +163,7 @@ const AddCoupon = ({ setState }) => {
             />
           </div>
         </div>
-        <div className="mt-16 text-[14px] flex gap-8 flex-row justify-end">
+        <div className="mt-16 text-[14px] flex gap-8 flex-col md:flex-row justify-end">
           <button
             className="border px-4 py-3 text-slate-300 border-slate-500"
             onClick={generateRandomCouponId}
@@ -208,7 +183,7 @@ const AddCoupon = ({ setState }) => {
   )
 }
 const Coupon = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const dispatch = useDispatch()
   const [showAddCoupon, setShowAddCoupon] = useState(false)
 
