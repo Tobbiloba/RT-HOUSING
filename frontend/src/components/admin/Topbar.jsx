@@ -16,7 +16,7 @@ const Topbar = ({ setShowSlide, showSlide }) => {
   const [showNotification, setShowNotification] = useState(false)
 
   useEffect(() => {
-    // dispatch(getNotifications('65c77993a24964910729d98d'))
+    dispatch(getNotifications('65c77993a24964910729d98d'))
   }, [])
   const { notifications } = useSelector(state => state.getNotifications)
   // console.log(notifications)

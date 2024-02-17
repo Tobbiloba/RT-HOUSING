@@ -91,7 +91,7 @@ const Notification = () => {
     }
   }, [])
   useEffect(() => {
-    // dispatch(getNotifications('65c77993a24964910729d98d'))
+    dispatch(getNotifications('65c77993a24964910729d98d'))
   }, [])
 
   console.log(unreadNotificationIds)
