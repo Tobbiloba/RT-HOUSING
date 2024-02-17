@@ -48,18 +48,6 @@ const PropertyOptionCard = ({ items }) => {
   const [showCheckInCalendar, setShowCheckInCalendar] = useState(false)
   const [showCheckOutCalendar, setShowCheckOutCalendar] = useState(false)
 
-  const ammenitiesList = [
-    'WI-FI',
-    'Air Conditioning',
-    'TV Cable',
-    'Swimming Pool',
-    'Barbecue Area',
-    'Sauna',
-    'Dish Washer',
-    'Gym',
-    'Laundry',
-  ]
-
   const dispatch = useDispatch()
 
   const calculateDayDifference = (checkinDate, checkoutDate) => {
@@ -183,7 +171,7 @@ const PropertyOptionCard = ({ items }) => {
   }, [coupon])
   return (
     <form onSubmit={onSubmit} className="">
-      <div className="w-[22.5rem] exo mb-6 h-fit overflow-hidden">
+      <div className="w-[20.5rem] exo mb-6 h-fit overflow-hidden">
         <div className="flex flex-col gap-6">
           <FilterBox title="Pricing">
             <div>
@@ -500,8 +488,8 @@ const PropertyOptions = ({ state, setState, item }) => {
         onClose={toggleDrawer(anchor, false)}
       >
         <div
-          style={{ width: '25rem' }}
-          className="py-[1.5rem] flex justify-center relative"
+          style={{ width: '22.5rem' }}
+          className="py-[1rem] flex justify-center relative"
         >
           <PropertyOptionCard items={item} />
         </div>

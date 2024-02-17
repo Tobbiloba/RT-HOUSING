@@ -212,20 +212,16 @@ export const createEmployeeSchema = yup.object().shape({
 
 export const updateAdminProfileSchema = yup.object().shape({
   firstname: yup.string().required('Required'),
+  profile_img: yup.string().required('Required'),
   lastname: yup.string().required('Required'),
   email: yup.string().email('Please enter a valid email').required('Required'),
-  phone: yup
+  phone_no: yup
     .string()
     .matches(/^\d+$/, 'Phone number must only contain digits')
     .required('Required'),
   city: yup.string().required('Required'),
   state: yup.string().required('Required'),
-  country: yup.string().required('Required'),
-  password: yup
-    .string()
-    .min(5, 'Password must be at least 5 characters')
-    .matches(passwordRules, 'Please create a stronger password')
-    .required('Required'),
+  country: yup.string().required('Required')
 })
 
 

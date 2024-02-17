@@ -71,7 +71,7 @@ const PropertyDetails = () => {
           <CircularProgress />
         </div>
       ) : !loading && details ? (
-        <div>
+        <div className=''>
           <Carousel images={details?.property_information.property_images} />
           {/* <div className="fixed top-0 right-0 z-50"> */}
           <PropertyOptions
@@ -79,8 +79,8 @@ const PropertyDetails = () => {
             setState={setShowProperty}
             item={details.property_information}
           />
-          <div className="container mx-auto">
-            <div className="w-[100%] mt-12 px-[1rem] flex items-end justify-end tablet:hidden">
+          <div className="md:container w-[100%] px-[1rem]">
+            <div className="w-[100%] mt-12 flex items-end justify-end tablet:hidden">
               <div
                 onClick={toggleDrawer(anchor, true)}
                 className="border text-slate-500 cursor-pointer px-3 bg-slate-600 border-slate-500 flex items-center justify-center h-10 text-[21px]"
@@ -89,7 +89,7 @@ const PropertyDetails = () => {
               </div>
             </div>
 
-            <div className="flex mt-4 lg:mt-20 flex-col lg:flex-row gap-16 justify-between px-[1rem] relative">
+            <div className="flex mt-4 lg:mt-20 flex-col lg:flex-row gap-16 justify-between relative">
               <div className="">
                 <div className={`flex flex-row w-[100%] gap-x-8  py-4 text-[14px] flex-wrap  gap-y-2 ${isUser ? "text-slate-500 border border-white border-b-gray-200 " : "text-white"}`}>
                   <Link

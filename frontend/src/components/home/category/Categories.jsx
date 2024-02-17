@@ -38,7 +38,6 @@ const SwiperContainer = () => {
       >
 
         {properties && properties.map((property, index) => {
-          console.log(property.property_information.property_size)
           return (
             <SwiperSlide
               key={index}
@@ -105,8 +104,8 @@ const Categories = () => {
 
   return (
     <div className="flex items-center justify-center exo bg-gray-100 h-fit py-6 lg:py-12 ">
-      <div className="container flex-col flex">
-        <div className="flex flex-row justify-between items-center">
+      <div className="md:container px-[1rem] flex-col w-[100%] flex">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           <div>
             <h1 className="font-[600] lg:text-5xl text-slate-500 md:tex-4xl text-3xl">
               Discover Our Featured <br /> Properties
@@ -116,12 +115,12 @@ const Categories = () => {
             </p>
           </div>
 
-          <button className="border px-8 py-2 text-slate-700 border-slate-700 text-[15px]">
+          <button className="border px-8 w-fit mt-4 md:mt-0 py-2 text-slate-700 border-slate-700 text-[15px]">
             See More
           </button>
         </div>
 
-        <div className="mt-7">
+        <div className="mt-7 ">
           <SwiperContainer />
         </div>
       </div>

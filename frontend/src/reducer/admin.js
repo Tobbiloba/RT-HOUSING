@@ -35,7 +35,7 @@ export const getAdminInfoReducer = (
 }
 
 export const updateAdminInfoReducer = (
-  state = { loading: true, error: null },
+  state = { loading: null, error: null },
   action,
 ) => {
   switch (action.type) {

@@ -58,7 +58,7 @@ const HomePage = () => {
     <div className="relative w-[100vw] exo border-red-500 h-[67.5rem] md:h-[65rem] justify-center lg:justify-start lg:h-[55rem] flex items-center lg:px-[2rem]">
       <Slider />
 
-      <div className="md:h-[50rem] h-[61rem] md:bottom-20 lg:bottom-0 w-[90%] lg:w-[33.5rem] bg-white z-[30] relative p-7">
+      <div className="md:h-[50rem] h-[61rem] md:bottom-20 lg:bottom-0  w-[100%] mx-[1rem] lg:w-[33.5rem] bg-white z-[30] relative p-7">
         <p className="text-slate-900">Find Exoctic & Affordable.</p>
         <h1 className="text-slate-600 text-xl my-2">Hotel Rooms Instantly</h1>
         <div className="mt-5">

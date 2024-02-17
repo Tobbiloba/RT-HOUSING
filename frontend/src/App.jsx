@@ -41,6 +41,7 @@ import UpdateProperty from './screen/admin/property/UpdateProperty'
 import Chatbot from './components/chatbot/Chatbot'
 import Aboutus from './screen/user/about us/Aboutus'
 import Contactus from './screen/user/contact us/Contactus'
+import UpdateAdminProfile from './screen/admin/profile/UpdateProfile'
 function App() {
   const routes = [
     <Route
@@ -255,6 +256,14 @@ function App() {
         </AdminLayout>
       }
     />,
+    <Route
+    path="/admin/profile/update-profile"
+    element={
+      <AdminLayout>
+        <UpdateAdminProfile />
+      </AdminLayout>
+    }
+  />,
     <Route path="/admin/login" element={<AdminLoginScreen />} />,
     <Route path="/admin/register" element={<AdminRegisterScreen />} />,
     <Route

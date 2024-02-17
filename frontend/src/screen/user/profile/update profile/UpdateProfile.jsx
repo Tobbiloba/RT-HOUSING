@@ -6,36 +6,20 @@ import { updateProfileSchema } from '@/schemas'
 import { useFormik } from 'formik'
 import Dropzone from '@/components/admin/dropzone/Dropzone'
 import { useSelector } from 'react-redux'
-// const Input = ({label, state, setState}) => {
 
-//   return (
-//     <div className='flex flex-col gap-3'>
-//         <label className='text-slate-600 text-[14px]'>{label}</label>
-//         <input value={state} onChange={(e) => setState(e.target.value)} className='border text-slate-500 px-3 py-3 text-[14px] rounded-md'/>
-//     </div>
-//   )
-// }
 
 const UpdateProfile = () => {
-  const [fullname, setFullname] = useState('Salau Oluwatobiloba')
-  const [phoneNo, setPhoneNo] = useState('+234 70 8455 7988')
-  const [image, setImage] = useState(
-    'https://res.cloudinary.com/ahossain/image/upload/v1705308803/kf8vs4zpgbfsbehmtsmo.jpg',
-  )
-  const data = JSON.parse(sessionStorage.getItem('userInfo'))
-  console.log(data.phoneNo)
 
-  const onSubmit = async (values, actions) => {
+
+  const onSubmit = async (values) => {
     console.log(values)
     // dispatch(register({...values}));
     // dispatch(login(values));
   }
-
   const {
     values,
     errors,
     touched,
-    isSubmitting,
     handleBlur,
     handleChange,
     handleSubmit,
@@ -53,13 +37,15 @@ const UpdateProfile = () => {
   })
 
   useEffect(() => {
-    values.image = data.avatar
+    const data = JSON.parse(sessionStorage.getItem('userInfo'))
+    setTimeout(() => {
+      values.image = data.avatar
     values.username = data.username
     values.phoneNo = data.phoneNo
     values.firstname = data.firstname || ''
     values.lastname = data.lastname || ''
-  }, [data])
-  // console.log(image)
+    }, [3000])
+  }, [])
   return (
     <div className="bg-white exo p-6 rounded-md">
       <h1 className="text-[16px]">Update Profile</h1>
@@ -133,7 +119,7 @@ const UpdateProfile = () => {
         <div className="flex justify-end mt-12">
           <button
             type="submit"
-            className="px-6 py-3 text-[13px] rounded-md shadow-md bg-slate-100 hover:border border-slate-500 hover:bg-white text-slate-600"
+            className="px-6 py-3 text-[13px] shadow-md bg-slate-100 hover:border border-slate-500 hover:bg-white text-slate-600"
           >
             UPDATE PROFILE
           </button>

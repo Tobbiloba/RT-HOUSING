@@ -1,24 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { useRef } from 'react'
-import { motion, useCycle } from 'framer-motion'
+import React, { useState } from 'react'
 import { AnimatedTabs } from './DesktopNav'
 import { Link } from 'react-router-dom'
 
 const MenuBar = () => {
   const [showMenu, setShowMenu] = useState(false)
-  const [sty, setSty] = useState('')
-  const [showDesktopMenu, setShowDesktopMenu] = useState(true)
-
-  const [isOpen, toggleOpen] = useCycle(false, true)
-
-  useEffect(() => {
-    if (showMenu) {
-      setSty('slide-in')
-    } else {
-      setSty('slide-out')
-    }
-  }, [showMenu])
-
   const links = [
     { name: 'Home', link: '/' },
     { name: 'Properties', link: '/properties' },
@@ -28,7 +13,7 @@ const MenuBar = () => {
   ]
   return (
     <div className="flex relative border exo border-white border-t-gray-100 pt-4 exo items-center justify-center pl-[1rem] md:px-[1rem] mt-4 ">
-      <div className="container flex flex-row justify-between items-center relative">
+      <div className="md:container px-[1rem] w-[100%] flex flex-row justify-between items-center relative">
         <h1 className="text-xl flex text-[30px] text-slate-500 flex-row pt-1 capitalized">
           Fe
           <div className="rotate-12 w-[30px] h-[46px] flex flex-col items-center justify-center">
@@ -52,7 +37,7 @@ const MenuBar = () => {
 
       {showMenu && (
         <div
-          className="w-[100%] left-0  flex flex-col h-[12.5rem] bg-white absolute -bottom-[12.4rem] z-[100]"
+          className="w-[100%] left-0  flex flex-col h-[16rem] bg-white absolute -bottom-[16rem] z-[100]"
           onMouseEnter={() => setShowMenu(true)}
           onMouseLeave={() => setShowMenu(false)}
         >

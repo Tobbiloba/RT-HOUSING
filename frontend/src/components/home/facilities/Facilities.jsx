@@ -22,13 +22,13 @@ const Wave = ({ color }) => {
 const Facilities = () => {
 
   return (
-    <div className="flex exo flex-row my-24 gap-12 px-[1rem] sm:px-[1rem] md:px-[2rem] items-center justify-center">
-      <div className="container flex-col flex lg:flex-row gap-12">
+    <div className="flex exo flex-row my-24 gap-12 items-center justify-center">
+      <div className="md:container flex-col w-[100%] flex lg:flex-row gap-12">
         <div className="relative lg:min-w-[20rem] lg:w-[30%] lg:max-w-[25rem] md:w-[100%] w-[100%]">
           <img src="/left-image.jpg" alt="wave" className="w-[100%] h-[100%]" />
           <Wave />
         </div>
-        <div className="flex-1 flex flex-col gap-8">
+        <div className="flex-1 flex flex-col gap-8 w-[100%]  px-[1rem]">
           <div className="flex flex-row flex-wrap items-center justify-center md:justify-between md:items-center md:flex-nowrap  ">
             <h1 className="lg:text-6xl text-5xl min-w-[25rem] mb-8 md:mb-0 font-[600] md:w-[40%] text-center md:text-start">
               MODERN FACILITIES OF THE PROPERTY.
