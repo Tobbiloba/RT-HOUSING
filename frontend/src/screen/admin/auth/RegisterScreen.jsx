@@ -77,7 +77,7 @@ const AdminRegisterScreen = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="w-[100%] mt-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+            <div className="flex flex-col md:grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
               <Input
                 placeholder="Type in your firstname"
                 type="text"
