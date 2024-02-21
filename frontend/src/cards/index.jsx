@@ -13,10 +13,10 @@ const AgentCard = ({ item, values, setFieldValue }) => {
       className={`flex flex-col hover:bg-slate-600 ${isAgentActive && 'shadow-xl bg-slate-700'} flex-row  cursor-pointer xl:flex-row gap-5 justify-between items-center lg:items-end xl:items-center`}
     >
       <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row w-[100%] justify-between md:items-center lg:items-start xl:items-center">
-        <div className="w-5/12 h-28 flex items-center overflow-hidden">
+        {/* <div className="w-5/12 h-28 flex items-center overflow-hidden">
           <img src={item?.img} alt={item?.name} />
-        </div>
-        <div className="text-white w-6/12 flex overflow-hidden flex-col gap-1">
+        </div> */}
+        <div className="text-white w-12/12 flex overflow-hidden flex-col gap-1">
           <h1 className="text-[15px] font-[600]">{item?.username}</h1>
           <p className="text-[13px]">{item?.role}</p>
           <p className="text-[12px]">{item?.email}</p>
