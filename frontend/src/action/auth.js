@@ -141,7 +141,7 @@ export const registerAdmin = (values) => async dispatch => {
       payload: data,
     })
 
-    console.log(`${BASE_URL}/auth/login`)
+    console.log(`${BASE_URL}/auth/register`)
 
     toast.success('Account created successfully', {
       position: 'bottom-right',

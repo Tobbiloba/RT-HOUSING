@@ -70,7 +70,7 @@ export const registerAdminSchema = yup.object().shape({
   state: yup.string().required('Required'),
   city: yup.string().required('Required'),
   email: yup.string().email('Please enter a valid email').required('Required'),
-  phone: yup.number().positive().integer().required('Required'),
+  phone_no: yup.number().positive().integer().required('Required'),
   password: yup
     .string()
     .min(5, 'Password must be at least 5 characters')

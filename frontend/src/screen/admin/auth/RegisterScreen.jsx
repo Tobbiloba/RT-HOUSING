@@ -32,7 +32,7 @@ const AdminRegisterScreen = () => {
       firstname: '',
       lastname: '',
       username: '',
-      phone: '',
+      phone_no: '',
       state: '',
       country: '',
       city: '',
@@ -130,10 +130,10 @@ const AdminRegisterScreen = () => {
                 placeholder="Type in your phone"
                 type="text"
                 label="Phone"
-                value={values.phone}
+                value={values.phone_no}
                 handleChange={handleChange}
-                error={errors.phone && touched.phone ? errors.phone : undefined}
-                id="phone"
+                error={errors.phone_no && touched.phone_no ? errors.phone_no : undefined}
+                id="phone_no"
               />
 
               <Input
