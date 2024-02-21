@@ -56,7 +56,7 @@ const AdminLoginScreen = () => {
   })
 
   return (
-    <div className="flex exo flex-row w-[100vw] min-h-[100vh] overflow-hidden justify-end bg-[#e9e9e9] md:p-12 relative">
+    <div className="flex exo flex-row w-[100vw] min-h-[100vh] overflow-hidden justify-end bg-[#e9e9e9] p-[1rem] md:p-12 relative">
       {/* <div className="w-8/12 bg-[#2d3133] flex flex-col p-[2rem] justify-evenly"></div> */}
 
       <div className="absolute left-0 border border--500 top-[20%]">
