@@ -3,14 +3,14 @@ import React from 'react'
 // import { IoCloseOutline, IoCheckmarkDoneOutline } from 'react-icons/io5'
 // import { RiDeleteBin4Line } from 'react-icons/ri'
 import Input from '@/components/Input'
-import {  startOfTomorrow } from 'date-fns'
+import { startOfTomorrow } from 'date-fns'
 // import { FaCalendarAlt } from 'react-icons/fa'
-import Calendar from '@/components/Calendar'
+import Calendar from '@/components/common/calendar/Calendar'
 import { useFormik } from 'formik'
 import { createEmployeeSchema } from '@/schemas'
-import Dropdown from '@/components/admin/dropdown/Dropdown'
-import Box from '../../../components/admin/box/Box'
-import Dropzone from '@/components/admin/dropzone/Dropzone'
+import Dropdown from '@/components/common/dropdown/Dropdown'
+import Box from '../../../components/common/box/Box'
+import Dropzone from '@/components/common/dropzone/Dropzone'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clear, createEmployee } from '@/action/employee'
@@ -220,12 +220,14 @@ const AddEmployee = () => {
             type="submit"
             disabled={employee.loading}
           >
-            {
-              employee.loading ? <div className='flex items-center cursor-not-allowed gap-4 px-4'>
-                <CircularProgress size="1.5rem"/>
+            {employee.loading ? (
+              <div className="flex items-center cursor-not-allowed gap-4 px-4">
+                <CircularProgress size="1.5rem" />
                 <p>Loading...</p>
-              </div> : 'Add Employee'
-            }
+              </div>
+            ) : (
+              'Add Employee'
+            )}
           </button>
         </div>
       </div>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import Slider from '@mui/material/Slider'
 import FilterOptions from '../home/FilterOptions'
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
 const FilterBox = ({ children, title }) => {
   const [showChildren, setShowChildren] = useState(true)
@@ -33,8 +33,6 @@ const FilterBox = ({ children, title }) => {
   )
 }
 
-
-
 const FilterOption = ({ data, setData }) => {
   const [adults, setAdults] = useState('')
   const [children, setChildren] = useState('')
@@ -52,7 +50,6 @@ const FilterOption = ({ data, setData }) => {
   }
 
   const { types, loading } = useSelector(state => state.propertyTypes)
-
 
   const room = [
     {
@@ -94,38 +91,38 @@ const FilterOption = ({ data, setData }) => {
   ]
   const { properties } = useSelector(state => state.allProperties)
 
-  const handleAccomodationCheckboxChange = (item) => {
+  const handleAccomodationCheckboxChange = item => {
     // Check if the item is already in the state
     if (accomodationType.includes(item)) {
-      let match = data.filter((items) => {
+      let match = data.filter(items => {
         // Replace 'yourPropertyValue' with the value you are looking for
-        return items.property_information.property_type != item;
-      });
+        return items.property_information.property_type != item
+      })
 
-      if(accomodationType.length <= 1) {
+      if (accomodationType.length <= 1) {
         setData(properties)
       } else {
         setData(match)
       }
 
-      setAccomodationType(accomodationType.filter((type) => type !== item));
+      setAccomodationType(accomodationType.filter(type => type !== item))
     } else {
       // If not, add it
-      if(properties) {
-  let match = properties.filter((items) => {
-    // Replace 'yourPropertyValue' with the value you are looking for
-    return items.property_information.property_type === item;
-  });
+      if (properties) {
+        let match = properties.filter(items => {
+          // Replace 'yourPropertyValue' with the value you are looking for
+          return items.property_information.property_type === item
+        })
 
-        if(accomodationType.length) {
+        if (accomodationType.length) {
           setData(data, match)
         } else {
           setData(match)
         }
       }
-      setAccomodationType([...accomodationType, item]);
+      setAccomodationType([...accomodationType, item])
     }
-  };
+  }
 
   // const handleFacilitiesCheckboxChange = item => {
   //   // Check if the item is already in the state
@@ -140,9 +137,7 @@ const FilterOption = ({ data, setData }) => {
     setAreaSize(newValue)
   }
 
-  const handleApplyFilters = () => {
- 
-  }
+  const handleApplyFilters = () => {}
 
   useEffect(() => {
     if (adults) {
@@ -204,7 +199,10 @@ const FilterOption = ({ data, setData }) => {
               <div className="grid grid-cols-1 gap-4">
                 {types &&
                   types.map((item, index) => (
-                    <div className="flex justify-between items-center" key={index}>
+                    <div
+                      className="flex justify-between items-center"
+                      key={index}
+                    >
                       <div className="flex gap-3">
                         <input
                           type="checkbox"
@@ -324,7 +322,6 @@ const FilterOption = ({ data, setData }) => {
             <button
               className="mt-4 border-[3px] text-slate-500 cursor-not-allowed border-slate-500 hover:text-white px-10 py-3 w-fit"
               onClick={handleApplyFilters}
-
             >
               Apply Filters
             </button>

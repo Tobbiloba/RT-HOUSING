@@ -67,13 +67,6 @@ export const fetchCouponReducer = (
   }
 }
 
-
-
-
-
-
-
-
 export const verifyCouponReducer = (
   state = { verificationLoader: null, error: null },
   action,

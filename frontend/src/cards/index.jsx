@@ -2,19 +2,17 @@
 
 import { timeAgo } from '@/components/utils'
 import { handleAgentsCheckboxChange } from '@/utils'
-import { useEffect, useState } from 'react'
-
 // Agent card for create property screen to show agents
 const AgentCard = ({ item, values, setFieldValue }) => {
-  const isAgentActive = values && values.username === item.username;
+  const isAgentActive = values && values.username === item.username
   return (
     <div
       onClick={() =>
         handleAgentsCheckboxChange({ item, values, setFieldValue })
       }
-      className={`flex hover:bg-slate-600 ${isAgentActive && 'shadow-xl bg-slate-700'} flex-row lg:flex-col cursor-pointer xl:flex-row gap-5 justify-between items-center lg:items-end xl:items-center`}
+      className={`flex flex-col hover:bg-slate-600 ${isAgentActive && 'shadow-xl bg-slate-700'} flex-row  cursor-pointer xl:flex-row gap-5 justify-between items-center lg:items-end xl:items-center`}
     >
-      <div className="flex w-[100%] justify-between items-center">
+      <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row w-[100%] justify-between md:items-center lg:items-start xl:items-center">
         <div className="w-5/12 h-28 flex items-center overflow-hidden">
           <img src={item?.img} alt={item?.name} />
         </div>

@@ -1,4 +1,3 @@
-import { CLEAR } from '@/constant/property'
 import {
   REQUEST_LOGIN,
   REQUEST_LOGIN_FAILED,
@@ -14,8 +13,9 @@ import {
   REQUEST_REGISTER_ADMIN_SUCCESSFUL,
   ACTIVATE_ACCOUNT,
   ACTIVATE_ACCOUNT_SUCCESSFUL,
+  CLEAR_AUTH,
+  ACTIVATE_ACCOUNT_FAILED
 } from '../constant/auth'
-
 export const loginReducer = (
   state = { loading: false, error: null },
   action,
@@ -36,6 +36,8 @@ export const loginReducer = (
         loading: false,
         error: false,
       }
+      case CLEAR_AUTH:
+        return {}
     default:
       return state
   }
@@ -62,8 +64,6 @@ export const registerReducer = (
         loading: false,
         error: false,
       }
-    case CLEAR:
-      return {}
     default:
       return state
   }
@@ -89,6 +89,8 @@ export const loginAdminReducer = (
         loading: false,
         error: false,
       }
+      case CLEAR_AUTH:
+        return {}
     default:
       return state
   }
@@ -134,7 +136,7 @@ export const activateUser = (
         loading: false,
         error: false,
       }
-    case ACTIVATE_ACCOUNT_SUCCESSFUL:
+    case ACTIVATE_ACCOUNT_FAILED:
       return {
         loading: false,
         error: true,

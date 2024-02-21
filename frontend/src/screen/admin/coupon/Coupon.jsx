@@ -1,7 +1,7 @@
 // @ts-nocheck
-import { CouponTable } from '@/components/admin/table/CouponTable'
+import { CouponTable } from '@/components/table/CouponTable'
 import React, { useEffect, useState } from 'react'
-import Dropdown from '@/components/admin/dropdown/Dropdown'
+import Dropdown from '@/components/common/dropdown/Dropdown'
 import { IoCloseOutline } from 'react-icons/io5'
 import { useFormik } from 'formik'
 import { couponSchema } from '@/schemas'
@@ -10,16 +10,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createCompanyCoupon, getCompanyCoupon } from '@/action/coupon'
 import { CircularProgress } from '@mui/material'
 import { clear } from '@/action/employee'
+import Spinner from '@/components/common/spinner/Spinner'
 
 const options = ['Fixed', 'Percent']
 const AddCoupon = ({ setState }) => {
-
   const dispatch = useDispatch()
 
   const onSubmit = values => {
-    const id = ''
     console.log(values)
-    dispatch(createCompanyCoupon({ values, id }))
+    dispatch(createCompanyCoupon({ values }))
   }
 
   const {
@@ -59,13 +58,13 @@ const AddCoupon = ({ setState }) => {
     setFieldValue('code', couponId)
   }
 
-  const { status } = useSelector(state => state?.createCoupon)
+  const { status, loading } = useSelector(state => state?.createCoupon)
   // console.log(status)
   useEffect(() => {
     if (status == 'successful') {
       setState(false)
       dispatch(clear())
-      dispatch(getCompanyCoupon('65c77993a24964910729d98d'))
+      dispatch(getCompanyCoupon())
     }
   }, [status])
 
@@ -89,7 +88,6 @@ const AddCoupon = ({ setState }) => {
           <h1 className="p-2 cursor-not-allowed">Usage</h1>
         </div>
         <div className="grid grid-cols-1  mt-5  justify-between gap-y-9 gap-x-12">
-       
           <Input
             placeholder="Code"
             type="text"
@@ -172,10 +170,16 @@ const AddCoupon = ({ setState }) => {
             Generate Coupon Code
           </button>
           <button
-            className="bg-green-700 px-4 py-3 text-white border-slate-500"
+          disabled={loading}
+            className={`bg-green-700 px-4 py-3 text-white border-slate-500 ${loading && "cursor-not-allowed"}`}
             type="submit"
           >
-            Create Coupon
+             {
+              loading ? <div className='flex item-center gap-5'><Spinner />
+              <p>Please wait...</p>
+              </div>
+             :
+            "Create Coupon"}
           </button>
         </div>
       </div>

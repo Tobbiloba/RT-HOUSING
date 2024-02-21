@@ -17,16 +17,16 @@ const handleAmmenitiesCheckboxChange = ({ item, values, setFieldValue }) => {
 }
 
 const handleAgentsCheckboxChange = ({ item, setFieldValue, values }) => {
-  const isAgentActive = values && values.name === item.name;
-  
+  const isAgentActive = values && values.name === item.name
+
   if (isAgentActive) {
     // If the agent is already active, deactivate it
-    setFieldValue('agent', null);
+    setFieldValue('agent', null)
   } else {
     // If no agent is currently active, set the current agent as active
-    setFieldValue('agent', { ...item });
+    setFieldValue('agent', { ...item })
   }
-};
+}
 
 // const handleAgentsCheckboxChange = ({ item, setFieldValue, values }) => {
 //   const currentAgents = values || []

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import {  useNavigate, useLocation } from 'react-router-dom'
 import React from 'react'
 
 let tabs = [
@@ -12,17 +12,27 @@ let tabs = [
 ]
 
 export const AnimatedTabs = () => {
-  let [activeTab, setActiveTab] = useState(tabs[0].id)
+  const [currentPath, setCurrentPath] = useState('')
+  const location = useLocation()
+  const pathname = location.pathname.split('/')
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if(!pathname[1]) {
+      setCurrentPath("")
+    } else {
+      setCurrentPath(pathname[1])
+    }
+  }, [])
 
   return (
     <div className="flex-row gap-5 font-[500]">
       {tabs.map(tab => (
         <button
           key={tab.id}
-          onClick={() => (setActiveTab(tab.id), navigate(tab.link))}
+          onClick={() =>  navigate(tab.link)}
           className={`text-[13px] ${
-            activeTab === tab.id
+            currentPath == tab.link.split("/")[1]
               ? 'text-white'
               : 'hover:text-black/60 text-slate-500'
           } relative  px-3 py-1 font-medium  outline-sky-400 transition focus-visible:outline-2`}
@@ -30,7 +40,7 @@ export const AnimatedTabs = () => {
             WebkitTapHighlightColor: 'transparent',
           }}
         >
-          {activeTab === tab.id && (
+          {currentPath == tab.link.split("/")[1] && (
             <motion.span
               layoutId="bubble"
               className="absolute inset-0 bg-slate-500  -z-10"

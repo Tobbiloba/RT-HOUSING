@@ -10,5 +10,5 @@ router.route("/").get(getAllMessageModel);
 router.route("/tour-request").get(getAllTourRequestModel);
 router.route("/agent-message").get(getAllMessageRequestModel);
 router.route("/tour-request/:id").post(createTourRequestModel);
-router.route("/agent-message/:id").post(createAgentMessageModel);
+router.route("/contact-agent/:id").post(createAgentMessageModel);
 export default router;

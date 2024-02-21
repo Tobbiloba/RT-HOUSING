@@ -18,7 +18,6 @@ const Estimate = () => {
       // eslint-disable-next-line no-restricted-properties
       (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments))
 
-
     const roundTo2DecimalPlaces = value => {
       return Number(value.toFixed(2))
     }

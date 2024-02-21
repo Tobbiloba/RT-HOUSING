@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Dropdown from '../home/Dropdown'
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown } from 'react-icons/io'
 const places = ['Ikorodu', 'Lekki', 'V I', 'Banana Island']
 const Banner = () => {
   const [place, setPlace] = useState('Where You Want To Stay')
@@ -39,10 +39,10 @@ const Banner = () => {
           </div>
 
           <h1 className="flex items-center text-[14px] border bg-white  px-[1rem] h-[3.5rem] justify-between cursor-pointer">
-            In <IoIosArrowDown className='text-[17px]'/>
+            In <IoIosArrowDown className="text-[17px]" />
           </h1>
           <h1 className="flex items-center border text-[14px] bg-white px-[1rem] h-[3.5rem] justify-between cursor-pointer">
-            Out <IoIosArrowDown className='text-[17px]'/>
+            Out <IoIosArrowDown className="text-[17px]" />
           </h1>
           <button className="flex items-center hover:border text-[14px] text-white h-[3.5rem] justify-center bg-slate-400 hover:bg-white hover:text-slate-400">
             Search Now

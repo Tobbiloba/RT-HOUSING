@@ -56,7 +56,7 @@ export const updatePasswordSchema = yup.object().shape({
 export const updateProfileSchema = yup.object().shape({
   username: yup.string().required('Required'),
   phoneNo: yup.number().positive().integer().required('Required'),
-  image: yup.string().required('Required'),
+  avatar: yup.string().required('Required'),
   firstname: yup.string().required('Required'),
   lastname: yup.string().required('Required'),
 })
@@ -64,6 +64,7 @@ export const updateProfileSchema = yup.object().shape({
 export const registerAdminSchema = yup.object().shape({
   firstname: yup.string().required('Required'),
   lastname: yup.string().required('Required'),
+  profile_img: yup.string().required('Required'),
   username: yup.string().required('Required'),
   country: yup.string().required('Required'),
   state: yup.string().required('Required'),
@@ -149,7 +150,7 @@ export const createPropertySchema = yup.object().shape({
     .min(3, 'At least 3 amenities are required'),
   availableFromDate: yup.date().required('Available From Date is required'),
   availableTillDate: yup.date().required('Available From Date is required'),
-  agent: yup.object().nullable(true)
+  agent: yup.object().nullable(true),
   // unavailableFromDate: yup.date(),
   // unavailableTillDate: yup.date()
   // .when('unavailableFromDate', {
@@ -165,7 +166,7 @@ export const createPropertySchema = yup.object().shape({
 })
 
 export const contactAgentSchema = yup.object().shape({
-  name: yup.string().required('Required'),
+  username: yup.string().required('Required'),
   message: yup.string().required('Required'),
   email: yup.string().email('Please enter a valid email').required('Required'),
   // phone: yup.number().positive().integer().required("Required"),
@@ -181,9 +182,15 @@ export const contactAgentSchema = yup.object().shape({
 })
 
 export const tourSchema = yup.object().shape({
-  name: yup.string().required('Required'),
+  username: yup.string().required('Required'),
   email: yup.string().email('Please enter a valid email').required('Required'),
   phone: yup.number().positive().integer().required('Required'),
+  // termsAndConditions: yup
+  // .boolean()
+  // .oneOf([true], 'Checkbox must be checked')
+  // .required('Checkbox is required'),
+  additionalNote: yup.string().required('Required'),
+  tourDate: yup.object(),
 })
 
 export const couponSchema = yup.object().shape({
@@ -221,17 +228,16 @@ export const updateAdminProfileSchema = yup.object().shape({
     .required('Required'),
   city: yup.string().required('Required'),
   state: yup.string().required('Required'),
-  country: yup.string().required('Required')
+  country: yup.string().required('Required'),
 })
-
-
-
-
 
 export const createOrderSchema = yup.object().shape({
   pricing: yup.array(),
   checkoutDate: yup.string().required('Required'),
   checkinDate: yup.string().required('Required'),
   couponCode: yup.string(),
-  checkBox: yup.boolean().oneOf([true], 'Checkbox must be checked').required('Checkbox is required'),
+  checkBox: yup
+    .boolean()
+    .oneOf([true], 'Checkbox must be checked')
+    .required('Checkbox is required'),
 })

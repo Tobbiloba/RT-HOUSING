@@ -1,6 +1,6 @@
+// @ts-nocheck
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useMediaQuery } from 'react-responsive'
 import Rating from '@mui/material/Rating'
 const data = [
   {
@@ -140,7 +140,6 @@ const Slider = ({ images }) => {
 
   return (
     <div className="slider absolute w-[100%] h-[100%] top-0 left-0">
-      {/* <div className='overlay fixed top-0 left-0 w-[100%] h-[100%] '></div> */}
       <div
         className="slider-inner"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -173,16 +172,12 @@ const FeaturedPropCard = ({ item }) => {
       <div className="relative w-full h-[15rem] flex flex-col justify-between p-3">
         <Slider images={item.img} />
         <div className="relative z-10 gap-4 flex items-start text-[12px] text-white">
-          {/* <h1 > */}
           {item.featured && (
             <h1 className="px-2 py-1 rounded-sm bg-red-500">FEATURED</h1>
           )}
-          {/* </h1> */}
-          {/* <h1 className='px-2 py-1 rounded-sm bg-blue-500'> */}
           {item.featured && (
             <h1 className="px-2 py-1 rounded-sm bg-blue-500">TOP RATED</h1>
           )}
-          {/* </h1> */}
         </div>
         <div className="relative z-10 flex items-start  justify-between text-[14px] text-white">
           <div className="flex flex-row gap-1 items-center">
@@ -262,12 +257,6 @@ const FeaturedPropCard = ({ item }) => {
   )
 }
 
-const images = [
-  'https://placekitten.com/800/400',
-  'https://placekitten.com/801/400',
-  'https://placekitten.com/802/400',
-  // Add more image URLs as needed
-]
 
 const FeaturedProp = () => {
   return (

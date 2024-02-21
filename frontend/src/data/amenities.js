@@ -274,6 +274,6 @@ const amenities = [
     name: 'Snooker/Pool Table',
     img: 'https://cdn-icons-png.flaticon.com/128/1711/1711985.png',
   },
-];
+]
 
 export default amenities

@@ -8,7 +8,6 @@ import Estimate from '../../../components/home/estimate/Estimate'
 import Facilities from '../../../components/home/facilities/Facilities'
 // import FeaturedProp from '../../../components/home/FeaturedProp'
 import FloorPlans from '../../../components/home/FloorPlans'
-import Footer from '../../../components/Footer/Footer'
 import HomePage from '../../../components/home/HomePage'
 
 const Homescreen = () => {
@@ -20,7 +19,6 @@ const Homescreen = () => {
       <FloorPlans />
       <Estimate />
       <Tip />
-      <Footer />
     </div>
   )
 }

@@ -6,8 +6,11 @@ const MessageSchema = new mongoose.Schema({
     propertyId: {type: String, required: false},
     created_at: { type: Date, default: Date.now },
     phone: {type: String, required: false},
-    tourDate: {type: String, required: false},
+    tourDate: {type: Object, required: false},
     messageType: {type: String, required: false},
+    additionalNote: {type: String, required: false},
+    username: {type: String, required: true},
+    propertyId: {type: String, required: true}
 })
 
 const MessageModel = mongoose.model("Message", MessageSchema)

@@ -19,7 +19,16 @@ export const getNext7Days = () => {
 
   return next7Days
 }
+export   const convertDate = dateString => {
+  if (dateString) {
+    const dateObject = new Date(dateString)
 
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
+    const formattedDate = dateObject.toLocaleDateString('en-GB', options)
+    return formattedDate
+  }
+  return
+}
 export const getCurrentTime = () => {
   const now = new Date()
   const hours = now.getHours()

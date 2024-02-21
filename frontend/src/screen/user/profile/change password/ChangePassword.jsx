@@ -1,17 +1,19 @@
 // @ts-nocheck
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import Input from '@/components/Input'
 import { updatePasswordSchema } from '@/schemas'
 import { useFormik } from 'formik'
-
+import Spinner from '@/components/common/spinner/Spinner'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUserPassword } from '@/action/user'
+import { clear } from '@/action/employee'
 const ChangePassword = () => {
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  // const [email, setEmail] = useState("tobiloba.a.salau@gmail.com");
-
-  const onSubmit = async (values, actions) => {
+  const dispatch = useDispatch()
+  const { status, loading } = useSelector(state => state.updateUserPassword)
+  console.log(status, loading)
+  const onSubmit = async () => {
     console.log(values)
-    // dispatch(register({...values}));
+    dispatch(updateUserPassword({ ...values }))
     // dispatch(login(values));
   }
 
@@ -19,8 +21,7 @@ const ChangePassword = () => {
     values,
     errors,
     touched,
-    isSubmitting,
-    handleBlur,
+
     handleChange,
     handleSubmit,
   } = useFormik({
@@ -34,8 +35,24 @@ const ChangePassword = () => {
     onSubmit,
   })
 
+  useEffect(() => {
+    if (status == 'successful') {
+      values.newPassword = ''
+      values.confirmNewPassword = ''
+
+
+
+      dispatch(clear())
+    }
+  }, [status])
+
   return (
     <div className="bg-white exo p-6 rounded-md">
+      {status  && (
+        <p className="bg-red-500 text-[12px] py-1 mb-4 flex justify-center text-white">
+          You have to logout and login again so see your changes
+        </p>
+      )}
       <h1 className="text-xl font-[600] text-slate-600">Change Password</h1>
 
       <form
@@ -98,9 +115,16 @@ const ChangePassword = () => {
         <div className="flex justify-end md:col-span-2 mt-8">
           <button
             type="submit"
-            className="px-6 py-3 text-[14px] rounded-md shadow-md bg-slate-100 hover:border border-slate-500 hover:bg-white text-slate-600"
+            className={`px-6 py-3 text-[13px] shadow-md bg-slate-100 hover: border-slate-500 hover:bg-white text-slate-600 ${loading && 'cursor-not-allowed'}`}
           >
-            Change Password
+            {loading ? (
+              <div className="flex justify-center items-center gap-5">
+                <Spinner />
+                <p>Please wait...</p>
+              </div>
+            ) : (
+              'UPDATE PROFILE'
+            )}
           </button>
         </div>
       </form>

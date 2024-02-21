@@ -20,7 +20,6 @@ const Wave = ({ color }) => {
   )
 }
 const Facilities = () => {
-
   return (
     <div className="flex exo flex-row my-24 gap-12 items-center justify-center">
       <div className="md:container flex-col w-[100%] flex lg:flex-row gap-12">

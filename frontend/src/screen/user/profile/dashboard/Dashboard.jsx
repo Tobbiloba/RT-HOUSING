@@ -4,7 +4,7 @@ import { SlRefresh } from 'react-icons/sl'
 import { BsCart2 } from 'react-icons/bs'
 import { TbBus } from 'react-icons/tb'
 import { IoCheckmarkDoneSharp } from 'react-icons/io5'
-import { OrderTable } from '@/components/profile/table/OrderTable'
+import { OrderTable } from '@/components/table/OrderTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserOrder } from '@/action/order'
 // import Loading from '@/components/Loading'
@@ -91,7 +91,7 @@ const Dashboard = () => {
                 src="https://cdn-icons-png.flaticon.com/128/10967/10967123.png"
                 className="w-24"
               />
-              <h1 className='text-[14px] mt-6'>No order yet</h1>
+              <h1 className="text-[14px] mt-6">No order yet</h1>
             </div>
           )
         )}

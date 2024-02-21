@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from './components/Layout'
+import Layout from './components/Layouts/user/Layout'
 import Homescreen from './screen/user/home/Homescreen'
 import {
   createBrowserRouter,
@@ -38,7 +38,7 @@ import HowItWorks from './screen/user/how it works/HowItWorks'
 import UserActivation from './components/home/UserActivation'
 import AdminActivation from './screen/admin/activation/Activation'
 import UpdateProperty from './screen/admin/property/UpdateProperty'
-import Chatbot from './components/chatbot/Chatbot'
+import Chatbot from './components/common/chatbot/Chatbot'
 import Aboutus from './screen/user/about us/Aboutus'
 import Contactus from './screen/user/contact us/Contactus'
 import UpdateAdminProfile from './screen/admin/profile/UpdateProfile'
@@ -137,7 +137,7 @@ const App = () => {
       }
     />,
     <Route
-      path="/property-detail/:id"
+      path="/properties/property-detail/:id"
       element={
         <Layout>
           <PropertyDetails />
@@ -257,13 +257,13 @@ const App = () => {
       }
     />,
     <Route
-    path="/admin/profile/update-profile"
-    element={
-      <AdminLayout>
-        <UpdateAdminProfile />
-      </AdminLayout>
-    }
-  />,
+      path="/admin/profile/update-profile"
+      element={
+        <AdminLayout>
+          <UpdateAdminProfile />
+        </AdminLayout>
+      }
+    />,
     <Route path="/admin/login" element={<AdminLoginScreen />} />,
     <Route path="/admin/register" element={<AdminRegisterScreen />} />,
     <Route
@@ -281,7 +281,7 @@ const App = () => {
     <>
       <ToastContainer />
       <Toaster />
-      
+
       <RouterProvider router={router} />
     </>
   )

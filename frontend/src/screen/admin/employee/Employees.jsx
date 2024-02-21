@@ -1,12 +1,11 @@
-import { CouponTable } from '@/components/admin/table/CouponTable'
-import { EmployeeTable } from '@/components/admin/table/EmployeeTable'
+import { CouponTable } from '@/components/table/CouponTable'
+import { EmployeeTable } from '@/components/table/EmployeeTable'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AddEmployee from './AddEmployee'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdminEmployee } from '@/action/employee'
 import { CircularProgress } from '@mui/material'
-
 
 const Employees = () => {
   const dispatch = useDispatch()

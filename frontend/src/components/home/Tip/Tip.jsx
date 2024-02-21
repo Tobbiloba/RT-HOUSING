@@ -21,7 +21,7 @@ const Tip = () => {
         <div className="md:grid flex flex-col grid-rows-3 grid-flow-col gap-10 w-[100%] mt-12">
           {tips.map((item, index) => (
             <div
-            key={index}
+              key={index}
               className={` flex gap-8 ${index != 3 ? 'flex-row' : 'flex-col'} ${index == 0 ? 'col-span-2' : index == 1 ? 'col-span-2' : index == 2 ? 'col-span-2' : 'col-span-2 row-span-3'}`}
             >
               <img

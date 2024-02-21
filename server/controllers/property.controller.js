@@ -288,71 +288,30 @@ const createProperty = async (req, res) => {
 
     const { property_information } = req.body;
 
-console.log(id, property_information)
+// console.log(id, property_information)
     if (!id || !property_information) {
       return res
         .status(500)
         .json({ message: "Pass in the necessary parameters" });
     }
-    // console.log(property_information?.agent)
-    // console.log(property_information)
 
-    // const session = await mongoose.startSession();
-    // session.startTransaction();
-
-    // const user = await getAdminUserById(id);
     const admin = await getAdminUserById(id);
-    // console.log(property_information.guest.maximum_children)
 
     if (!admin) {
       throw new Error("Admin not found");
       console.log("end");
       return res.status(500).end();
     }
-
+    console.log('1')
     const propertyType = await getPropertyTypeByName(
       property_information?.propertyType
     );
+    console.log(property_information?.propertyType)
     if (!propertyType) {
+
       return res.status(500).json({ messsage: "Property type not found" });
     }
-    console.log('1')
     const getRandomBoolean = () => Math.random() < 0.5;
-    // console.log({property_information: {
-    //   property_name: property_information?.propertyName,
-    //   property_type: property_information?.propertyType,
-    //   property_description: property_information?.propertyDescription,
-    //   property_no_bedrooms: property_information?.bedrooms,
-    //   property_no_bathrooms: property_information?.bathrooms,
-    //   property_no_floor: property_information?.floors,
-    //   property_no_garages: property_information?.garages,
-    //   property_size: property_information?.propertySize, // Assuming you want the upper limit of the size range
-    //   property_amenities: property_information?.amenities,
-    //   property_images: property_information?.images,
-    //   property_location: {
-    //     country: property_information?.country,
-    //     state: property_information?.state,
-    //     city: property_information?.city,
-
-    //   },
-    //   property_policy: {
-    //     pet_policy: property_information?.pet_policy,
-    //     smoking_policy: property_information?.smoking_policy,
-    //   },
-    //   pricing: property_information.pricing,
-    //   availability: {
-    //     available_date_from: property_information?.availableFromDate,
-    //     available_date_till: property_information?.availableTillDate,
-    //   },
-    //   guest: {
-    //     maximum_children: property_information?.children,
-    //     maximum_adults: property_information?.adults,
-    //     maximum_infants: property_information?.infants,
-    //   },
-    //   booking_status: property_information?.isUnavailable
-    //     ? "unavailable"
-    //     : "available",
-    // },})
 
     const newProperty = await createPropertyAdmin({
       isActive: false,
@@ -426,6 +385,8 @@ console.log(id, property_information)
     Best Regards,
     Febtos`,
     });
+
+    console.log('success')
 
     res.status(200).json(newProperty);
   } catch (error) {

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react'
-import Carousel from '../../../components/details/Carousel'
-import PropertyOptions from '../../../components/details/PropertyOptions'
+import Carousel from '../../../components/common/details/Carousel'
+import PropertyOptions from '../../../components/common/details/PropertyOptions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import {
@@ -11,23 +11,18 @@ import {
   Nearby,
   Availability,
   ContactAgent,
-  TourRequest
-} from './card'
+  TourRequest,
+} from '../../../components/common/card'
 
 import {
   Link,
   Element,
-  // animateScroll as scroll,
 } from 'react-scroll'
-// import AvailabilityCalendar from '../../../components/AvailabilityCalendar'
 import { getPropertyDetailById } from '@/action/property'
 import { useParams } from 'react-router-dom'
 import { CircularProgress } from '@mui/material'
 const PropertyDetails = () => {
   const [isUser, setIsUser] = useState(null)
-
-
-
 
   const [showProperty, setShowProperty] = useState({
     right: true,
@@ -52,18 +47,17 @@ const PropertyDetails = () => {
   const { details, loading, error } = useSelector(state => state.propertyDetail)
   const location = useLocation()
 
-
   useEffect(() => {
-    if(location.pathname.split("/")[1] == "admin") {
+    if (location.pathname.split('/')[1] == 'admin') {
       setIsUser(false)
     } else {
       setIsUser(true)
     }
-    // window.scrollTo(0, 0)
-    // dispatch(getPropertyDetailById(id))
+    window.scrollTo(0, 0)
+    dispatch(getPropertyDetailById(id))
   }, [])
 
-  console.log(isUser)
+  // console.log(isUser)
   return (
     <div className="bg-transparent pt-16 font-mono">
       {loading ? (
@@ -71,9 +65,8 @@ const PropertyDetails = () => {
           <CircularProgress />
         </div>
       ) : !loading && details ? (
-        <div className=''>
+        <div className="">
           <Carousel images={details?.property_information.property_images} />
-          {/* <div className="fixed top-0 right-0 z-50"> */}
           <PropertyOptions
             state={showProperty}
             setState={setShowProperty}
@@ -91,7 +84,9 @@ const PropertyDetails = () => {
 
             <div className="flex mt-4 lg:mt-20 flex-col lg:flex-row gap-16 justify-between relative">
               <div className="">
-                <div className={`flex flex-row w-[100%] gap-x-8  py-4 text-[14px] flex-wrap  gap-y-2 ${isUser ? "text-slate-500 border border-white border-b-gray-200 " : "text-white"}`}>
+                <div
+                  className={`flex flex-row w-[100%] gap-x-8  py-4 text-[14px] flex-wrap  gap-y-2 ${isUser ? 'text-slate-500 border border-white border-b-gray-200 ' : 'text-white'}`}
+                >
                   <Link
                     to="about-property"
                     smooth={true}
@@ -106,9 +101,7 @@ const PropertyDetails = () => {
                     offset={-70}
                     duration={500}
                   >
-                    <span>
-                      Amenities Others
-                    </span>
+                    <span>Amenities Others</span>
                   </Link>
                   <Link to="nearby" smooth={true} offset={-70} duration={500}>
                     <span>Nearby</span>
@@ -119,14 +112,10 @@ const PropertyDetails = () => {
                     offset={-70}
                     duration={500}
                   >
-                    <span>
-                      Availability
-                    </span>
+                    <span>Availability</span>
                   </Link>
                   <Link to="terms" smooth={true} offset={-70} duration={500}>
-                    <span>
-                      Terms & Rules
-                    </span>
+                    <span>Terms & Rules</span>
                   </Link>
                   <Link to="reviews" smooth={true} offset={-70} duration={500}>
                     <span>Reviews</span>
@@ -149,8 +138,11 @@ const PropertyDetails = () => {
                       />
                     </Element>
                     <Element name="availability" className="element">
-                  <Availability id="availability" detail={details.property_information}/>
-                </Element>
+                      <Availability
+                        id="availability"
+                        detail={details.property_information}
+                      />
+                    </Element>
                     <Element name="nearby" className="element">
                       <Nearby id="nearby" />
                     </Element>
@@ -161,9 +153,8 @@ const PropertyDetails = () => {
                 </div>
               </div>
               <div className=" lg:w-4/12 min-w-[22.5rem] h-fit">
-                <ContactAgent />
-                <TourRequest />
-              
+                <ContactAgent propertyId={details._id}/>
+                <TourRequest propertyId={details._id}/>
               </div>
             </div>
           </div>

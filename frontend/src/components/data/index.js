@@ -11,7 +11,6 @@ const options = [
 
 const numbers = [1, 2, 3, 4, 5, 6]
 
-// @ts-ignore
 const add_ons = [
   { name: 'Airport Transportation', price: 50 },
   { name: 'Car Rental', price: 75 },
@@ -247,4 +246,13 @@ const footerImages = [
   'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-8.jpg',
   'https://wpolive.com/suqat/wp-content/uploads/2023/09/gallery-10.jpg',
 ]
-export { ammenitiesList, add_ons, options, numbers, facilities, floors, tips, footerImages }
+export {
+  ammenitiesList,
+  add_ons,
+  options,
+  numbers,
+  facilities,
+  floors,
+  tips,
+  footerImages,
+}

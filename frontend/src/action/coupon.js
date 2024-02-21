@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -17,12 +18,10 @@ import {
 } from '@/constant/coupon'
 
 const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/coupon`
-
 const customId = 'custom-id-yes'
-const id =  "65c77993a24964910729d98d"
-// console.log(BASE_URL)
-
-export const getCompanyCoupon = id => async dispatch => {
+const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+const user_id = JSON.parse(sessionStorage.getItem('userInfo'))?._id
+export const getCompanyCoupon = () => async dispatch => {
   dispatch({
     type: GET_COMPANY_COUPON,
   })
@@ -33,22 +32,21 @@ export const getCompanyCoupon = id => async dispatch => {
       payload: data,
     })
 
-    console.log(data)
   } catch (error) {
     console.log(error.message)
 
     dispatch({
       type: GET_COMPANY_COUPON_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
-        : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
       {
         toastId: customId,
         position: 'bottom-right',
@@ -76,15 +74,15 @@ export const getAllCoupon = () => async dispatch => {
     dispatch({
       type: GET_ALL_COUPONS_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
-        : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
       {
         toastId: customId,
         position: 'bottom-right',
@@ -95,7 +93,7 @@ export const getAllCoupon = () => async dispatch => {
 }
 
 export const createCompanyCoupon =
-  ({ values, id }) =>
+  ({ values }) =>
   async dispatch => {
     dispatch({
       type: CREATE_COUPON_CODE,
@@ -103,9 +101,8 @@ export const createCompanyCoupon =
     console.log(values)
     try {
       const { data } = await Axios.post(
-        `${BASE_URL}/create/65c77993a24964910729d98d`,
+        `${BASE_URL}/create/${id}`,
         {
-          // ...values
           coupon_code: values.code,
           free_shipping: values.free_shipping,
           quantity: 1,
@@ -125,22 +122,20 @@ export const createCompanyCoupon =
         position: 'bottom-right',
         theme: 'colored',
       })
-      console.log(data)
     } catch (error) {
-      console.log(error.message)
 
       dispatch({
         type: CREATE_COUPON_CODE_FAILED,
         payload:
-          error.response && error.response.data[0]
-            ? error.response.data.message
-            : error.message,
+        error.response && error.response.data
+        ? error.response.data.message
+        : error.message,
       })
 
       toast.error(
-        error.response && error.response.data[0]
-          ? error.response.data[0]
-          : error.message,
+        error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
         {
           toastId: customId,
           position: 'bottom-right',
@@ -150,63 +145,57 @@ export const createCompanyCoupon =
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  export const verifyCouponCode = ({amount, couponCode}) => async dispatch => {
+export const verifyCouponCode =
+  ({ amount, couponCode }) =>
+  async dispatch => {
     dispatch({
       type: VERIFY_COUPON_CODE,
     })
-    console.log(`${BASE_URL}/activate`)
     try {
-      const { data } = await Axios.put(`${BASE_URL}/activate`, {
-        couponCode,
-          amount
-      })
-      dispatch({
-        type: VERIFY_COUPON_CODE_SUCCESSFUL,
-        payload: data,
-      })
+      if(user_id) {
+        const { data } = await Axios.put(`${BASE_URL}/activate`, {
+          couponCode,
+          amount,
+        })
+        dispatch({
+          type: VERIFY_COUPON_CODE_SUCCESSFUL,
+          payload: data,
+        })
   
-      toast.success(
-        'Successfully activated coupon.',
-        {
+        toast.success('Successfully activated coupon.', {
           toastId: customId,
           position: 'bottom-right',
           theme: 'colored',
-        },
-      )
+        })
+      } else {
+        console.log('called')
+        dispatch({
+          type: VERIFY_COUPON_CODE_FAILED
+        })
+
+
+        toast.error("You have to login first", {
+          toastId: customId,
+          position: 'bottom-right',
+          theme: 'colored',
+        })
+      }
     } catch (error) {
-      console.log(error.message)
-  
+
       dispatch({
         type: VERIFY_COUPON_CODE_FAILED,
         payload:
-          error.response && error.response.data[0]
-            ? error.response.data.message
-            : error.message,
+        error.response && error.response.data
+        ? error.response.data.message
+        : error.message,
       })
-  
-      toast.error(
-        error,
-        {
-          toastId: customId,
-          position: 'bottom-right',
-          theme: 'colored',
-        },
-      )
+
+      toast.error(error.response && error.response.data
+        ? error.response.data.message
+        : error.message, {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      })
     }
   }

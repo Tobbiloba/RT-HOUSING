@@ -1,6 +1,6 @@
 // @ts-nocheck
 import Footer from '@/components/Footer/Footer'
-import SearchBox from '@/components/how/SearchBox'
+import SearchBox from '@/components/common/how/SearchBox'
 import React from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { IoSettingsOutline } from 'react-icons/io5'

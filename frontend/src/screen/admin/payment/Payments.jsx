@@ -2,7 +2,7 @@ import React from 'react'
 import { LuWarehouse } from 'react-icons/lu'
 import { CiGrid41 } from 'react-icons/ci'
 import { AiOutlineOrderedList } from 'react-icons/ai'
-import { PaymentTable } from '@/components/admin/table/PaymentTable'
+import { PaymentTable } from '@/components/table/PaymentTable'
 
 const data = [
   {

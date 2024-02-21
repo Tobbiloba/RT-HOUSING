@@ -12,7 +12,6 @@ const FloorPlans = () => {
     top: 1,
   })
 
-
   return (
     <div className="flex items-center exo justify-center py-12 bg-slate-50">
       <div className="container flex px-[5%] md:px-0 flex-col gap-y-24 w-[100%] lg:flex-row justify-evenly items-center gap-4">

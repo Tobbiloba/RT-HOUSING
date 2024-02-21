@@ -24,10 +24,8 @@ import {
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL
 
 const customId = 'custom-id-yes'
-const adminId = "659ff1167d551e2588859520"
-
-// console.log(BASE_URL)
-
+const adminId = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+console.log(adminId)
 export const getAllProperties = () => async dispatch => {
   dispatch({
     type: FETCH_PROPERTIES,
@@ -43,15 +41,15 @@ export const getAllProperties = () => async dispatch => {
     dispatch({
       type: FETCH_PROPERTIES_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
-        : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
       {
         toastId: customId,
         position: 'bottom-right',
@@ -65,30 +63,25 @@ export const getMyProperties = () => async dispatch => {
   dispatch({
     type: FETCH_MY_PROPERTIES,
   })
-  console.log('called')
   try {
-    const { data } = await Axios.get(
-      `${BASE_URL}/properties/admin/${adminId}`,
-    )
+    const { data } = await Axios.get(`${BASE_URL}/properties/admin/${adminId}`)
     dispatch({
       type: FETCH_MY_PROPERTIES_SUCCESSFUL,
       payload: data,
     })
-
-    console.log(data)
   } catch (error) {
     dispatch({
       type: FETCH_MY_PROPERTIES_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
     console.log(error)
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
-        : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
       {
         toastId: customId,
         position: 'bottom-right',
@@ -98,11 +91,10 @@ export const getMyProperties = () => async dispatch => {
   }
 }
 
-export const getPropertyByType = (type) => async dispatch => {
+export const getPropertyByType = type => async dispatch => {
   dispatch({
     type: FETCH_PROPERTY_TYPE,
   })
-  console.log('called')
   try {
     const { data } = await Axios.get(`${BASE_URL}/properties/type/${type}`)
     dispatch({
@@ -110,59 +102,53 @@ export const getPropertyByType = (type) => async dispatch => {
       payload: data,
     })
 
-    console.log(data)
   } catch (error) {
     dispatch({
       type: FETCH_PROPERTY_TYPE_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
-    console.log(error)
-    // toast.error(
-    //   error.response && error.response.data[0]
-    //     ? error.response.data[0]
-    //     : error.message,
-    //   {
-    //     toastId: customId,
-    //     position: "bottom-right",
-    //     theme: "colored",
-    //   }
-    // );
   }
 }
 
-export const createProperty = (id, property_information) => async dispatch => {
+export const createProperty = (property_information) => async dispatch => {
   dispatch({
     type: CREATE_PROPERTIES,
   })
 
-  // console.log(id, property_information)
-
   try {
     const { data } = await Axios.post(`${BASE_URL}/properties/${adminId}`, {
-      // id,
       property_information: property_information,
     })
     dispatch({
       type: CREATE_PROPERTIES_SUCCESSFUL,
       payload: data,
     })
-    console.log(data)
+
+    toast.success(
+      "Successfully created property",
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
+
   } catch (error) {
     dispatch({
       type: CREATE_PROPERTIES_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
-        : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
       {
         toastId: customId,
         position: 'bottom-right',
@@ -176,32 +162,27 @@ export const updateProperty = (id, property_information) => async dispatch => {
   dispatch({
     type: CREATE_PROPERTIES,
   })
-
-  // console.log(id, property_information)
-
   try {
     const { data } = await Axios.patch(`${BASE_URL}/properties/${id}`, {
-      // id,
       property_information: property_information,
     })
     dispatch({
       type: CREATE_PROPERTIES_SUCCESSFUL,
       payload: data,
     })
-    console.log(data)
   } catch (error) {
     dispatch({
       type: CREATE_PROPERTIES_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
-        : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
       {
         toastId: customId,
         position: 'bottom-right',
@@ -216,12 +197,10 @@ export const Clear = () => async dispatch => {
     type: CLEAR,
   })
 }
-
 export const getPropertyDetailById = id => async dispatch => {
   dispatch({
     type: FETCH_PROPERTY_DETAILS,
   })
-  console.log(id)
   try {
     const { data } = await Axios.get(
       `${BASE_URL}/properties/property-details/${encodeURIComponent(id)}`,
@@ -230,21 +209,19 @@ export const getPropertyDetailById = id => async dispatch => {
       type: FETCH_PROPERTY_DETAILS_SUCCESSFUL,
       payload: data,
     })
-
-    console.log(data)
   } catch (error) {
     dispatch({
       type: FETCH_PROPERTY_DETAILS_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
-        : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
       {
         toastId: customId,
         position: 'bottom-right',

@@ -1,8 +1,8 @@
+// @ts-nocheck
 import React, { useState } from 'react'
 import './Dropdown.css' // Import your CSS file for styling
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown } from 'react-icons/io'
 const Dropdown = ({ state, setState, data, height }) => {
-  const [selectedOption, setSelectedOption] = useState('Select an option')
   const [isDropdownOpen, setDropdownOpen] = useState(false)
 
   const options = ['Option 1', 'Option 2', 'Option 3']
@@ -12,11 +12,9 @@ const Dropdown = ({ state, setState, data, height }) => {
     setDropdownOpen(false)
   }
 
-  // console.log(state)
-
   return (
     <div className="dropdown-container exo text-[13px] w-[100%]">
-      {/* <label htmlFor="dropdown">Select an option:</label> */}
+
       <div className="dropdown w-[100%] h-[100%]">
         <div
           className={`items-center px-3 cursor-pointer ${height ? `${height}` : 'h-10'}  flex flex-row justify-between text-gray-500 text-[13px]`}
@@ -25,8 +23,7 @@ const Dropdown = ({ state, setState, data, height }) => {
           {state}
 
           {options != '' && (
-            //   <span className="down-button">&#9660;</span>
-            <IoIosArrowDown className='text-[17px]'/>
+           <IoIosArrowDown className="text-[17px]" />
           )}
         </div>
         {isDropdownOpen && (

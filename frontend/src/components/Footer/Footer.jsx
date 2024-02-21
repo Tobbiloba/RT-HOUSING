@@ -19,7 +19,6 @@ const ImageCard = ({ item }) => {
   )
 }
 const Footer = () => {
-  
   return (
     <div className="exo flex items-centerw-[100%] justify-center mt-8">
       <div className="container px-[1rem]">

@@ -1,5 +1,5 @@
+// @ts-nocheck
 import Axios from 'axios'
-
 import {
   GET_NOTIFICATION,
   GET_NOTIFICATION_FAILED,
@@ -10,8 +10,8 @@ import {
 } from '@/constant/notification'
 
 const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/notification`
-
-export const getNotifications = id => async dispatch => {
+const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+export const getNotifications = () => async dispatch => {
   dispatch({
     type: GET_NOTIFICATION,
   })
@@ -21,8 +21,6 @@ export const getNotifications = id => async dispatch => {
       type: GET_NOTIFICATION_SUCCESSFUL,
       payload: data,
     })
-
-    console.log(data)
   } catch (error) {
     console.log(error.message)
 
@@ -50,7 +48,6 @@ export const updateNotification = ids => async dispatch => {
       payload: data,
     })
 
-    // console.log(data)
   } catch (error) {
     console.log(error.message)
 

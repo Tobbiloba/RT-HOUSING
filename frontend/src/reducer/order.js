@@ -15,7 +15,7 @@ import {
   GET_ACTIVE_ORDER_SUCCESSFUL,
   GET_ACTIVE_ORDER_FAILED,
 } from '../constant/order'
-
+import { CLEAR } from '@/constant/property'
 export const getAdminOrder = (
   state = { loading: true, error: null },
   action,
@@ -68,9 +68,6 @@ export const getUserOrder = (
   }
 }
 
-
-
-
 export const getUserActiveOrder = (
   state = { loading: true, error: null },
   action,
@@ -84,7 +81,7 @@ export const getUserActiveOrder = (
     case GET_ACTIVE_ORDER_SUCCESSFUL:
       return {
         loading: false,
-        orders: action.payload
+        orders: action.payload,
       }
     case GET_ACTIVE_ORDER_FAILED:
       return {
@@ -96,7 +93,10 @@ export const getUserActiveOrder = (
   }
 }
 
-export const createOrder = (state = { loading: false, error: null }, action) => {
+export const createOrder = (
+  state = { loading: false, error: null },
+  action,
+) => {
   switch (action.type) {
     case CREATE_USER_ORDER:
       return {
@@ -137,6 +137,8 @@ export const updateOrder = (state = { loading: true, error: null }, action) => {
         loading: false,
         error: true,
       }
+      case CLEAR: 
+      return {}
     default:
       return state
   }

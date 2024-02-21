@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   GET_ADMIN_PROFILE,
   GET_ADMIN_PROFILE_FAILED,
@@ -9,12 +10,11 @@ import {
 import Axios from 'axios'
 
 const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/admin`
-
-export const getAdminInfo = id => async dispatch => {
+const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+export const getAdminInfo = ()=> async dispatch => {
   dispatch({
     type: GET_ADMIN_PROFILE,
   })
-  console.log(id)
   try {
     const { data } = await Axios.get(`${BASE_URL}/${id}`)
     dispatch({
@@ -22,21 +22,18 @@ export const getAdminInfo = id => async dispatch => {
       payload: data,
     })
 
-    console.log(data)
   } catch (error) {
-    console.log(error.message)
-
     dispatch({
       type: GET_ADMIN_PROFILE_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
   }
 }
 
-export const updateAdminInfo = (id, values) => async dispatch => {
+export const updateAdminInfo = (values) => async dispatch => {
   dispatch({
     type: UPDATE_ADMIN_PROFILE,
   })
@@ -49,16 +46,13 @@ export const updateAdminInfo = (id, values) => async dispatch => {
       payload: data,
     })
 
-    console.log(data)
   } catch (error) {
-    console.log(error.message)
-
     dispatch({
       type: UPDATE_ADMIN_PROFILE_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
   }
 }

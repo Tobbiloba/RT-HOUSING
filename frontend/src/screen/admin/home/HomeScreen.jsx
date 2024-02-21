@@ -3,7 +3,7 @@ import React from 'react'
 import PieChart from '@/components/admin/chart/PieChart'
 import TotalRevenue from '@/components/admin/chart/TotalRevenue'
 import PropertyReferrals from '@/components/admin/chart/PropertyReferrals'
-import '@/components/chatbot/chatbot.css'
+// import '@/components/chatbot/chatbot.css'
 
 const Home = () => {
   return (

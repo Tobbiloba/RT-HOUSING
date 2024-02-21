@@ -68,6 +68,8 @@ export const getOrderByUserId = (id) =>
     "propertyId": propertyId
   });
 export const getOrderById = (id) => OrderModel.findOne({ _id: id });
+export const getUserIsOrderExist = (id, userId) =>
+  OrderModel.findOne({ propertyId: id, "userInformation.userId": userId, bookingStatus: { $in: ["active", "pending"] } });
 export const createOrder = (values) =>
   new OrderModel(values).save().then((user) => user.toObject());
 export const updateOrderById = (id, property) =>

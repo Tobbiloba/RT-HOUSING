@@ -1,13 +1,13 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react'
-import Sidebar from '@/components/admin/Sidebar'
+import Sidebar from '@/components/admin/sidebar/Sidebar'
 import './index.css'
 import { useMediaQuery } from 'react-responsive'
 import { FaLongArrowAltLeft } from 'react-icons/fa'
 import { useNavigate, useLocation } from 'react-router-dom'
-import Loading from '../../Loading'
-import Topbar from '@/components/admin/Topbar'
-import BreadCrumb from '@/components/admin/breadcrumb/BreadCrumb'
+import Loading from '../../common/loading/Loading'
+import Topbar from '@/components/admin/topbar/Topbar'
+import BreadCrumb from '@/components/common/breadcrumb/BreadCrumb'
 const AdminLayout = ({ children }) => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -20,7 +20,7 @@ const AdminLayout = ({ children }) => {
   useEffect(() => {
     setLoading(true)
     if (!data) {
-      navigate('/admin/login', { replace: true })
+      navigate('/admin/login', { state: { from: location.pathname } })
     }
     setLoading(false)
   }, [data])

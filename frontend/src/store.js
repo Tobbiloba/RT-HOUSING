@@ -21,7 +21,11 @@ import {
   getUserOrder,
   updateOrder,
 } from './reducer/order'
-import { createCouponReducer, fetchCouponReducer, verifyCouponReducer } from './reducer/coupon'
+import {
+  createCouponReducer,
+  fetchCouponReducer,
+  verifyCouponReducer,
+} from './reducer/coupon'
 import {
   createEmployeeReducer,
   fetchAdminEmployeeReducer,
@@ -36,6 +40,8 @@ import {
 } from './reducer/notification'
 import { getAdminInfoReducer, updateAdminInfoReducer } from './reducer/admin'
 import { fetchPropertyTypeReducer } from './reducer/type'
+import { requestTourReducer, contactAgentReducer } from './reducer/message'
+import { updateUserProfileReducer, updateUserPasswordReducer } from './reducer/user'
 const rootReducer = combineReducers({
   login: loginReducer,
   register: registerReducer,
@@ -65,9 +71,14 @@ const rootReducer = combineReducers({
   propertyTypes: fetchPropertyTypeReducer,
   verifyCoupon: verifyCouponReducer,
   activeUserOrder: getUserActiveOrder,
-  agent: fetchAdminAgentReducer
+  agent: fetchAdminAgentReducer,
+  requestTour: requestTourReducer,
+  contactAgent: contactAgentReducer,
+  updateUserProfile: updateUserProfileReducer,
+  updateUserPassword: updateUserPasswordReducer
 })
 
+// @ts-ignore
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk)))

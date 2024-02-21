@@ -7,23 +7,35 @@ import { FaBath } from 'react-icons/fa'
 import { IoBedSharp } from 'react-icons/io5'
 import { SlSizeActual } from 'react-icons/sl'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
-// Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/pagination'
 import { FaLocationDot } from 'react-icons/fa6'
 import { FreeMode, Pagination } from 'swiper/modules'
-const LazyLoadedImage = lazy(() => import('../../LazyLoadedImage'))
+const LazyLoadedImage = lazy(() => import('../../common/lazy loading/LazyLoadedImage'))
+
+
+
+const DiscoveryLoadingCard = () => {
+  return(
+    <div className='h-[25rem] w-[100%]'>
+    <div className='w-[100%] h-[15rem] bg-slate-400 animate-pulse'></div>
+    <div className='p-[1rem]'>
+    <div className='h-8 w-[100%] bg-slate-400 animate-pulse'></div>
+    <div className='h-5 w-[80%] bg-slate-400 animate-pulse mt-8'></div>
+    <div className='h-5 w-[60%] bg-slate-400 animate-pulse mt-4'></div>
+    </div>
+  </div>
+  )
+}
 const SwiperContainer = () => {
   const one = useMediaQuery({ maxWidth: 508 })
   const two = useMediaQuery({ maxWidth: 788 })
   const three = useMediaQuery({ maxWidth: 920 })
   const four = useMediaQuery({ minWidth: 1024 })
 
-
-
-  const {properties} = useSelector(state => state.propertyType)
+  const { properties, loading } = useSelector(state => state.propertyType)
+  const num = [1, 2, 3, 4, 5, 6, 7, 8]
   return (
     <>
       <Swiper
@@ -36,71 +48,83 @@ const SwiperContainer = () => {
         modules={[FreeMode, Pagination]}
         className="mySwiper pb-[2rem]"
       >
-
-        {properties && properties.map((property, index) => {
-          return (
-            <SwiperSlide
-              key={index}
-              className="hover:border-b hover:shadow-md border-slate-500 "
-            >
-              <div className="relative  max-h-[15rem] overflow-hidden">
-               
-
-                <div className="w-[100%] h-[15rem]">
-                  <Suspense
-                    fallback={<div className="h-[15rem] w-[100%]"></div>}
-                  >
-                    <LazyLoadedImage src={property.property_information.property_images[0]} className=" " />
-                  </Suspense>
+        {loading ? 
+            num.map((index) => <SwiperSlide
+            key={index}
+            className="hover:border-b hover:shadow-md border-slate-500 "
+          > <DiscoveryLoadingCard key={index}/>
+          </SwiperSlide>)
+        : properties && properties.length > 0 &&
+          properties.map((property, index) => {
+            return (
+              <SwiperSlide
+                key={index}
+                className="hover:border-b hover:shadow-md border-slate-500 "
+              >
+                <div className="relative  max-h-[15rem] overflow-hidden">
+                  <div className="w-[100%] h-[15rem]">
+                    <Suspense
+                      fallback={<div className="h-[15rem] w-[100%]"></div>}
+                    >
+                      <LazyLoadedImage
+                        src={property?.property_information?.property_images[0]}
+                        className=" "
+                      />
+                    </Suspense>
+                  </div>
+                  <div className="w-[100%] h-[100%] z-[50] bg-black/50 absolute top-0 left-0"></div>
                 </div>
-                <div className="w-[100%] h-[100%] z-[50] bg-black/50 absolute top-0 left-0"></div>
-              </div>
 
-              <div className=" p-[1.25rem] py-[2rem]">
-                <p className="text-[18px] font-[600]">
-                  {property.property_information.pricing}{' '}
-                  <span className="text-slate-500 text-[13px]">
-                    / night
-                  </span>
-                </p>
-
-                <div className="flex flex-row mt-3 gap-4 items-center justify-between">
-                  <p className="text-[16px] gap-3 items-center  flex flex-row">
-                    <FaBath className="text-slate-500" />
-                    {property.property_information.property_no_bathrooms}
+                <div className=" p-[1.25rem] py-[2rem]">
+                <div className='flex justify-between'>
+                <p className="text-[20px] text-slate-600 font-[600]">
+                    {property.property_information?.property_name}{' '}
                   </p>
-                  <p className="text-[16px] gap-3 items-center  flex flex-row">
-                    <IoBedSharp className="text-slate-500" />
-                    {property.property_information.property_no_bedrooms}
-                  </p>
-                  <p className="text-[16px] gap-3 items-center  flex flex-row">
-                    <SlSizeActual className="text-slate-500" />
-                    {property.property_information.property_size}
+                  <p className="text-[16px] text-slate-600 font-[600]">
+                    {property.property_information?.pricing}{' '}
+                    <span className="text-slate-500 text-[13px]">/ night</span>
                   </p>
                 </div>
 
-                <div className="flex mt-4 flex-row items-center gap-3">
-                  <FaLocationDot className="text-slate-500" />
-                  <h1 className="text-[16px]">{property.property_information.property_location.city}</h1>
+                  <div className="flex text-slate-500 flex-row mt-7 gap-4 items-center justify-between">
+                    <p className="text-[16px] gap-3 items-center  flex flex-row">
+                      <FaBath className="text-slate-500" />
+                      {property.property_information?.property_no_bathrooms}
+                    </p>
+                    <p className="text-[16px] gap-3 items-center  flex flex-row">
+                      <IoBedSharp className="text-slate-500" />
+                      {property.property_information?.property_no_bedrooms}
+                    </p>
+                    <p className="text-[16px]  gap-3 items-center  flex flex-row">
+                      <SlSizeActual className="text-slate-500" />
+                      {property.property_information?.property_size}
+                    </p>
+                  </div>
+
+                  <div className="flex mt-4 text-slate-500 flex-row items-center gap-3">
+                    <FaLocationDot className="text-slate-500" />
+                    <h1 className="text-[16px]">
+                      {property.property_information?.property_location.city}
+                    </h1>
+                  </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          )
-        })}
+              </SwiperSlide>
+            )
+          })}
       </Swiper>
     </>
   )
 }
 
-const Categories = () => {
 
+
+
+const Categories = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getPropertyByType('Apartment'))
   }, [])
-
-  
 
   return (
     <div className="flex items-center justify-center exo bg-gray-100 h-fit py-6 lg:py-12 ">
@@ -121,7 +145,9 @@ const Categories = () => {
         </div>
 
         <div className="mt-7 ">
+
           <SwiperContainer />
+          
         </div>
       </div>
     </div>

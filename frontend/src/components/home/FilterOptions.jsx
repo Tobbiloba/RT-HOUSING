@@ -1,30 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import Dropdown from './Dropdown'
+// @ts-nocheck
+import React
+// , { useState, useEffect } 
+from 'react'
 
 const FilterOptions = ({ type, value, setValue }) => {
-  const [number, setSelectedNumber] = useState('Other')
-  const [val, setVal] = useState('Select Option')
-  const numbers = ['4', '5', '6']
-
-  useEffect(() => {
-    if (value <= 3) {
-      setVal('Select Option')
-    } else {
-      setVal(value)
-    }
-  }, [value])
 
   const handleClick = num => {
-    // if(!value) {
     setValue(num)
-    // }
-    // else {
-    //   if(value == num) {
-    //     setValue('')
-    //   } else {
-    //     setValue(num)
-    //   }
-    // }
   }
   return (
     <div
@@ -86,9 +68,6 @@ const FilterOptions = ({ type, value, setValue }) => {
         </p>
       </div>
 
-      {/* <div className={`border-r border-b border-t w-[100%] ${type !== '' ? 'md:w-4/12' : 'h-[100%]'}`}>
-              <Dropdown  data={numbers} state={val} setState={setValue}/>
-      </div> */}
     </div>
   )
 }

@@ -405,7 +405,9 @@ export const sendOrderVerificationAdmin = async (email, orderDetails, adminName)
     usedDiscount,
     checkinDate,
     checkoutDate,
-    status
+    status,
+    customerEmail,
+    customerName
   } = orderDetails;
 
   const mailOptions = {
@@ -454,6 +456,16 @@ export const sendOrderVerificationAdmin = async (email, orderDetails, adminName)
       
           <table
             style="width: 100%; color: white; border-collapse: collapse; margin-bottom: 40px;  font-size: 12px; margin-top: 2rem; padding-left: 1rem;">
+            <tr style="margin-top: 4px; padding: 2rem 0">
+              <td style="width: 100%; text-align: left;  display: flex; padding-top: 2rem; justify-content: start; align-items: start;">Customer name:
+              </td>
+              <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${customerName}</td>
+            </tr>
+            <tr style="margin-top: 4px; padding: 2rem 0">
+              <td style="width: 100%; text-align: left;  display: flex; padding-top: 2rem; justify-content: start; align-items: start;">Customer email:
+              </td>
+              <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${customerEmail}</td>
+            </tr>
             <tr style="margin-top: 4px; padding: 2rem 0">
               <td style="width: 100%; text-align: left;  display: flex; padding-top: 2rem; justify-content: start; align-items: start;">Order ID:
               </td>
@@ -948,7 +960,7 @@ export const sendTourRequestVerification = async (email, name, tourId, propertyN
       pass: "gdbu hltz lxbr ipyw",
     },
   });
-
+console.log(email, name, tourId, propertyName, requestDate, additionalNote)
 
 
   const mailOptions = {
@@ -995,10 +1007,10 @@ export const sendTourRequestVerification = async (email, name, tourId, propertyN
                 <p style="font-size: 13px;">Here are the details of your request:</p>
               
                 <ul style="font-size: 13px; list-style-type: none; padding: 0;">
-                  <li><strong>Tour Request ID:</strong> ${tourId}</li>
-                  <li><strong>Property Name:</strong> ${propertyName}</li>
-                  <li><strong>Requested Tour Date and Time:</strong> ${requestDate}</li>
-                  ${additionalNote ? `<li><strong>Additional Notes or Preferences:</strong> ${additionalNote}</li>` : ''}
+                  <li style="padding-top: 5px;"><strong>Tour Request ID:</strong> ${tourId}</li>
+                  <li style="padding-top: 5px;"><strong>Property Name:</strong> ${propertyName}</li>
+                  <li style="padding-top: 5px;"><strong>Requested Tour Date and Time:</strong> ${requestDate.dayOfWeek} ${requestDate.dateOfMonth} ${requestDate.monthOfYear}</li>
+                  ${additionalNote ? `<li style="padding-top: 5px;"><strong>Additional Notes or Preferences:</strong> ${additionalNote}</li>` : ''}
                 </ul>
               
                 <p style="font-size: 14px; ">Please be assured that we are committed to providing you with the best possible service and ensuring a seamless experience throughout the tour request process.</p>
@@ -1057,7 +1069,7 @@ export const sendTourRequestVerification = async (email, name, tourId, propertyN
 
 
 
-export const agentMessageVerification = async (email, name) => {
+export const sendAgentMessageVerification = async (email, name) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {

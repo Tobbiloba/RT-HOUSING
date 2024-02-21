@@ -75,7 +75,7 @@ const loginUser = async (req, res) => {
 
       if (userExists.authentication.password != expectedHash) {
         console.log("password doesnt match");
-        return res.sendStatus(403);
+        return res.status(403).json({message: "Incorrect password! Please try again"});
       } else {
         const salt = random();
         userExists.authentication.sessionToken = authentication(
@@ -140,36 +140,66 @@ const getUserInfoByEmail = async (req, res) => {
 
 
 
+
+
+const validatePassword = (salt, enteredPassword, storedHash) => {
+  const enteredHash = authentication(salt, enteredPassword);
+  return enteredHash === storedHash;
+};
+
+
+
+
+
+
 const updateUserPassword = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, oldPassword, newPassword } = req.body;
+    console.log(email, oldPassword, newPassword );
 
-    // Check if both email and password are provided
-    if (!email || !password) {
-      return res.status(400).json({ message: "Please provide both email and password" });
+    // Check if email, oldPassword, and newPassword are provided
+    if (!email || !oldPassword || !newPassword) {
+      return res.status(400).json({ message: "Please provide email, old password, and new password" });
     }
 
-    // Assuming you have a function to get user by email
-    const user = await getUserByEmail(email);
-
-    console.log(user)
+    const userExists = await getUserByEmail(email).select(
+      "+authentication.salt +authentication.password"
+    );
 
     // Check if user exists
-    if (!user) {
+    if (!userExists) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Generate a salt
-    const salt = random();
+    const expectedHash = authentication(
+      userExists.authentication.salt,
+      oldPassword
+    );
 
-    // Update user's authentication details
-    user.authentication = {
+    // console.log(userExists);
+
+    if (userExists.authentication.password != expectedHash) {
+      console.log("password doesnt match");
+      return res.status(403).json({message: "Incorrect password! Please try again"});
+    } else {
+      console.log('equal')
+    }
+
+    // Check if the old password matches
+  
+
+    // // Generate a new salt and hash for the new password
+    const salt = random();
+    const newHash = authentication(salt, newPassword);
+
+    // // Update user's authentication details with the new password
+    userExists.authentication = {
       salt,
-      password: authentication(salt, password),
+      password: newHash,
     };
 
     // Assuming you have a function to save the updated user
-    await user.save();
+    await userExists.save();
 
     // Send a success response
     return res.status(200).json({ message: "Password updated successfully" });
@@ -182,19 +212,86 @@ const updateUserPassword = async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+// const updateUserPassword = async (req, res) => {
+//   try {
+//     const { email, oldPassword, newPassword } = req.body;
+//     console.log(email, oldPassword, newPassword )
+//     // Check if email, oldPassword, and newPassword are provided
+//     if (!email || !oldPassword || !newPassword) {
+//       return res.status(400).json({ message: "Please provide email, old password, and new password" });
+//     }
+
+//     // Assuming you have a function to get user by email
+//     const user = await getUserByEmail(email);
+
+//     // Check if user exists
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+//     console.log(user)
+
+
+//     const expectedHash = authentication(
+//       user.authentication.salt,
+//       password
+//     );
+
+
+//     // Check if the old password matches
+//     const isPasswordMatch = validatePassword(user.authentication.salt, oldPassword, user.authentication.password);
+
+//     if (!isPasswordMatch) {
+//       return res.status(401).json({ message: "Old password is incorrect" });
+//     }
+
+//     // Generate a new salt
+//     const newSalt = random();
+
+//     // Update user's authentication details with the new password
+//     user.authentication = {
+//       salt: newSalt,
+//       password: authentication(newSalt, newPassword),
+//     };
+
+//     // Assuming you have a function to save the updated user
+//     await user.save();
+
+//     // Send a success response
+//     return res.status(200).json({ message: "Password updated successfully" });
+
+//   } catch (error) {
+//     console.log(error.message);
+//     return res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };
+
+
+
+
 const updateUserInfo = async (req, res) => {
   try {
-    const { email, username, firstname, lastname, avatar, phoneNo } = req.body;
+    const {id} = req.params
+    const { username, firstname, lastname, avatar, phoneNo } = req.body;
+
+    console.log(username, firstname, lastname, avatar, phoneNo, id )
 
     // Check if required fields are provided
-    if (!email || !username || !firstname || !lastname || !avatar  || !phoneNo) {
+    if (!id || !username || !firstname || !lastname || !avatar  || !phoneNo) {
       return res.status(400).json({ message: "Incomplete user information provided" });
     }
 
-    console.log(email, username, firstname, lastname, avatar, phoneNo)
+    console.log(id, username, firstname, lastname, avatar, phoneNo)
 
     // Assuming you have a function to get user by email
-    const user = await getUserByEmail(email);
+    const user = await getUserById(id);
 
     // Check if user exists
     if (!user) {

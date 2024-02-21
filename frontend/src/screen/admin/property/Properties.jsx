@@ -121,7 +121,7 @@ const AdminProperties = () => {
 
   return (
     <div className="exo">
-      <div className="pt-6 items-center flex-wrap gap-y-6 pb-4 px-4 bg-slate-600 mt-0 md:px-[2%] flex flex-row justify-between">
+      <div className="pt-6 items-center relative first-line:flex-wrap gap-y-6 pb-4 px-4 bg-slate-600 mt-0 md:px-[2%] flex flex-row justify-between">
         <div className="flex flex-row gap-6 flex-wrap">
           <div className="flex flex-row flex-wrap gap-4">
             <button

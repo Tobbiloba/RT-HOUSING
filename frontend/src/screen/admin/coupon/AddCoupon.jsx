@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaCalendarAlt } from 'react-icons/fa'
-import Calendar from '@/components/Calendar'
+import Calendar from '@/components/common/calendar/Calendar'
 import { startOfToday, startOfTomorrow } from 'date-fns'
 import Dropdown from '@/components/home/Dropdown'
 const Input = ({ state, setState, label, placeholder }) => {

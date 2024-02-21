@@ -17,18 +17,17 @@ import {
   ACTIVATE_ACCOUNT,
   ACTIVATE_ACCOUNT_SUCCESSFUL,
   ACTIVATE_ACCOUNT_FAILED,
+  CLEAR_AUTH
 } from '../constant/auth'
 
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL
 const customId = 'custom-id-yes'
 
-console.log(BASE_URL)
-
 export const login = values => async dispatch => {
   dispatch({
     type: REQUEST_LOGIN,
   })
-  console.log(values)
+  // console.log(values)
 
   try {
     const { data } = await Axios.post(`${BASE_URL}/users/login`, {
@@ -39,7 +38,7 @@ export const login = values => async dispatch => {
       payload: data,
     })
 
-    console.log(`${BASE_URL}/auth/login`)
+    // console.log(`${BASE_URL}/auth/login`)
 
     toast.success('Successfully signed in', {
       position: 'bottom-right',
@@ -58,17 +57,13 @@ export const login = values => async dispatch => {
   } catch (error) {
     dispatch({
       type: REQUEST_LOGIN_FAILED,
-      // payload:
-      //   error.response && error.response.data[0]
-      //     ? error.response.data.message
-      //     : error.message,
     })
 
-    console.log(error)
+    console.log(error.response.data.message)
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
+      error.response && error.response.data
+        ? error.response.data.message
         : error.message,
       {
         toastId: customId,
@@ -111,18 +106,15 @@ export const register = value => async dispatch => {
     sessionStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
-      type: REQUEST_REGISTER_FAILED,
-      // payload:
-      //   error.response && error.response.data[0]
-      //     ? error.response.data.message
-      //     : error.message,
+      type: REQUEST_REGISTER_FAILED
     })
 
-    console.log(error)
+
+    console.log(error.response.data.message)
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
+      error.response && error.response.data
+        ? error.response.data.message
         : error.message,
       {
         toastId: customId,
@@ -133,26 +125,16 @@ export const register = value => async dispatch => {
   }
 }
 
-export const registerAdmin = (values, image) => async dispatch => {
+export const registerAdmin = (values) => async dispatch => {
   dispatch({
     type: REQUEST_REGISTER_ADMIN,
   })
-  console.log({ ...values, profile_img: image })
+  console.log({ ...values })
 
   try {
     const { data } = await Axios.post(`${BASE_URL}/admin/register`, {
-      // email: email,
-      // password: password,
-      // phone_no: phoneNo,
-      // username: username,
-      // firstname, firstname,
-      // lastname: lastname,
 
-      // country: country,
-      // state: state,
-      // city: city
-      ...values,
-      profile_img: image,
+      ...values
     })
     dispatch({
       type: REQUEST_REGISTER_ADMIN_SUCCESSFUL,
@@ -172,22 +154,16 @@ export const registerAdmin = (values, image) => async dispatch => {
       theme: 'light',
     })
 
-    console.log(data)
-    // Saving the auth token to session storage
-    // sessionStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
-      type: REQUEST_REGISTER_ADMIN_FAILED,
-      // payload:
-      //   error.response && error.response.data[0]
-      //     ? error.response.data.message
-      //     : error.message,
+      type: REQUEST_REGISTER_ADMIN_FAILED
     })
-    console.log(error)
+
+    console.log(error.response.data.message)
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
+      error.response && error.response.data
+        ? error.response.data.message
         : error.message,
       {
         toastId: customId,
@@ -213,8 +189,6 @@ export const loginAdmin = value => async dispatch => {
       payload: data,
     })
 
-    console.log(`${BASE_URL}/auth/login`)
-
     toast.success('Successfully signed in', {
       position: 'bottom-right',
       autoClose: 4000,
@@ -230,18 +204,15 @@ export const loginAdmin = value => async dispatch => {
     sessionStorage.setItem('adminInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
-      type: REQUEST_LOGIN_ADMIN_FAILED,
-      // payload:
-      //   error.response && error.response.data[0]
-      //     ? error.response.data.message
-      //     : error.message,
+      type: REQUEST_LOGIN_ADMIN_FAILED
     })
 
-    console.log(error)
+
+    console.log(error.response.data.message)
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
+      error.response && error.response.data
+        ? error.response.data.message
         : error.message,
       {
         toastId: customId,
@@ -279,6 +250,20 @@ export const activateUser = (id, token) => async dispatch => {
           ? error.response.data.message
           : error.message,
     })
+
+    console.log(error.response.data.message)
+
+    toast.error(
+      error.response && error.response.data
+        ? error.response.data.message
+        : error.message,
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
+
   }
 }
 
@@ -286,7 +271,6 @@ export const activateAdminUser = (id, token) => async dispatch => {
   dispatch({
     type: ACTIVATE_ACCOUNT,
   })
-  console.log(id, token)
 
   try {
     const { data } = await Axios.post(
@@ -300,14 +284,32 @@ export const activateAdminUser = (id, token) => async dispatch => {
       payload: data,
     })
 
-    console.log(token)
   } catch (error) {
     dispatch({
       type: ACTIVATE_ACCOUNT_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
+
+
+    console.log(error.response.data.message)
+
+    toast.error(
+      error.response && error.response.data
+        ? error.response.data.message
+        : error.message,
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
   }
 }
+
+export const clearAuth = () => async dispatch => {
+  dispatch({
+    type: CLEAR_AUTH
+  })}

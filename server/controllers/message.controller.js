@@ -1,4 +1,4 @@
-import { sendTourRequestVerification } from "../helpers/index.js";
+import { sendAgentMessageVerification, sendTourRequestVerification } from "../helpers/index.js";
 import { getAllMessageSchema, getMessageTypeSchema, createContactAgentSchema, createTourRequestSchema } from "../mongodb/models/message.js";
 import { getPropertyById } from "../mongodb/models/property.js";
 
@@ -41,31 +41,37 @@ const getAllMessageRequestModel = async (req, res) => {
 
  const createTourRequestModel = async (req, res) => {
     try{
+        const {id} = req.params
         const {
-            name, email, date, phone, propertyId, requestDate, additionalNote
+            username, email, phone, tourDate, additionalNote
         } = req.body
 
-        if(!name || !email || !phone || !date || !requestDate) {
+
+        console.log(id, username, email, phone, tourDate, additionalNote)
+        if(!username || !email || !phone || !tourDate || !additionalNote ) {
             return res.status(500).json({message: "Pass in necessary parameters"})
         }
-        const property = await getPropertyById(propertyId)
+        const property = await getPropertyById(id)
 
         if(!property) {
             return res.status(500).json({message: "Property not found"})
         }
         const propertyName = property.property_information.property_name
         
-       
+        console.log(propertyName)
 
         const tourRequest = await createTourRequestSchema({
             messageType: "tourRequest",
             phone,
             email,
-            name
+            username,
+            tourDate,
+            additionalNote,
+            propertyId: id
         })
 
-         sendTourRequestVerification(email, name, tourRequest._id, propertyName, requestDate, additionalNote)
-
+         sendTourRequestVerification(email, username, tourRequest._id, propertyName, tourDate, additionalNote)
+        console.log('success')
          return res.status(200).json({status: "Successful"})
     } catch(error) {
         console.log(error.message)
@@ -78,24 +84,33 @@ const getAllMessageRequestModel = async (req, res) => {
 
  const createAgentMessageModel = async (req, res) => {
     try{
+        const {id} = req.params
         const {
-            name, email, phone, message
+            username, email, phone, message
         } = req.body
 
-        if(!name || !email || !phone || !message) {
+        const property = await getPropertyById(id)
+
+        if(!username || !email || !phone || !message) {
             return res.status(500).json({message: "Pass in necessary parameters"})
         }
-        console.log(name, email, phone, message)
+
+        if(!property) {
+            return res.status(404).json({message: "Property not found"})
+        }
+        console.log(username, email, phone, message)
      
 
-        const createAgentMessage = createContactAgentSchema({
-            
+        const createAgentMessage = await createContactAgentSchema({
+            username, email, phone, message, propertyId: id
         })
         
-
+        sendAgentMessageVerification(email, username)
+        console.log('success')
+        return res.status(200).json({status: "Successful"})
     } catch(error) {
         console.log(error.message)
-        return res.status(500).json(error.message)
+        return res.status(500).json(error)
     }
 }
 

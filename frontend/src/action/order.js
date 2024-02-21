@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -16,7 +17,7 @@ import {
   UPDATE_USER_ORDER_SUCCESSFUL,
   GET_ACTIVE_ORDER,
   GET_ACTIVE_ORDER_FAILED,
-  GET_ACTIVE_ORDER_SUCCESSFUL
+  GET_ACTIVE_ORDER_SUCCESSFUL,
 } from '../constant/order'
 
 // @ts-ignore
@@ -24,41 +25,32 @@ const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/order`
 
 const customId = 'custom-id-yes'
 
-console.log(BASE_URL)
-
+const admin_id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+const user_id = JSON.parse(sessionStorage.getItem('userInfo'))?._id
 // @ts-ignore
-export const getAdminOrder = id => async dispatch => {
+export const getAdminOrder = () => async dispatch => {
   dispatch({
     type: FETCH_ADMIN_ORDER,
   })
 
   try {
-    const { data } = await Axios.get(`${BASE_URL}/admin/${id}/orders`)
+    const { data } = await Axios.get(`${BASE_URL}/admin/${admin_id}/orders`)
     dispatch({
       type: FETCH_ADMIN_ORDER_SUCCESSFUL,
       payload: data,
     })
-
-    console.log(data)
   } catch (error) {
     dispatch({
       type: FETCH_ADMIN_ORDER_FAILED,
       payload:
-        // @ts-ignore
-        error.response && error.response.data[0]
-          // @ts-ignore
-          ? error.response.data.message
-          // @ts-ignore
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
-    console.log(error)
 
     toast.error(
-      // @ts-ignore
-      error.response && error.response.data[0]
-        // @ts-ignore
-        ? error.response.data[0]
-        // @ts-ignore
+      error.response && error.response.data
+        ? error.response.data.message
         : error.message,
       {
         toastId: customId,
@@ -69,18 +61,14 @@ export const getAdminOrder = id => async dispatch => {
   }
 }
 
-
-
-// @ts-ignore
-export const getUserActiveOrder = (id, propertyId) => async dispatch => {
+export const getUserActiveOrder = propertyId => async dispatch => {
   dispatch({
     type: GET_ACTIVE_ORDER,
   })
-console.log(propertyId)
   try {
-    const {data} = await Axios.post(`${BASE_URL}/active/${id}`, {
-      propertyId
-    });
+    const { data } = await Axios.post(`${BASE_URL}/active/${user_id}`, {
+      propertyId,
+    })
     dispatch({
       type: GET_ACTIVE_ORDER_SUCCESSFUL,
       payload: data,
@@ -89,26 +77,21 @@ console.log(propertyId)
     dispatch({
       type: GET_ACTIVE_ORDER_FAILED,
       payload:
-        // @ts-ignore
-        error.response && error.response.data[0]
-          // @ts-ignore
-          ? error.response.data.message
-          // @ts-ignore
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
   }
 }
 
 // @ts-ignore
-export const getUserOrder = id => async dispatch => {
+export const getUserOrder = () => async dispatch => {
   dispatch({
     type: FETCH_USER_ORDER,
   })
 
-  console.log(id)
-
   try {
-    const { data } = await Axios.get(`${BASE_URL}/user/${id}/orders`)
+    const { data } = await Axios.get(`${BASE_URL}/user/${user_id}/orders`)
     dispatch({
       type: FETCH_USER_ORDER_SUCCESSFUL,
       payload: data,
@@ -119,20 +102,14 @@ export const getUserOrder = id => async dispatch => {
     dispatch({
       type: FETCH_USER_ORDER_FAILED,
       payload:
-        // @ts-ignore
-        error.response && error.response.data[0]
-          // @ts-ignore
-          ? error.response.data.message
-          // @ts-ignore
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
 
     toast.error(
-      // @ts-ignore
-      error.response && error.response.data[0]
-        // @ts-ignore
-        ? error.response.data[0]
-        // @ts-ignore
+      error.response && error.response.data
+        ? error.response.data.message
         : error.message,
       {
         toastId: customId,
@@ -142,105 +119,113 @@ export const getUserOrder = id => async dispatch => {
     )
   }
 }
-const user_id = "65ca388cf1369640b78fbeb5"
 export const createUserOrder =
-  // @ts-ignore
-  ({ id, couponCode, checkinDate, checkoutDate, expenses, totalPrice}) => async dispatch => {
+    ({ id, couponCode, checkinDate, checkoutDate, expenses, totalPrice }) =>
+    async dispatch => {
+      dispatch({
+        type: CREATE_USER_ORDER,
+      })
+
+      try {
+       if(user_id) {
+        const { data } = await Axios.post(`${BASE_URL}/create-order/${id}`, {
+          expense: expenses,
+          user_id,
+          checkinDate,
+          checkoutDate,
+          couponCode,
+          totalPrice,
+        })
+        dispatch({
+          type: CREATE_USER_ORDER_SUCCESSFUL,
+          payload: data,
+        })
+
+
+        toast.success(
+          "Successfully created order",
+          {
+            toastId: customId,
+            position: 'bottom-right',
+            theme: 'colored',
+          },
+        )
+       } else {
+        dispatch({
+          type: CREATE_USER_ORDER_FAILED
+        })
+        toast.error(
+          "You have to login first",
+          {
+            toastId: customId,
+            position: 'bottom-right',
+            theme: 'colored',
+          },
+        )
+       }
+      } catch (error) {
+        dispatch({
+          type: CREATE_USER_ORDER_FAILED,
+          payload:
+          error.response && error.response.data
+          ? error.response.data.message
+          : error.message,
+        })
+
+        toast.error(
+          error.response && error.response.data
+        ? error.response.data.message
+        : error.message,
+          {
+            toastId: customId,
+            position: 'bottom-right',
+            theme: 'colored',
+          },
+        )
+      }
+    }
+
+export const updateOrderStatus =
+  ( orderId, status, reason) => async dispatch => {
     dispatch({
-      type: CREATE_USER_ORDER,
+      type: UPDATE_USER_ORDER,
     })
 
-    console.log(user_id, id, couponCode, checkinDate, checkoutDate)
-console.log(totalPrice)
+    console.log(orderId, reason, status)
+
     try {
-      const {data} = await Axios.post(`${BASE_URL}/create-order/${id}`, {
-        expense: expenses,
-        user_id,
-        checkinDate,
-        checkoutDate,
-        couponCode,
-        totalPrice
-      });
+      const { data } = await Axios.put(`${BASE_URL}/admin/${admin_id}/update`, {
+        orderId,
+        reason,
+        status,
+      })
       dispatch({
-        type: CREATE_USER_ORDER_SUCCESSFUL,
+        type: UPDATE_USER_ORDER_SUCCESSFUL,
         payload: data,
       })
 
-      // toast.success('Successfully booked this apartment', {
-      //   position: 'bottom-right',
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: 'light',
-      // })
-    } catch (error) {
-      dispatch({
-        type: CREATE_USER_ORDER_FAILED,
-        payload:
-          // @ts-ignore
-          error.response && error.response.data[0]
-            // @ts-ignore
-            ? error.response.data.message
-            // @ts-ignore
-            : error.message,
-      })
 
-      toast.error(
-        // @ts-ignore
-        error.response && error.response.data[0]
-          // @ts-ignore
-          ? error.response.data[0]
-          // @ts-ignore
-          : error.message,
+      toast.success(
+        `Successfully ${status == "active" ? "activated" : "declined"} this order`,
         {
           toastId: customId,
           position: 'bottom-right',
           theme: 'colored',
         },
       )
-    }
-  }
-
-export const updateOrderStatus =
-  // @ts-ignore
-  (id, orderId, status, reason) => async dispatch => {
-    dispatch({
-      type: UPDATE_USER_ORDER,
-    })
-
-    try {
-      const { data } = await Axios.get(`${BASE_URL}/admin/${id}/update`, {
-        // @ts-ignore
-        property_id: property_id,
-        // @ts-ignore
-        order_information: order_information,
-      })
-      dispatch({
-        type: UPDATE_USER_ORDER_SUCCESSFUL,
-        payload: data,
-      })
     } catch (error) {
       dispatch({
         type: UPDATE_USER_ORDER_FAILED,
         payload:
-          // @ts-ignore
-          error.response && error.response.data[0]
-            // @ts-ignore
-            ? error.response.data.message
-            // @ts-ignore
-            : error.message,
+        error.response && error.response.data
+        ? error.response.data.message
+        : error.message,
       })
 
       toast.error(
-        // @ts-ignore
-        error.response && error.response.data[0]
-          // @ts-ignore
-          ? error.response.data[0]
-          // @ts-ignore
-          : error.message,
+        error.response && error.response.data
+        ? error.response.data.message
+        : error.message,
         {
           toastId: customId,
           position: 'bottom-right',

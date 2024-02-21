@@ -17,7 +17,7 @@ import {
   CLEAR,
   GET_AGENT,
   GET_AGENT_FAILED,
-  GET_AGENT_SUCCESSFUL
+  GET_AGENT_SUCCESSFUL,
 } from '@/constant/employee'
 
 export const fetchAllEmployeeReducer = (
@@ -80,12 +80,6 @@ export const fetchAdminEmployeeReducer = (
   }
 }
 
-
-
-
-
-
-
 export const fetchAdminAgentReducer = (
   state = { agentLoader: null, error: null },
   action,
@@ -115,8 +109,6 @@ export const fetchAdminAgentReducer = (
       return state
   }
 }
-
-
 
 export const createEmployeeReducer = (
   state = { loading: null, error: null },

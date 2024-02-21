@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import Stepper from '../../../components/admin/stepper/Stepper'
+import Stepper from '../../../components/common/stepper/Stepper'
 // import Input from "../../../components/Input";
-import Dropdown from '../../../components/admin/dropdown/Dropdown'
+import Dropdown from '../../../components/common/dropdown/Dropdown'
 // import Textarea from "../../../components/textarea/Textarea";
 import { Slider } from '@mui/material'
 import { toast } from 'react-toastify'
-import Calendar from '../../../components/Calendar'
+import Calendar from '../../../components/common/calendar/Calendar'
 import { startOfToday, startOfTomorrow } from 'date-fns'
-import Box from '../../../components/admin/box/Box'
-import Dropzone from '../../../components/admin/dropzone/Dropzone'
+import Box from '../../../components/common/box/Box'
+import Dropzone from '../../../components/common/dropzone/Dropzone'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Clear, createProperty } from '../../../action/property'
 import { IoMdCloseCircle } from 'react-icons/io'
 import { styled } from '@mui/system'
-import DragDropFiles from '@/components/dropzone/Dropzone'
+import DragDropFiles from '@/components/common/dropzone/Dropzone'
 import { useMediaQuery } from 'react-responsive'
 import Input from '@/components/Input'
 import { useFormik } from 'formik'
 import { createPropertySchema } from '@/schemas'
-import Textarea from '@/components/textarea/Textarea'
+import Textarea from '@/components/common/textarea/Textarea'
 const AddProperty = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()

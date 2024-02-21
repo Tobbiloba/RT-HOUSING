@@ -1,90 +1,104 @@
+// @ts-nocheck
 import Axios from 'axios'
 import { toast } from 'react-toastify'
 
-
-import { REQUEST_TOUR, REQUEST_TOUR_FAILED, REQUEST_TOUR_SUCCESSFUL, MESSAGE_AGENT, MESSAGE_AGENT_FAILED, MESSAGE_AGENT_SUCCESSFUL } from '@/constant/message'
+import {
+  REQUEST_TOUR,
+  REQUEST_TOUR_FAILED,
+  REQUEST_TOUR_SUCCESSFUL,
+  MESSAGE_AGENT,
+  MESSAGE_AGENT_FAILED,
+  MESSAGE_AGENT_SUCCESSFUL,
+} from '@/constant/message'
 
 const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/message`
 
 const customId = 'custom-id-yes'
-const id = ''
+const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
 
-export const requestTour = ({email, name, additionalNote, requestDate, phone}) => async dispatch => {
-    dispatch({
-      type: REQUEST_TOUR,
+export const requestTour = (values) => async dispatch => {
+  dispatch({
+    type: REQUEST_TOUR,
+  })
+  try {
+    const { data } = await Axios.post(`${BASE_URL}/tour-request/${id}`, {
+      ...values,
     })
-    try {
-      const { data } = await Axios.post(`${BASE_URL}/tour-request/${id}`, {
-        name,
-        phone,
-        requestDate,
-        email
-      })
-      dispatch({
-        type: REQUEST_TOUR_SUCCESSFUL,
-        payload: data,
-      })
-  
-      console.log(data)
-    } catch (error) {
-      console.log(error.message)
-  
-      dispatch({
-        type: REQUEST_TOUR_FAILED,
-        payload:
-          error.response && error.response.data[0]
-            ? error.response.data.message
-            : error.message,
-      })
-  
-      toast.error(
-        error.response && error.response.data[0]
-          ? error.response.data[0]
-          : error.message,
-        {
-          toastId: customId,
-          position: 'bottom-right',
-          theme: 'colored',
-        },
-      )
-    }
-  }
-
-
-
-
-  export const contactAgent = (email, name, message) => async dispatch => {
     dispatch({
-      type: REQUEST_TOUR,
+      type: REQUEST_TOUR_SUCCESSFUL,
+      payload: data,
     })
-    try {
-      const { data } = await Axios.get(`${BASE_URL}/${id}`)
-      dispatch({
-        type: REQUEST_TOUR_SUCCESSFUL,
-        payload: data,
-      })
-  
-      console.log(data)
-    } catch (error) {
-      console.log(error.message)
-  
-      dispatch({
-        type: REQUEST_TOUR_FAILED,
-        payload:
-          error.response && error.response.data[0]
-            ? error.response.data.message
-            : error.message,
-      })
-  
-      toast.error(
+
+    toast.success(
+      "Successfully requested tour",
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
+  } catch (error) {
+
+    dispatch({
+      type: REQUEST_TOUR_FAILED,
+      payload:
         error.response && error.response.data[0]
-          ? error.response.data[0]
+          ? error.response.data.message
           : error.message,
-        {
-          toastId: customId,
-          position: 'bottom-right',
-          theme: 'colored',
-        },
-      )
-    }
+    })
+
+    toast.error(
+      error.response && error.response.data[0]
+        ? error.response.data[0]
+        : error.message,
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
   }
+}
+
+export const contactAgent = (values) => async dispatch => {
+  dispatch({
+    type: MESSAGE_AGENT,
+  })
+  try {
+    const { data } = await Axios.post(`${BASE_URL}/contact-agent/${id}`, {
+      ...values
+    })
+    dispatch({
+      type: MESSAGE_AGENT_SUCCESSFUL,
+      payload: data,
+    })
+
+     toast.success(
+      "Successfully contacted agent",
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
+  } catch (error) {
+    dispatch({
+      type: MESSAGE_AGENT_FAILED,
+      payload:
+        error.response && error.response.data[0]
+          ? error.response.data.message
+          : error.message,
+    })
+
+    toast.error(
+      error.response && error.response.data[0]
+        ? error.response.data[0]
+        : error.message,
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
+  }
+}

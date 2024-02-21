@@ -1,14 +1,16 @@
 // @ts-nocheck
 import React, { useEffect } from 'react'
-import Carousel from '../../../components/details/Carousel'
-import AvailabilityCalendar from '@/components/AvailabilityCalendar'
-import {
-  Link,
-  Element,
-  animateScroll as scroll,
-} from 'react-scroll'
+import Carousel from '../../../components/common/details/Carousel'
+import AvailabilityCalendar from '@/components/common/calendar/AvailabilityCalendar'
+import { Link, Element, animateScroll as scroll } from 'react-scroll'
 import { Rating } from '@mui/material'
-import { AboutProperty, Terms, Nearby, Availability, Amenities } from '@/screen/user/property/card'
+import {
+  AboutProperty,
+  Terms,
+  Nearby,
+  Availability,
+  Amenities,
+} from '@/components/common/card'
 
 const detail = [
   {
@@ -144,7 +146,6 @@ const DetailTopCard = ({ detail }) => {
     </div>
   )
 }
-
 
 const Reviews = () => {
   return (
@@ -303,9 +304,7 @@ const PropertyDetail = () => {
                     <Element name="about-property" className="element">
                       <AboutProperty
                         id="about-property"
-                        detail={
-                          propertyDetails?.details?.property_information
-                        }
+                        detail={propertyDetails?.details?.property_information}
                       />
                     </Element>
                     <Element name="nearby" className="element">
@@ -314,10 +313,7 @@ const PropertyDetail = () => {
                     <Element name="amenities" className="element">
                       <Amenities
                         id="amenities"
-                        detail={
-                          propertyDetails?.details?.property_information
-                            
-                        }
+                        detail={propertyDetails?.details?.property_information}
                         white
                       />
                     </Element>
@@ -325,10 +321,7 @@ const PropertyDetail = () => {
                     <Element name="availability" className="element">
                       <Availability
                         id="availability"
-                        detail={
-                          propertyDetails?.details?.property_information
-                            
-                        }
+                        detail={propertyDetails?.details?.property_information}
                       />
                     </Element>
                     <Element name="terms" className="element ">

@@ -151,8 +151,7 @@ const HomePage = () => {
               <h1>Sared Room</h1>
               <p>(18,550)</p>
             </div>
-            <div className="border w-6 h-6 rounded-full">
-            </div>
+            <div className="border w-6 h-6 rounded-full"></div>
           </div>
           <div className="flex flex-row justify-between mt-4 hover:border cursor-pointer border-white border-b-slate-500 hover:shadow-sm py-1 items-center">
             <div className="flex flex-row gap-3">
@@ -160,8 +159,7 @@ const HomePage = () => {
               <h1>Entire Place</h1>
               <p>(8,150)</p>
             </div>
-            <div className="border w-6 h-6 rounded-full">
-            </div>
+            <div className="border w-6 h-6 rounded-full"></div>
           </div>
         </div>
       </div>
@@ -190,7 +188,6 @@ const HomePage = () => {
         ))}
       </div>
 
-      {/* <AvailableCard /> */}
     </div>
   )
 }

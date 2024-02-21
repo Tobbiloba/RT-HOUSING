@@ -51,7 +51,7 @@ const FeaturedPropCard = ({ item, viewMode }) => {
             <p className="text-slate-500 text-[13px]">
               {item.property_information.property_type}
             </p>
-            <Link to={`/property-detail/${encodeURIComponent(item._id)}`}>
+            <Link to={`/properties/property-detail/${encodeURIComponent(item._id)}`}>
               <h1 className="text-[17px] text-slate-500 font-[600]">
                 {item.property_information.property_name}
               </h1>
@@ -66,7 +66,6 @@ const FeaturedPropCard = ({ item, viewMode }) => {
               <p className="text-[14px] ">10 review</p>
             </div>
           </div>
-
         </div>
         <div className="grid grid-cols-2  p-4 gap-x-3 gap-y-4 mt-5 text-slate-600 text-[14px]">
           <div className="flex items-center flex-row gap-3">
@@ -101,7 +100,6 @@ const FeaturedPropCard = ({ item, viewMode }) => {
     </div>
   )
 }
-
 
 const PropertiesList = ({ viewMode, properties }) => {
   const itemsPerPage = 9

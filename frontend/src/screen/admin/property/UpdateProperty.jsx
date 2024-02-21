@@ -1,13 +1,13 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import Input from '@/components/Input'
-import Dropdown from '../../../components/admin/dropdown/Dropdown'
-import Textarea from '@/components/textarea/Textarea'
+import Dropdown from '../../../components/common/dropdown/Dropdown'
+import Textarea from '@/components/common/textarea/Textarea'
 import { Slider } from '@mui/material'
-import Calendar from '../../../components/Calendar'
+import Calendar from '../../../components/common/calendar/Calendar'
 import { startOfToday, startOfTomorrow } from 'date-fns'
-import Box from '../../../components/admin/box/Box'
-import Dropzone from '../../../components/admin/dropzone/Dropzone'
+import Box from '../../../components/common/box/Box'
+import Dropzone from '../../../components/common/dropzone/Dropzone'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Clear, createProperty } from '../../../action/property'
@@ -21,7 +21,7 @@ import { options, numbers } from '@/components/data'
 import { handleAmmenitiesCheckboxChange } from '@/utils'
 import amenities from '@/data/amenities'
 import { getAgent } from '@/action/employee'
-import Spinner from '@/components/spinner/Spinner'
+import Spinner from '@/components/common/spinner/Spinner'
 
 const UpdateProperty = () => {
   const dispatch = useDispatch()
@@ -33,6 +33,7 @@ const UpdateProperty = () => {
   const { details } = useSelector(state => state?.propertyDetail)
   const { status, loading } = useSelector(state => state.createProperty)
   const { agent, agentLoader } = useSelector(state => state.agent)
+  console.log(status)
 
   const [
     show_Property_availability_from_date,
@@ -51,8 +52,6 @@ const UpdateProperty = () => {
     return `${value}°C`
   }
 
-
-
   const DarkSlider = styled(Slider)({
     color: '#0f172a', // Change 'red' to your desired color
   })
@@ -64,11 +63,9 @@ const UpdateProperty = () => {
     if (id) {
       console.log('')
     } else {
-      dispatch(createProperty('65c77993a24964910729d98d', values))
+      dispatch(createProperty(values))
     }
   }
-
-
 
   const {
     values,
@@ -80,22 +77,22 @@ const UpdateProperty = () => {
     setFieldValue, // Access setFieldValue function from useFormik
   } = useFormik({
     initialValues: {
-      propertyName: '',
-      propertyDescription: '',
-      propertyType: '',
-      bathrooms: 0,
-      bedrooms: 0,
-      floors: 0,
-      garages: 0,
-      adults: 0,
-      children: 0,
-      infants: 0,
-      pricing: '',
-      address: '',
-      country: '',
-      state: '',
-      city: '',
-      postalCode: '',
+      propertyName: 'Lekki cottagedo',
+      propertyDescription: 'diwldbw;e9 owie weic eru rco rvioe lvj rvlj lejv er lvj ervlje rvrbvjer verjv r',
+      propertyType: 'Apartment',
+      bathrooms: 1,
+      bedrooms: 2,
+      floors: 2,
+      garages: 2,
+      adults: 3,
+      children: 4,
+      infants: 3,
+      pricing: '50000',
+      address: 'NO 6 lucky fibre',
+      country: 'Nigeria',
+      state: 'Lagos',
+      city: 'Ikorodu',
+      postalCode: '102222',
       images: [],
       amenities: [],
       availableFromDate: today,
@@ -112,9 +109,9 @@ const UpdateProperty = () => {
     onSubmit,
     validationSchema: createPropertySchema,
   })
-  // console.log(errors)
+  console.log(errors)
   useEffect(() => {
-        // dispatch(getPropertyDetailById(id))
+    // dispatch(getPropertyDetailById(id))
     dispatch(getAgent('65c77993a24964910729d98d'))
   }, [])
   useEffect(() => {
@@ -389,12 +386,12 @@ const UpdateProperty = () => {
                     </p>
                   </div>
                 ))}
-
-                
               </div>
-              {
-                   errors.amenities && touched.amenities && <p className='text-[13px] mt-3 text-white'>{errors.amenities}</p>
-                }
+              {errors.amenities && touched.amenities && (
+                <p className="text-[13px] mt-3 text-white">
+                  {errors.amenities}
+                </p>
+              )}
             </div>
           </div>
         </div>

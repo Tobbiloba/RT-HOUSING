@@ -1,7 +1,7 @@
-import React from 'react'
+// import React from 'react'
 
-const BreadCrumb = () => {
-  return <div>bread</div>
-}
+// const BreadCrumb = () => {
+//   return <div>bread</div>
+// }
 
-export default BreadCrumb
+// export default BreadCrumb

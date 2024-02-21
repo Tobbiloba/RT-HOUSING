@@ -11,9 +11,8 @@ import { useMediaQuery } from 'react-responsive'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProperties } from '@/action/property'
 import { fetchPropertyType } from '@/action/type'
-import PropertyLocationCard from '@/components/propertyCard/PropertyLocationCard'
+import PropertyLocationCard from '@/components/common/propertyCard/PropertyLocationCard'
 const LoadingCard = ({ viewMode }) => {
-  console.log(viewMode)
   return (
     <div
       className={`w-[100%] flex flex-col md:flex-row   ${
@@ -94,7 +93,6 @@ const Properties = () => {
 
     setShowProperty({ ...showProperty, [anchor]: open })
   }
-
 
   const isMobile = useMediaQuery({ maxWidth: 1270 })
   const isDesktop = useMediaQuery({ minWidth: 1271 })

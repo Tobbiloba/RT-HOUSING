@@ -4,8 +4,8 @@ import { useFormik } from 'formik'
 import { updateAdminProfileSchema } from '@/schemas'
 import Input from '@/components/Input'
 import { useDispatch, useSelector } from 'react-redux'
-import Dropzone from '@/components/admin/dropzone/Dropzone'
-import Spinner from '@/components/spinner/Spinner'
+import Dropzone from '@/components/common/dropzone/Dropzone'
+import Spinner from '@/components/common/spinner/Spinner'
 import { updateAdminInfo } from '@/action/admin'
 import { useNavigate } from 'react-router-dom'
 import { clear } from '@/action/employee'
@@ -18,8 +18,8 @@ const UpdateAdminProfile = () => {
   const { loading, status } = useSelector(state => state?.updateAdminInfo)
 
   useEffect(() => {
-    if(status == "successful") {
-      navigate("/admin/profile")
+    if (status == 'successful') {
+      navigate('/admin/profile')
       dispatch(clear())
     }
   }, [status])

@@ -9,6 +9,7 @@ import {
   // getOrderByCompany,
   getOrderByAdminId,
   getActiveOrderByUserId,
+  getUserIsOrderExist,
 } from "../mongodb/models/order.js";
 import PropertyModel, { getPropertyByAdminId } from "../mongodb/models/property.js";
 import moment from "moment";
@@ -55,12 +56,12 @@ const getOrdersByAdmin = async (req, res) => {
   console.log(id);
 
   try {
-    const company = await getCompanyByIdSchema(id)
-    if(!company) {
-      return res.status(500).json({message: "Company doesn't exist"})
+    const admin = await getAdminUserById(id)
+    if(!admin) {
+      return res.status(500).json({message: "Admin doesn't exist"})
     }
 
-    console.log(company)
+    console.log(admin)
 
     const orders = await getOrderByAdminId(id);
 
@@ -105,7 +106,7 @@ const createUserOrder = async (req, res) => {
   };
 
   try {
-    console.log(expense)
+    // console.log(expense, user_id, checkinDate, checkoutDate, couponCode, totalPrice, id)
     if (!id || !expense || !user_id || !checkinDate || !checkoutDate || !totalPrice) {
       // console.log('error')
       return res.status(500).json({ message: "Pass all necessary parameters" });
@@ -114,6 +115,14 @@ const createUserOrder = async (req, res) => {
     const user = await getUserById(user_id);
     const property = await getPropertyById(id);
     const coupon = await getCouponByCodeSchema(couponCode)
+    const orderExist = await getUserIsOrderExist(id, user_id)
+    const admin = await getAdminUserById(property.admin_id)
+
+    if(orderExist) {
+      return res.status(500).json({message: "You already have an order for this property"})
+    } 
+
+
 
     if (!user) {
       return res.status(500).json({ message: "User not found" });
@@ -128,12 +137,14 @@ const createUserOrder = async (req, res) => {
       property &&
       property.property_information.booking_status !== "available"
     ) {
-      console.log(property.status);
+      // console.log(property.status);
       return res.status(500).json({
         message: "Property unavailable at the moment. Please check back later.",
       });
     }
-console.log(expense)
+// console.log(expense)
+const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+// console.log(checkinDate.toLocaleString('en-US', options))
 
     const newOrder = await createOrder({
       propertyId: id,
@@ -144,8 +155,10 @@ console.log(expense)
         email: user.email,
         phoneNo: user.phoneNo,
       },
-      checkinDate: checkinDate,
-      checkoutDate: checkoutDate,
+      // checkinDate: checkinDate.toLocaleDateString(),
+      // checkoutDate: checkoutDate.toLocaleDateString(),
+      checkinDate: checkinDate.toLocaleString('en-US', options),
+checkoutDate: checkoutDate.toLocaleString('en-US', options),
       propertyInformation: {
         propertyName: necessaryPropertyInfo.propertyName,
         propertyLocation: necessaryPropertyInfo.propertyLocation,
@@ -184,12 +197,14 @@ console.log(expense)
       checkoutDate: checkout.toLocaleDateString(),
       status: newOrder.bookingStatus,
       reason: newOrder.reason,
+      customerName: `${user.firstname} ${user.lastname}`,
+      customerEmail: user.email
     };
 
-    sendOrderVerificationAdmin("abayomitobiloba410@gmail.com", order, property.property_information.property_name);
-    sendOrderVerificationUser("abayomitobiloba410@gmail.com", order);
-    createNotificationModel({useId: property.admin_id, title: "Property Order Notification", title: "Property Order Notification", message: "Hello Admin, a new order has been placed for your property. Please review and take necessary actions."})
-console.log(order)
+    sendOrderVerificationAdmin(admin.email, order, property.property_information.property_name);
+    sendOrderVerificationUser(user.email, order);
+    createNotificationModel({userId: property.admin_id, title: "Property Order Notification", title: "Property Order Notification", message: "Hello Admin, a new order has been placed for your property. Please review and take necessary actions."})
+// console.log(order)
    
     
     return res.status(201).json({ order: newOrder });
@@ -307,8 +322,8 @@ import { getCouponByCodeSchema } from "../mongodb/models/coupon.js";
 import { createNotificationModel } from "./notification.controller.js";
 // Function to schedule a job to update booking status on check-in and check-out dates
 const scheduleBookingStatusUpdate = (checkinDate, checkoutDate, propertyId) => {
-  console.log('called')
-  console.log(`22 16 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]}`);
+  console.log(`57 18 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]} *`, propertyId, 'start')
+  // console.log(`22 16 ${checkinDate.split("/")[0]} ${checkinDate.split("/")[1]}`);
 
 
   // updateBookingStatus(orderId, 'end')
@@ -327,7 +342,9 @@ const scheduleBookingStatusUpdate = (checkinDate, checkoutDate, propertyId) => {
   // );
 
   // scheduleJobHandler(57, 22, 12, 2, propertyId, 'start');
-  scheduleJobHandler(21, 23, 12, 2, propertyId, 'end');
+  scheduleJobHandler(57, 18, `${checkinDate.split("/")[0]}`, `${checkinDate.split("/")[1]}` , propertyId, 'start');
+  scheduleJobHandler(57, 18, `${checkoutDate.split("/")[0]}`, `${checkoutDate.split("/")[1]}` , propertyId, 'end');
+  // scheduleJobHandler(`48 18 ${checkoutDate.split("/")[0]} ${checkinDate.split("/")[1]} *`, propertyId, 'start');
   // scheduleJobHandler(56, 18, 12, 2, propertyId, 'start');
   // scheduleJobHandler(57, 18, 12, 2, propertyId, 'start');
   // scheduleJobHandler(58, 18, 12, 2, propertyId, 'start');
@@ -345,7 +362,16 @@ const scheduleBookingStatusUpdate = (checkinDate, checkoutDate, propertyId) => {
 };
 
 
+const convertDate = dateString => {
+  if (dateString) {
+    const dateObject = new Date(dateString)
 
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
+    const formattedDate = dateObject.toLocaleDateString('en-GB', options)
+    return formattedDate
+  }
+  return
+}
 
 
 
@@ -353,18 +379,19 @@ const scheduleBookingStatusUpdate = (checkinDate, checkoutDate, propertyId) => {
 
 const updateOrderStatus = async (req, res) => {
   const { id } = req.params;
-  const { adminId, status, reason } = req.body;
+  const { orderId, status, reason } = req.body;
 
   try {
-    const admin = await getAdminUserById(adminId);
+    const admin = await getAdminUserById(id);
 
     if (!admin) {
       return res.status(403).json({ message: "Not authorized as an admin" });
     }
 
-    const order = await getOrderById(id);
-    const checkoutDate = "28/01/2024";
-    const checkinDate = "28/01/2024";
+    const order = await getOrderById(orderId);
+    const checkoutDate = convertDate(order.checkoutDate);
+    const checkinDate = convertDate(order.checkinDate);
+    // console.log(checkinDate, checkoutDate)
     const property = await getPropertyById(order.propertyId);
 
     // console.log(order.userInformation.email)

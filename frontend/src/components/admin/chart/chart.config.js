@@ -1,5 +1,3 @@
-import { ApexOptions } from 'apexcharts'
-
 export const TotalRevenueSeries = [
   {
     name: 'Last Month',
@@ -53,6 +51,7 @@ export const TotalRevenueOptions = {
   },
   tooltip: {
     y: {
+      // @ts-ignore
       formatter(val) {
         return `$ ${val} thousands`
       },

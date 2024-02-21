@@ -18,8 +18,8 @@ router.route("/register").post(createUser);
 router.route("/activate/token/:id").post(activateUser);
 router.route("/login").post(loginUser);
 router.route("/email").get(getUserInfoByEmail);
-router.route("/update-password").get(updateUserPassword);
-router.route("/update-profile").get(updateUserInfo);
+router.route("/update-password").post(updateUserPassword);
+router.route("/update-profile/:id").post(updateUserInfo);
 router.route("/:id").get(getUserInfoByID);
 
 
