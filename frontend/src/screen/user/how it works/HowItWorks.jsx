@@ -107,7 +107,6 @@ const HowItWorks = () => {
           </div>
         )}
       </div>
-      <Footer />
     </div>
   )
 }

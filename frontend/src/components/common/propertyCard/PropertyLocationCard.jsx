@@ -22,7 +22,7 @@ const PropertyLocationCard = ({ title }) => {
             <PropertyLoadingCard key={item} />
           ))}
         </div>
-      ) : (
+      ) : properties && properties.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mt-4">
           {properties &&
             properties
@@ -67,7 +67,9 @@ const PropertyLocationCard = ({ title }) => {
                 </div>
               ))}
         </div>
-      )}
+      ) : <div className="h-40 w-[100%] mx-0 flex items-center justify-center">
+      <h1 className="text-slate-500">No property to show</h1>
+    </div>}
 
       <h1 className="mt-7 text-slate-600">See all {title} </h1>
     </div>

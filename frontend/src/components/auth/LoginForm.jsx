@@ -97,7 +97,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
                   // onClick={handleLogin}
                   type="submit"
                 >
-                  {!loading ? 'Login' : <div>
+                  {!loading ? 'Login' : <div className='flex gap-5 item-center'>
                     <Spinner />
                     <p>Loading ...</p>
                     </div>}

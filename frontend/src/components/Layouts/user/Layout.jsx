@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
 
     setTimeout(() => {
       setIsLoading(false)
-    }, 3000)
+    }, 2000)
   }, [location])
   return (
     <div className="w-[100%] overflow-hidden">

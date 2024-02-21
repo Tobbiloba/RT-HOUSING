@@ -128,7 +128,7 @@ const Properties = () => {
             </div>
           ) : (
             !loading &&
-            !properties && (
+            properties.length == 0 && (
               <div className="h-40 w-[100%] mx-0 flex items-center justify-center">
                 <h1 className="text-slate-500">No property to show</h1>
               </div>
@@ -152,10 +152,6 @@ const Properties = () => {
         <PropertyLocationCard title="Apartment" />
         <PropertyLocationCard title="Condos" />
         <PropertyLocationCard title="Duplex" />
-      </div>
-
-      <div className="mt-6 ">
-        <Footer />
       </div>
     </div>
   )
