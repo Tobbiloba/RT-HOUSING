@@ -224,12 +224,16 @@ const getAllPropertiesUser = async (req, res) => {
 };
 
 const getPropertyByAdmin = async (req, res) => {
-  const { id } = req.params;
+  try{
+    const { id } = req.params;
   const propertyExists = await getPropertyByAdminId(id);
   if (propertyExists) {
     res.status(200).json(propertyExists);
   } else {
     res.status(404).json({ message: "Property not found" });
+  }
+  } catch (error) {
+    return res.status(500)
   }
 };
 
@@ -242,7 +246,7 @@ const getPropertyByTypeModel = async (req, res) => {
     }
     const getType = await getPropertyTypeByName(type);
     if (!getType) {
-      return res.status(500).json({ message: "Property type not found" });
+      return res.status(404).json({ message: "Property type not found" });
     }
     const property = await getPropertyByType(type);
     console.log(property)
@@ -291,8 +295,11 @@ const createProperty = async (req, res) => {
 // console.log(id, property_information)
     if (!id || !property_information) {
       return res
-        .status(500)
+        .status(404)
         .json({ message: "Pass in the necessary parameters" });
+    }
+    if(!property_information?.agent.username) {
+      return res.status(500).json({message: "You need to have atleast one agent. You can create it in the employee page."})
     }
 
     const admin = await getAdminUserById(id);
@@ -309,8 +316,10 @@ const createProperty = async (req, res) => {
     console.log(property_information?.propertyType)
     if (!propertyType) {
 
-      return res.status(500).json({ messsage: "Property type not found" });
+      return res.status(404).json({ messsage: "Property type not found" });
     }
+    console.log(property_information?.agent.username)
+    
     const getRandomBoolean = () => Math.random() < 0.5;
 
     const newProperty = await createPropertyAdmin({
@@ -442,7 +451,7 @@ const updateProperty = async (req, res) => {
     const existingPropertyInformation = await getPropertyById(id);
 
     if (!existingPropertyInformation) {
-      return res.status(500).json({ message: "Property doesn't exist" });
+      return res.status(400).json({ message: "Property doesn't exist" });
     }
 
     const updatedProperty = await updatePropertyById(
@@ -617,7 +626,7 @@ const deActivateProperty = async (req, res) => {
     // console.log(activated);
     const property = await getPropertyById(id);
     if (!property) {
-      return res.status(500).json({ message: "Property not found" });
+      return res.status(404).json({ message: "Property not found" });
     }
     console.log(property);
     property.isActive = false;
@@ -703,7 +712,7 @@ const deletePropertyById = async (req, res) => {
     const propertyToDelete = await findPropertyById(id);
 
     if (!propertyToDelete) {
-      return res.status(500).json({ message: "Property doesn't exist" });
+      return res.status(404).json({ message: "Property doesn't exist" });
     }
 
     // const deleteProperty= await deletePropertyId

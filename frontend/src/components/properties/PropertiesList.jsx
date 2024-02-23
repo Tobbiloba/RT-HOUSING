@@ -24,7 +24,7 @@ const FeaturedPropCard = ({ item, viewMode }) => {
   const [showMenu, setShowMenu] = useState(false)
   return (
     <div
-      className={`hover:shadow-md w-full overflow-hidden font-mono md:items-center lg:items-start xl:text-center  lg:h-[100%] flex flex-col  ${
+      className={`hover:shadow-md w-full exo overflow-hidden font-mono md:items-center lg:items-start xl:text-center  lg:h-[100%] flex flex-col  ${
         viewMode === 'flex'
           ? 'md:flex-row xl:h-[20rem] md:h-[20rem] xl:flex-row'
           : 'sm:flex-row md:flex-col xl:flex-col md:w-[100%] min-w-[25rem]'
@@ -120,7 +120,7 @@ const PropertiesList = ({ viewMode, properties }) => {
     ))
 
   return (
-    <div className="flex flex-col items-center exo w-[100%] justify-center">
+    <div className="flex exo flex-col items-center exo w-[100%] justify-center">
       <div
         className={` flex-1 flex-col md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-8 w-[100%] ${viewMode === 'flex' ? 'flex' : 'grid'}`}
       >

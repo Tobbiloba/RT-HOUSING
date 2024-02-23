@@ -38,12 +38,6 @@ const Sidebar = ({ showSlide, setShowSlide }) => {
       icon: <AiOutlineTags />,
     },
     {
-      id: 8,
-      title: 'Payments',
-      link: '/admin/payments',
-      icon: <FaMoneyBillAlt />,
-    },
-    {
       id: 5,
       title: 'Coupons',
       link: '/admin/coupon',

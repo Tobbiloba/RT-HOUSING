@@ -47,7 +47,7 @@ const createCouponModel = async (req, res) => {
         }
 
         const adminExist = await getAdminUserById(id);
-
+        console.log(adminExist)
         if (!adminExist) {
             console.log('admin not found')
             return res.status(404).json({ message: "Admin doesn't exist" });
@@ -90,19 +90,19 @@ const verifyCouponModel = async (req, res) => {
         // console.log(isCoupon)
 
         if(!isCoupon) {
-            return res.status(500).json({message: "Coupon doesn't exist"})
+            return res.status(404).json({message: "Coupon doesn't exist"})
         }
 
         if(isCoupon.status === "inactive") {
-            return res.status(500).json({message: "Coupon already used"})
+            return res.status(400).json({message: "Coupon already used"})
         }
 
         if(!amount) {
-            return res.status(500).json({message: "Amount not found"})
+            return res.status(400).json({message: "Amount not found"})
         }
 
         if(amount < isCoupon.min_purchase) {
-            return res.status(500).json({message: `Purchase has to be atleast #${isCoupon.min_purchase}`})
+            return res.status(400).json({message: `Purchase has to be atleast #${isCoupon.min_purchase}`})
         }
 
 

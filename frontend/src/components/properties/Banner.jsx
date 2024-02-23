@@ -44,7 +44,7 @@ const Banner = () => {
           <h1 className="flex items-center border text-[14px] bg-white px-[1rem] h-[3.5rem] justify-between cursor-pointer">
             Out <IoIosArrowDown className="text-[17px]" />
           </h1>
-          <button className="flex items-center hover:border text-[14px] text-white h-[3.5rem] justify-center bg-slate-400 hover:bg-white hover:text-slate-400">
+          <button className="flex items-center cursor-not-allowed hover:border text-[14px] text-white h-[3.5rem] justify-center bg-slate-400 hover:bg-white hover:text-slate-400">
             Search Now
           </button>
         </div>

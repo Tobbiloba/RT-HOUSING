@@ -80,7 +80,7 @@ const AvailabilityCalendar = ({
   }
 
   return (
-    <div className="w-[23rem] border p-3 shadow-md">
+    <div className="w-[23rem] p-3 shadow-md">
       <div className=" w-[100%]">
         <div className="">
           <div className="">

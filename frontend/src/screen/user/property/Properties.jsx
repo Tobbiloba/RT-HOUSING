@@ -15,7 +15,7 @@ import PropertyLocationCard from '@/components/common/propertyCard/PropertyLocat
 const LoadingCard = ({ viewMode }) => {
   return (
     <div
-      className={`w-[100%] flex flex-col md:flex-row   ${
+      className={`w-[100%] flex flex-col bricolage md:flex-row   ${
         viewMode === 'flex' ? '' : 'sm:flex-row md:flex-col'
       }`}
     >
@@ -75,7 +75,7 @@ const Properties = () => {
   // console.log(properties)
   useEffect(() => {
     // Scroll to the top of the page when the component mounts
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, [])
   const [viewMode, setViewMode] = useState('flex')
   const [showProperty, setShowProperty] = useState({
@@ -98,7 +98,7 @@ const Properties = () => {
   const isDesktop = useMediaQuery({ minWidth: 1271 })
 
   return (
-    <div className=" flex flex-col items-center justify-center">
+    <div className="exo flex flex-col items-center justify-center">
       <Banner />
       <div className="flex flex-row mt-16 container justify-center px-[1rem]">
         <div className="w-[100%] max-w-[55rem] flex-1">
@@ -107,6 +107,7 @@ const Properties = () => {
             setViewMode={setViewMode}
             toggleFilterOptions={toggleDrawer}
             filterState={showProperty}
+            count={properties?.length}
           />
           {loading ? (
             <div
@@ -122,13 +123,13 @@ const Properties = () => {
                 </div>
               ))}
             </div>
-          ) : !loading && properties && data ? (
+          ) : !loading && properties && properties.length > 0 && data ? (
             <div className="w-[100%] flex items-end justify-center">
               <PropertiesList viewMode={viewMode} properties={data} />
             </div>
           ) : (
             !loading &&
-            properties.length == 0 && (
+            !properties && (
               <div className="h-40 w-[100%] mx-0 flex items-center justify-center">
                 <h1 className="text-slate-500">No property to show</h1>
               </div>

@@ -18,15 +18,15 @@ import { contactAgent, requestTour } from '@/action/message'
 import Spinner from '../spinner/Spinner'
 import { clear } from '@/action/employee'
 
-const AboutProperty = ({ detail }) => {
+const AboutProperty = ({ detail, isUser }) => {
   return (
     <div className="my-6">
-      <h1 className="text-slate-700 text-[15px] font-[600]">About Property</h1>
-      <p className="mt-3 text-slate-500 text-[13px] leading-6">
+      <h1 className={`${isUser ? "text-slate-700" :"text-white"} text-[16px] mb-4 font-[600]`}>About Property</h1>
+      <p className={`mt-3 ${isUser ? "text-slate-500" :"text-slate-300"} text-[13px] leading-6`}>
         {detail.property_description}
       </p>
       <div className=" mt-7">
-        <h1 className="text-slate-700 text-[15px] font-[600]">
+        <h1 className={`${isUser ? "text-slate-700" :"text-white"} text-[16px] mb-4 font-[600]`}>
           Property Details
         </h1>
 
@@ -34,7 +34,7 @@ const AboutProperty = ({ detail }) => {
           <table className="border-collapse w-full text-start text-[13px] ...">
             <thead>
               <tr className="bg-slate-100">
-                <th className="border border-white border-r-gray-300 pl-5 text-start  text-slate-600 py-3 w-6/12">
+                <th className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"}  pl-5 text-start  text-slate-600 py-3 w-6/12`}>
                   Accommodation
                 </th>
                 <th className="text-start pl-5 text-gray-500 font-[500]"></th>
@@ -42,7 +42,7 @@ const AboutProperty = ({ detail }) => {
             </thead>
             <tbody>
               <tr>
-                <td className="border border-white border-r-gray-300 pl-5 text-start  text-slate-600 py-3 font-[600]">
+                <td className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"} pl-5 text-start  text-slate-600 py-3 font-[600]`}>
                   Bedrooms
                 </td>
                 <td className="text-start pl-5 text-gray-500 font-[500]">
@@ -50,7 +50,7 @@ const AboutProperty = ({ detail }) => {
                 </td>
               </tr>
               <tr className="bg-slate-100">
-                <td className="border border-white border-r-gray-300 pl-5 text-start  text-slate-600 py-3 font-[600]">
+                <td className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"} pl-5 text-start  text-slate-600 py-3 font-[600]`}>
                   Bathrooms
                 </td>
                 <td className="text-start pl-5 text-gray-500 font-[500]">
@@ -58,7 +58,7 @@ const AboutProperty = ({ detail }) => {
                 </td>
               </tr>
               <tr>
-                <td className="border border-white border-r-gray-300 pl-5 text-start  text-slate-600 py-3 font-[600]">
+                <td className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"} pl-5 text-start  text-slate-600 py-3 font-[600]`}>
                   Dimension
                 </td>
                 <td className="text-start pl-5 text-gray-500 font-[500]">
@@ -66,7 +66,7 @@ const AboutProperty = ({ detail }) => {
                 </td>
               </tr>
               <tr className="bg-slate-100">
-                <td className="border border-white border-r-gray-300 pl-5 text-start  text-slate-600 py-3 font-[600]">
+                <td className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"} pl-5 text-start  text-slate-600 py-3 font-[600]`}>
                   Type
                 </td>
                 <td className="text-start pl-5 text-gray-500 font-[500]">
@@ -74,7 +74,7 @@ const AboutProperty = ({ detail }) => {
                 </td>
               </tr>
               <tr>
-                <td className="border border-white border-r-gray-300 pl-5 text-start  text-slate-600 py-3 font-[600]">
+                <td className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"} pl-5 text-start  text-slate-600 py-3 font-[600]`}>
                   Check-In Start @
                 </td>
                 <td className="text-start pl-5 text-gray-500 font-[500]">
@@ -89,7 +89,7 @@ const AboutProperty = ({ detail }) => {
   )
 }
 
-const AmenitiesCard = ({ detail }) => {
+const AmenitiesCard = ({ detail, isUser }) => {
   return (
     <div>
       {amenities.map(
@@ -97,9 +97,9 @@ const AmenitiesCard = ({ detail }) => {
           item.name === detail && (
             <div
               key={item.id}
-              className="flex w-[100%] text-[12px] sm:max-w-[20rem] flex-row justify-between items-center"
+              className="flex w-[100%] text-[13px] sm:max-w-[20rem] flex-row justify-between items-center"
             >
-              <p className="text-slate-600 font-[600]">{item.name}</p>
+              <p className={` ${isUser ? "text-slate-600" : "text-slate-300"} font-[600]`}>{item.name}</p>
               <img className="w-9 h-9" src={item.img} alt={item.name} />
             </div>
           ),
@@ -108,24 +108,24 @@ const AmenitiesCard = ({ detail }) => {
   )
 }
 
-const Amenities = ({ detail }) => {
+const Amenities = ({ detail, isUser }) => {
   return (
     <div className="my-6">
-      <h1 className="text-slate-700 text-[15px] font-[600]">Amenities</h1>
+      <h1 className={`${isUser ? "text-slate-700" :"text-white"} text-[16px] mb-4 font-[600]`}>Amenities</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {detail.property_amenities.map((item, index) => (
-          <AmenitiesCard key={index} detail={item} />
+          <AmenitiesCard key={index} detail={item} isUser={isUser}/>
         ))}
       </div>
     </div>
   )
 }
 
-const Nearby = () => {
+const Nearby = ({isUser}) => {
   return (
     <div className="my-12">
-      <h1 className="text-slate-700 text-[15px] font-[600]">
+      <h1 className={`${isUser ? "text-slate-700" :"text-white"} text-[16px] mb-4 font-[600]`}>
         Nearby Locations
       </h1>
       <div className="w-[100%] bg-gray-200 h-[30rem] text-[13px] my-3 flex items-center justify-center">
@@ -135,13 +135,13 @@ const Nearby = () => {
   )
 }
 
-const Availability = ({ detail }) => {
+const Availability = ({ detail, isUser }) => {
 
 
   return (
     <div className="w-[100%] my-12">
-      <h1 className="text-slate-700 text-[17px] font-[600]">Availability</h1>
-      <p className="mt-3 text-slate-500 text-[13px] leading-6">
+      <h1 className={`${isUser ? "text-slate-700" :"text-white"} text-[16px] mb-4 font-[600]`}>Availability</h1>
+      <p className={`mt-3 ${isUser ? "text-slate-500" :"text-slate-300"} text-[13px] leading-6`}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempoer incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nrud exercitation ullamco laboris nisi ute aliquip ex ea
@@ -149,7 +149,7 @@ const Availability = ({ detail }) => {
         velit.
       </p>
 
-      <div className="mt-8">
+      <div className="mt-8 bg-slate-700 w-fit">
         <AvailabilityCalendar
           availableFromDate={convertDate(
             detail.availability.available_date_from[0],
@@ -190,7 +190,7 @@ const Availability = ({ detail }) => {
   )
 }
 
-const Terms = () => {
+const Terms = ({isUser}) => {
   return (
     <div className="my-12 bg-gray-100 max-w-[50rem] px-4 py-12 flex flex-col md:flex-row gap-5">
       <img
@@ -230,8 +230,10 @@ const Reviews = () => {
 const ContactAgent = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
-   
-    const { loading, status} = useSelector((state) => state?.contactAgent)
+    const { details
+      , loading
+     } = useSelector(state => state.propertyDetail)
+    const { tourLoading, status} = useSelector((state) => state?.contactAgent)
     const onSubmit = () => {
       dispatch(contactAgent(values, id))
     
@@ -260,7 +262,7 @@ const ContactAgent = () => {
       onSubmit()
     },
   })
-
+console.log(details?.agent[0].img)
   useEffect(() => {
     if (status) {
       setValues(prevValues => ({
@@ -275,25 +277,30 @@ const ContactAgent = () => {
       dispatch(clear())
     }
   }, [status]);
+  // const loading = true
   return (
     <div className="border p-[1rem] pt-8 pb-12">
       <h1 className="font-[600]">Contact an Agent</h1>
 
-      <div className="flex flex-row mt-2 justify-between">
-        <div className="flex flex-row gap-2 items-center">
+      {
+        loading ? <div className='flex pt-6 pb-4 justify-center'>
+          <Spinner />
+        </div>: <div className="flex flex-row mt-2 justify-between">
+        <div className="flex flex-row gap-6 items-center">
           <img
-            src="https://eliezergroup.com/wp-content/webp-express/webp-images/uploads/2021/08/How-To-Become-A-Facilities-Manager.jpg.webp"
-            className="w-28 h-24 object-cover rounded-md"
+            src={details?.agent[0]?.img}
+            className="w-28 h-24 object-cover"
           />
 
           <div>
-            <h1 className="font-[600]">John Doe</h1>
+            <h1 className="font-[600]">{details?.agent[0]?.username}</h1>
             <p className="text-[13px] text-slate-500">Modern House</p>
-            <p className="text-[14px]">001 234 5678</p>
+            <p className="text-[14px]">{details?.agent[0]?.phone_no}</p>
           </div>
         </div>
         <IoIosArrowDown className="text-slate-500" />
       </div>
+      }
 
       <form
         onSubmit={handleSubmit}
@@ -370,11 +377,11 @@ const ContactAgent = () => {
         />
 
 <button
-        disabled={loading}
+        disabled={tourLoading}
           type="submit"
-          className={`flex flex-row gap-4 items-center border py-3 text-white bg-slate-800 justify-center ${loading && "cursor-not-allowed"}`}
+          className={`flex flex-row gap-4 items-center border py-3 text-white bg-slate-800 justify-center ${tourLoading && "cursor-not-allowed"}`}
         >{
-          loading ? <div className='w-[100%] flex  gap-5 items-center justify-center'>
+          tourLoading ? <div className='w-[100%] flex  gap-5 items-center justify-center'>
             <Spinner />
             <p>Please wait...</p>
           </div>: <div className='flex flex-row gap-6 items-center'>

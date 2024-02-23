@@ -49,12 +49,12 @@ const getAllMessageRequestModel = async (req, res) => {
 
         console.log(id, username, email, phone, tourDate, additionalNote)
         if(!username || !email || !phone || !tourDate || !additionalNote ) {
-            return res.status(500).json({message: "Pass in necessary parameters"})
+            return res.status(400).json({message: "Pass in necessary parameters"})
         }
         const property = await getPropertyById(id)
 
         if(!property) {
-            return res.status(500).json({message: "Property not found"})
+            return res.status(404).json({message: "Property not found"})
         }
         const propertyName = property.property_information.property_name
         
@@ -92,7 +92,7 @@ const getAllMessageRequestModel = async (req, res) => {
         const property = await getPropertyById(id)
 
         if(!username || !email || !phone || !message) {
-            return res.status(500).json({message: "Pass in necessary parameters"})
+            return res.status(400).json({message: "Pass in necessary parameters"})
         }
 
         if(!property) {

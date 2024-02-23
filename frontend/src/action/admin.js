@@ -10,11 +10,12 @@ import {
 import Axios from 'axios'
 
 const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/admin`
-const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+
 export const getAdminInfo = ()=> async dispatch => {
   dispatch({
     type: GET_ADMIN_PROFILE,
   })
+  const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
     const { data } = await Axios.get(`${BASE_URL}/${id}`)
     dispatch({
@@ -37,6 +38,7 @@ export const updateAdminInfo = (values) => async dispatch => {
   dispatch({
     type: UPDATE_ADMIN_PROFILE,
   })
+  const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
     const { data } = await Axios.put(`${BASE_URL}/${id}`, {
       newFields: values,

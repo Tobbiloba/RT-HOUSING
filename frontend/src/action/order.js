@@ -25,14 +25,14 @@ const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/order`
 
 const customId = 'custom-id-yes'
 
-const admin_id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
-const user_id = JSON.parse(sessionStorage.getItem('userInfo'))?._id
+
+
 // @ts-ignore
 export const getAdminOrder = () => async dispatch => {
   dispatch({
     type: FETCH_ADMIN_ORDER,
   })
-
+  const admin_id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
     const { data } = await Axios.get(`${BASE_URL}/admin/${admin_id}/orders`)
     dispatch({
@@ -65,6 +65,7 @@ export const getUserActiveOrder = propertyId => async dispatch => {
   dispatch({
     type: GET_ACTIVE_ORDER,
   })
+  const user_id = JSON.parse(sessionStorage.getItem('userInfo'))?._id
   try {
     const { data } = await Axios.post(`${BASE_URL}/active/${user_id}`, {
       propertyId,
@@ -89,7 +90,7 @@ export const getUserOrder = () => async dispatch => {
   dispatch({
     type: FETCH_USER_ORDER,
   })
-
+  const user_id = JSON.parse(sessionStorage.getItem('userInfo'))?._id
   try {
     const { data } = await Axios.get(`${BASE_URL}/user/${user_id}/orders`)
     dispatch({
@@ -125,7 +126,7 @@ export const createUserOrder =
       dispatch({
         type: CREATE_USER_ORDER,
       })
-
+      const user_id = JSON.parse(sessionStorage.getItem('userInfo'))?._id
       try {
        if(user_id) {
         const { data } = await Axios.post(`${BASE_URL}/create-order/${id}`, {
@@ -191,8 +192,7 @@ export const updateOrderStatus =
       type: UPDATE_USER_ORDER,
     })
 
-    console.log(orderId, reason, status)
-
+    const admin_id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
     try {
       const { data } = await Axios.put(`${BASE_URL}/admin/${admin_id}/update`, {
         orderId,

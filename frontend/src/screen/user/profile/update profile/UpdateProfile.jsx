@@ -5,22 +5,31 @@ import Input from '@/components/Input'
 import { updateProfileSchema } from '@/schemas'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUserProfile } from '@/action/user'
+import { getUserInfo, updateUserProfile } from '@/action/user'
 import { clear } from '@/action/employee'
 import Spinner from '@/components/common/spinner/Spinner'
+import { CircularProgress } from '@mui/material'
 
 const UpdateProfile = () => {
   const dispatch = useDispatch()
-  const {status, loading} = useSelector((state) => state.updateUserProfile)
+  const {status, updateLoading} = useSelector((state) => state.updateUserProfile)
+  const {userInfo, loading} = useSelector(state => state.userInfo)
   const onSubmit = async values => {
     dispatch(updateUserProfile(values))
   }
-  const data = JSON.parse(sessionStorage.getItem('userInfo'))
-
+  // const data = JSON.parse(sessionStorage.getItem('userInfo'))
+// console.log(userInfo)
   useEffect(() => {
     if(status == "successful") {
 dispatch(clear())
+dispatch(getUserInfo())
     }
+  }, [status])
+
+// const loading = true
+
+  useEffect(() => {
+dispatch(getUserInfo())
   }, [])
   const {
     values,
@@ -43,22 +52,24 @@ dispatch(clear())
   })
 
   useEffect(() => {
-    
-    setFieldValue('avatar', data.avatar);
-    setFieldValue('username', data.username);
-    setFieldValue('phoneNo', data.phoneNo);
-    setFieldValue('firstname', data.firstname || '');
-    setFieldValue('lastname', data.lastname || '');
+      if(userInfo.username) {
+          setFieldValue('avatar', userInfo.avatar);
+    setFieldValue('username', userInfo.username);
+    setFieldValue('phoneNo', userInfo.phoneNo);
+    setFieldValue('firstname', userInfo.firstname || '');
+    setFieldValue('lastname', userInfo.lastname || '');
+      }
+  
   }, [])
 
   return (
     <div className="bg-white exo p-6 rounded-md">
-{
-  status == "successful" &&       <p className='bg-red-500 text-[12px] py-1 mb-4 flex justify-center text-white'>You have to logout and login again so see your changes</p>
-}
       <h1 className="text-[14px]">Update Profile</h1>
       <p className="mt-6 text-[14px] text-slate-600">Photo</p>
-      <form onSubmit={handleSubmit} autoComplete="off">
+      {
+        loading ? <div className='flex justify-center'>
+          <CircularProgress />
+        </div> : <form onSubmit={handleSubmit} autoComplete="off">
         <div className="mt-2">
           <Dropzone
           red
@@ -127,9 +138,9 @@ dispatch(clear())
         <div className="flex justify-end mt-12">
           <button
             type="submit"
-            className={`px-6 py-3 text-[13px] shadow-md bg-slate-100 hover: border-slate-500 hover:bg-white text-slate-600 ${loading && "cursor-not-allowed"}`}
+            className={`px-6 py-3 text-[13px] shadow-md bg-slate-100 hover: border-slate-500 hover:bg-white text-slate-600 ${updateLoading && "cursor-not-allowed"}`}
           >
-            {loading ? (
+            {updateLoading ? (
   <div className="flex justify-center items-center gap-5">
     <Spinner />
     <p>Please wait...</p>
@@ -140,6 +151,7 @@ dispatch(clear())
           </button>
         </div>
       </form>
+      }
     </div>
   )
 }

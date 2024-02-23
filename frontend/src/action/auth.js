@@ -174,11 +174,10 @@ export const registerAdmin = (values) => async dispatch => {
   }
 }
 
-export const loginAdmin = value => async dispatch => {
+export const loginAdmin = value => async (dispatch) => {
   dispatch({
     type: REQUEST_LOGIN_ADMIN,
   })
-  console.log(value)
 
   try {
     const { data } = await Axios.post(`${BASE_URL}/admin/login`, {

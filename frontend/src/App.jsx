@@ -185,7 +185,7 @@ const App = () => {
       }
     />,
     <Route
-      path="/admin/property-detail/:id"
+      path="/admin/properties/detail/:id"
       element={
         <AdminLayout>
           <PropertyDetails />

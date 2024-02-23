@@ -11,23 +11,23 @@ import {
   import { CLEAR } from '@/constant/property'
 
   export const requestTourReducer = (
-    state = { loading: null, error: null },
+    state = { tourLoading: null, error: null },
     action,
   ) => {
     switch (action.type) {
       case REQUEST_TOUR:
         return {
-          loading: true,
+          tourLoading: true,
           error: null,
         }
       case REQUEST_TOUR_SUCCESSFUL:
         return {
-          loading: false,
+          tourLoading: false,
           status: 'success',
         }
       case REQUEST_TOUR_FAILED:
         return {
-          loading: false,
+          tourLoading: false,
           error: false,
         }
       case CLEAR:
@@ -39,23 +39,23 @@ import {
 
 
   export const contactAgentReducer = (
-    state = { loading: null, error: null },
+    state = { agentLoading: null, error: null },
     action,
   ) => {
     switch (action.type) {
       case MESSAGE_AGENT:
         return {
-          loading: true,
+          agentLoading: true,
           error: null,
         }
       case MESSAGE_AGENT_SUCCESSFUL:
         return {
-          loading: false,
+          agentLoading: false,
           status: 'success',
         }
       case MESSAGE_AGENT_FAILED:
         return {
-          loading: false,
+          agentLoading: false,
           error: false,
         }
       case CLEAR:

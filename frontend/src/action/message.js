@@ -14,12 +14,13 @@ import {
 const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/message`
 
 const customId = 'custom-id-yes'
-const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+
 
 export const requestTour = (values) => async dispatch => {
   dispatch({
     type: REQUEST_TOUR,
   })
+  const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
     const { data } = await Axios.post(`${BASE_URL}/tour-request/${id}`, {
       ...values,
@@ -42,15 +43,15 @@ export const requestTour = (values) => async dispatch => {
     dispatch({
       type: REQUEST_TOUR_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
-        : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
       {
         toastId: customId,
         position: 'bottom-right',
@@ -64,6 +65,7 @@ export const contactAgent = (values) => async dispatch => {
   dispatch({
     type: MESSAGE_AGENT,
   })
+  const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
     const { data } = await Axios.post(`${BASE_URL}/contact-agent/${id}`, {
       ...values
@@ -85,14 +87,14 @@ export const contactAgent = (values) => async dispatch => {
     dispatch({
       type: MESSAGE_AGENT_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
 
     toast.error(
-      error.response && error.response.data[0]
-        ? error.response.data[0]
+      error.response && error.response.data
+        ? error.response.data.message
         : error.message,
       {
         toastId: customId,

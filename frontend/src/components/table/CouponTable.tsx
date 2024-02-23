@@ -265,7 +265,7 @@ export function CouponTable({ data }) {
                   colSpan={columns.length}
                   className="h-24 text-center text-white"
                 >
-                  No results.
+                  No coupon
                 </TableCell>
               </TableRow>
             )}
@@ -273,7 +273,7 @@ export function CouponTable({ data }) {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4 px-[1rem]">
-        <div className="flex-1 text-sm text-muted-foreground">
+        <div className="flex-1 text-sm text-white">
           {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>

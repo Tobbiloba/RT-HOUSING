@@ -22,11 +22,11 @@ const createAdminUser = async (req, res) => {
     // console.log( username, firstname, lastname, email, phone, password, profile_img, country, state, city, socials );
     const token = generateRandomToken()
     if (!email || !password || !username || !firstname || !lastname || !profile_img || !state || !country || !city  || !phone_no) {
-      return res.status(500).json({ message: "Pass necessary parameters" });
+      return res.status(400).json({ message: "Pass necessary parameters" });
     }
     const userExists = await getAdminUserByEmail(email);
     if (userExists) {
-      return res.status(500).json({ message: "User already exists" });
+      return res.status(400).json({ message: "User already exists" });
     }
     const salt = random();
     const newUser = await registerAdminUser({
@@ -114,16 +114,13 @@ const loginAdminUser = async (req, res) => {
       } else {
         const salt = random();
         userExists.authentication.sessionToken = authentication(salt, userExists._id.toString());
-    
         await userExists.save();
-
-        sendLoginNotification(userExists._id)
         console.log('successful')
         res.cookie('TOBBIE-AUTH', userExists.authentication.sessionToken, { domain: 'localhost', path: '/' });
         return res.status(200).json(userExists).end();
       }
     } else {
-      return res.status(500).json({ message: "Admin User doesn't exist" });
+      return res.status(404).json({ message: "Admin User doesn't exist" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -170,7 +167,7 @@ const activateAdminUser = async (req, res) => {
     }
 
     if(token != adminUser.activationToken) {
-      return res.status(500).json({message: "Token not correct"})
+      return res.status(400).json({message: "Token not correct"})
     }
 // // console.log(adminUser)
     adminUser.activationToken = undefined;

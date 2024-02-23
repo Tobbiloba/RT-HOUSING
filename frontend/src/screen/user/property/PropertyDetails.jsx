@@ -54,12 +54,12 @@ const PropertyDetails = () => {
       setIsUser(true)
     }
     window.scrollTo(0, 0)
-    dispatch(getPropertyDetailById(id))
+    // dispatch(getPropertyDetailById(id))
   }, [])
 
   // console.log(isUser)
   return (
-    <div className="bg-transparent pt-16 font-mono">
+    <div className="bg-slate-800 exo pt-16 font-mono">
       {loading ? (
         <div className="h-[100vh] flex justify-center">
           <CircularProgress />
@@ -67,25 +67,29 @@ const PropertyDetails = () => {
       ) : !loading && details ? (
         <div className="">
           <Carousel images={details?.property_information.property_images} />
-          <PropertyOptions
-            state={showProperty}
-            setState={setShowProperty}
-            item={details.property_information}
-          />
+         {
+          isUser &&  <PropertyOptions
+          state={showProperty}
+          setState={setShowProperty}
+          item={details.property_information}
+        />
+         }
           <div className="md:container w-[100%] px-[1rem]">
-            <div className="w-[100%] mt-12 flex items-end justify-end tablet:hidden">
-              <div
-                onClick={toggleDrawer(anchor, true)}
-                className="border text-slate-500 cursor-pointer px-3 bg-slate-600 border-slate-500 flex items-center justify-center h-10 text-[21px]"
-              >
-                <p className="text-[13px] text-white">Complete Order</p>
-              </div>
+           {
+            isUser &&  <div className="w-[100%] mt-12 flex items-end justify-end tablet:hidden">
+            <div
+              onClick={toggleDrawer(anchor, true)}
+              className="border text-slate-500 cursor-pointer px-3 bg-slate-600 border-slate-500 flex items-center justify-center h-10 text-[21px]"
+            >
+              <p className="text-[13px] text-white">Complete Order</p>
             </div>
+          </div>
+           }
 
             <div className="flex mt-4 lg:mt-20 flex-col lg:flex-row gap-16 justify-between relative">
               <div className="">
                 <div
-                  className={`flex flex-row w-[100%] gap-x-8  py-4 text-[14px] flex-wrap  gap-y-2 ${isUser ? 'text-slate-500 border border-white border-b-gray-200 ' : 'text-white'}`}
+                  className={`flex flex-row w-[100%] gap-x-8  py-4 text-[14px] flex-wrap  gap-y-2 text-slate-500  ${isUser ? 'border-white border' : 'text-white'}  border-b-gray-200 `}
                 >
                   <Link
                     to="about-property"
@@ -128,6 +132,7 @@ const PropertyDetails = () => {
                       <AboutProperty
                         id="about-property"
                         detail={details.property_information}
+                        isUser={isUser}
                       />
                     </Element>
 
@@ -135,27 +140,32 @@ const PropertyDetails = () => {
                       <Amenities
                         id="amenities"
                         detail={details.property_information}
+                        isUser={isUser}
                       />
                     </Element>
                     <Element name="availability" className="element">
                       <Availability
                         id="availability"
                         detail={details.property_information}
+                        isUser={isUser}
                       />
                     </Element>
                     <Element name="nearby" className="element">
-                      <Nearby id="nearby" />
+                      <Nearby id="nearby" isUser={isUser}/>
                     </Element>
                     <Element name="terms" className="element">
-                      <Terms id="terms" />
+                      <Terms id="terms" isUser={isUser}/>
                     </Element>
                   </div>
                 </div>
               </div>
-              <div className=" lg:w-4/12 min-w-[22.5rem] h-fit">
+              {
+                isUser &&
+                <div className=" lg:w-4/12 min-w-[22.5rem] h-fit">
                 <ContactAgent propertyId={details._id}/>
                 <TourRequest propertyId={details._id}/>
               </div>
+              }
             </div>
           </div>
         </div>

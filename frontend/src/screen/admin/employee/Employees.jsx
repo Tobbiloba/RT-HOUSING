@@ -49,8 +49,8 @@ const Employees = () => {
             employees.length == 0 && (
               <div className="text-center">
                 {/* <div> */}
-                <h1 className="text-slate-400 text-[14px]">
-                  No employee found
+                <h1 className="text-white py-6 text-[16px]">
+                  No employee found.
                 </h1>
                 {/* </div> */}
               </div>

@@ -9,12 +9,12 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMyProperties } from '../../../action/property'
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
-
+import { FaArrowRightLong } from "react-icons/fa6";
 const PropertyCard = ({ item }) => {
   return (
     <div
       key={item._id}
-      className="max-w-[25rem] h-fit bg-slate-600 border border-slate-600 overflow-hidden"
+      className="max-w-[25rem] exo h-fit bg-slate-  overflow-hidden"
     >
       <div className="relative ">
         <div className="max-h-[20rem] overflow-hidden">
@@ -33,11 +33,11 @@ const PropertyCard = ({ item }) => {
         </p>
       </div>
 
-      <div className="bg-slate-400 text-black mt-2 p-4">
+      <div className="bg-slate-900 shadow-xl text-white mt-2 p-4">
         <div className="flex flex-row items-center justify-between">
           <h1 className="text-xl">{item.property_information.property_name}</h1>
           <h1 className="text-[15px]">
-            ${item.property_information.pricing}.00
+          ₦{item.property_information.pricing}
           </h1>
         </div>
 
@@ -48,7 +48,7 @@ const PropertyCard = ({ item }) => {
         <div className="flex flex-row gap-8 mt-4">
           <div className="flex flex-row gap-3 items-center">
             <img
-              src="https://cdn-icons-png.flaticon.com/128/2642/2642268.png"
+              src="https://cdn-icons-png.flaticon.com/128/2642/2642358.png"
               className="w-8 h-8"
             />
             <p className="text-white text-[14px]">
@@ -58,7 +58,7 @@ const PropertyCard = ({ item }) => {
           {/*  */}
           <div className="flex flex-row gap-3 items-center">
             <img
-              src="https://cdn-icons-png.flaticon.com/128/1018/1018552.png"
+              src="https://cdn-icons-png.flaticon.com/128/3289/3289779.png"
               className="w-8 h-8"
             />
             <p className="text-white text-[14px]">
@@ -68,7 +68,7 @@ const PropertyCard = ({ item }) => {
 
           <div className="flex flex-row gap-3 items-center">
             <img
-              src="https://cdn-icons-png.flaticon.com/128/9823/9823123.png"
+              src="https://cdn-icons-png.flaticon.com/128/4350/4350287.png"
               className="w-8 h-8"
             />
             <p className="text-white text-[14px]">
@@ -79,9 +79,11 @@ const PropertyCard = ({ item }) => {
 
         <div className="mt-2">
           <div className="mt-10 flex justify-center">
-            <Link to={`/admin/property-detail/${encodeURIComponent(item._id)}`}>
-              <button className="bg-gray-600 text-[14px] px-4 py-2 text-white font-[400]">
-                VIEW DETAILS
+            <Link to={`/admin/properties/detail/${encodeURIComponent(item._id)}`}>
+              <button className="flex items-center gap-5 text-[13px] px-6 py-2 text-white font-[400]">
+                
+                <p className='text-[15px]'>View Detail</p>
+                <FaArrowRightLong className='text-white text-xl'/>
               </button>
             </Link>
           </div>
@@ -121,7 +123,7 @@ const AdminProperties = () => {
 
   return (
     <div className="exo">
-      <div className="pt-6 items-center relative first-line:flex-wrap gap-y-6 pb-4 px-4 bg-slate-600 mt-0 md:px-[2%] flex flex-row justify-between">
+      <div className="pt-6 items-center relative first-line:flex-wrap gap-y-6 pb-4 px-4 bg-slate-800 mt-0 md:px-[2%] flex flex-row justify-between">
         <div className="flex flex-row gap-6 flex-wrap">
           <div className="flex flex-row flex-wrap gap-4">
             <button

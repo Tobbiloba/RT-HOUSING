@@ -24,8 +24,8 @@ import {
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL
 
 const customId = 'custom-id-yes'
-const adminId = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
-console.log(adminId)
+
+// console.log(adminId)
 export const getAllProperties = () => async dispatch => {
   dispatch({
     type: FETCH_PROPERTIES,
@@ -63,6 +63,7 @@ export const getMyProperties = () => async dispatch => {
   dispatch({
     type: FETCH_MY_PROPERTIES,
   })
+  const adminId = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
     const { data } = await Axios.get(`${BASE_URL}/properties/admin/${adminId}`)
     dispatch({
@@ -91,10 +92,20 @@ export const getMyProperties = () => async dispatch => {
   }
 }
 
-export const getPropertyByType = type => async dispatch => {
+export const getPropertyByType = type => async (dispatch) => {
   dispatch({
     type: FETCH_PROPERTY_TYPE,
-  })
+  });
+
+  // console.log('lol');
+  // console.log(getState())
+  // // const {
+  // //   userSignin: { userInfo },
+  // // } = getState();
+  // const { userInfo } = getState().userSignin;
+
+  // console.log(userInfo);
+
   try {
     const { data } = await Axios.get(`${BASE_URL}/properties/type/${type}`)
     dispatch({
@@ -117,7 +128,7 @@ export const createProperty = (property_information) => async dispatch => {
   dispatch({
     type: CREATE_PROPERTIES,
   })
-
+  const adminId = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
     const { data } = await Axios.post(`${BASE_URL}/properties/${adminId}`, {
       property_information: property_information,

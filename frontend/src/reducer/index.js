@@ -64,6 +64,8 @@ export const registerReducer = (
         loading: false,
         error: false,
       }
+      case CLEAR_AUTH:
+        return {}
     default:
       return state
   }
@@ -116,6 +118,8 @@ export const registerAdminReducer = (
         loading: false,
         error: false,
       }
+      case CLEAR_AUTH:
+        return {}
     default:
       return state
   }

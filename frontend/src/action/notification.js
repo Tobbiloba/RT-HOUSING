@@ -10,11 +10,12 @@ import {
 } from '@/constant/notification'
 
 const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/notification`
-const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+
 export const getNotifications = () => async dispatch => {
   dispatch({
     type: GET_NOTIFICATION,
   })
+  const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
     const { data } = await Axios.get(`${BASE_URL}/${id}`)
     dispatch({
@@ -27,9 +28,9 @@ export const getNotifications = () => async dispatch => {
     dispatch({
       type: GET_NOTIFICATION_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
   }
 }
@@ -54,9 +55,9 @@ export const updateNotification = ids => async dispatch => {
     dispatch({
       type: UPDATE_NOTIFICATION_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
   }
 }

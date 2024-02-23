@@ -112,7 +112,7 @@ const UpdateProperty = () => {
   console.log(errors)
   useEffect(() => {
     // dispatch(getPropertyDetailById(id))
-    dispatch(getAgent('65c77993a24964910729d98d'))
+    dispatch(getAgent())
   }, [])
   useEffect(() => {
     if (details && id) {
@@ -159,8 +159,8 @@ const UpdateProperty = () => {
         onSubmit={handleSubmit}
       >
         <div className={`${isDesktop && 'w-8/12'} `}>
-          <div className="bg-slate-500 px-[1rem] py-[2rem] shadow-md">
-            <h1 className="text-slate-900 text-xl font-[600]">
+          <div className="bg-slate-900 px-[1rem] py-[2rem] shadow-md">
+            <h1 className="text-slate-400 text-[15px]">
               Property Details
             </h1>
             <div className="md:grid flex flex-col grid-cols-1 md:grid-cols-2 gap-10 mt-8">
@@ -341,8 +341,8 @@ const UpdateProperty = () => {
             </div>
           </div>
 
-          <div className="mt-12 px-[1rem] py-[2rem] bg-slate-500  shadow-md">
-            <h1 className="text-slate-900 text-xl font-[600]">
+          <div className="mt-12 px-[1rem] py-[2rem] bg-slate-900  shadow-md">
+            <h1 className="text-slate-400 text-[15px]">
               Property Image
             </h1>
 
@@ -360,9 +360,9 @@ const UpdateProperty = () => {
             </div>
           </div>
 
-          <div className="mt-12 px-[1rem] py-[2rem] shadow-md bg-slate-500">
+          <div className="mt-12 px-[1rem] py-[2rem] shadow-md bg-slate-900">
             <div className="my-5  w-[100%] col-span-2">
-              <h1 className="text-slate-900 text-xl font-[600]">
+              <h1 className="text-slate-400 text-[15px]">
                 Available Ammenities
               </h1>
               <div className=" mt-8 flex flex-row flex-wrap gap-x-6 gap-y-3">
@@ -378,7 +378,7 @@ const UpdateProperty = () => {
                       }
                       className={`text-[15px] text-white cursor-pointer ${
                         values.amenities.includes(item.name)
-                          ? 'bg-slate-900 '
+                          ? 'bg-slate-00 '
                           : 'border'
                       } hover:bg-slate-300 px-4 py-1`}
                     >
@@ -401,8 +401,8 @@ const UpdateProperty = () => {
             isDesktop ? 'w-4/12' : 'mt-16'
           }   grid grid-cols-1 gap-12 h-fit`}
         >
-          <div className="mt-0 shadow-md h-fit bg-slate-500 py-[2rem] px-[1rem]">
-            <h1 className="text-slate-900 text-xl font-[600]">
+          <div className="mt-0 shadow-md h-fit bg-slate-900 py-[2rem] px-[1rem]">
+            <h1 className="text-slate-400 text-[15px]">
               Property Location
             </h1>
             <div className="col-span-2 mt-8 grid grid-cols-1 gap-4">
@@ -467,8 +467,8 @@ const UpdateProperty = () => {
             </div>
           </div>
 
-          <div className="p-[1.5rem] h-fit shadow-md bg-slate-500 flex flex-col gap-6">
-            <h1 className="text-slate-900 text-xl font-[600]">
+          <div className="p-[1.5rem] h-fit shadow-md bg-slate-900 flex flex-col gap-6">
+            <h1 className="text-slate-400 text-[15px]">
               Availability Date
             </h1>
             <div className="relative ">
@@ -514,9 +514,9 @@ const UpdateProperty = () => {
             </div>
           </div>
 
-          <div className="p-[1.5rem] h-fit shadow-md bg-slate-500 flex flex-col gap-6">
-            <h1 className="text-slate-900 text-xl font-[600]">
-              Property Agents
+          <div className="p-[1.5rem] h-fit shadow-md bg-slate-900 flex flex-col gap-6">
+            <h1 className="text-slate-400 text-[15px]">
+              Property Agent
             </h1>
 
             {agentLoader ? (
@@ -540,8 +540,8 @@ const UpdateProperty = () => {
 
             {errors.agent && touched.agent && <p>{errors.agent}</p>}
           </div>
-          <div className="p-[1.5rem] shadow-md bg-slate-500 h-fit">
-            <h1 className="text-slate-900 text-xl  font-[600]">Amenities</h1>
+          <div className="p-[1.5rem] shadow-md bg-slate-900 h-fit">
+            <h1 className="text-slate-400 text-[15px]">Selected Amenities</h1>
 
             <div>
               {values.amenities.length > 0 ? (
@@ -576,7 +576,7 @@ const UpdateProperty = () => {
 
             <div className="mt-12 flex text-[14px] flex-row justify-between">
               <button
-                className="w-6/12 py-3 bg-slate-400 text-white shadow-md"
+                className="w-6/12 py-3 bg-slate-700 text-white shadow-md"
                 // onClick={validateForm}
                 disabled={loading}
                 type="submit"

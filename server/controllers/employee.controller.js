@@ -22,7 +22,7 @@ const getEmployeeByIdModel = async(req, res) => {
         const employee = await getEmployeeByIdSchema(id)
 
         if(!employee) {
-            return res.status(500).json({message: "Employee not found"})
+            return res.status(404).json({message: "Employee not found"})
         }
 
         return res.status(200).json(employee)
@@ -110,7 +110,7 @@ const createEmployeeModel = async(req, res) => {
 
             if(employeeExist) {
                 console.log('already exist')
-                return res.status(500).json({message: "Employee already exist"})
+                return res.status(400).json({message: "Employee already exist"})
             }
 
         if(!username ||
@@ -122,14 +122,14 @@ const createEmployeeModel = async(req, res) => {
             !role||
             !job_type ||
             !status|| !id || !img) {
-                return res.status(500).json({message: "Pass in necessary parameters"})
+                return res.status(400).json({message: "Pass in necessary parameters"})
             }
 
             const admin = await getAdminUserById(id);
             console.log(admin)
 
             if(!admin) {
-                return res.status(500).json({message: "Admin not found"})
+                return res.status(404).json({message: "Admin not found"})
             }
 
 
@@ -202,7 +202,7 @@ const updateEmployeeStatusModel = async (req, res) => {
 
 
         if (!employee) {
-            return res.status(500).json({message: "Employee not found"})
+            return res.status(404).json({message: "Employee not found"})
         }
 
         employee.status = status

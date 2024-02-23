@@ -119,16 +119,16 @@ const createUserOrder = async (req, res) => {
     const admin = await getAdminUserById(property.admin_id)
 
     if(orderExist) {
-      return res.status(500).json({message: "You already have an order for this property"})
+      return res.status(400).json({message: "You already have an order for this property"})
     } 
 
 
 
     if (!user) {
-      return res.status(500).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found" });
     }
     if (!property) {
-      return res.status(500).json({ message: "Property not found" });
+      return res.status(404).json({ message: "Property not found" });
     }
 // console.log(property)
     const necessaryPropertyInfo = extractNecessaryPropertyInfo(property);
@@ -138,7 +138,7 @@ const createUserOrder = async (req, res) => {
       property.property_information.booking_status !== "available"
     ) {
       // console.log(property.status);
-      return res.status(500).json({
+      return res.status(400).json({
         message: "Property unavailable at the moment. Please check back later.",
       });
     }

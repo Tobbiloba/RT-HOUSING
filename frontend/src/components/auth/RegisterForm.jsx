@@ -43,9 +43,9 @@ const RegisterForm = ({ setShowRegister, showRegister }) => {
     onSubmit,
   })
 
-  console.log(errors)
+  // console.log(errors)
   const { loading, status } = useSelector(state => state?.register)
-  console.log(status)
+  // console.log(status)
 
   useEffect(() => {
     if (status == 'success') {
@@ -61,7 +61,7 @@ const RegisterForm = ({ setShowRegister, showRegister }) => {
         onClose={handleClose}
       >
         <Box sx={style}>
-          <div className="bg-white text-[14px] exo z-10 rounded-md overflow-hidden w-[90vw] h-fit md:w-[27.5rem] md:h-[46.5rem]">
+          <div className="bg-white text-[14px] exo z-10 overflow-hidden w-[90vw] h-fit md:w-[32.5rem] md:h-[46.5rem]">
             <div className="flex flex-row justify-between py-4 px-8 bg-slate-100 ">
               <p className="text-slate-900 font-[600] text-[15px]">Register</p>
               <p className="text-red-500 cursor-pointer" onClick={handleClose}>
@@ -132,11 +132,11 @@ const RegisterForm = ({ setShowRegister, showRegister }) => {
 
                 <div className="mt-2 md:mt-6 flex flex-col md:flex-row justify-between gap-y-3 md:items-center w-[100%]">
                   <button
-                    className={`border-2 w-[40%] text-[14px] py-2 border-slate-300 rounded-md ${loading && 'cursor-not-allowed'}`}
+                    className={`border-2 w-[40%] text-[14px] py-2 border-slate-300 ${loading && 'cursor-not-allowed'}`}
                     disabled={loading}
                     type="submit"
                   >
-                    {loading ? <div>
+                    {loading ? <div className='flex justify-center gap-4 item-center'>
                       <Spinner />
                       <p>Loading...</p>
                     </div> : 'Register'}

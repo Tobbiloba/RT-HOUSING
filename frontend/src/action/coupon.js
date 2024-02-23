@@ -19,14 +19,15 @@ import {
 
 const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/coupon`
 const customId = 'custom-id-yes'
-const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
-const user_id = JSON.parse(sessionStorage.getItem('userInfo'))?._id
+
+
 export const getCompanyCoupon = () => async dispatch => {
   dispatch({
     type: GET_COMPANY_COUPON,
   })
+  const admin_id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
-    const { data } = await Axios.get(`${BASE_URL}/${id}`)
+    const { data } = await Axios.get(`${BASE_URL}/${admin_id}`)
     dispatch({
       type: GET_COMPANY_COUPON_SUCCESSFUL,
       payload: data,
@@ -98,10 +99,10 @@ export const createCompanyCoupon =
     dispatch({
       type: CREATE_COUPON_CODE,
     })
-    console.log(values)
+    const admin_id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
     try {
       const { data } = await Axios.post(
-        `${BASE_URL}/create/${id}`,
+        `${BASE_URL}/create/${admin_id}`,
         {
           coupon_code: values.code,
           free_shipping: values.free_shipping,
@@ -151,6 +152,7 @@ export const verifyCouponCode =
     dispatch({
       type: VERIFY_COUPON_CODE,
     })
+    const user_id = JSON.parse(sessionStorage.getItem('userInfo'))?._id
     try {
       if(user_id) {
         const { data } = await Axios.put(`${BASE_URL}/activate`, {

@@ -10,11 +10,12 @@ const PropertyLoadingCard = () => {
 }
 const PropertyLocationCard = ({ title }) => {
   const { properties, loading } = useSelector(state => state.allProperties)
-  // console.log(properties[0].property_information)
+  // console.log(properties[0].property_information.property_type)
+  // console.log(title)
 
   return (
-    <div className="w-[100%] rubik text-slate-600 border-b pb-16">
-      <h1 className="text-xl"> {title}</h1>
+    <div className="w-[100%] exo text-slate-600 border-b pb-16">
+      <h1 className="text-[16px]"> {title}</h1>
 
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mt-4">
@@ -22,7 +23,7 @@ const PropertyLocationCard = ({ title }) => {
             <PropertyLoadingCard key={item} />
           ))}
         </div>
-      ) : properties && properties.length > 0 ? (
+      ) : properties && properties.length > 0 && properties[0].property_information.property_type == title ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mt-4">
           {properties &&
             properties
@@ -39,7 +40,7 @@ const PropertyLocationCard = ({ title }) => {
                 >
                   <div className="w-[100%] h-[100%] absolute top-0 left-0 bg-black/40"></div>
                   <div className="z-10 relative flex flex-row items-center justify-between">
-                    <p className="text-[11px] h-6 flex items-center justify-center px-3 bg-slate-600">
+                    <p className="text-[11px] h-6 flex items-center justify-center px-3 bg-slate-500">
                       {item.property_information.booking_status}
                     </p>
                     <p className="text-[13px]">
@@ -67,11 +68,11 @@ const PropertyLocationCard = ({ title }) => {
                 </div>
               ))}
         </div>
-      ) : <div className="h-40 w-[100%] mx-0 flex items-center justify-center">
-      <h1 className="text-slate-500">No property to show</h1>
+      ) :<div className="h-24 w-[100%] bg-slate-200 mx-0 flex items-center justify-center">
+      <h1 className="text-slate-500 text-[14px]">No property to show</h1>
     </div>}
 
-      <h1 className="mt-7 text-slate-600">See all {title} </h1>
+      <h1 className="mt-7 text-slate-600 text-[14px]">See all {title} </h1>
     </div>
   )
 }

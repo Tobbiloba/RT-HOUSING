@@ -29,7 +29,7 @@ const createUser = async (req, res) => {
 
     if (userExists) {
       console.log('user exist')
-      return res.status(500).json({ message: "User already exists" });
+      return res.status(404).json({ message: "User already exists" });
     }
 
     const salt = random();

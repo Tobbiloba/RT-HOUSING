@@ -40,6 +40,24 @@ const Layout = ({ children }) => {
         </div>
       )}
 
+
+        {/* <div>
+          <TopBar
+            setShowLogin={setShowLogin}
+            setShowRegister={setShowRegister}
+            showRegister={showRegister}
+          />
+          <MenuBar />
+          <Chatbot />
+          {
+            isLoading ? <Loading /> : <>
+            {children}
+            </>
+          }
+          
+          <Footer />
+        </div> */}
+
       {showLogin && !isLoggedIn && (
         <LoginForm setShowLogin={setShowLogin} showLogin={showLogin} />
       )}

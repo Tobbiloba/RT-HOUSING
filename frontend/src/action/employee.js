@@ -27,7 +27,7 @@ const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/employee`
 
 const customId = 'custom-id-yes'
 
-const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+
 
 export const getAdminEmployee =
   () =>
@@ -35,8 +35,9 @@ export const getAdminEmployee =
     dispatch({
       type: FETCH_ADMIN_EMPLOYEES,
     })
+    const admin_id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
     try {
-      const { data } = await Axios.get(`${BASE_URL}/employer/${id}`)
+      const { data } = await Axios.get(`${BASE_URL}/employer/${admin_id}`)
       dispatch({
         type: FETCH_ADMIN_EMPLOYEES_SUCCESSFUL,
         payload: data,
@@ -103,8 +104,9 @@ export const getAgent = () => async dispatch => {
   dispatch({
     type: GET_AGENT,
   })
+  const admin_id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
-    const { data } = await Axios.get(`${BASE_URL}/agent/${id}`)
+    const { data } = await Axios.get(`${BASE_URL}/agent/${admin_id}`)
     dispatch({
       type: GET_AGENT_SUCCESSFUL,
       payload: data,
@@ -139,8 +141,9 @@ export const createEmployee = values => async dispatch => {
   dispatch({
     type: CREATE_EMPLOYEE,
   })
+  const admin_id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
-    const { data } = await Axios.post(`${BASE_URL}/${id}`, {
+    const { data } = await Axios.post(`${BASE_URL}/${admin_id}`, {
       ...values,
     })
     dispatch({

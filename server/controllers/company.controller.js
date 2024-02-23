@@ -46,7 +46,7 @@ const getCompanyByEmailModel = async (req, res) => {
       return res.status(200).json(company);
     } else {
       console.log("Company email cant be found");
-      return res.status(400).json({ message: "Company not found" });
+      return res.status(404).json({ message: "Company not found" });
     }
   } catch (error) {
     console.log('error');
@@ -79,7 +79,7 @@ const createCompanyModel = async (req, res) => {
         const isUser = await getAdminUserById(id)
 
         if(!isUser) {
-            return res.status(500).json({message: "User not found"})
+            return res.status(404).json({message: "User not found"})
         } else {
             console.log('user found')
             console.log(isUser.firstname)
@@ -87,7 +87,7 @@ const createCompanyModel = async (req, res) => {
         const companyNameExist = await getCompanyByNameSchema(company_name)
         if(companyNameExist) {
             console.log('Company name already exists')
-            return res.status(500).json({message: "Company name is already taken"})
+            return res.status(404).json({message: "Company name is already taken"})
         }
         const companyIdExist = await getCompanyByEmailSchema(company_name)
         if(companyIdExist) {
@@ -134,7 +134,7 @@ const addEmployee = async (req, res) => {
         const isCompany = await getCompanyByIdSchema(id);
 
         if(!isCompany) {
-            return res.status(500).json({message: "Message not found"})
+            return res.status(404).json({message: "Message not found"})
         }
 
         const userExists = await getAdminUserByEmail(email).select(
@@ -180,7 +180,7 @@ const deleteEmployee = async (req, res) => {
         const isCompany = await getCompanyByIdSchema(id);
 
         if(!isCompany) {
-            return res.status(500).json({message: "Message not found"})
+            return res.status(404).json({message: "Message not found"})
         }
 
         const userExists = await getAdminUserByEmail(email).select(

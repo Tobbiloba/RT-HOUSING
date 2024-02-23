@@ -19,7 +19,7 @@ const Topbar = ({ setShowSlide, showSlide }) => {
 
   return (
     <div
-      className={` bg-slate-600 z-[499] md:z-[100] exo ml-auto px-[1rem] md:px-[2%] md: shadow-b-md h-fit md:h-[4.25rem] flex flex-col md:flex-row md:items-center justify-between  ${
+      className={` bg-slate-800 z-[499] md:z-[100] exo ml-auto px-[1rem] md:px-[2%] md: shadow-b-md h-fit md:h-[4.25rem] flex flex-col md:flex-row md:items-center justify-between  ${
         showSlide ? 'sidebar-slide-in-topbar' : 'sidebar-slide-out-in-topbar'
       }`}
     >

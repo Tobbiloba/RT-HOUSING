@@ -62,7 +62,7 @@ const AdminLoginScreen = () => {
       <div className="absolute left-0 border border--500 top-[20%]">
         <img src="https://cdn.dribbble.com/userupload/8432950/file/original-0c14504bd291054d76548cb015dff89a.png?resize=1024x768&vertical=center" />
       </div>
-      <div className="w-[32rem] relative z-10 bg-[#ffffff] p-[1rem] md:p-[2rem] flex flex-col justify-between rounded-">
+      <div className="w-[35rem] relative z-10 bg-[#ffffff] p-[1rem] md:p-[2rem] flex flex-col justify-between rounded-">
         <div></div>
         <div className="items-center flex flex-col">
           <h1 className=" flex text-[28px] text-slate-400 flex-row pt-3 capitalized">

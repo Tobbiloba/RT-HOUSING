@@ -188,6 +188,7 @@ const AddCoupon = ({ setState }) => {
 }
 const Coupon = () => {
   // const navigate = useNavigate()
+  
   const dispatch = useDispatch()
   const [showAddCoupon, setShowAddCoupon] = useState(false)
 
@@ -195,12 +196,12 @@ const Coupon = () => {
     dispatch(getCompanyCoupon('65c77993a24964910729d98d'))
   }, [])
   const { loading, coupon } = useSelector(state => state.fetchCoupon)
-  console.log(coupon)
+  // console.log(coupon)
 
   // const loading = true
 
   return (
-    <div className="exo  pb-8 w-[100%] p-[1rem] md:p-[2rem] flex">
+    <div className="exo pb-8 w-[100%] p-[1rem] md:p-[2rem] flex">
       <div className="rounded h-fit w-[100%]">
         <div className="flex pb-4 text-slate-100 flex-row gap-x-7 gap-y-4 text-[13px] justify-end">
           <button className="px-5 py-2 bg-red-600 cursor-not-allowed">

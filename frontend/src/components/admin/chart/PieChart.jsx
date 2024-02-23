@@ -19,12 +19,13 @@ const PieChart = ({ title, value, series, colors, bg }) => {
       gap={2}
       minHeight="110px"
       width="100%"
+      fontFamily="exo"
     >
       <Stack direction="column">
-        <Typography fontSize={14} color={bg ? 'white' : '#808191'}>
+        <Typography fontSize={12} color={bg ? 'white' : '#808191'}>
           {title}
         </Typography>
-        <Typography fontSize={24} color="#11142d" fontWeight={700} mt={1}>
+        <Typography fontSize={18} color="#11142d" fontWeight={700} mt={1}>
           {value}
         </Typography>
       </Stack>

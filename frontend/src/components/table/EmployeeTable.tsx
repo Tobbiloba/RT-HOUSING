@@ -109,7 +109,7 @@ export const columns = [
               <DotsHorizontalIcon className="h-4 w-4 rounded-none" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className='z-50'>
             <div className="bg-slate-800 pt-[1rem] w-[10rem] h-fit">
               <h1 className="text-slate-400 ml-[1rem]">Actions</h1>
               <div className="mt-4">
