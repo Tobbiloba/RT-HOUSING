@@ -48,8 +48,13 @@ const AdminLayout = ({ children }) => {
             }`}
           >
             <Topbar setShowSlide={setToggleOpen} showSlide={toggleOpen} />
-
+            
             <div className="md:mt-[0rem] mt-[0rem] w-[100%]">
+            {
+              !data?.isActivated && <p className='w-[100%] bg-red-500 text-center text-white text-[13px] py-1'>
+                Your account hasn't been actived. Check your mail for activation link in order to continue.
+              </p>
+            }
               {pathname[pathname.length - 1] != 'admin' && <BreadCrumb />}
               {children}
 

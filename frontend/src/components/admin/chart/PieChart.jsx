@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack'
 
 const PieChart = ({ title, value, series, colors, bg }) => {
   return (
+    // <div className='shadow-white shadow-sm'>
     <Box
       id="chart"
       flex={1}
@@ -20,6 +21,7 @@ const PieChart = ({ title, value, series, colors, bg }) => {
       minHeight="110px"
       width="100%"
       fontFamily="exo"
+      
     >
       <Stack direction="column">
         <Typography fontSize={12} color={bg ? 'white' : '#808191'}>
@@ -42,6 +44,7 @@ const PieChart = ({ title, value, series, colors, bg }) => {
         width="120px"
       />
     </Box>
+    // </div>
   )
 }
 

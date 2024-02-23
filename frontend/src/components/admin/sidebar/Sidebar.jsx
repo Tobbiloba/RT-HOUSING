@@ -12,6 +12,7 @@ import { RiLogoutCircleRLine } from 'react-icons/ri'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { clearAuth } from '@/action/auth'
+
 const Sidebar = ({ showSlide, setShowSlide }) => {
   const location = useLocation()
   const dispatch = useDispatch()
@@ -72,7 +73,7 @@ const Sidebar = ({ showSlide, setShowSlide }) => {
     dispatch(clearAuth())
     navigate("/")
   }
-
+  const data = sessionStorage.getItem('adminInfo')
   return (
     <div
       className={`h-[100vh] exo top-0 fixed z-[199] ${!showSlide ? 'sidebar-slide-out-in' : 'sidebar-slide-in'} py-4  bg-slate-900 flex flex-col justify-between`}
@@ -98,9 +99,9 @@ const Sidebar = ({ showSlide, setShowSlide }) => {
               // console.log(`${nav.link.split('/')[2] || 'admin'}`, pathname[2])
               return (
                 <Link
-                  to={nav.link}
+                  to={ data?.isActivated ? nav.link : '/admin/dashboard'}
                   key={nav.id}
-                  className={`flex flex-row  items-center ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[2]}` ? 'bg-slate-600 text-white' : ''} text-white -full ${!showSlide ? 'h-[3rem]  w-[3rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}
+                  className={`flex flex-row  items-center hover:bg-slate-400 ${`${nav.link.split('/')[2] || 'admin'}` == `${pathname[2]}` ? 'bg-slate-600 text-white' : ''} ${!data?.isActivated && "cursor-not-allowed"} text-white -full ${!showSlide ? 'h-[3rem]  w-[3rem]  justify-center items-center' : 'w-[100%] h-[50px] pl-4 gap-3 drop-shadow-xl'}`}
                   onClick={() => setShowSlide(false)}
                 >
                   <div className="text-[22px] ">{nav.icon}</div>
