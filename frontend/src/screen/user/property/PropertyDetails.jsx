@@ -54,7 +54,7 @@ const PropertyDetails = () => {
       setIsUser(true)
     }
     window.scrollTo(0, 0)
-    // dispatch(getPropertyDetailById(id))
+    dispatch(getPropertyDetailById(id))
   }, [])
 
   // console.log(isUser)
