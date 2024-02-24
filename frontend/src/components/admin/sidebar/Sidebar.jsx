@@ -73,7 +73,7 @@ const Sidebar = ({ showSlide, setShowSlide }) => {
     dispatch(clearAuth())
     navigate("/")
   }
-  const data = sessionStorage.getItem('adminInfo')
+  const data = JSON.parse(sessionStorage.getItem('adminInfo'))
   return (
     <div
       className={`h-[100vh] exo top-0 fixed z-[199] ${!showSlide ? 'sidebar-slide-out-in' : 'sidebar-slide-in'} py-4  bg-slate-900 flex flex-col justify-between`}

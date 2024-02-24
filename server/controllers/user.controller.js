@@ -19,7 +19,6 @@ const createUser = async (req, res) => {
   try {
     const { username, email, avatar, password, phoneNo, socials } = req.body;
     console.log(username, email, avatar, password, phoneNo, socials)
-    const token = generateRandomToken()
     // console.log(name);
     if (!email || !password || !username || !phoneNo) {
       return res.status(500).json({ message: "Pass all parameters" });
@@ -35,7 +34,6 @@ const createUser = async (req, res) => {
     const salt = random();
 
     const newUser = await registerUser({
-      activationToken: token,
       username,
       email,
       avatar: avatar ? avatar : null,
@@ -44,11 +42,9 @@ const createUser = async (req, res) => {
       authentication: {
         salt,
         password: authentication(salt, password),
-      },
-      isActivated: false
+      }
     });
 
-    sendVerificationToken('abayomitobiloba410@gmail.com', `http://localhost:5173/user/profile/activate/${newUser._id}/${token}`)
 
     res.status(200).json({ newUser }).end();
   } catch (error) {

@@ -17,6 +17,9 @@ import {
   ACTIVATE_ACCOUNT,
   ACTIVATE_ACCOUNT_SUCCESSFUL,
   ACTIVATE_ACCOUNT_FAILED,
+  RESEND_TOKEN,
+  RESEND_TOKEN_FAILED,
+  RESEND_TOKEN_SUCCESSFUL,
   CLEAR_AUTH
 } from '../constant/auth'
 
@@ -245,9 +248,9 @@ export const activateUser = (id, token) => async dispatch => {
     dispatch({
       type: ACTIVATE_ACCOUNT_FAILED,
       payload:
-        error.response && error.response.data[0]
-          ? error.response.data.message
-          : error.message,
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
     })
 
     console.log(error.response.data.message)
@@ -266,11 +269,62 @@ export const activateUser = (id, token) => async dispatch => {
   }
 }
 
+export const resendToken = (adminId) => async dispatch => {
+  dispatch({
+    type: RESEND_TOKEN,
+  })
+//   const adminId = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+console.log('lol')
+console.log(`${BASE_URL}/admin/resend-token/${adminId}`)
+
+  try {
+    const { data } = await Axios.get(
+      `${BASE_URL}/admin/resend-token/${adminId}`
+    )
+    dispatch({
+      type: RESEND_TOKEN_SUCCESSFUL,
+      payload: data,
+    })
+
+    toast.success(
+      "Resend OTP successful. Check your mail",
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
+  } catch (error) {
+    dispatch({
+      type: RESEND_TOKEN_FAILED,
+      payload:
+      error.response && error.response.data
+      ? error.response.data.message
+      : error.message,
+    })
+
+    console.log(error)
+
+    toast.error(
+      error.response && error.response.data
+        ? error.response.data.message
+        : error.message,
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
+
+  }
+}
+
+
 export const activateAdminUser = (id, token) => async dispatch => {
   dispatch({
     type: ACTIVATE_ACCOUNT,
   })
-
+console.log(id, token)
   try {
     const { data } = await Axios.post(
       `${BASE_URL}/admin/activate/token/${id}`,
@@ -282,6 +336,14 @@ export const activateAdminUser = (id, token) => async dispatch => {
       type: ACTIVATE_ACCOUNT_SUCCESSFUL,
       payload: data,
     })
+    toast.success(
+      "Successfully activated account",
+      {
+        toastId: customId,
+        position: 'bottom-right',
+        theme: 'colored',
+      },
+    )
 
   } catch (error) {
     dispatch({

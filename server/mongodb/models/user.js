@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
-    activationToken: { type: String, required: false },
-    isActivated: { type: Boolean, enum: [true, false], default: false },
-    username: { type: String, required: true },
+  username: { type: String, required: true },
     firstname: {type: String, required: false},
     lastname: {type: String, required: false},
     email: { type: String, required: true },

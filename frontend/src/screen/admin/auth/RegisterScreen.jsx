@@ -254,9 +254,6 @@
 
 
 
-
-
-
 // @ts-nocheck
 import React, { useEffect } from 'react'
 import Input from '../../../components/Input'
@@ -267,6 +264,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { registerAdminSchema } from '@/schemas'
 import { useFormik } from 'formik'
 import Spinner from '@/components/common/spinner/Spinner'
+import { clear } from '@/action/employee'
 const AdminRegisterScreen = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -306,41 +304,40 @@ const AdminRegisterScreen = () => {
 
   useEffect(() => {
     if (registerAdminUser.adminInfo) {
-      navigate('/admin/login')
+      dispatch(clear())
+      navigate('/admin/verify/otp')
     }
   }, [registerAdminUser])
 
   return (
-    <div className="flex exo flex-row w-[100vw] min-h-[100vh] overflow-hidden justify-end  p-[1rem] md:p-12 relative">
-      <div className="w-[100%] bg-black/80 absolute z-10 flex flex-col top-0 left-0 h-[100%]  justify-evenly"></div>
-
-      <div className="absolute left-0 border--500 top-[0%]">
-        <img 
-        src='/bg.png'
-        // src="https://cdn.dribbble.com/userupload/8432950/file/original-0c14504bd291054d76548cb015dff89a.png?resize=1024x768&vertical=center"
-         />
+    <div className="flex exo flex-col md:flex-row w-[100vw] min-h-[100vh] overflow-hidden justify-end bg-[#e9e9e9]  relative">
+    
+    <div className="flex-1 flex item-center relative justify-center  left-0 top-[20%]">
+      <div className="absolute w-[100%] z-10 h-[100%] top-0 left-0 bg-black/40"></div>
+        <img src="/bg.png" />
       </div>
-      <div className="w-[32.5rem] min-h-[90vh] relative z-10  md:bg-slate-900 md:p-[2rem] flex flex-col justify-between rounded-">
-        <div></div>
+      <div className='md:w-[30%] flex justify-center items-center bg-white'>
+      <div className="md:min-w-[30rem] w-[100%] shadow-slate-200 shadow-sm h-fit  relative z-10 bg-[#ffffff] p-[1rem] md:p-[2rem] flex flex-col justify-between rounded-">
+         <div></div>
         <div className="items-center flex flex-col">
-          <Link to="/" className=" flex text-[28px] text-slate-400 flex-row pt-3 capitalized">
+          {/* <Link to="/" className=" flex text-[28px] text-slate-400 flex-row pt-3 capitalized">
             Fe
             <div className="rotate-12 w-[30px] h-[60px] flex flex-col items-center justify-center">
               <div className="w-[10px] h-[10px] rounded-full bg-slate-600"></div>
               <span className="text-slate-600 relative bottom-2">bt</span>
             </div>
             oS
-          </Link>
+          </Link> */}
 
           <div className="mt-6 text-center">
-            <h1 className="text-4xl font-[600] text-slate-300">
+            <h1 className="text-4xl font-[600] text-slate-600">
               Sign Up
             </h1>
             {/* <p className="mt-4 text-slate-500">Please enter your details</p> */}
           </div>
 
-          <form onSubmit={handleSubmit} className="w-[100%] mt-6 md:mt-16">
-            <div className="flex flex-col gap-y-8 md:grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-y-6">
+          <form onSubmit={handleSubmit} className="w-[100%] mt-8 md:mt-16">
+            <div className="flex flex-col gap-y-8 md:grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-y-2">
               <Input
                 placeholder="Type in your firstname"
                 type="text"
@@ -429,7 +426,7 @@ const AdminRegisterScreen = () => {
                 id="city"
               />
 
-              <div className="col-span-2 mb-4">
+              <div className="col-span-2">
                 <Input
                   placeholder="Type in your password"
                   type="password"
@@ -452,13 +449,13 @@ const AdminRegisterScreen = () => {
                   error={
                     errors.profile_img && touched.profile_img ? errors.profile_img : undefined
                   }
-                  // red
+                  red
                 />
               </div>
             </div>
 
             <div className="mt-12 flex flex-row justify-between">
-              <div className="flex flex-row gap-5 text-[14px] items-center text-white">
+              <div className="flex flex-row gap-5 items-center">
                 <input type="checkbox" className="" />
 
                 <p>Remember me</p>
@@ -466,12 +463,12 @@ const AdminRegisterScreen = () => {
 
               <p className="text-slate-400 cursor-pointer">Forgot password?</p>
             </div>
-            <div className="flex flex-col mt-12 gap-6">
+            <div className="flex flex-col px-[10%] mt-12 gap-6">
               <button
                 type="submit"
                 disabled={registerAdminUser.loading}
-                className={`${
-                  registerAdminUser.loading ? 'bg-gray-300 cursor-not-allowed flex flex-row justify-center' : 'bg-slate-700'
+                className={`border ${
+                  registerAdminUser.loading ? 'bg-gray-300 cursor-not-allowed flex flex-row justify-center' : 'bg-slate-900'
                 } py-3 text-white`}
               >
                 {
@@ -487,13 +484,14 @@ const AdminRegisterScreen = () => {
 
         <Link to="/admin/login" className="mt-8">
           <p className="text-slate-600  ">
-            Don't have an account?{' '}
+            Dont have an account?{' '}
             <span className="text-slate-400 cursor-pointer">Sign In</span>
           </p>
         </Link>
-      </div>
+      </div></div>
     </div>
   )
 }
 
 export default AdminRegisterScreen
+

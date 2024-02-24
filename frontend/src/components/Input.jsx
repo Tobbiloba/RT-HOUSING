@@ -56,9 +56,9 @@ const Input = ({
               //  onChange={handleInputChange}
               className={`bg-inherit fill-none h-[2.5rem] ${
                 bigText || 'text-[14px]'
-              } text-black w-[100%] ${
+              } text-slate-700 w-[100%] ${
                 error ? 'bg-red-50 border border-red-500' : 'bg-slate-100'
-              } py-3 pl-3 outline-none`}
+              } py-6 pl-3 outline-none`}
             />
           )}
           {type === 'password' && value !== '' && (

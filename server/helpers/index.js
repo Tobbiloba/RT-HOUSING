@@ -52,8 +52,8 @@ export const sendLoginNotification = ({ id }) => {
   // return notificationModel;
 };
 
-export const sendVerificationToken = async (email, url) => {
-  console.log(email, url);
+export const sendVerificationToken = async (email, token) => {
+  // console.log(email, url);
   const transporter = nodemailer.createTransport({
     // Configure your email service
     service: "gmail",
@@ -99,8 +99,7 @@ export const sendVerificationToken = async (email, url) => {
           <p class="description" style="color: #cbd5e1; font-size: 14px; margin-top: 30px;">
               Thank you for choosing Febtos, your go-to rental company. We appreciate your business and welcome you to our community!
           </p>
-
-          <a href=${url} class="activation-button" style="color: #758192; font-size: 15px;">Activate Account</a>
+            <h1 style="color: white; font-size: 15px; padding: 5px 10px;">${token}</h1>
 
           <div class="additional-texts" style="color: #cbd5e1; font-size: 14px; margin-top: 30px;">
               <p class="terms-and-conditions">

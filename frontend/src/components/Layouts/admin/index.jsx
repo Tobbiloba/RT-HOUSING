@@ -16,7 +16,7 @@ const AdminLayout = ({ children }) => {
   const [loading, setLoading] = useState(false)
 
   const isMobile = useMediaQuery({ maxWidth: 768 })
-  const data = sessionStorage.getItem('adminInfo')
+  const data = JSON.parse(sessionStorage.getItem('adminInfo'))
   useEffect(() => {
     setLoading(true)
     if (!data) {

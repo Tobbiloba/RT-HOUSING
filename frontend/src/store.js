@@ -7,6 +7,7 @@ import {
   registerAdminReducer,
   loginAdminReducer,
   activateUser,
+  resendTokenReducer
 } from './reducer'
 import {
   fetchAllPropertiesReducer,
@@ -100,7 +101,8 @@ const reducer = combineReducers({
   contactAgent: contactAgentReducer,
   updateUserProfile: updateUserProfileReducer,
   updateUserPassword: updateUserPasswordReducer,
-  userInfo: getUserInfoReducer
+  userInfo: getUserInfoReducer,
+  resendToken: resendTokenReducer
 })
 
 // @ts-ignore

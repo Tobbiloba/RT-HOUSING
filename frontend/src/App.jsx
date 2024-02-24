@@ -42,6 +42,7 @@ import Chatbot from './components/common/chatbot/Chatbot'
 import Aboutus from './screen/user/about us/Aboutus'
 import Contactus from './screen/user/contact us/Contactus'
 import UpdateAdminProfile from './screen/admin/profile/UpdateProfile'
+import OTP from './screen/OTP'
 const App = () => {
   const routes = [
     <Route
@@ -60,6 +61,14 @@ const App = () => {
         </Layout>
       }
     />,
+    <Route
+    path="/admin/verify/otp"
+    element={
+      // <Layout>
+        <OTP />
+      // </Layout>
+    }
+  />,
     <Route
       path="/about-us"
       element={

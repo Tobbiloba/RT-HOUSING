@@ -46,7 +46,7 @@ const createAdminUser = async (req, res) => {
     }
     });
 
-    sendVerificationToken('abayomitobiloba410@gmail.com', `https://rt-housing.vercel.app/admin/profile/activate/${newUser._id}/${token}`)
+    sendVerificationToken(newUser.email, token)
     res.status(200).json(newUser).end();
   } catch (error) {
     console.log(error);
@@ -54,6 +54,31 @@ const createAdminUser = async (req, res) => {
   }
 };
 
+
+
+const resendAdminTOken = async (req, res) => {
+  try {
+    const {id} = req.params
+    console.log(id)
+    // console.log( username, firstname, lastname, email, phone, password, profile_img, country, state, city, socials );
+    const token = generateRandomToken()
+    if (!id) {
+      return res.status(400).json({ message: "Pass necessary parameters" });
+    }
+    const userExists = await getAdminUserById(id);
+    if (!userExists) {
+      return res.status(400).json({ message: "User doesn't exist" });
+    }
+  console.log('successful')
+    userExists.activationToken = token
+    await userExists.save()
+    sendVerificationToken('abayomitobiloba410@gmail.com', token)
+    res.status(200).json({message: "Successfully activated token"}).end();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 const updateAdminUser = async (req, res) => {
   try {
@@ -160,16 +185,15 @@ const activateAdminUser = async (req, res) => {
     }
 
     const adminUser = await getAdminUserById(id);
-    console.log(adminUser)
+    // console.log(adminUser)
 
     if (!adminUser) {
       return res.status(404).json({ error: 'Admin user not found for the given token' });
     }
-
+    console.log(adminUser.activationToken)
     if(token != adminUser.activationToken) {
-      return res.status(400).json({message: "Token not correct"})
+      return res.status(400).json({message: "Invalid OTP"})
     }
-// // console.log(adminUser)
     adminUser.activationToken = undefined;
     adminUser.isActivated = true;
 
@@ -198,4 +222,4 @@ const activateAdminUser = async (req, res) => {
 // }
 
 
-export {getAllAdminUsers, createAdminUser, loginAdminUser, getAdminUserInfoByID, activateAdminUser, updateAdminUser}
+export {getAllAdminUsers, resendAdminTOken, createAdminUser, loginAdminUser, getAdminUserInfoByID, activateAdminUser, updateAdminUser}

@@ -61,7 +61,7 @@ const RegisterForm = ({ setShowRegister, showRegister }) => {
         onClose={handleClose}
       >
         <Box sx={style}>
-          <div className="bg-white text-[14px] exo z-10 overflow-hidden w-[90vw] h-fit md:w-[32.5rem] md:h-[46.5rem]">
+          <div className="bg-white text-[14px] exo z-10 overflow-hidden w-[90vw] h-fit md:w-[32.5rem] md:h-fit">
             <div className="flex flex-row justify-between py-4 px-8 bg-slate-100 ">
               <p className="text-slate-900 font-[600] text-[15px]">Register</p>
               <p className="text-red-500 cursor-pointer" onClick={handleClose}>

@@ -291,7 +291,7 @@ const createProperty = async (req, res) => {
     const { id } = req.params;
 
     const { property_information } = req.body;
-
+    console.log(property_information?.agent)
 // console.log(id, property_information)
     if (!id || !property_information) {
       return res
@@ -318,7 +318,7 @@ const createProperty = async (req, res) => {
 
       return res.status(404).json({ messsage: "Property type not found" });
     }
-    console.log(property_information?.agent.username)
+
     
     const getRandomBoolean = () => Math.random() < 0.5;
 

@@ -17,8 +17,7 @@ const style = {
 
 const LoginForm = ({ setShowLogin, showLogin }) => {
   const dispatch = useDispatch()
-  const { loading, userInfo } = useSelector(state => state.login)
-
+  const {  userInfo, loading } = useSelector(state => state.login)
   useEffect(() => {
     if (userInfo) {
       setShowLogin(false)
@@ -57,8 +56,8 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="bg-white text-[14px] exo z-10 rounded-md overflow-hidden w-[90vw] h-fit md:w-[27.5rem] md:h-[38.5rem]">
-            <div className="flex flex-row rounded-md justify-between py-4 px-8 bg-gray-100 ">
+          <div className="bg-white text-[14px] exo z-10 overflow-hidden w-[90vw] h-fit md:w-[27.5rem] md:h-fit">
+            <div className="flex flex-row justify-between py-4 px-8 bg-gray-100 ">
               <p className="text-slate-900 font-[600] text-[15px]">Login</p>
               <p className="text-red-500 cursor-pointer" onClick={handleClose}>
                 Close
@@ -93,13 +92,13 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
               />
               <div className="mt-6 flex flex-col gap-y-3 md:flex-row justify-between md:items-center w-[100%]">
                 <button
-                  className="border-2 w-[40%] py-2 border-slate-500 rounded-md"
+                  className="border-2 w-[40%] py-2 border-slate-500"
                   // onClick={handleLogin}
                   type="submit"
                 >
-                  {!loading ? 'Login' : <div className='flex gap-5 item-center'>
+                  {!loading ? 'Login' : <div className='flex gap-5 item-center justify-center'>
                     <Spinner />
-                    <p>Loading ...</p>
+                    <p className=''>Loading ...</p>
                     </div>}
                 </button>
                 <div className="flex flex-row gap-4">
@@ -118,7 +117,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
                 <div className="flex-1 h-[1px] bg-slate-600"></div>
               </div>
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
-                <div className="flex flex-row flex-1 rounded-sm bg-slate-700 overflow-hidden items-center">
+                <div className="flex cursor-not-allowed flex-row flex-1 bg-slate-700 overflow-hidden items-center">
                   <div className="py-2 px-3 bg-slate-900 border border-slate-900">
                     <img
                       src="/facebook.png"
@@ -130,7 +129,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
                     Via facebook
                   </p>
                 </div>
-                <div className="flex flex-row flex-1 rounded-sm bg-slate-700 overflow-hidden items-center  border">
+                <div className="flex  cursor-not-allowed flex-row flex-1 bg-slate-700 overflow-hidden items-center  border">
                   <p className="flex-1 text-[14px] flex items-center pl-3 text-white">
                     Via Gmail
                   </p>
@@ -162,8 +161,8 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
                   <span className="text-slate-400">Signup Now</span>
                 </p>
               </div>
-              <div className="flex-1 text-center py-5">
-                <p>Forgot password?</p>
+              <div className="flex-1 text-center flex item-center justify-center border py-5">
+                <p className='h-fit'>Forgot password?</p>
               </div>
             </div>
           </div>

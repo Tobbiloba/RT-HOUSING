@@ -14,7 +14,10 @@ import {
   ACTIVATE_ACCOUNT,
   ACTIVATE_ACCOUNT_SUCCESSFUL,
   CLEAR_AUTH,
-  ACTIVATE_ACCOUNT_FAILED
+  ACTIVATE_ACCOUNT_FAILED,
+  RESEND_TOKEN,
+  RESEND_TOKEN_FAILED,
+  RESEND_TOKEN_SUCCESSFUL
 } from '../constant/auth'
 export const loginReducer = (
   state = { loading: false, error: null },
@@ -43,6 +46,34 @@ export const loginReducer = (
   }
 }
 
+
+
+export const resendTokenReducer = (
+  state = { loading: false, error: null },
+  action,
+) => {
+  switch (action.type) {
+    case RESEND_TOKEN:
+      return {
+        loading: true,
+        error: null,
+      }
+    case RESEND_TOKEN_SUCCESSFUL:
+      return {
+        loading: false,
+        status: "successful",
+      }
+    case RESEND_TOKEN_FAILED:
+      return {
+        loading: false,
+        error: false,
+      }
+      case CLEAR_AUTH:
+        return {}
+    default:
+      return state
+  }
+}
 export const registerReducer = (
   state = { loading: false, error: null },
   action,
@@ -126,7 +157,7 @@ export const registerAdminReducer = (
 }
 
 export const activateUser = (
-  state = { loading: true, error: null },
+  state = { loading: null, error: null },
   action,
 ) => {
   switch (action.type) {
@@ -139,6 +170,7 @@ export const activateUser = (
       return {
         loading: false,
         error: false,
+        activationSuccess: "successful"
       }
     case ACTIVATE_ACCOUNT_FAILED:
       return {
