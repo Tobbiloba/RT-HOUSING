@@ -52,7 +52,7 @@ dispatch(getUserInfo())
   })
 
   useEffect(() => {
-      if(userInfo.username) {
+      if(userInfo?.username) {
           setFieldValue('avatar', userInfo.avatar);
     setFieldValue('username', userInfo.username);
     setFieldValue('phoneNo', userInfo.phoneNo);

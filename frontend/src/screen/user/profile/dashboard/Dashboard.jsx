@@ -9,28 +9,28 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUserOrder } from '@/action/order'
 // import Loading from '@/components/Loading'
 import { CircularProgress } from '@mui/material'
-const items = [
-  {
-    name: 'Total Booking',
-    number: 299,
-    icon: <SlRefresh className="text-[20px]" />,
-  },
-  {
-    name: 'Pending Booking',
-    number: 299,
-    icon: <BsCart2 className="text-[20px]" />,
-  },
-  {
-    name: 'Processing Booking',
-    number: 299,
-    icon: <TbBus className="text-[24px]" />,
-  },
-  {
-    name: 'Declined Booking',
-    number: 299,
-    icon: <IoCheckmarkDoneSharp className="text-[20px]" />,
-  },
-]
+// const items = [
+//   {
+//     name: 'Total Booking',
+//     number: 299,
+//     icon: <SlRefresh className="text-[20px]" />,
+//   },
+//   {
+//     name: 'Pending Booking',
+//     number: 299,
+//     icon: <BsCart2 className="text-[20px]" />,
+//   },
+//   {
+//     name: 'Processing Booking',
+//     number: 299,
+//     icon: <TbBus className="text-[24px]" />,
+//   },
+//   {
+//     name: 'Declined Booking',
+//     number: 299,
+//     icon: <IoCheckmarkDoneSharp className="text-[20px]" />,
+//   },
+// ]
 
 const Dashboard = () => {
   const dispatch = useDispatch()
@@ -41,13 +41,17 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getUserOrder(data._id))
   }, [])
+
+  // const pendingBooking = details.filter((item) => item.bookingStatus == "pending").length
+  // console.log(pendingBooking)
+  // console.log(details)
   return (
     <div className="bg-white exo p-3">
       <div>
         <h1 className="text-[16px]">Dashboard</h1>
 
         <div className="grid grid-cols-1 mt-5 md:grid-cols-2 xl:grid-cols-4 gap-8">
-          {items.map((item, index) => (
+          {/* {items.map((item, index) => (
             <div
               className={`border ${
                 index == 0
@@ -69,7 +73,70 @@ const Dashboard = () => {
                 <h1 className="text-[15px] font-[600]">{item.number}</h1>
               </div>
             </div>
-          ))}
+          ))} */}
+
+<div
+              className={`border
+                   bg-green-100
+                  
+              flex flex-row justify- gap-4 items-center px-4 h-[5.5rem]`}
+             
+            >
+              <div className="border bg-white/60 w-9 h-9 justify-center flex items-center ">
+              <SlRefresh className="text-[20px]" />
+              </div>
+              <div>
+                <p className=" text-[13px] mb-1">Total Booking</p>
+                <h1 className="text-[15px] font-[600]">{details && details.length}</h1>
+              </div>
+            </div>
+
+            <div
+              className={`border bg-slate-100'
+                   bg-slate-100
+              }
+              flex flex-row justify- gap-4 items-center px-4 h-[5.5rem]`}
+          
+            >
+              <div className="border bg-white/60 w-9 h-9 justify-center flex items-center ">
+              <BsCart2 className="text-[20px]" />
+              </div>
+              <div>
+                <p className=" text-[13px] mb-1">Pending Bookings</p>
+                <h1 className="text-[15px] font-[600]">{details && details.filter((item) => item.bookingStatus == "pending").length}</h1>
+              </div>
+            </div>
+
+            <div
+              className={`border bg-sky-200
+              }
+              flex flex-row justify- gap-4 items-center px-4 h-[5.5rem]`}
+           
+            >
+              <div className="border bg-white/60 w-9 h-9 justify-center flex items-center ">
+              <TbBus className="text-[24px]" />
+              </div>
+              <div>
+                <p className=" text-[13px] mb-1">Processing Bookings</p>
+                <h1 className="text-[15px] font-[600]">{details && details.filter((item) => item.bookingStatus == "active").length}</h1>
+              </div>
+            </div>
+
+            <div
+              className={`border 
+                      bg-red-100
+              
+              flex flex-row justify- gap-4 items-center px-4 h-[5.5rem]`}
+            
+            >
+              <div className="border bg-white/60 w-9 h-9 justify-center flex items-center ">
+              <IoCheckmarkDoneSharp className="text-[20px]" />
+              </div>
+              <div>
+                <p className=" text-[13px] mb-1">Declined Bookings</p>
+                <h1 className="text-[15px] font-[600]">{details && details.filter((item) => item.bookingStatus == "declined").length}</h1>
+              </div>
+            </div>
         </div>
       </div>
 

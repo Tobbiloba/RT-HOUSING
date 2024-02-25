@@ -3,12 +3,10 @@ import React from 'react'
 import amenities from '@/data/amenities'
 import Input from '@/components/Input'
 import AvailabilityCalendar from '@/components/common/calendar/AvailabilityCalendar'
-// @ts-nocheck
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { convertDate } from '@/components/utils'
 import { useParams } from 'react-router-dom'
-import { IoIosArrowDown } from 'react-icons/io'
 import { tourSchema, contactAgentSchema } from '@/schemas'
 import { useFormik } from 'formik'
 import { IoIosArrowRoundForward } from 'react-icons/io'
@@ -21,12 +19,20 @@ import { clear } from '@/action/employee'
 const AboutProperty = ({ detail, isUser }) => {
   return (
     <div className="my-6">
-      <h1 className={`${isUser ? "text-slate-700" :"text-white"} text-[16px] mb-4 font-[600]`}>About Property</h1>
-      <p className={`mt-3 ${isUser ? "text-slate-500" :"text-slate-300"} text-[13px] leading-6`}>
+      <h1
+        className={`${isUser ? 'text-slate-700' : 'text-white'} text-[16px] mb-4 font-[600]`}
+      >
+        About Property
+      </h1>
+      <p
+        className={`mt-3 ${isUser ? 'text-slate-500' : 'text-slate-300'} text-[13px] leading-6`}
+      >
         {detail.property_description}
       </p>
       <div className=" mt-7">
-        <h1 className={`${isUser ? "text-slate-700" :"text-white"} text-[16px] mb-4 font-[600]`}>
+        <h1
+          className={`${isUser ? 'text-slate-700' : 'text-white'} text-[16px] mb-4 font-[600]`}
+        >
           Property Details
         </h1>
 
@@ -34,7 +40,9 @@ const AboutProperty = ({ detail, isUser }) => {
           <table className="border-collapse w-full text-start text-[13px] ...">
             <thead>
               <tr className="bg-slate-100">
-                <th className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"}  pl-5 text-start  text-slate-600 py-3 w-6/12`}>
+                <th
+                  className={`border ${isUser ? 'border-white border-r-gray-300' : 'border-slate-800 border-r-gray-300'}  pl-5 text-start  text-slate-600 py-3 w-6/12`}
+                >
                   Accommodation
                 </th>
                 <th className="text-start pl-5 text-gray-500 font-[500]"></th>
@@ -42,7 +50,9 @@ const AboutProperty = ({ detail, isUser }) => {
             </thead>
             <tbody>
               <tr>
-                <td className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"} pl-5 text-start  text-slate-600 py-3 font-[600]`}>
+                <td
+                  className={`border ${isUser ? 'border-white border-r-gray-300' : 'border-slate-800 border-r-gray-300'} pl-5 text-start  text-slate-600 py-3 font-[600]`}
+                >
                   Bedrooms
                 </td>
                 <td className="text-start pl-5 text-gray-500 font-[500]">
@@ -50,7 +60,9 @@ const AboutProperty = ({ detail, isUser }) => {
                 </td>
               </tr>
               <tr className="bg-slate-100">
-                <td className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"} pl-5 text-start  text-slate-600 py-3 font-[600]`}>
+                <td
+                  className={`border ${isUser ? 'border-white border-r-gray-300' : 'border-slate-800 border-r-gray-300'} pl-5 text-start  text-slate-600 py-3 font-[600]`}
+                >
                   Bathrooms
                 </td>
                 <td className="text-start pl-5 text-gray-500 font-[500]">
@@ -58,7 +70,9 @@ const AboutProperty = ({ detail, isUser }) => {
                 </td>
               </tr>
               <tr>
-                <td className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"} pl-5 text-start  text-slate-600 py-3 font-[600]`}>
+                <td
+                  className={`border ${isUser ? 'border-white border-r-gray-300' : 'border-slate-800 border-r-gray-300'} pl-5 text-start  text-slate-600 py-3 font-[600]`}
+                >
                   Dimension
                 </td>
                 <td className="text-start pl-5 text-gray-500 font-[500]">
@@ -66,7 +80,9 @@ const AboutProperty = ({ detail, isUser }) => {
                 </td>
               </tr>
               <tr className="bg-slate-100">
-                <td className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"} pl-5 text-start  text-slate-600 py-3 font-[600]`}>
+                <td
+                  className={`border ${isUser ? 'border-white border-r-gray-300' : 'border-slate-800 border-r-gray-300'} pl-5 text-start  text-slate-600 py-3 font-[600]`}
+                >
                   Type
                 </td>
                 <td className="text-start pl-5 text-gray-500 font-[500]">
@@ -74,7 +90,9 @@ const AboutProperty = ({ detail, isUser }) => {
                 </td>
               </tr>
               <tr>
-                <td className={`border ${isUser ? "border-white border-r-gray-300" : "border-slate-800 border-r-gray-300"} pl-5 text-start  text-slate-600 py-3 font-[600]`}>
+                <td
+                  className={`border ${isUser ? 'border-white border-r-gray-300' : 'border-slate-800 border-r-gray-300'} pl-5 text-start  text-slate-600 py-3 font-[600]`}
+                >
                   Check-In Start @
                 </td>
                 <td className="text-start pl-5 text-gray-500 font-[500]">
@@ -83,6 +101,50 @@ const AboutProperty = ({ detail, isUser }) => {
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <h1
+          className={`mt-8 ${isUser ? 'text-slate-700' : 'text-white'} text-[16px] mb-4 font-[600]`}
+        >
+          Policies
+        </h1>
+        <div className={`pb-3 items-center ${isUser ? "text-black" : "text-slate-400"}`}>
+          <div className="flex items-center gap-6">
+            Pet Policy:
+            {detail.property_policy.smoking_policy ? (
+              <div>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/2926/2926722.png"
+                  className="w-14 h-14"
+                />
+              </div>
+            ) : (
+              <div>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1661/1661948.png"
+                  className="w-14 h-14"
+                />
+              </div>
+            )}
+          </div>
+          <div className="flex items-center gap-6 mt-6">
+            Smoking Policy:
+            {detail.property_policy.pet_policy ? (
+              <div>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/3487/3487377.png"
+                  className="w-12 h-12"
+                />
+              </div>
+            ) : (
+              <div>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1970/1970829.png"
+                  className="w-12 h-12"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -99,7 +161,11 @@ const AmenitiesCard = ({ detail, isUser }) => {
               key={item.id}
               className="flex w-[100%] text-[13px] sm:max-w-[20rem] flex-row justify-between items-center"
             >
-              <p className={` ${isUser ? "text-slate-600" : "text-slate-300"} font-[600]`}>{item.name}</p>
+              <p
+                className={` ${isUser ? 'text-slate-600' : 'text-slate-300'} font-[600]`}
+              >
+                {item.name}
+              </p>
               <img className="w-9 h-9" src={item.img} alt={item.name} />
             </div>
           ),
@@ -111,21 +177,27 @@ const AmenitiesCard = ({ detail, isUser }) => {
 const Amenities = ({ detail, isUser }) => {
   return (
     <div className="my-6">
-      <h1 className={`${isUser ? "text-slate-700" :"text-white"} text-[16px] mb-4 font-[600]`}>Amenities</h1>
+      <h1
+        className={`${isUser ? 'text-slate-700' : 'text-white'} text-[16px] mb-4 font-[600]`}
+      >
+        Amenities
+      </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {detail.property_amenities.map((item, index) => (
-          <AmenitiesCard key={index} detail={item} isUser={isUser}/>
+          <AmenitiesCard key={index} detail={item} isUser={isUser} />
         ))}
       </div>
     </div>
   )
 }
 
-const Nearby = ({isUser}) => {
+const Nearby = ({ isUser }) => {
   return (
     <div className="my-12">
-      <h1 className={`${isUser ? "text-slate-700" :"text-white"} text-[16px] mb-4 font-[600]`}>
+      <h1
+        className={`${isUser ? 'text-slate-700' : 'text-white'} text-[16px] mb-4 font-[600]`}
+      >
         Nearby Locations
       </h1>
       <div className="w-[100%] bg-gray-200 h-[30rem] text-[13px] my-3 flex items-center justify-center">
@@ -136,12 +208,16 @@ const Nearby = ({isUser}) => {
 }
 
 const Availability = ({ detail, isUser }) => {
-
-
   return (
     <div className="w-[100%] my-12">
-      <h1 className={`${isUser ? "text-slate-700" :"text-white"} text-[16px] mb-4 font-[600]`}>Availability</h1>
-      <p className={`mt-3 ${isUser ? "text-slate-500" :"text-slate-300"} text-[13px] leading-6`}>
+      <h1
+        className={`${isUser ? 'text-slate-700' : 'text-white'} text-[16px] mb-4 font-[600]`}
+      >
+        Availability
+      </h1>
+      <p
+        className={`mt-3 ${isUser ? 'text-slate-500' : 'text-slate-300'} text-[13px] leading-6`}
+      >
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempoer incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nrud exercitation ullamco laboris nisi ute aliquip ex ea
@@ -149,7 +225,9 @@ const Availability = ({ detail, isUser }) => {
         velit.
       </p>
 
-      <div className="mt-8 bg-slate-700 w-fit">
+      <div
+        className={`mt-8  w-fit ${isUser ? 'bg-slate-100' : 'bg-slate-700'}`}
+      >
         <AvailabilityCalendar
           availableFromDate={convertDate(
             detail.availability.available_date_from[0],
@@ -157,18 +235,7 @@ const Availability = ({ detail, isUser }) => {
           availableToDate={convertDate(
             detail.availability.available_date_till[0],
           )}
-          // unavailableFromDate={convertDate(
-          //   detail.availability.unavailable_date_from[0],
-          // )}
-          // unavailableToDate={convertDate(
-          //   detail.availability.unavailable_date_till[0],
-          // )}
-          // occupiedDateFrom={convertDate(
-          //   detail.availability.occupied_date_from[0],
-          // )}
-          // occupiedDateTill={convertDate(
-          //   detail.availability.occupied_date_till[0],
-          // )}
+         
         />
       </div>
 
@@ -190,7 +257,7 @@ const Availability = ({ detail, isUser }) => {
   )
 }
 
-const Terms = ({isUser}) => {
+const Terms = ({ isUser }) => {
   return (
     <div className="my-12 bg-gray-100 max-w-[50rem] px-4 py-12 flex flex-col md:flex-row gap-5">
       <img
@@ -228,16 +295,14 @@ const Reviews = () => {
 }
 
 const ContactAgent = () => {
-    const { id } = useParams()
-    const dispatch = useDispatch()
-    const { details
-      , loading
-     } = useSelector(state => state.propertyDetail)
-    const { tourLoading, status} = useSelector((state) => state?.contactAgent)
-    const onSubmit = () => {
-      dispatch(contactAgent(values, id))
-    
-    }
+  const { id } = useParams()
+  const dispatch = useDispatch()
+  const { details, loading } = useSelector(state => state.propertyDetail)
+  const { agentLoading, status } = useSelector(state => state?.contactAgent)
+  // console.log()
+  const onSubmit = () => {
+    dispatch(contactAgent(values, id))
+  }
   // Formik instance for contact agent form
   const {
     values,
@@ -247,7 +312,7 @@ const ContactAgent = () => {
     handleSubmit,
     handleReset,
     setValues,
-    getFieldProps
+    getFieldProps,
   } = useFormik({
     initialValues: {
       username: '',
@@ -262,45 +327,45 @@ const ContactAgent = () => {
       onSubmit()
     },
   })
-console.log(details?.agent[0].img)
   useEffect(() => {
     if (status) {
       setValues(prevValues => ({
         ...prevValues,
-        name: "",
-        message: "",
-        email: "",
-        phone: "",
-      }));
+        name: '',
+        message: '',
+        email: '',
+        phone: '',
+      }))
 
       handleReset()
       dispatch(clear())
     }
-  }, [status]);
+  }, [status])
   // const loading = true
   return (
-    <div className="border p-[1rem] pt-8 pb-12">
+    <div className="border p-[1rem] pt-8 pb-12 ">
       <h1 className="font-[600]">Contact an Agent</h1>
 
-      {
-        loading ? <div className='flex pt-6 pb-4 justify-center'>
+      {loading ? (
+        <div className="flex pt-6 pb-4 justify-center">
           <Spinner />
-        </div>: <div className="flex flex-row mt-2 justify-between">
-        <div className="flex flex-row gap-6 items-center">
-          <img
-            src={details?.agent[0]?.img}
-            className="w-28 h-24 object-cover"
-          />
-
-          <div>
-            <h1 className="font-[600]">{details?.agent[0]?.username}</h1>
-            <p className="text-[13px] text-slate-500">Modern House</p>
-            <p className="text-[14px]">{details?.agent[0]?.phone_no}</p>
-          </div>
         </div>
-        <IoIosArrowDown className="text-slate-500" />
-      </div>
-      }
+      ) : (
+        <div className="flex flex-row mt-2 justify-between ">
+          <div className="flex flex-row gap-6 items-center justify-between w-[100%]">
+            <div className="">
+              <h1 className="text-[20px]">{details?.agent[0]?.username}</h1>
+              <p className="text-[12px] text-slate-500">Modern House</p>
+              <p className="text-[13px]">{details?.agent[0]?.phone_no}</p>
+            </div>
+            <img
+              src={details?.agent[0]?.img}
+              className="w-28 h-24 object-contain"
+            />
+          </div>
+          {/* <IoIosArrowDown className="text-slate-500" /> */}
+        </div>
+      )}
 
       <form
         onSubmit={handleSubmit}
@@ -313,9 +378,7 @@ console.log(details?.agent[0].img)
           value={values.username}
           handleChange={handleChange}
           error={
-            errors.username && touched.username
-              ? errors.username
-              : undefined
+            errors.username && touched.username ? errors.username : undefined
           }
           id="username"
           errorbg
@@ -326,11 +389,7 @@ console.log(details?.agent[0].img)
           label="Email"
           value={values.email}
           handleChange={handleChange}
-          error={
-            errors.email && touched.email
-              ? errors.email
-              : undefined
-          }
+          error={errors.email && touched.email ? errors.email : undefined}
           id="email"
           errorbg
         />
@@ -340,11 +399,7 @@ console.log(details?.agent[0].img)
           label="Phone"
           value={values.phone}
           handleChange={handleChange}
-          error={
-            errors.phone && touched.phone
-              ? errors.phone
-              : undefined
-          }
+          error={errors.phone && touched.phone ? errors.phone : undefined}
           id="phone"
           errorbg
         />
@@ -356,10 +411,7 @@ console.log(details?.agent[0].img)
             value={values.message}
             handleChange={handleChange}
             error={
-              errors.message &&
-              touched.message
-                ? errors.message
-                : undefined
+              errors.message && touched.message ? errors.message : undefined
             }
             id="message"
             inputType="textarea"
@@ -376,34 +428,35 @@ console.log(details?.agent[0].img)
           id="termsAndConditions"
         />
 
-<button
-        disabled={tourLoading}
+        <button
+          disabled={agentLoading}
           type="submit"
-          className={`flex flex-row gap-4 items-center border py-3 text-white bg-slate-800 justify-center ${tourLoading && "cursor-not-allowed"}`}
-        >{
-          tourLoading ? <div className='w-[100%] flex  gap-5 items-center justify-center'>
-            <Spinner />
-            <p>Please wait...</p>
-          </div>: <div className='flex flex-row gap-6 items-center'>
-          Send Message <IoIosArrowRoundForward />
-          </div>
-        }
+          className={`flex flex-row gap-4 items-center border py-3 text-white bg-slate-800 justify-center ${agentLoading && 'cursor-not-allowed'}`}
+        >
+          {agentLoading ? (
+            <div className="w-[100%] flex  gap-5 items-center justify-center">
+              <Spinner />
+              <p>Please wait...</p>
+            </div>
+          ) : (
+            <div className="flex flex-row gap-6 items-center">
+              Send Message <IoIosArrowRoundForward />
+            </div>
+          )}
         </button>
       </form>
     </div>
   )
 }
 
-
-
 const TourRequest = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
- 
-  const { loading, status} = useSelector((state) => state?.requestTour)
+
+  const { tourLoading, status } = useSelector(state => state?.requestTour)
   const onSubmit = () => {
-    console.log(values)
-  
+    // console.log(values)
+
     dispatch(requestTour(values, id))
   }
   // Formik instance for tour form
@@ -412,10 +465,10 @@ const TourRequest = () => {
     errors,
     touched,
     handleChange,
-    setFieldValue, 
+    setFieldValue,
     handleSubmit,
     handleReset,
-    setValues
+    setValues,
   } = useFormik({
     initialValues: {
       username: '',
@@ -423,7 +476,7 @@ const TourRequest = () => {
       phone: '',
       // termsAndConditions: false,
       tourDate: getNext7Days()[0],
-      additionalNote: ""
+      additionalNote: '',
     },
     validationSchema: tourSchema,
     onSubmit: () => {
@@ -436,16 +489,18 @@ const TourRequest = () => {
     if (status) {
       setValues(prevValues => ({
         ...prevValues,
-        additionalNote: "",
-        email: "",
-        username: "",
-        phone: "",
-      }));
+        additionalNote: '',
+        email: '',
+        username: '',
+        phone: '',
+      }))
       handleReset()
 
       dispatch(clear())
     }
-  }, [status]);
+  }, [status])
+
+  // console.log(tourLoading)
   return (
     <div className="mt-6 border pb-6 p-[1rem]">
       <h1 className="font-[600]">Property Tour</h1>
@@ -457,7 +512,7 @@ const TourRequest = () => {
               setFieldValue('tourDate', item)
             }}
             className={`${
-            values.tourDate.dateOfMonth === item.dateOfMonth
+              values.tourDate.dateOfMonth === item.dateOfMonth
                 ? 'bg-slate-600 border shadow-xl text-white'
                 : 'bg-slate-200 text-slate-500'
             } cursor-pointer hover:border-b hover:border-t border-slate-500 py-6 text-[14px] text-center`}
@@ -473,10 +528,13 @@ const TourRequest = () => {
 
       <h1 className="font-[600] mt-12">Tour Type</h1>
       <div className="mt-4 flex flex-row gap-5 text-[14px] text-slate-600 font-[600]">
-        <p>In Person</p>
-        <p>Video Chat</p>
+        <p className="underline">In Person</p>
+        <p className="text-slate-400">Video Chat</p>
       </div>
-      <form className="flex flex-col md:grid grid-cols-2 lg:flex gap-6 mt-4" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col md:grid grid-cols-2 lg:flex gap-6 mt-4"
+        onSubmit={handleSubmit}
+      >
         <Input
           placeholder=""
           type="text"
@@ -484,9 +542,7 @@ const TourRequest = () => {
           value={values.username}
           handleChange={handleChange}
           error={
-            errors.username && touched.username
-              ? errors.username
-              : undefined
+            errors.username && touched.username ? errors.username : undefined
           }
           id="username"
           errorbg
@@ -497,11 +553,7 @@ const TourRequest = () => {
           label="Phone"
           value={values.phone}
           handleChange={handleChange}
-          error={
-            errors.phone && touched.phone
-              ? errors.phone
-              : undefined
-          }
+          error={errors.phone && touched.phone ? errors.phone : undefined}
           id="phone"
           errorbg
         />
@@ -512,11 +564,7 @@ const TourRequest = () => {
           label="Email"
           value={values.email}
           handleChange={handleChange}
-          error={
-            errors.email && touched.email
-              ? errors.email
-              : undefined
-          }
+          error={errors.email && touched.email ? errors.email : undefined}
           id="email"
           errorbg
         />
@@ -528,8 +576,7 @@ const TourRequest = () => {
             value={values.additionalNote}
             handleChange={handleChange}
             error={
-              errors.additionalNote &&
-              touched.additionalNote
+              errors.additionalNote && touched.additionalNote
                 ? errors.mesadditionalNotesage
                 : undefined
             }
@@ -539,15 +586,18 @@ const TourRequest = () => {
           />
         </div>
         <button
-        disabled={loading}
+          disabled={tourLoading}
           type="submit"
-          className={`border w-fit px-6 py-3 bg-slate-700 text-white text-[13px] ${loading && "cursor-not-allowed"}`}
-        >{
-          loading ? <div className='w-[100%] flex  gap-5 items-center'>
-            <Spinner />
-            <p>Please wait...</p>
-          </div>: 'REQUEST TOUR'
-        }
+          className={`border w-fit px-6 py-3 bg-slate-700 text-white text-[13px] ${tourLoading && 'cursor-not-allowed'}`}
+        >
+          {tourLoading ? (
+            <div className="w-[100%] flex  gap-5 items-center">
+              <Spinner />
+              <p>Please wait...</p>
+            </div>
+          ) : (
+            'REQUEST TOUR'
+          )}
         </button>
       </form>
     </div>

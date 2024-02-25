@@ -18,7 +18,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { convertDate } from '../utils'
+import { addCommasToNumber, convertDate } from '../utils'
 // import { Button } from "@/components/ui/button"
 import { Button } from '@/~/components/ui/button'
 import { Checkbox } from '@/~/components/ui/checkbox'
@@ -160,9 +160,9 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => {
       // console.log("Status:", row.getValue("bookingStatus"));
       const price = row.getValue('pricing')
-      console.log(price.totalPrice)
+      // console.log(price.totalPrice)
       // console.log(row.getValue(`'pricing.'totalPrice'`))
-      console.log('Total Price:', row.getValue('pricing'))
+      // console.log('Total Price:', row.getValue('pricing'))
       const statusColor =
         row.getValue('bookingStatus') === 'active'
           ? 'text-sky-400'
@@ -174,7 +174,7 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <div className={`capitalize text- text-[13px] ${statusColor}`}>
           {/* {row.getValue("pricing.totalPrice")} */}
-          {price.totalPrice}
+          ₦ {addCommasToNumber(price.totalPrice)}
         </div>
       )
     },
@@ -203,7 +203,7 @@ export const columns: ColumnDef<Payment>[] = [
       const dispatch = useDispatch()
       // console.log(payment._id);
       return (
-        <DropdownMenu>
+        <DropdownMenu >
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
             <span className="sr-only">Open menu</span>
@@ -211,7 +211,7 @@ export const columns: ColumnDef<Payment>[] = [
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className='z-50'>
-          <div className="bg-slate-800 pt-[1rem] w-[10rem] h-fit">
+          <div className="bg-slate-900 pt-[1rem] w-[10rem] h-fit">
             <h1 className="text-slate-400 ml-[1rem]">Actions</h1>
             <div className="mt-4">
               <button onClick={() => dispatch(updateOrderStatus(payment._id, 'active'))} className="py-3 text-slate-400 text-start px-[1rem] hover:text-white  text-[14px] hover:bg-green-600 w-[100%]">

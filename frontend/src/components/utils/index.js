@@ -68,3 +68,43 @@ export function timeAgo(isoDateString) {
 export const filterProperty = () => {
   console.log('filter')
 }
+
+export const addCommasToNumber = (number) => {
+ // Convert the number to a string
+ const numberString = number.toString();
+
+ // Split the string into whole and decimal parts
+ const [wholePart, decimalPart] = numberString.split('.');
+
+ // Add commas to the whole part from the back
+ const formattedWholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+ // Combine the whole part and decimal part (if exists)
+ const formattedNumber = decimalPart
+   ? `${formattedWholePart}.${decimalPart}`
+   : formattedWholePart;
+
+ return formattedNumber;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const formatDate = (isoDateString) => {
+  // Create a Date object from the ISO string
+  const dateObject = new Date(isoDateString);
+
+  // Format the date
+  const formattedDate =  dateObject.toLocaleDateString();; // Adjust according to your preferred format
+
+  return formattedDate;
+}

@@ -16,11 +16,11 @@ const BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/message`
 const customId = 'custom-id-yes'
 
 
-export const requestTour = (values) => async dispatch => {
+export const requestTour = (values, id) => async dispatch => {
   dispatch({
     type: REQUEST_TOUR,
   })
-  const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+  // const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
     const { data } = await Axios.post(`${BASE_URL}/tour-request/${id}`, {
       ...values,
@@ -61,11 +61,11 @@ export const requestTour = (values) => async dispatch => {
   }
 }
 
-export const contactAgent = (values) => async dispatch => {
+export const contactAgent = (values, id) => async dispatch => {
   dispatch({
     type: MESSAGE_AGENT,
   })
-  const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
+  // const id = JSON.parse(sessionStorage.getItem('adminInfo'))?._id
   try {
     const { data } = await Axios.post(`${BASE_URL}/contact-agent/${id}`, {
       ...values

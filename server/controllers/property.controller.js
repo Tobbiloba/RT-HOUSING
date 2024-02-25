@@ -291,7 +291,7 @@ const createProperty = async (req, res) => {
     const { id } = req.params;
 
     const { property_information } = req.body;
-    console.log(property_information?.agent)
+    // console.log(property_information?.agent)
 // console.log(id, property_information)
     if (!id || !property_information) {
       return res
@@ -306,14 +306,14 @@ const createProperty = async (req, res) => {
 
     if (!admin) {
       throw new Error("Admin not found");
-      console.log("end");
+      // console.log("end");
       return res.status(500).end();
     }
-    console.log('1')
+    // console.log('1')
     const propertyType = await getPropertyTypeByName(
       property_information?.propertyType
     );
-    console.log(property_information?.propertyType)
+    // console.log(property_information?.propertyType)
     if (!propertyType) {
 
       return res.status(404).json({ messsage: "Property type not found" });
@@ -370,7 +370,7 @@ const createProperty = async (req, res) => {
       admin_id: admin._id,
       created_by: id,
     });
-    console.log('1')
+    // console.log('1')
     // if(property_information?.agent) {
     //   admin.employee = property_information?.agent
     //   await admin.save()
@@ -378,8 +378,8 @@ const createProperty = async (req, res) => {
 
     propertyType.property_count = propertyType.property_count + 1;
     await propertyType.save();
-    console.log('newProperty');
-    console.log(newProperty);
+    // console.log('newProperty');
+    // console.log(newProperty);
     // notifyEmployees(company);
 
     createNotificationModel({

@@ -24,7 +24,7 @@ const Notification = () => {
     }
   }, [])
   useEffect(() => {
-    dispatch(getNotifications('65c77993a24964910729d98d'))
+    dispatch(getNotifications())
   }, [])
 
   return (
@@ -40,6 +40,10 @@ const Notification = () => {
             {notifications.map((item, index) => (
               <NotificationCard item={item} key={index} />
             ))}
+
+{/* {notifications.reverse().map((item, index) => (
+  <NotificationCard item={item} key={index} />
+))} */}
           </div>
         ) : (
           <div className='h-[100%] flex items-center justify-center'>

@@ -38,6 +38,7 @@ import {
 import { BsClipboard } from 'react-icons/bs'
 import { ToastButton } from '@/components/common/toast/Toast'
 import { FaLongArrowAltUp } from 'react-icons/fa'
+import { addCommasToNumber } from '../utils'
 const CodeCard = ({ code }: any) => {
   const [showClipboard, setShowClipboard] = React.useState(false)
 
@@ -79,7 +80,7 @@ export const columns = [
 
       return (
         <div className={`capitalize text-[13px] text-start `}>
-         ₦ {row.getValue('min_purchase')}
+         ₦ {addCommasToNumber(row.getValue('min_purchase'))}
         </div>
       )
     },
@@ -108,7 +109,7 @@ export const columns = [
     ),
     cell: ({ row }) => (
       <div className={`capitalize text-[13px] text-start `}>
-        ₦{row.getValue('discount_price')}
+        ₦{addCommasToNumber(row.getValue('discount_price'))}
       </div>
     ),
   },

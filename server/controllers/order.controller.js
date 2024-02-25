@@ -127,6 +127,9 @@ const createUserOrder = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+    if (!user.firstname) {
+      return res.status(404).json({ message: "Please update your profile" });
+    }
     if (!property) {
       return res.status(404).json({ message: "Property not found" });
     }
@@ -399,11 +402,17 @@ const updateOrderStatus = async (req, res) => {
     if (!checkinDate || !checkoutDate) {
       return res.status(400).json({ message: "Date is undefined" });
     }
-
+console.log(status)
     if (order) {
       if (status === "active" || status === "declined") {
         if (status === "declined" && !reason) {
           return res.status(500).json({ message: "Pass in your reason" });
+        } 
+        if(status == "declined") {
+          order.bookingStatus = "declined"
+          order.reason = reason
+          await order.save()
+          return res.status(200).json({message: "Successfully declined order."})
         }
 
         const [day, month, year] = checkinDate.split("/");

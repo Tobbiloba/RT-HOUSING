@@ -31,6 +31,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/~/components/ui/table'
+import { addCommasToNumber, formatDate } from '../utils'
 
 
 export type Payment = {
@@ -103,7 +104,7 @@ export const columns: ColumnDef<Payment>[] = [
                 (row.getValue('bookingStatus') === 'declined' && 'text-red-500')
         }`}
       >
-        {row.getValue('checkinDate')}
+        {formatDate(row.getValue('checkinDate'))}
       </div>
     ),
   },
@@ -124,7 +125,7 @@ export const columns: ColumnDef<Payment>[] = [
                     'text-red-500')
           }`}
         >
-          {row.getValue('checkoutDate')}
+          {formatDate(row.getValue('checkoutDate'))}
         </div>
       )
     },
@@ -172,7 +173,7 @@ export const columns: ColumnDef<Payment>[] = [
                       'text-red-500')
             }`}
           >
-            {pricing.totalPrice}
+            ₦ {addCommasToNumber(pricing.totalPrice)}
           </div>
         )
       } else {
@@ -246,12 +247,12 @@ export function OrderTable({ orders }: { orders: Payment[] }) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className={`${index % 2 === 0 ? 'bg-slate-800' : 'bg-slate-950'} border-0 py-8`}
+                  className={`${index % 2 === 0 ? 'bg-slate-800 text-slate-50 hover:text-slate-800' : 'bg-slate-950'} border-0 py-8`}
                 >
                   {row.getVisibleCells().map(cell => (
                     <TableCell
                       key={cell.id}
-                      className={` text-slate-600 ${index % 2 === 0 ? 'text-white' : 'text-slate-400'}`}
+                      className={` text-slate- ${index % 2 === 0 ? '' : 'text-slate-400'}`}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,

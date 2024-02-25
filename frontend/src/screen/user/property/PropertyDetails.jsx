@@ -14,10 +14,7 @@ import {
   TourRequest,
 } from '../../../components/common/card'
 
-import {
-  Link,
-  Element,
-} from 'react-scroll'
+import { Link, Element } from 'react-scroll'
 import { getPropertyDetailById } from '@/action/property'
 import { useParams } from 'react-router-dom'
 import { CircularProgress } from '@mui/material'
@@ -57,34 +54,52 @@ const PropertyDetails = () => {
     dispatch(getPropertyDetailById(id))
   }, [])
 
-  // console.log(isUser)
+  // console.log(details.property_information)
   return (
-    <div className="bg-slate-800 exo pt-16 font-mono">
+    <div className={`exo pt-16 font-mono ${isUser ? 'bg-slate-00' : ''}`}>
       {loading ? (
         <div className="h-[100vh] flex justify-center">
           <CircularProgress />
         </div>
       ) : !loading && details ? (
-        <div className="">
-          <Carousel images={details?.property_information.property_images} />
-         {
-          isUser &&  <PropertyOptions
-          state={showProperty}
-          setState={setShowProperty}
-          item={details.property_information}
-        />
-         }
-          <div className="md:container w-[100%] px-[1rem]">
-           {
-            isUser &&  <div className="w-[100%] mt-12 flex items-end justify-end tablet:hidden">
-            <div
-              onClick={toggleDrawer(anchor, true)}
-              className="border text-slate-500 cursor-pointer px-3 bg-slate-600 border-slate-500 flex items-center justify-center h-10 text-[21px]"
-            >
-              <p className="text-[13px] text-white">Complete Order</p>
+        <div className="py-5">
+          <div className={`px-[1rem]  lg:container`}>
+            <h1 className={`text-4xl font-[600] ${isUser ? "text-slate-500" : "text-white"}`}>
+              {details?.property_information.property_name}
+            </h1>
+            <h1 className={`text-[16px] ${isUser ? "text-slate-600" : "text-white"}`}>
+              {' '}
+              {details?.property_information.property_type}
+            </h1>
+            <div className={`flex gap-3 mt-3 pb-5 ${isUser ? "text-slate-500" : "text-white"} text-[13px]`}>
+              <h1>
+                {details?.property_information.property_location.country}{' '}
+              </h1>
+              <span>/</span>
+              <h1>{details?.property_information.property_location.state}</h1>
+              <span>/</span>
+              <h1>{details?.property_information.property_location.city}</h1>
             </div>
           </div>
-           }
+          <Carousel isUser={isUser} images={details?.property_information.property_images} />
+          {isUser && (
+            <PropertyOptions
+              state={showProperty}
+              setState={setShowProperty}
+              item={details.property_information}
+            />
+          )}
+          <div className="md:container w-[100%] px-[1rem]">
+            {isUser && (
+              <div className="w-[100%] mt-12 flex items-end justify-end tablet:hidden">
+                <div
+                  onClick={toggleDrawer(anchor, true)}
+                  className="border text-slate-500 cursor-pointer px-3 bg-slate-600 border-slate-500 flex items-center justify-center h-10 text-[21px]"
+                >
+                  <p className="text-[13px] text-white">Complete Order</p>
+                </div>
+              </div>
+            )}
 
             <div className="flex mt-4 lg:mt-20 flex-col lg:flex-row gap-16 justify-between relative">
               <div className="">
@@ -151,21 +166,20 @@ const PropertyDetails = () => {
                       />
                     </Element>
                     <Element name="nearby" className="element">
-                      <Nearby id="nearby" isUser={isUser}/>
+                      <Nearby id="nearby" isUser={isUser} />
                     </Element>
                     <Element name="terms" className="element">
-                      <Terms id="terms" isUser={isUser}/>
+                      <Terms id="terms" isUser={isUser} />
                     </Element>
                   </div>
                 </div>
               </div>
-              {
-                isUser &&
+              {isUser && (
                 <div className=" lg:w-4/12 min-w-[22.5rem] h-fit">
-                <ContactAgent propertyId={details._id}/>
-                <TourRequest propertyId={details._id}/>
-              </div>
-              }
+                  <ContactAgent propertyId={details._id} />
+                  <TourRequest propertyId={details._id} />
+                </div>
+              )}
             </div>
           </div>
         </div>
