@@ -36,12 +36,12 @@ const LoadingCard = ({ viewMode }) => {
         <div className="px-4 py-4">
           <div className=" flex flex-row justify-between">
             <div className="flex flex-col gap-3">
-              <div className="w-24 rounded-full h-4 bg-slate-300  animate-pulse"></div>
-              <div className="w-48 rounded-full h-5 bg-slate-300  animate-pulse"></div>
-              <div className="w-36 rounded-full h-4 bg-slate-300 animate-pulse"></div>
-              <div className="w-44 rounded-full h-4 bg-slate-300  animate-pulse"></div>
+              <div className="w-24  h-4 bg-slate-300  animate-pulse"></div>
+              <div className="w-48  h-5 bg-slate-300  animate-pulse"></div>
+              <div className="w-36  h-4 bg-slate-300 animate-pulse"></div>
+              <div className="w-44  h-4 bg-slate-300  animate-pulse"></div>
             </div>
-            <div className="w-20 h-20 bg-slate-300 rounded-md animate-pulse"></div>
+            <div className="w-20 h-20 bg-slate-300 animate-pulse"></div>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-3">
             <div className="w-40 h-4 bg-slate-300 animate-pulse"></div>
@@ -151,7 +151,7 @@ const Properties = () => {
       {/* <Map /> */}
       <div className="w-[100%] items-center mt-8 justify-center px-[1rem] md:px-[4%] flex flex-col gap-20">
         <PropertyLocationCard title="Apartment" />
-        <PropertyLocationCard title="Condos" />
+        <PropertyLocationCard title="Condo" />
         <PropertyLocationCard title="Duplex" />
       </div>
     </div>

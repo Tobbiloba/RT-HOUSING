@@ -49,16 +49,16 @@ const FeaturedPropCard = ({ item, viewMode }) => {
       >
         <div className="flex flex-row items-center p-3 justify-between text-[14px]">
           <div className="flex flex-col gap-2 items-start justify-start">
-            <p className="text-slate-600 text-[13px]">
+            <p className="text-slate-500 text-[13px]">
               {item.property_information.property_type}
             </p>
             <Link to={`/properties/property-detail/${encodeURIComponent(item._id)}`}>
-              <h1 className="text-[17px] text-slate-800 font-[600]">
+              <h1 className="text-[17px] text-slate-600 font-[600]">
                 {item.property_information.property_name}
               </h1>
             </Link>
 
-            <p className="text-slate-600 ">
+            <p className="text-slate-400 ">
               ₦{addCommasToNumber(item.property_information.pricing)}{' '}
               <span className="text-[13px]">/ night</span>
             </p>
@@ -68,7 +68,7 @@ const FeaturedPropCard = ({ item, viewMode }) => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2  p-4 gap-x-3 gap-y-4 mt-5 text-slate-700 text-[14px]">
+        <div className="grid grid-cols-2  p-4 gap-x-3 gap-y-4 mt-5 text-slate-500 text-[14px]">
           <div className="flex items-center flex-row gap-3">
             <img src="/user.png" className="w-4 h-4" />
             <p>04 Guests</p>
