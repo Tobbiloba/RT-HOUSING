@@ -7,7 +7,7 @@ const LazyLoadedImage = ({ src, alt }) => {
       src={src}
       alt={alt}
       loading="lazy"
-      className="max-h-[15rem] w-[100%]"
+      className="max-h-[15rem] h-[100%] w-[100%]"
     />
   )
 }

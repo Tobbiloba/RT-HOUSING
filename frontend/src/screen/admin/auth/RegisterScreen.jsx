@@ -463,7 +463,7 @@ const AdminRegisterScreen = () => {
 
               <p className="text-slate-400 cursor-pointer">Forgot password?</p>
             </div>
-            <div className="flex flex-col px-[10%] mt-12 gap-6">
+            <div className="flex flex-col mt-12 gap-6">
               <button
                 type="submit"
                 disabled={registerAdminUser.loading}

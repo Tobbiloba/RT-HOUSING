@@ -99,7 +99,7 @@ export const sendVerificationToken = async (email, token) => {
           <p class="description" style="color: #cbd5e1; font-size: 14px; margin-top: 30px;">
               Thank you for choosing Febtos, your go-to rental company. We appreciate your business and welcome you to our community!
           </p>
-            <h1 style="color: white; font-size: 15px; padding: 5px 10px;">${token}</h1>
+            <h1 style="color: white; font-size: 15px; padding: 5px 10px; background-color: "#020617">${token}</h1>
 
           <div class="additional-texts" style="color: #cbd5e1; font-size: 14px; margin-top: 30px;">
               <p class="terms-and-conditions">

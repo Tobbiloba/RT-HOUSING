@@ -84,7 +84,7 @@ const Carousel = ({ images, isUser }) => {
     setSelectedImg(images[0])
   }, [])
 
-  console.log(images[0][images[0].length - 3])
+  // console.log(images[0][images[0].length - 3])
   return (
     <div className="slider top-0 left-0 ">
       <div className="flex flex-col md:grid grid-cols-10 h-fit md:grid-rows-3 lg:grid-rows-4 gap-4">
@@ -97,7 +97,7 @@ const Carousel = ({ images, isUser }) => {
         // className="col-span-4 overflow-x-scroll px-2 md:h-[40rem] lg:h-[45rem] gap-4 md:row-span-3 lg:row-span-4 flex flex-row md:grid grid-cols-1 lg:grid-cols-2 md:overflow-y-scroll"
         >
             {images.map((img, i) => {
-              console.log(img[img.length - 4])
+              // console.log(img[img.length - 4])
 
               return (
                 <img

@@ -12,20 +12,21 @@ import 'swiper/css/free-mode'
 import 'swiper/css/pagination'
 import { FaLocationDot } from 'react-icons/fa6'
 import { FreeMode, Pagination } from 'swiper/modules'
-const LazyLoadedImage = lazy(() => import('../../common/lazy loading/LazyLoadedImage'))
-
-
+import { addCommasToNumber } from '@/components/utils'
+const LazyLoadedImage = lazy(
+  () => import('../../common/lazy loading/LazyLoadedImage'),
+)
 
 const DiscoveryLoadingCard = () => {
-  return(
-    <div className='h-[25rem] w-[100%]'>
-    <div className='w-[100%] h-[15rem] bg-slate-400 animate-pulse'></div>
-    <div className='p-[1rem]'>
-    <div className='h-8 w-[100%] bg-slate-400 animate-pulse'></div>
-    <div className='h-5 w-[80%] bg-slate-400 animate-pulse mt-8'></div>
-    <div className='h-5 w-[60%] bg-slate-400 animate-pulse mt-4'></div>
+  return (
+    <div className="h-[25rem] w-[100%]">
+      <div className="w-[100%] h-[15rem] bg-slate-400 animate-pulse"></div>
+      <div className="p-[1rem]">
+        <div className="h-8 w-[100%] bg-slate-400 animate-pulse"></div>
+        <div className="h-5 w-[80%] bg-slate-400 animate-pulse mt-8"></div>
+        <div className="h-5 w-[60%] bg-slate-400 animate-pulse mt-4"></div>
+      </div>
     </div>
-  </div>
   )
 }
 const SwiperContainer = () => {
@@ -48,76 +49,84 @@ const SwiperContainer = () => {
         modules={[FreeMode, Pagination]}
         className="mySwiper pb-[2rem]"
       >
-        {loading ? 
-            num.map((index) => <SwiperSlide
-            key={index}
-            className="hover:border-b hover:shadow-md border-slate-500 "
-          > <DiscoveryLoadingCard key={index}/>
-          </SwiperSlide>)
-        : properties && properties.length > 0 &&
-          properties.map((property, index) => {
-            return (
+        {loading
+          ? num.map(index => (
               <SwiperSlide
                 key={index}
                 className="hover:border-b hover:shadow-md border-slate-500 "
               >
-                <div className="relative  max-h-[15rem] overflow-hidden">
-                  <div className="w-[100%] h-[15rem]">
-                    <Suspense
-                      fallback={<div className="h-[15rem] w-[100%]"></div>}
-                    >
-                      <LazyLoadedImage
-                        src={property?.property_information?.property_images[0]}
-                        className=" "
-                      />
-                    </Suspense>
-                  </div>
-                  <div className="w-[100%] h-[100%] z-[50] bg-black/50 absolute top-0 left-0"></div>
-                </div>
-
-                <div className=" p-[1.25rem] py-[2rem]">
-                <div className='flex justify-between'>
-                <p className="text-[20px] text-slate-600 font-[600]">
-                    {property.property_information?.property_name}{' '}
-                  </p>
-                  <p className="text-[16px] text-slate-600 font-[600]">
-                    {property.property_information?.pricing}{' '}
-                    <span className="text-slate-500 text-[13px]">/ night</span>
-                  </p>
-                </div>
-
-                  <div className="flex text-slate-500 flex-row mt-7 gap-4 items-center justify-between">
-                    <p className="text-[16px] gap-3 items-center  flex flex-row">
-                      <FaBath className="text-slate-500" />
-                      {property.property_information?.property_no_bathrooms}
-                    </p>
-                    <p className="text-[16px] gap-3 items-center  flex flex-row">
-                      <IoBedSharp className="text-slate-500" />
-                      {property.property_information?.property_no_bedrooms}
-                    </p>
-                    <p className="text-[16px]  gap-3 items-center  flex flex-row">
-                      <SlSizeActual className="text-slate-500" />
-                      {property.property_information?.property_size}
-                    </p>
-                  </div>
-
-                  <div className="flex mt-4 text-slate-500 flex-row items-center gap-3">
-                    <FaLocationDot className="text-slate-500" />
-                    <h1 className="text-[16px]">
-                      {property.property_information?.property_location.city}
-                    </h1>
-                  </div>
-                </div>
+                {' '}
+                <DiscoveryLoadingCard key={index} />
               </SwiperSlide>
-            )
-          })}
+            ))
+          : properties &&
+            properties.length > 0 &&
+            properties.map((property, index) => {
+              return (
+                <SwiperSlide
+                  key={index}
+                  className="hover:border-b h-[27.5rem] hover:shadow-md border-slate-500 "
+                >
+                  <div className="relative  border h-[15rem] overflow-hidden">
+                    <div className="w-[100%] h-[15rem]">
+                      <Suspense
+                        fallback={<div className="h-[15rem] w-[100%]"></div>}
+                      >
+                        <LazyLoadedImage
+                          src={
+                            property?.property_information?.property_images[0]
+                          }
+                          className="h-[100%]"
+                        />
+                      </Suspense>
+                    </div>
+                    <div className="w-[100%] h-[100%] z-[50] bg-black/50 absolute top-0 left-0"></div>
+                  </div>
+                  {/* <div className='flex flex-col justify-between h-[12.5rem] flex-1 border'> */}
+                  <div className=" p-[1.25rem] flex flex-col justify-between h-[12.5rem] flex-1">
+                    <div className="flex flex-col justify-between">
+                      <p className="text-[18px] h-[4rem] text-slate-600 flex items-center font-[600]">
+                        {property.property_information?.property_name}{' '}
+                      </p>
+                      <p className="text-[16px] mt-1 flex justify-end items-center gap-1 text-slate-600 font-[600]">
+                        ₦{' '}
+                        {addCommasToNumber(
+                          property?.property_information?.pricing,
+                        )}{' '}
+                        {/* <span className="text-slate-500 text-[13px]">/ night</span> */}
+                      </p>
+                    </div>
+
+                    <div className="flex text-slate-400 flex-row mt-2 gap-4 items-center justify-between">
+                      <p className="text-[14px] gap-3 items-center  flex flex-row">
+                        <FaBath className="text-slate-400" />
+                        {property.property_information?.property_no_bathrooms}
+                      </p>
+                      <p className="text-[14px] gap-3 items-center  flex flex-row">
+                        <IoBedSharp className="text-slate-400" />
+                        {property.property_information?.property_no_bedrooms}
+                      </p>
+                      <p className="text-[14px]  gap-3 items-center  flex flex-row">
+                        <SlSizeActual className="text-slate-400" />
+                        {property.property_information?.property_size}
+                      </p>
+                    </div>
+
+                    <div className="flex mt-4 text-slate-500 flex-row items-center gap-3">
+                      <FaLocationDot className="text-slate-500" />
+                      <h1 className="text-[16px]">
+                        {property.property_information?.property_location.city}
+                      </h1>
+                    </div>
+                    {/* </div> */}
+                  </div>
+                </SwiperSlide>
+              )
+            })}
       </Swiper>
     </>
   )
 }
-
-
-
 
 const Categories = () => {
   const dispatch = useDispatch()
@@ -145,9 +154,7 @@ const Categories = () => {
         </div>
 
         <div className="mt-7 ">
-
           <SwiperContainer />
-          
         </div>
       </div>
     </div>

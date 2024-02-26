@@ -38,7 +38,7 @@ const Calendar = ({ selectedDay, setShowCalendar, id, setFieldValue }) => {
     let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 })
     setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'))
   }
-  console.log(selectedDay)
+  // console.log(selectedDay)
 
   return (
     <div className="w-[21rem] bg-white p-2">
@@ -88,7 +88,7 @@ const Calendar = ({ selectedDay, setShowCalendar, id, setFieldValue }) => {
                     type="button"
                     onClick={() => (
                       setShowCalendar(false),
-                      console.log(day),
+                      // console.log(day),
                       setFieldValue(id, day)
                     )}
                     className={classNames(

@@ -141,12 +141,12 @@ const PropertyOptionCard = ({ items }) => {
         'expenses',
         values.expenses.filter(addOn => addOn.name !== name),
       )
-      console.log('removed', name)
+      // console.log('removed', name)
     } else {
       // If not, add it with name and price
       // Create a new array with the existing add-ons and the new one
       setFieldValue('expenses', [...values.expenses, { name, price }])
-      console.log('added', name)
+      // console.log('added', name)
     }
   }
 

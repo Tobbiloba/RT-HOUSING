@@ -71,6 +71,7 @@ export const filterProperty = () => {
 
 export const addCommasToNumber = (number) => {
  // Convert the number to a string
+ if(!number) return;
  const numberString = number.toString();
 
  // Split the string into whole and decimal parts
