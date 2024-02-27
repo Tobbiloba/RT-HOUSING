@@ -27,7 +27,7 @@ const Banner = () => {
           style={{
             background: 'linear-gradient(to bottom, white 50%, #cbd5e1 50%)',
           }}
-          className="grid shadow-md two-tone-background p-[.5rem]  mt-8 grid-cols-1 bg- md:grid-cols-2 lg:grid-cols-4 text-[15px] text-gray-500"
+          className="grid shadow-md two-tone-background p-[.5rem] rounded-md mt-8 grid-cols-1 bg- md:grid-cols-2 lg:grid-cols-4 text-[15px] text-gray-500"
         >
           <div className="h-[3.5rem] bg-white text-[14px]">
             <Dropdown

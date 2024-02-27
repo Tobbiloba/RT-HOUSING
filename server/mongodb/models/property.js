@@ -74,6 +74,6 @@ export const getPropertyByType = (property_type) => {
 export const createPropertyAdmin = (values) => new PropertyModel(values)
     .save().then((user) => user.toObject())
 export const updatePropertyById = (id, property) => PropertyModel.findByIdAndUpdate(id, property);
-export const deletePropertyById = (id) => PropertyModel.findByIdAndDelete(id);
+export const deletePropertyByIdSchema = (id) => PropertyModel.findByIdAndDelete(id);
 
 export default PropertyModel;

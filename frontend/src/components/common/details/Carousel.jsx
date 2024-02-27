@@ -89,7 +89,7 @@ const Carousel = ({ images, isUser }) => {
     <div className="slider top-0 left-0 ">
       <div className="flex flex-col md:grid grid-cols-10 h-fit md:grid-rows-3 lg:grid-rows-4 gap-4">
         <div className={`col-span-6 ${isUser ? "bg-slate-100" : "bg-slate-600"} flex items-center justify-center md:row-span-3 lg:row-span-4 md md:h-[40rem] lg:h-[45rem] mb-0`}>
-          <img src={selectedImg} className="w-auto h-auto" />
+          <img src={selectedImg} className="w-auto h-auto rounded-md" />
         </div>
 
         <div 
@@ -103,7 +103,7 @@ const Carousel = ({ images, isUser }) => {
                 <img
                   src={img}
                   key={i}
-                  className={`md:w-[100%] md:h-auto w-[5rem] h-[5rem] cursor-pointer hover:scale-[.99] ${img[img.length - 4] == "1" ? "col-span-2" : "col-span-1"}`}
+                  className={`md:w-[100%] md:h-auto w-[5rem] h-[5rem] cursor-pointer rounded-md hover:scale-[.99] ${img[img.length - 4] == "1" ? "col-span-2" : "col-span-1"}`}
                   onClick={() => setSelectedImg(img)}
                 />
               )

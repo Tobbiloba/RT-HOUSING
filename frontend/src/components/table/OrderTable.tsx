@@ -44,6 +44,7 @@ export type Payment = {
   checkout: string
   property_name: string
   property_type: string
+  promotions: any
 }
 
 export const columns: ColumnDef<Payment>[] = [
@@ -55,10 +56,10 @@ export const columns: ColumnDef<Payment>[] = [
       const propertyInformation = row.original?.propertyInformation
 
       if (propertyInformation && propertyInformation.propertyName) {
-        console.log(propertyInformation.propertyName)
+        // console.log(propertyInformation.propertyName)
 
         return (
-          <div className="capitalize text-[13px]">
+          <div className="capitalize text-[13px] min-w-[15rem]">
             {propertyInformation.propertyName}
           </div>
         )
@@ -78,7 +79,7 @@ export const columns: ColumnDef<Payment>[] = [
       if (propertyInformation && propertyInformation.propertyType) {
 
         return (
-          <div className="capitalize text-[13px]">
+          <div className="capitalize text-[13px] ">
             {propertyInformation.propertyType}
           </div>
         )
@@ -88,13 +89,33 @@ export const columns: ColumnDef<Payment>[] = [
       }
     },
   },
+  // {
+  //   accessorKey: 'propertyInformation.propertyType',
+  //   header: 'Total Price',
+  //   cell: ({ row }) => {
+  //     const pricing = row.original?.pricing
+
+  //     if (pricing && pricing.totalPrice) {
+
+  //       return (
+  //         <div className="capitalize text-[13px] flex flex-row gap-1">
+  //           <p>₦</p>
+  //           {addCommasToNumber(pricing.totalPrice)}
+  //         </div>
+  //       )
+  //     } else {
+  //       // Handle the case where propertyInformation or propertyType is undefined
+  //       return <div className="capitalize ">N/A</div>
+  //     }
+  //   },
+  // },
 
   {
     accessorKey: 'checkinDate',
     header: 'Checkin Date',
     cell: ({ row }) => (
       <div
-        className={`capitalize text-[12px] ${
+        className={`capitalize text-[12px] min-w-24 ${
           row.getValue('bookingStatus') === 'active' ||
           row.getValue('bookingStatus') === 'ongoing'
             ? 'text-green-500'
@@ -130,6 +151,7 @@ export const columns: ColumnDef<Payment>[] = [
       )
     },
   },
+ 
   {
     accessorKey: 'bookingStatus',
     header: 'Status',
@@ -162,7 +184,7 @@ export const columns: ColumnDef<Payment>[] = [
 
         return (
           <div
-            className={`capitalize text-[12px] ${
+            className={`capitalize text-[12px] min-w-24 ${
               row.getValue('bookingStatus') === 'active' ||
               row.getValue('bookingStatus') === 'ongoing'
                 ? 'text-green-500'
@@ -171,7 +193,7 @@ export const columns: ColumnDef<Payment>[] = [
                   : row.getValue('bookingStatus') === 'expired' ||
                     (row.getValue('bookingStatus') === 'declined' &&
                       'text-red-500')
-            }`}
+            } min-w-20`}
           >
             ₦ {addCommasToNumber(pricing.totalPrice)}
           </div>
@@ -183,6 +205,94 @@ export const columns: ColumnDef<Payment>[] = [
     },
   },
 
+  {
+    accessorKey: 'promotions',
+    header: 'Coupon Code',
+    cell: ({ row }) => {
+      const promotions = row.original?.promotions
+
+
+      // if (propertyInformation && propertyInformation.propertyType) {
+
+      //   return (
+      //     <div className="capitalize text-[13px]">
+      //       {propertyInformation.propertyType}
+      //     </div>
+      //   )
+      // } else {
+      //   // Handle the case where propertyInformation or propertyType is undefined
+      //   return <div className="capitalize ">N/A</div>
+      // }
+// console.log(promotions)
+
+      return (
+        <div
+          className={`capitalize text-[12px] min-w-24 ${
+            row.getValue('bookingStatus') === 'active' ||
+            row.getValue('bookingStatus') === 'ongoing'
+              ? 'text-green-500'
+              : row.getValue('bookingStatus') === 'pending'
+                ? 'text-yellow-500'
+                : row.getValue('bookingStatus') === 'expired' ||
+                  (row.getValue('bookingStatus') === 'declined' &&
+                    'text-red-500')
+          }`}
+        >
+          {/* {formatDate(row.getValue('checkoutDate'))} */}
+          {promotions.couponCode ? <p>
+            {promotions.couponCode}
+          </p> : <p>N/A</p>}
+
+
+        </div>
+      )
+    },
+  },
+ 
+  {
+    accessorKey: 'promotions',
+    header: 'Coupon Code',
+    cell: ({ row }) => {
+      const promotions = row.original?.promotions
+
+
+      // if (propertyInformation && propertyInformation.propertyType) {
+
+      //   return (
+      //     <div className="capitalize text-[13px]">
+      //       {propertyInformation.propertyType}
+      //     </div>
+      //   )
+      // } else {
+      //   // Handle the case where propertyInformation or propertyType is undefined
+      //   return <div className="capitalize ">N/A</div>
+      // }
+console.log(promotions)
+
+      return (
+        <div
+          className={`capitalize text-[12px] min-w-24 ${
+            row.getValue('bookingStatus') === 'active' ||
+            row.getValue('bookingStatus') === 'ongoing'
+              ? 'text-green-500'
+              : row.getValue('bookingStatus') === 'pending'
+                ? 'text-yellow-500'
+                : row.getValue('bookingStatus') === 'expired' ||
+                  (row.getValue('bookingStatus') === 'declined' &&
+                    'text-red-500')
+          }`}
+        >
+          {/* {formatDate(row.getValue('checkoutDate'))} */}
+          {promotions.discount ? <p>
+            {promotions.discount}
+          </p> : <p>N/A</p>}
+
+
+        </div>
+      )
+    },
+  },
+
 ]
 
 export function OrderTable({ orders }: { orders: Payment[] }) {
@@ -190,6 +300,7 @@ export function OrderTable({ orders }: { orders: Payment[] }) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   )
+  console.log(orders[0])
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})

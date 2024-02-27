@@ -96,7 +96,7 @@ const PropertyDetails = () => {
                   onClick={toggleDrawer(anchor, true)}
                   className="border text-slate-500 cursor-pointer px-3 bg-slate-600 border-slate-500 flex items-center justify-center h-10 text-[21px]"
                 >
-                  <p className="text-[13px] text-white">Complete Order</p>
+                  <p className="text-[13px] text-white rounded-md">Complete Order</p>
                 </div>
               </div>
             )}

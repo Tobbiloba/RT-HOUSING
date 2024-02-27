@@ -409,7 +409,7 @@ const PropertyOptionCard = ({ items }) => {
                     Successfully activated coupon!
                   </h1>
                   <p className="text-[13px]">
-                    You have gotten a discount of #{coupon.discount_price}
+                    You have gotten a discount of ₦{coupon.discount_price}
                   </p>
                 </div>
               )}
@@ -437,7 +437,7 @@ const PropertyOptionCard = ({ items }) => {
           </div>
         </div>
         <button
-          className={`border w-[100%] bg-slate-500 text-white py-3 mt-5 ${loading || (orders?.bookingStatus && 'cursor-not-allowed')}`}
+          className={`border w-[100%] bg-slate-800 rounded-md text-white py-3 mt-5 ${loading || (orders?.bookingStatus && 'cursor-not-allowed')}`}
           type="submit"
           disabled={orders?.bookingStatus || loading}
         >

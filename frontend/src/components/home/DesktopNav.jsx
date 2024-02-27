@@ -43,7 +43,7 @@ export const AnimatedTabs = () => {
           {currentPath == tab.link.split("/")[1] && (
             <motion.span
               layoutId="bubble"
-              className="absolute inset-0 bg-slate-500  -z-10"
+              className="absolute inset-0 bg-slate-500 rounded-sm -z-10"
               transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
             />
           )}

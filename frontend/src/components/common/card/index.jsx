@@ -343,7 +343,7 @@ const ContactAgent = () => {
   }, [status])
   // const loading = true
   return (
-    <div className="border p-[1rem] pt-8 pb-12 ">
+    <div className="border p-[1rem] rounded-md pt-8 pb-12 ">
       <h1 className="font-[600]">Contact an Agent</h1>
 
       {loading ? (
@@ -360,7 +360,7 @@ const ContactAgent = () => {
             </div>
             <img
               src={details?.agent[0]?.img}
-              className="w-28 h-24 object-contain"
+              className="w-28 h-24 object-contain rounded-md"
             />
           </div>
           {/* <IoIosArrowDown className="text-slate-500" /> */}
@@ -431,7 +431,7 @@ const ContactAgent = () => {
         <button
           disabled={agentLoading}
           type="submit"
-          className={`flex flex-row gap-4 items-center border py-3 text-white bg-slate-800 justify-center ${agentLoading && 'cursor-not-allowed'}`}
+          className={`flex flex-row gap-4 items-center rounded-md border py-3 text-white bg-slate-800 justify-center ${agentLoading && 'cursor-not-allowed'}`}
         >
           {agentLoading ? (
             <div className="w-[100%] flex  gap-5 items-center justify-center">
@@ -502,7 +502,7 @@ const TourRequest = () => {
 
   // console.log(tourLoading)
   return (
-    <div className="mt-6 border pb-6 p-[1rem]">
+    <div className="mt-6 rounded-md border pb-6 p-[1rem]">
       <h1 className="font-[600]">Property Tour</h1>
       <div className="gap-3 grid grid-cols-3 justify-evenly mt-6">
         {getNext7Days().map((item, index) => (
@@ -515,7 +515,7 @@ const TourRequest = () => {
               values.tourDate.dateOfMonth === item.dateOfMonth
                 ? 'bg-slate-600 border shadow-xl text-white'
                 : 'bg-slate-200 text-slate-500'
-            } cursor-pointer hover:border-b hover:border-t border-slate-500 py-6 text-[14px] text-center`}
+            } cursor-pointer rounded-md hover:border-b hover:border-t border-slate-500 py-6 text-[14px] text-center`}
           >
             <p className="text-[12px]">{item.dayOfWeek}</p>
             <h1 className="text-black my-1 font-[600] text-[16px]">
@@ -588,7 +588,7 @@ const TourRequest = () => {
         <button
           disabled={tourLoading}
           type="submit"
-          className={`border w-fit px-6 py-3 bg-slate-700 text-white text-[13px] ${tourLoading && 'cursor-not-allowed'}`}
+          className={`border rounded-md w-fit px-6 py-3 bg-slate-700 text-white text-[13px] ${tourLoading && 'cursor-not-allowed'}`}
         >
           {tourLoading ? (
             <div className="w-[100%] flex  gap-5 items-center">

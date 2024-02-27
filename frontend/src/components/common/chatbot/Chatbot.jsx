@@ -51,18 +51,18 @@ const Chatbot = () => {
         break
       case 'available properties':
         response = (
-          <>
+          <div className=''>
             Sure we have several properties available. What city are you
             interested in. <br /> You can also click the link below to see
             available apartments
             <br />
             For more details, you can visit our <br />{' '}
             <div className="pt-3">
-              <a href="/properties" className="mt-2 px-2 py-1 bg-slate-800">
+              <a href="/properties" className="mt-2 px-2 py-1 rounded-md mb-2 bg-slate-800">
                 See available properties
               </a>
             </div>
-          </>
+          </div>
         )
         break
       case 'how much is the rent?':
@@ -129,8 +129,8 @@ const Chatbot = () => {
   return (
     <div className="z-20 exo fixed bottom-10 text-[12px] right-10 max-w-[20rem]">
       {showChat ? (
-        <div className="bg-slate-200 relative h-[30rem]">
-          <div className=" top-0 right-0 w-[100%] text-[16px] flex items-center justify-between px-[1rem] py-[5px] text-white bg-slate-400 shadow-md">
+        <div className="bg-slate-200 rounded-md relative h-[30rem]">
+          <div className=" top-0 right-0 w-[100%] text-[16px] flex items-center justify-between px-[1rem] py-[5px] rounded-md text-white bg-slate-400 shadow-md">
             <img
               src="https://cdn-icons-png.flaticon.com/128/8943/8943377.png"
               className="w-10 h-10"
@@ -153,13 +153,13 @@ const Chatbot = () => {
                   className={`flex flex-col gap-2 mt-2 ${message.sender === 'chatbot' ? 'items-end' : 'items-start'}`}
                 >
                   {message.sender && (
-                    <div className="border text-start bg-slate-300 w-fit p-1">
+                    <div className="border text-start rounded-md bg-slate-300 w-fit p-1">
                       {message.sender}
                     </div>
                   )}
                   <div className="flex justify-end w-[100%]">
                     <p
-                      className={` bg-slate-600 text-white w-fit p-1 max-w-[90%]`}
+                      className={` bg-slate-600 rounded-md text-white w-fit p-1 max-w-[90%]`}
                     >
                       {message.text}
                     </p>
@@ -172,7 +172,7 @@ const Chatbot = () => {
                 {remainingQuestions.map((question, index) => (
                   <li
                     key={index}
-                    className={`border bg-slate-600 px-2 h-[2rem] whitespace-nowrap flex items-center text-white cursor-pointer ${
+                    className={`border rounded-md bg-slate-600 px-2 h-[2rem] whitespace-nowrap flex items-center text-white cursor-pointer ${
                       selectedQuestion === question ? 'bg-slate-700' : ''
                     }`}
                     onClick={() => handleQuestionSelection(question)}
@@ -181,15 +181,15 @@ const Chatbot = () => {
                   </li>
                 ))}
               </ul>
-              <div className="flex mt-3 bg-slate-600">
+              <div className="flex gap-1 mt-3 ">
                 <input
-                  className="flex-1 border p-2"
+                  className="flex-1 rounded-md bg-slate-500 text-white p-2"
                   value={input}
                   onChange={e => setInput(e.target.value)}
                   disabled
                 />
                 <button
-                  className="p-2 text-white text-[16px]"
+                  className="p-2 text-white bg-slate-600 rounded-md text-[16px]"
                   onClick={handleSendMessage}
                 >
                   <IoMdSend />
@@ -200,12 +200,12 @@ const Chatbot = () => {
         </div>
       ) : (
         <div
-          className="bg-white flex flex-col justify-center items-center cursor-pointer p-3 shadow-md"
+          className="bg-slate-200 flex flex-col justify-center items-center cursor-pointer px-2 py-3 rounded-md  shadow-md"
           onClick={() => setShowChat(true)}
         >
           <img
             src="https://cdn-icons-png.flaticon.com/128/8943/8943377.png"
-            className="w-10 h-10"
+            className="w-8 h-8"
           />
           <p className="text-black">Need help?</p>
         </div>

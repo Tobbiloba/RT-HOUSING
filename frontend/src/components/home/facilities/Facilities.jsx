@@ -32,7 +32,7 @@ const Facilities = () => {
             <h1 className="lg:text-6xl text-5xl min-w-[25rem] mb-8 md:mb-0 font-[600] md:w-[40%] text-center md:text-start">
               MODERN FACILITIES OF THE PROPERTY.
             </h1>
-            <img src="/title2.jpg" className="w-[100%] md:w-fit" />
+            <img src="/title2.jpg" className="w-[100%] md:w-fit rounded-md" />
           </div>
 
           <div className="grid sm:grid-cols-2 gap-x-8 gap-y-16 mt-8">

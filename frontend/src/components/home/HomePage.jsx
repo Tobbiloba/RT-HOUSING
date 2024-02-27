@@ -58,7 +58,7 @@ const HomePage = () => {
     <div className="relative w-[100vw] exo border-red-500 h-[67.5rem] md:h-[65rem] justify-center lg:justify-start lg:h-[55rem] flex items-center lg:px-[2rem]">
       <Slider />
 
-      <div className="md:h-[50rem] h-[61rem] md:bottom-20 lg:bottom-0  w-[100%] mx-[1rem] lg:w-[33.5rem] bg-white z-[30] relative p-7">
+      <div className="md:h-[50rem] h-[61rem] md:bottom-20 lg:bottom-0  w-[100%] mx-[1rem] lg:w-[33.5rem] bg-white z-[30] relative p-7 rounded-md">
         <p className="text-slate-900">Find Exoctic & Affordable.</p>
         <h1 className="text-slate-600 text-xl my-2">Hotel Rooms Instantly</h1>
         <div className="mt-5">
@@ -169,7 +169,7 @@ const HomePage = () => {
           <div
             key={item.id}
             className={`py-3 px-4  ${
-              currentSwiper === item.id ? 'width-in ' : 'width-out-in'
+              currentSwiper === item.id ? 'width-in rounded-t-md' : 'width-out-in'
             } bg-white border w-[17.5rem] ${
               item.id === 3 && 'hidden 2xl:flex flex-col'
             }`}
@@ -180,7 +180,7 @@ const HomePage = () => {
               {item.h1}
             </h1>
             {currentSwiper === item.id && (
-              <button className="hover:text-slate-500 hover:bg-white mt-6 border border-slate-500 px-5 py-2 text-white bg-slate-500">
+              <button className="hover:text-slate-500 rounded-md hover:bg-white mt-6 border border-slate-500 px-5 py-2 text-white bg-slate-500">
                 Start Exploring
               </button>
             )}

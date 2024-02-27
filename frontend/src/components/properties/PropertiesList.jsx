@@ -25,7 +25,7 @@ const FeaturedPropCard = ({ item, viewMode }) => {
   const [showMenu, setShowMenu] = useState(false)
   return (
     <div
-      className={`hover:shadow-md w-full exo overflow-hidden font-mono md:items-center lg:items-start xl:text-center  lg:h-[100%] flex flex-col  ${
+      className={`hover:shadow-md w-full rounded-r-md exo overflow-hidden font-mono md:items-center lg:items-start xl:text-center  lg:h-[100%] flex flex-col  ${
         viewMode === 'flex'
           ? 'md:flex-row xl:h-[20rem] md:h-[20rem] xl:flex-row'
           : 'sm:flex-row md:flex-col xl:flex-col md:w-[100%] min-w-[25rem]'
@@ -36,16 +36,17 @@ const FeaturedPropCard = ({ item, viewMode }) => {
           viewMode === 'flex' ? 'xl:w-2/5 md:w-2/5' : ''
         }  p-0 lg:w-[100%] w-[100%] overflow-hidden flex h-fit md:h-[20rem]`}
       >
+          <div className='bg-black/30 absolute rounded-md top-0 left-0 w-[100%] h-[100%]'></div>
         <img
           src={item.property_information.property_images[0]}
-          className="w-[100%] h-[100%]"
+          className="w-[100%] h-[100%] rounded-md"
         />
       </div>
 
       <div
         className={`  ${
           viewMode === 'flex' ? 'xl:w-3/5 md:w-3/5' : ' '
-        } lg:w-[100%] w-[100%]  md:h-[20rem] border h-fit xl:mt-0`}
+        } lg:w-[100%] w-[100%]  md:h-[20rem] border bg-slate-50 h-fit xl:mt-0`}
       >
         <div className="flex flex-row items-center p-3 justify-between text-[14px]">
           <div className="flex flex-col gap-2 items-start justify-start">

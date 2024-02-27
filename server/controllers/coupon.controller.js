@@ -84,7 +84,7 @@ const verifyCouponModel = async (req, res) => {
     try {
         // const {id} = req.params;
         const {amount, couponCode} = req.body;
-
+        console.log(amount, couponCode)
         const isCoupon =  await getCouponByCodeSchema(couponCode)
 
         // console.log(isCoupon)

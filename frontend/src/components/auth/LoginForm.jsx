@@ -76,6 +76,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
                 handleChange={handleChange}
                 error={errors.email && touched.email ? errors.email : undefined}
                 id="email"
+                errorbg
               />
               <Input
                 placeholder="Type in your Password"
@@ -89,6 +90,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
                     : undefined
                 }
                 id="password"
+                errorbg
               />
               <div className="mt-6 flex flex-col gap-y-3 md:flex-row justify-between md:items-center w-[100%]">
                 <button

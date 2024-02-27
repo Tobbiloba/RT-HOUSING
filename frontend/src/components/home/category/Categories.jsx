@@ -13,6 +13,7 @@ import 'swiper/css/pagination'
 import { FaLocationDot } from 'react-icons/fa6'
 import { FreeMode, Pagination } from 'swiper/modules'
 import { addCommasToNumber } from '@/components/utils'
+import { Link } from 'react-router-dom'
 const LazyLoadedImage = lazy(
   () => import('../../common/lazy loading/LazyLoadedImage'),
 )
@@ -65,12 +66,12 @@ const SwiperContainer = () => {
               return (
                 <SwiperSlide
                   key={index}
-                  className="hover:border-b h-[27.5rem] hover:shadow-md border-slate-500 "
+                  className="hover:border-b cursor-pointer rounded-b-xl h-[27.5rem] hover:shadow-md border-slate-500 "
                 >
-                  <div className="relative  border h-[15rem] overflow-hidden">
-                    <div className="w-[100%] h-[15rem]">
+                  <div className="relative h-[15rem] overflow-hidden">
+                    <div className="w-[100%] relative rounded-xl overflow-hidden h-[15rem]">
                       <Suspense
-                        fallback={<div className="h-[15rem] w-[100%]"></div>}
+                        fallback={<div className="h-[15rem] overflow-hidden rounded-md w-[100%]"></div>}
                       >
                         <LazyLoadedImage
                           src={
@@ -80,14 +81,16 @@ const SwiperContainer = () => {
                         />
                       </Suspense>
                     </div>
-                    <div className="w-[100%] h-[100%] z-[50] bg-black/50 absolute top-0 left-0"></div>
+                    <div className="w-[100%] h-[100%] rounded-xl z-[50] bg-black/50 absolute top-0 left-0"></div>
                   </div>
-                  {/* <div className='flex flex-col justify-between h-[12.5rem] flex-1 border'> */}
+                
                   <div className=" p-[1.25rem] flex flex-col justify-between h-[12.5rem] flex-1">
                     <div className="flex flex-col justify-between">
+                    <Link to={`/properties/property-detail/${encodeURIComponent(property?._id)}`}>
                       <p className="text-[18px] h-[4rem] text-slate-600 flex items-center font-[600]">
                         {property.property_information?.property_name}{' '}
                       </p>
+                      </Link>
                       <p className="text-[16px] mt-1 flex justify-end items-center gap-1 text-slate-600 font-[600]">
                         ₦{' '}
                         {addCommasToNumber(
@@ -148,7 +151,7 @@ const Categories = () => {
             </p>
           </div>
 
-          <button className="border px-8 w-fit mt-4 md:mt-0 py-2 text-slate-700 border-slate-700 text-[15px]">
+          <button className="border rounded-md px-8 w-fit mt-4 md:mt-0 py-2 text-slate-700 border-slate-700 text-[15px]">
             See More
           </button>
         </div>

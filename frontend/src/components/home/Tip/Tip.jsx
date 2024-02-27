@@ -26,12 +26,12 @@ const Tip = () => {
             >
               <img
                 src={item.img}
-                className={`${index != 3 ? 'w-5/12' : 'w-[100%]'}`}
+                className={`${index != 3 ? 'w-5/12' : 'w-[100%]'} rounded-md`}
               />
 
               <div className="flex flex-col justify-evenly gap-4">
                 <div className="flex flex-row items-center gap-6">
-                  <img src={item.userImg} className="lg:w-9 lg:h-9 w-8 h-8" />
+                  <img src={item.userImg} className="lg:w-9 rounded-md lg:h-9 w-8 h-8" />
                   <p className="text-slate-500 text-[14px] lg:text-[16px]">
                     {item.userName}
                   </p>

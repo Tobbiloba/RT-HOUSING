@@ -89,6 +89,7 @@ const RegisterForm = ({ setShowRegister, showRegister }) => {
                       : undefined
                   }
                   id="username"
+                  errorbg
                 />
 
                 <Input
@@ -101,6 +102,7 @@ const RegisterForm = ({ setShowRegister, showRegister }) => {
                     errors.email && touched.email ? errors.email : undefined
                   }
                   id="email"
+                  errorbg
                 />
                 <Input
                   placeholder="Type in your Phone no"
@@ -114,6 +116,7 @@ const RegisterForm = ({ setShowRegister, showRegister }) => {
                       : undefined
                   }
                   id="phoneNo"
+                  errorbg
                 />
 
                 <Input
@@ -128,6 +131,7 @@ const RegisterForm = ({ setShowRegister, showRegister }) => {
                       : undefined
                   }
                   id="password"
+                  errorbg
                 />
 
                 <div className="mt-2 md:mt-6 flex flex-col md:flex-row justify-between gap-y-3 md:items-center w-[100%]">

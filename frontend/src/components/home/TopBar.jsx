@@ -51,12 +51,12 @@ const TopBar = ({ setShowLogin, setShowRegister }) => {
           <div className="relative flex flex-row overflow-hidden w-[17.5rem] h-[2.75rem] border">
             <Link
               to="/admin/dashboard"
-              className="flex-1 text-[14px] bg-slate-500 items-center flex justify-center"
+              className="flex-1 text-[14px] bg-slate-500 rounded-l-md items-center flex justify-center"
             >
               <p>Become A Host</p>
             </Link>
 
-            <p className="flex-1 text-white text-[14px] bg-slate-900 text-center items-center flex justify-center ">
+            <p className="flex-1 text-white text-[14px] bg-slate-900 rounded-r-md text-center items-center flex justify-center ">
               Find A Property
             </p>
             <div className="absolute left-[8.5rem] rotate-6 w-[.5rem] h-[3.5rem] bg-white">
