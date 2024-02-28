@@ -31,32 +31,32 @@ const SortByOptions = ({
             data={sortOptions}
             state={sortBy}
             setState={setSortBy}
-            height="w-40 h-10 rounded-sm border"
+            height="w-40 h-10 rounded-md border"
           />
         </div>
         {/* {
             viewMode === 'grid' &&
         } */}
         <div
-          className={`${viewMode === 'grid' ? 'bg-slate-500 text-white' : 'border text-gray-300'} cursor-pointer p-2`}
+          className={`rounded-md ${viewMode === 'grid' ? 'bg-slate-500 text-white' : 'border text-gray-300'} cursor-pointer p-2`}
           onClick={() => setViewMode('grid')}
         >
           <BsGrid1X2 />
         </div>
         <div
-          className={`${viewMode === 'flex' ? 'bg-slate-500 text-white' : 'border text-gray-300'} cursor-pointer p-2`}
+          className={`rounded-md  ${viewMode === 'flex' ? 'bg-slate-500 text-white' : 'border text-gray-300'} cursor-pointer p-2`}
           onClick={() => setViewMode('flex')}
         >
           <BsMenuButtonWide />
         </div>
         <div
-          className={`${useLocation ? 'bg-slate-500 text-white' : 'border text-gray-300'} text-xl cursor-pointer p-2`}
+          className={`rounded-md  ${useLocation ? 'bg-slate-500 text-white' : 'border text-gray-300'} text-xl cursor-pointer p-2`}
           onClick={() => setUseLocation(!useLocation)}
         >
           <HiLocationMarker />
         </div>
         <div
-          className={`${filterState.right ? 'bg-slate-500 text-white' : 'border text-gray-300'} text-xl cursor-pointer p-2 tablet:hidden`}
+          className={`rounded-md  ${filterState.right ? 'bg-slate-500 text-white' : 'border text-gray-300'} text-xl cursor-pointer p-2 tablet:hidden`}
           onClick={toggleFilterOptions(anchor, true)}
         >
           <IoSettingsOutline />

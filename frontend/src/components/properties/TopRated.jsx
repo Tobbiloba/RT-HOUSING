@@ -6,13 +6,13 @@ const TopRatedCard = ({ item }) => {
   return (
     <Link
       to={`/property-detail/${encodeURIComponent(item._id)}`}
-      className="flex flex-row gap-4 exo border items-center"
+      className="flex rounded-md flex-row gap-4 exo border items-center"
     >
       <img
         src={item.property_information.property_images[0]}
-        className="w-20 h-20"
+        className="w-24 h-20 rounded-md"
       />
-      <div className="flex-1">
+      <div className="flex-1 w-[60%]">
         <p className="text-slate-500 text-[13px]">
           {item.property_information.property_type}
         </p>
@@ -95,8 +95,8 @@ const TopRated = () => {
     },
   ]
   return (
-    <div className="w-[22.5rem] exo mb-6 h-fit exo overflow-hidden border pb-6">
-      <h1 className="p-[1rem] text-slate-900 bg-slate-100">
+    <div className="w-[22.5rem] rounded-md exo mb-6 h-fit exo overflow-hidden border pb-6">
+      <h1 className="p-[1rem] rounded-md text-slate-900 bg-slate-100">
         Top Rated Listings
       </h1>
       {loading ? (
@@ -112,7 +112,6 @@ const TopRated = () => {
               .filter(item => item.isTopRated)
               .slice(0, 4) // Take only the first 4 items
               .map(item => {
-                console.log(item)
                 return <TopRatedCard key={item.id} item={item} />
               })}
         </div>

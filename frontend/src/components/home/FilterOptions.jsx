@@ -34,7 +34,7 @@ const FilterOptions = ({ type, value, setValue }) => {
       )}
 
       <div
-        className={`${type !== '' ? 'md:w-4/12' : 'w-[100%]'} w-[100%] lg:min-w-[13rem] border justify-between flex flex-row`}
+        className={`${type !== '' ? 'md:w-4/12' : 'w-[100%]'} rounded-md w-[100%] lg:min-w-[13rem] border justify-between flex flex-row`}
       >
         <p
           className={`w-4/12 border border-y-0 border-l-0  h-10  cursor-pointer  flex items-center justify-center ${value === 1 ? 'bg-slate-500  text-white' : 'hover:text-slate-500 text-gray-400'}`}

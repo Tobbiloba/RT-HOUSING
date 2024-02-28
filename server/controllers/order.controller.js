@@ -118,9 +118,9 @@ const createUserOrder = async (req, res) => {
     const orderExist = await getUserIsOrderExist(id, user_id)
     const admin = await getAdminUserById(property.admin_id)
 
-    if(orderExist) {
-      return res.status(400).json({message: "You already have an order for this property"})
-    } 
+    // if(orderExist) {
+    //   return res.status(400).json({message: "You already have an order for this property"})
+    // } 
 
 
 

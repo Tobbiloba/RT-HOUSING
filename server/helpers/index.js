@@ -53,7 +53,7 @@ export const sendLoginNotification = ({ id }) => {
 };
 
 export const sendVerificationToken = async (email, token) => {
-  // console.log(email, url);
+  console.log(email, token);
   const transporter = nodemailer.createTransport({
     // Configure your email service
     service: "gmail",
@@ -78,17 +78,21 @@ export const sendVerificationToken = async (email, token) => {
 
       </head>
       
-     <body style="display: flex; justify-content: center; align-items: center; width: 100%; max-width: 100vw; margin: 0 auto; background-color: #e2e8f0; flex-direction: column;">
-  <div class="" style="background-color: #1e293b; padding: 0rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 25rem; width: 100%; margin: 0rem auto; height: fit; ">
-
-      <h1 style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: 1rem 0;">
+      <body
+      style="display: flex; justify-content: center; align-items: center; width: 100%; max-width: 100vw; margin: 0 auto; background-color: #e2e8f0; ">
+      <div class=""
+        style="background-color: #1e293b; color: white; padding: .5rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 25rem; width: 100%; margin: 0rem auto;">
+    
+        <h1
+          style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: .5rem 0;">
           Fe
-          <div style="transform: rotate(12deg); width: 30px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-              <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #798584;"></div>
-              <span style="color: #798584; position: relative; bottom: -2px;">bt</span>
+          <div
+            style="transform: rotate(12deg); width: 30px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #798584;"></div>
+            <span style="color: #798584; position: relative; bottom: -2px;">bt</span>
           </div>
           oS
-      </h1>
+        </h1>
 
       <div class="">
           <h1 style="color: #f1f5f9; font-family: 'Mono', monospace; text-align: center; font-size: 17px;">Thank you for choosing Febtos</h1>
@@ -188,7 +192,8 @@ export const sendOrderVerificationUser = async (email, orderDetails) => {
     usedDiscount,
     checkinDate,
     checkoutDate,
-    status
+    status,
+    customerName
   } = orderDetails;
 
   const mailOptions = {
@@ -220,7 +225,7 @@ export const sendOrderVerificationUser = async (email, orderDetails) => {
             </div>
             oS
           </h1>
-          <div style="height: 150px; overflow: hidden; position: relative;">
+          <div style="height: 190px; overflow: hidden; position: relative;">
             <img
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhvdXNlfGVufDB8fDB8fHww"
               style="width: 100%; height: 100%; object-fit: cover;" alt="Overlay Image" />
@@ -229,10 +234,10 @@ export const sendOrderVerificationUser = async (email, orderDetails) => {
           </div>
           <p style="font-size: 14px; color: #fff; margin-top: 2rem;">Hello there! 👋</p>
       
-          <p>
-    Dear [Customer Name],
+          <p style="font-size: 13px; color: #fff; margin-top: 2rem;">>
+    Dear ${customerName},
 
-    Thank you for choosing [Your Company]! 🌟✨ We acknowledge the receipt of your order request, and we appreciate
+    Thank you for choosing FebTos! 🌟✨ We acknowledge the receipt of your order request, and we appreciate
     your trust in our services.
 
     Our dedicated team is diligently processing your request. Please be assured that we strive to provide you with the
@@ -244,121 +249,109 @@ export const sendOrderVerificationUser = async (email, orderDetails) => {
     We look forward to the opportunity to serve you and create a memorable experience.
 
     Best Regards,
-    [Your Company Name]
+    FebTos
 </p>
 
           <p style="color: #ffffff; font-size: 13px;  margin-top: 20px;">
             What we offer:
           </p>
-          <ul style="color: #ffffff; font-size: 13px; margin-left: 0px;">
-            <li>🛏️ Cozy accommodation that felt just like home</li>
-            <li>🍽️ Delicious meals that satisfied your taste buds</li>
-            <li>🎉 Memorable experiences and adventures</li>
-            <li>💤 Restful nights and rejuvenating sleep</li>
-          </ul>
-      
-      
-          <table
-            style="width: 100%; color: white; border-collapse: collapse; margin-bottom: 40px;  font-size: 12px; margin-top: 2rem; padding-left: 1rem;">
-            <tr style="margin-top: 4px; padding: 2rem 0">
-              <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Order ID:
-              </td>
-              <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${orderId}</td>
-            </tr>
-            <tr style="margin-top: 6px; padding: 2rem 0">
-              <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Property
-                Title:</td>
-              <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${propertyName}</td>
-            </tr>
-            <tr style="padding: 2rem 0">
-              <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Address:
-              </td>
-              <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${propertyAddress}</td>
-            </tr>
-            <tr style="padding: 2rem 0">
-              <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Total
-                Price:</td>
-              <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${totalPrice}</td>
-            </tr>
-            <tr style="padding: 2rem 0">
-              <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Expenses:
-              </td>
-              <td style="width: 70%; text-align: left;">
-                <ul style="list-style: none; padding: 0;">
-                  ${
-                    expenses
-                      .map(
-                        ({ name, price }) =>
-                          `<li style="padding-top: 2rem;">${name}: $${price}</li>`
-                      )
-                      .join("") || "<li>No expenses</li>"
-                  }
-                </ul>
-              </td>
-            </tr>
-            <tr style="padding: 2rem 0">
-              <td style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start; ">Used
-                Discount:</td>
-              <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">
-                <p>Coupon ID: 43564564</p>
-                <p>Coupon Discount: ${usedDiscount.couponDiscount}</p>
-              </td>
-            </tr>
-            <tr style="padding: 2rem 0">
-              <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Check-in
-                Date:</td>
-              <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${checkinDate}</td>
-            </tr>
-            <tr style="padding: 2rem 0">
-              <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Checkout
-                Date:</td>
-              <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${checkoutDate}</td>
-            </tr>
-            <tr style="padding: 2rem 0">
-              <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Status:
-              </td>
-              <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${status}</td>
-            </tr>
-            ${
-              status === "declined"
-                ? `<tr style="padding: 2rem 0; padding-top: 2rem;">
-              <td
-                style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start; padding-bottom: 10px;">
-                Reason:</td>
-              <td style="width: 70%; padding-top: 2rem; text-align: left; padding-left: 4px;">${reason}</td>
-            </tr>`
-                : ""
-            }
-          </table>
-          <div style="display: flex; justify-content: end; margin-top: 20px;">
-            <img src="https://cdn-icons-png.flaticon.com/128/3714/3714884.png" style="width: 60px;" />
-          </div>
-          <div>
-            <p className="help-info" style="font-size: 13px;">Questions? Visit the <a href="" style="color: white;">Help Centre</a></p>
-            <ul className="help-links">
-              <li style="padding: 4px  0;"><a style="color: white; font-size: 12px;" href="/faq">FAQs</a></li>
-              <li style="padding: 4px 0;"><a style="color: white; font-size: 12px;" href="/contact">CONTACT US</a></li>
-              <li style="padding: 4px 0;"><a style="color: white; font-size: 12px;" href="/support">CUSTOMER SUPPORT</a></li>
-            </ul>
-          </div>
-      
-          <div>
-            <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" style="width: 30px; padding: 10px 10px;"/>
-            <img src="https://cdn-icons-png.flaticon.com/128/174/174848.png" style="width: 30px; padding: 10px 10px;"/>
-            <img src="https://cdn-icons-png.flaticon.com/128/5968/5968958.png" style="width: 30px; padding: 10px 10px;"/>
-          </div>
-          <div class="foote" style="margin-top: 3rem; color: white; font-size: 13px; text-align: center;">
-            <p class="copyright">
-                &copy; 2024 Febtos. All rights reserved.
-            </p>
-            <p class="footer-info">
-                Febtos Inc. | 123 Main Street, Cityville, Country
-            </p>
-        </div>
-        </div>
+          <ul style="color: #d3d0d0; font-size: 13px; margin-left: 20px;">
+          <li>🛏️ Cozy accommodation that felt just like home</li>
+          <li>🍽️ Delicious meals that satisfied your taste buds</li>
+          <li>🎉 Memorable experiences and adventures</li>
+          <li>💤 Restful nights and rejuvenating sleep</li>
+        </ul>
         
-        </div>
-      </body>
+        <p style="color: #d3d0d0; font-size: 13px;  margin-top: 20px;">
+          We can't wait to welcome you back for another fantastic stay! 🌈 If there's anything we can do to enhance your future experiences with us, feel free to let us know. Safe travels until we meet again! 🌍✈️
+        </p>
+        
+                  <table style="width: 100%; border-collapse: collapse; margin-bottom: 40px;  font-size: 13px; display: flex; flex-direction: column; gap: 4;>
+                      <tr style="margin-top: 4px; padding: 2rem 0;">
+                          <td style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start;">ORDER ID:</td>
+                          <td style="width: 70%; text-align: left; padding-left: 4px;">${orderId}</td>
+                      </tr>
+                      <tr style="margin-top: 8px; padding: 2rem 0">
+                          <td style="width: 100%; text-align: left; display: flex; justify-content: start; align-items: start;">PROPERTY TITLE:</td>
+                          <td style="width: 70%; text-align: left; padding-left: 4px;">${propertyName}</td>
+                      </tr>
+                      <tr style="padding: 2rem 0; margin-top: 8px;">
+                          <td style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start;">ADDRESS:</td>
+                          <td style="width: 70%; text-align: left; padding-left: 4px;">${propertyAddress}</td>
+                      </tr>
+                      <tr style="padding: 2rem 0; margin-top: 8px;">
+                          <td style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start;">TOTAL PRICE:</td>
+                          <td style="width: 70%; text-align: left; padding-left: 4px;">${totalPrice}</td>
+                      </tr>
+                      <div style="height: 1rem;"></div>
+                      <tr style="padding: 2rem 0; margin-top: 8px;">
+                          <td style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start;">EXPENSES:</td>
+                          <td style="width: 70%; text-align: left; ">
+                              <ul style="list-style: none; padding: 0;">
+                                  ${
+                                    expenses
+                                      .map(
+                                        ({ name, price }) =>
+                                          `<li>${name}: $${price}</li>`
+                                      )
+                                      .join("") || "<li>No expenses</li>"
+                                  }
+                              </ul>
+                          </td>
+                      </tr>
+                      <tr style="padding: 2rem 0; margin-top: 8px;">
+                          <td style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start; ">USED COUPON:</td>
+                          <td style="width: 70%; text-align: left; padding-left: 4px;">
+                              <p>Coupon ID: 43564564</p>
+                              <p>Coupon Discount: ${
+                                usedDiscount.couponDiscount
+                              }</p>
+                          </td>
+                      </tr>
+                      <tr style="padding: 2rem 0; margin-top: 8px;">
+                          <td style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start;">CHECK-IN DATE:</td>
+                          <td style="width: 70%; text-align: left; padding-left: 4px;">${checkinDate}</td>
+                      </tr>
+                      <tr style="padding: 2rem 0; margin-top: 8px;">
+                          <td style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start;">CHECKOUT DATE:</td>
+                          <td style="width: 70%; text-align: left; padding-left: 4px;">${checkoutDate}</td>
+                      </tr>
+                      <tr style="padding: 2rem 0; margin-top: 8px;">
+                          <td style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start;">STATUS:</td>
+                          <td style="width: 70%; text-align: left; padding-left: 4px;">expired</td>
+                      </tr>
+                      
+                  </table>
+              </div>
+              <div style="display: flex; justify-content: end; margin-top: 20px;">
+                <img src="https://cdn-icons-png.flaticon.com/128/3714/3714884.png" style="width: 60px;" />
+              </div>
+              <div style="color: white;">
+                <p className="help-info" style="font-size: 13px;">Questions? Visit the <a href="" style="color: white;">Help Centre</a></p>
+                <ul className="help-links">
+                  <li style="padding: 4px  0;"><a style="color: white; font-size: 12px;" href="/faq">FAQs</a></li>
+                  <li style="padding: 4px 0;"><a style="color: white; font-size: 12px;" href="/contact">CONTACT US</a></li>
+                  <li style="padding: 4px 0;"><a style="color: white; font-size: 12px;" href="/support">CUSTOMER SUPPORT</a></li>
+                </ul>
+              </div>
+              
+              <div>
+                <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" style="width: 30px; padding: 10px 10px;"/>
+                <img src="https://cdn-icons-png.flaticon.com/128/174/174848.png" style="width: 30px; padding: 10px 10px;"/>
+                <img src="https://cdn-icons-png.flaticon.com/128/5968/5968958.png" style="width: 30px; padding: 10px 10px;"/>
+              </div>
+              <div class="foote" style="margin-top: 3rem; color: white; font-size: 13px; text-align: center;">
+                <p class="copyright">
+                    &copy; 2024 Febtos. All rights reserved.
+                </p>
+                <p class="footer-info">
+                    Febtos Inc. | 123 Main Street, Cityville, Country
+                </p>
+                </div>
+                </div>
+                
+                </div> 
+          </body>
         
         </html>`,
   };
@@ -424,9 +417,9 @@ export const sendOrderVerificationAdmin = async (email, orderDetails, adminName)
         </head>
         
         <body
-        style="display: flex; justify-content: center; align-items: center; width: 100%; max-width: 100vw; margin: 0 auto; background-color: #0c1622; padding: .5rem 0;">
+        style="display: flex; justify-content: center; align-items: center; width: 100%; max-width: 100vw; margin: 0 auto; background-color: #e2e8f0; ">
         <div class=""
-          style="background-color: #1e293b; color: white; padding: .5rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 25rem; width: 100%; margin: 0rem auto;">
+          style="background-color: #1e293b; color: white; padding: .5rem .75rem; font-family: 'Open Sans', sans-serif; max-width: 30rem; width: 100%; margin: 0rem auto;">
       
           <h1
             style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: .5rem 0;">
@@ -438,7 +431,7 @@ export const sendOrderVerificationAdmin = async (email, orderDetails, adminName)
             </div>
             oS
           </h1>
-          <div style="height: 150px; overflow: hidden; position: relative;">
+          <div style="height: 190px; overflow: hidden; position: relative;">
             <img
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhvdXNlfGVufDB8fDB8fHww"
               style="width: 100%; height: 100%; object-fit: cover;" alt="Overlay Image" />
@@ -454,38 +447,38 @@ export const sendOrderVerificationAdmin = async (email, orderDetails, adminName)
       
       
           <table
-            style="width: 100%; color: white; border-collapse: collapse; margin-bottom: 40px;  font-size: 12px; margin-top: 2rem; padding-left: 1rem;">
-            <tr style="margin-top: 4px; padding: 2rem 0">
+            style="width: 100%; color: white; border-collapse: collapse; margin-bottom: 40px;  font-size: 12px; margin-top: 1rem; padding-left: 1rem;">
+            <tr style="margin-top: 4px; padding: 1rem 0">
               <td style="width: 100%; text-align: left;  display: flex; padding-top: 2rem; justify-content: start; align-items: start;">Customer name:
               </td>
               <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${customerName}</td>
             </tr>
-            <tr style="margin-top: 4px; padding: 2rem 0">
+            <tr style="margin-top: 4px; padding: 1rem 0">
               <td style="width: 100%; text-align: left;  display: flex; padding-top: 2rem; justify-content: start; align-items: start;">Customer email:
               </td>
               <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${customerEmail}</td>
             </tr>
-            <tr style="margin-top: 4px; padding: 2rem 0">
+            <tr style="margin-top: 4px; padding: 1rem 0">
               <td style="width: 100%; text-align: left;  display: flex; padding-top: 2rem; justify-content: start; align-items: start;">Order ID:
               </td>
               <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${orderId}</td>
             </tr>
-            <tr style="margin-top: 6px; padding: 2rem 0">
+            <tr style="margin-top: 6px; padding: 1rem 0">
               <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Property
                 Title:</td>
               <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${propertyName}</td>
             </tr>
-            <tr style="padding: 2rem 0">
+            <tr style="padding: 1rem 0">
               <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Address:
               </td>
               <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${propertyAddress}</td>
             </tr>
-            <tr style="padding: 2rem 0">
+            <tr style="padding: 1rem 0">
               <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Total
                 Price:</td>
               <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${totalPrice}</td>
             </tr>
-            <tr style="padding: 2rem 0">
+            <tr style="padding: 1rem 0">
               <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Expenses:
               </td>
               <td style="width: 70%; text-align: left;">
@@ -496,37 +489,37 @@ export const sendOrderVerificationAdmin = async (email, orderDetails, adminName)
                         ({ name, price }) =>
                           `<li style="padding-top: 1rem;">${name}: $${price}</li>`
                       )
-                      .join("") || "<li>No expenses</li>"
+                      .join("") || `<li style="padding-top: 1rem;">No expenses</li>`
                   }
                 </ul>
               </td>
             </tr>
-            <tr style="padding: 2rem 0">
+            <tr style="padding: 1rem 0">
               <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start; ">Used
                 Discount:</td>
               <td style="width: 70%; text-align: left; padding-left: 4px;">
-                <p>Coupon ID: 43564564</p>
+                <p style="padding-top: 1rem;">Coupon ID: 43564564</p>
                 <p>Coupon Discount: ${usedDiscount.couponDiscount}</p>
               </td>
             </tr>
-            <tr style="padding: 2rem 0">
+            <tr style="padding: 1rem 0">
               <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Check-in
                 Date:</td>
               <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${checkinDate}</td>
             </tr>
-            <tr style="padding: 2rem 0">
+            <tr style="padding: 1rem 0">
               <td style="width: 100%; text-align: left; padding-top: 2rem;  display: flex; justify-content: start; align-items: start;">Checkout
                 Date:</td>
               <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${checkoutDate}</td>
             </tr>
-            <tr style="padding: 2rem 0">
+            <tr style="padding: 1rem 0">
               <td style="width: 100%; text-align: left; padding-top: 2rem; display: flex; justify-content: start; align-items: start;">Status:
               </td>
               <td style="width: 70%; text-align: left; padding-top: 2rem; padding-left: 4px;">${status}</td>
             </tr>
             ${
               status === "declined"
-                ? `<tr style="padding: 2rem 0">
+                ? `<tr style="padding: 1rem 0">
               <td
                 style="width: 100%; text-align: left;  display: flex; justify-content: start; align-items: start; padding-bottom: 10px;">
                 Reason:</td>
@@ -820,17 +813,21 @@ export const sendOrderEnd = async (email, orderDetails) => {
         </head>
         
     
-        <body style="width: 100vw; margin: 0 0; background-color: #e2e8f0; ">
-        <div class="" style="background-color: #1e293b; padding: .5rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 20rem; width: 100vw; ">
+        <body
+        style="display: flex; justify-content: center; align-items: center; width: 100%; max-width: 100vw; margin: 0 auto; background-color: #e2e8f0; ">
+        <div class=""
+          style="background-color: #1e293b; color: white; padding: .5rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 25rem; width: 100%; margin: 0rem auto;">
       
-            <h1 style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: .5rem 0;">
-                Fe
-                <div style="transform: rotate(12deg); width: 30px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #798584;"></div>
-                    <span style="color: #798584; position: relative; bottom: -2px;">bt</span>
-                </div>
-                oS
-            </h1>
+          <h1
+            style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: .5rem 0;">
+            Fe
+            <div
+              style="transform: rotate(12deg); width: 30px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #798584;"></div>
+              <span style="color: #798584; position: relative; bottom: -2px;">bt</span>
+            </div>
+            oS
+          </h1>
             <div style="height: 150px; overflow: hidden; position: relative;">
               <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhvdXNlfGVufDB8fDB8fHww" style="width: 100%; height: 100%; object-fit: cover;" alt="Overlay Image"/>
               <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div>
@@ -974,18 +971,21 @@ console.log(email, name, tourId, propertyName, requestDate, additionalNote)
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
               <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
           </head>
-          
-          <body style="width: 100vw; margin: 0 0; background-color: #e2e8f0; ">
-          <div class="" style="background-color: #1e293b; padding: .5rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 100vw; width: 100vw; ">
+          <body
+          style="display: flex; justify-content: center; align-items: center; width: 100%; max-width: 100vw; margin: 0 auto; background-color: #e2e8f0; ">
+          <div class=""
+            style="background-color: #1e293b; color: white; padding: .5rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 25rem; width: 100%; margin: 0rem auto;">
         
-              <h1 style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: .5rem 0;">
-                  Fe
-                  <div style="transform: rotate(12deg); width: 30px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                      <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #798584;"></div>
-                      <span style="color: #798584; position: relative; bottom: -2px;">bt</span>
-                  </div>
-                  oS
-              </h1>
+            <h1
+              style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: .5rem 0;">
+              Fe
+              <div
+                style="transform: rotate(12deg); width: 30px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #798584;"></div>
+                <span style="color: #798584; position: relative; bottom: -2px;">bt</span>
+              </div>
+              oS
+            </h1>
               <div style="height: 150px; overflow: hidden; position: relative;">
                 <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhvdXNlfGVufDB8fDB8fHww" style="width: 100%; height: 100%; object-fit: cover;" alt="Overlay Image"/>
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div>
@@ -1091,17 +1091,21 @@ export const sendAgentMessageVerification = async (email, name) => {
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
             </head>
             
-            <body style="width: 100vw; margin: 0 0; background-color: #e2e8f0; ">
-            <div class="" style="background-color: #1e293b; padding: .5rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 100vw; width: 100vw; ">
+            <body
+            style="display: flex; justify-content: center; align-items: center; width: 100%; max-width: 100vw; margin: 0 auto; background-color: #e2e8f0; ">
+            <div class=""
+              style="background-color: #1e293b; color: white; padding: .5rem .5rem; font-family: 'Open Sans', sans-serif; max-width: 25rem; width: 100%; margin: 0rem auto;">
           
-                <h1 style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: .5rem 0;">
-                    Fe
-                    <div style="transform: rotate(12deg); width: 30px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #798584;"></div>
-                        <span style="color: #798584; position: relative; bottom: -2px;">bt</span>
-                    </div>
-                    oS
-                </h1>
+              <h1
+                style="font-size: 1.25rem; display: flex; color: #f0ecec; align-items: center; text-transform: capitalize; margin: .5rem 0;">
+                Fe
+                <div
+                  style="transform: rotate(12deg); width: 30px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                  <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #798584;"></div>
+                  <span style="color: #798584; position: relative; bottom: -2px;">bt</span>
+                </div>
+                oS
+              </h1>
                 <div style="height: 150px; overflow: hidden; position: relative;">
                   <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhvdXNlfGVufDB8fDB8fHww" style="width: 100%; height: 100%; object-fit: cover;" alt="Overlay Image"/>
                   <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div>

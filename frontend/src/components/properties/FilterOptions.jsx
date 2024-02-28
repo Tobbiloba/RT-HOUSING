@@ -8,12 +8,12 @@ import { CircularProgress } from '@mui/material'
 const FilterBox = ({ children, title }) => {
   const [showChildren, setShowChildren] = useState(true)
   return (
-    <div className="border exo  text-[13px]">
+    <div className="border exo rounded-md  text-[13px]">
       <div
-        className="flex flex-row justify-between cursor-pointer text-[15px] border-b p-[1rem] "
+        className="flex flex-row justify-between cursor-pointer  text-[15px] border-b p-[1rem] "
         onClick={() => setShowChildren(!showChildren)}
       >
-        <h1>{title}:</h1>
+        <h1 className='text-slate-500'>{title}:</h1>
         {showChildren ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
       </div>
 
@@ -207,9 +207,9 @@ const FilterOption = ({ data, setData }) => {
                         <input
                           type="checkbox"
                           className="custom-checkbox"
-                          // onChange={() =>
-                          //   handleAccomodationCheckboxChange(item.name)
-                          // }
+                          onChange={() =>
+                            handleAccomodationCheckboxChange(item.name)
+                          }
                           checked={accomodationType.includes(item.name)}
                         />
                         <p className="text-[15px]">{item.name}</p>
@@ -240,7 +240,7 @@ const FilterOption = ({ data, setData }) => {
                 <div
                   key={item.type}
                   onClick={() => setRoomType(item.type)}
-                  className="flex text-[13px] px-3 border border-t-gray-100 border-  flex-row justify-between mt-4 cursor-pointer  hover:shadow-sm py-3 items-center"
+                  className="flex text-[13px] rounded-md hover:shadow-md px-3 border border-t-gray-100 border-  flex-row justify-between mt-4 cursor-pointer py-3 items-center"
                 >
                   <div className="flex flex-row gap-3">
                     <img src={item.img} alt="suitcase" className="w-8 mr-8" />

@@ -115,7 +115,7 @@ const PropertyOptionCard = ({ items }) => {
       expenses: [],
       checkoutDate: tomorrow,
       checkinDate: today,
-      couponCode: '3fs3rc5cvt',
+      couponCode: '',
       checkBox: false,
     },
     validationSchema: createOrderSchema,
