@@ -350,6 +350,7 @@ const AdminRegisterScreen = () => {
                     : undefined
                 }
                 id="firstname"
+                  errorbg
               />
               <Input
                 placeholder="Type in your lastname"
@@ -363,6 +364,7 @@ const AdminRegisterScreen = () => {
                     : undefined
                 }
                 id="lastname"
+                  errorbg
               />
               <Input
                 placeholder="Type in your username"
@@ -376,6 +378,7 @@ const AdminRegisterScreen = () => {
                     : undefined
                 }
                 id="username"
+                  errorbg
               />
               <Input
                 placeholder="Type in your email"
@@ -385,6 +388,7 @@ const AdminRegisterScreen = () => {
                 handleChange={handleChange}
                 error={errors.email && touched.email ? errors.email : undefined}
                 id="email"
+                  errorbg
               />
               <Input
                 placeholder="Type in your phone"
@@ -394,6 +398,7 @@ const AdminRegisterScreen = () => {
                 handleChange={handleChange}
                 error={errors.phone_no && touched.phone_no ? errors.phone_no : undefined}
                 id="phone_no"
+                  errorbg
               />
 
               <Input
@@ -406,6 +411,7 @@ const AdminRegisterScreen = () => {
                   errors.country && touched.country ? errors.country : undefined
                 }
                 id="country"
+                  errorbg
               />
               <Input
                 placeholder="Type in your state"
@@ -415,6 +421,7 @@ const AdminRegisterScreen = () => {
                 handleChange={handleChange}
                 error={errors.state && touched.state ? errors.state : undefined}
                 id="state"
+                  errorbg
               />
               <Input
                 placeholder="Type in your city"
@@ -439,6 +446,7 @@ const AdminRegisterScreen = () => {
                       : undefined
                   }
                   id="password"
+                    errorbg
                 />
               </div>
 
