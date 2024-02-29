@@ -49,7 +49,7 @@ const PropertyOptionCard = ({ items }) => {
   const [showCheckOutCalendar, setShowCheckOutCalendar] = useState(false)
 
   const dispatch = useDispatch()
-
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
   const calculateDayDifference = (checkinDate, checkoutDate) => {
     const [checkinDay, checkinMonth, checkinYear] = checkinDate
       .split('/')
@@ -70,6 +70,7 @@ const PropertyOptionCard = ({ items }) => {
     const differenceInDays = Math.floor(
       differenceInMilliseconds / (24 * 60 * 60 * 1000),
     )
+    console.log(differenceInDays)
     return differenceInDays
   }
 
@@ -78,8 +79,8 @@ const PropertyOptionCard = ({ items }) => {
       values.expenses.reduce((total, addOn) => total + addOn.price, 0) +
       items.pricing *
         calculateDayDifference(
-          values.checkinDate.toLocaleDateString(),
-          values.checkoutDate.toLocaleDateString(),
+          values.checkinDate.toLocaleDateString('en-GB', options),
+          values.checkoutDate.toLocaleDateString('en-GB', options),
         )
     )
   }
@@ -164,6 +165,9 @@ const PropertyOptionCard = ({ items }) => {
       values.couponCode = coupon.couponCode
     }
   }, [coupon])
+
+
+  console.log(values.checkinDate.toLocaleDateString())
   return (
     <form onSubmit={onSubmit} className="">
       <div className="w-[20.5rem] md:w-[24rem] exo mb-6 h-fit overflow-hidden">
@@ -268,7 +272,8 @@ const PropertyOptionCard = ({ items }) => {
                 >
                   <p className="text-[13px] text-slate-500">Check-In:</p>
                   <h1 className="text-[13px] text-slate-800 cursor-text">
-                    {values.checkinDate.toLocaleDateString()}
+                    {/* {values.checkinDate.toLocaleDateString()} */}
+                    {values.checkinDate.toLocaleDateString('en-GB', options)}
                   </h1>
                 </div>
                 <div

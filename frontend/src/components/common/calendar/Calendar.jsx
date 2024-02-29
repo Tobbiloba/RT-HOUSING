@@ -1,6 +1,6 @@
 // @ts-nocheck
-import React from 'react'
-import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
+import React from 'react';
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
 
 import {
   add,
@@ -13,36 +13,35 @@ import {
   isToday,
   parse,
   startOfToday,
-} from 'date-fns'
-import { useState } from 'react'
+} from 'date-fns';
+import { useState } from 'react';
 
 const classNames = (...classes) => classes.filter(Boolean).join(' ');
 
-
 const Calendar = ({ selectedDay, setShowCalendar, id, setFieldValue }) => {
-  let today = startOfToday()
-  let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
-  let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
+  let today = startOfToday();
+  let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
+  let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', selectedDay);
+  let selectedMonth = format(selectedDay, 'MMMM yyyy');
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
     end: endOfMonth(firstDayCurrentMonth),
-  })
+  });
 
   const previousMonth = () => {
-    let firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 })
-    setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'))
-  }
+    let firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 });
+    setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
+  };
 
   const nextMonth = () => {
-    let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 })
-    setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'))
-  }
-  // console.log(selectedDay)
+    let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
+    setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
+  };
 
   return (
     <div className="w-[21rem] bg-white p-2">
-      <div className=" w-[100%]">
+      <div className="w-[100%]">
         <div className="">
           <div className="">
             <div className="flex items-center p-2">
@@ -66,7 +65,10 @@ const Calendar = ({ selectedDay, setShowCalendar, id, setFieldValue }) => {
                 <MdKeyboardArrowRight className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
-            <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
+            <div className="flex items-center p-2 mt-2">
+              <span className="text-gray-900">{selectedMonth}</span>
+            </div>
+            <div className="grid grid-cols-7 mt-2 text-xs leading-6 text-center text-gray-500">
               <div>S</div>
               <div>M</div>
               <div>T</div>
@@ -88,8 +90,8 @@ const Calendar = ({ selectedDay, setShowCalendar, id, setFieldValue }) => {
                     type="button"
                     onClick={() => (
                       setShowCalendar(false),
-                      // console.log(day),
-                      setFieldValue(id, day)
+                      setFieldValue(id, day),
+                      setCurrentMonth(format(day, 'MMM-yyyy')) // Set current month to the selected date's month
                     )}
                     className={classNames(
                       isEqual(day, selectedDay) && 'text-white',
@@ -127,8 +129,8 @@ const Calendar = ({ selectedDay, setShowCalendar, id, setFieldValue }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 let colStartClasses = [
   '',
@@ -138,6 +140,6 @@ let colStartClasses = [
   'col-start-5',
   'col-start-6',
   'col-start-7',
-]
+];
 
-export default Calendar
+export default Calendar;
