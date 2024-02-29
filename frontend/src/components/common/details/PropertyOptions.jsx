@@ -93,7 +93,7 @@ const PropertyOptionCard = ({ items }) => {
         expenses: values.expenses,
         checkinDate: values.checkinDate,
         checkoutDate: values.checkoutDate,
-        couponCode: values.couponCode,
+        couponCode: couponCode,
         totalPrice: coupon
           ? calculateTotalPrice() +
             calculateTotalPrice() * 0.05 -

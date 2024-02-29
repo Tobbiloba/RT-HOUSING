@@ -336,8 +336,8 @@ export function DataTableDemo2({ data }) {
                   data-state={row.getIsSelected() && 'selected'}
                   className={`${
                     index % 2 === 0
-                      ? 'bg-slate-700 hover:bg-slate-800'
-                      : 'bg-slate-800 hover:bg-slate-900'
+                      ? 'bg-slate-600 hover:bg-slate-800'
+                      : 'bg-slate-700 hover:bg-slate-900'
                   } border-0 py-8 `}
                 >
                   {row.getVisibleCells().map(cell => (
@@ -367,7 +367,7 @@ export function DataTableDemo2({ data }) {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
+        <div className="flex-1 text-sm text-white">
           {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>

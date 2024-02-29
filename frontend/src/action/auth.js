@@ -210,8 +210,6 @@ export const loginAdmin = value => async (dispatch) => {
     })
 
 
-    console.log(error.response.data.message)
-
     toast.error(
       error.response && error.response.data
         ? error.response.data.message

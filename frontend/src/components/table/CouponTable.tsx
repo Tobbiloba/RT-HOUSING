@@ -240,10 +240,10 @@ export function CouponTable({ data }) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className={`${
+                  className={`text-white ${
                     index % 2 === 0
-                      ? 'bg-slate-700 text-slate-400 hover:text-slate-800'
-                      : 'bg-slate-800'
+                      ? 'bg-slate-600'
+                      : 'bg-slate-700'
                   } border-0 py-8`}
                 >
                   {row.getVisibleCells().map(cell => {

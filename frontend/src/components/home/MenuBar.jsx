@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AnimatedTabs } from './DesktopNav'
 import { Link } from 'react-router-dom'
-
+import { useLocation } from 'react-router-dom'
 const MenuBar = () => {
   const [showMenu, setShowMenu] = useState(false)
   const links = [
@@ -11,6 +11,21 @@ const MenuBar = () => {
     { name: 'How It works?', link: '/how-it-works' },
     { name: 'Contact', link: '/contact-us' },
   ]
+
+
+  const [currentPath, setCurrentPath] = useState('')
+  const location = useLocation()
+  const pathname = location.pathname.split('/')
+
+
+  useEffect(() => {
+    if(!pathname[1]) {
+      setCurrentPath("")
+    } else {
+      setCurrentPath(pathname[1])
+    }
+  }, [pathname])
+
   return (
     <div className="flex relative border exo border-white border-t-gray-100 pt-4 exo items-center justify-center pl-[1rem] md:px-[1rem] mt-4 ">
       <div className="md:container px-[1rem] w-[100%] flex flex-row justify-between items-center relative">
@@ -29,7 +44,7 @@ const MenuBar = () => {
 
         <div
           className=" md:hidden  bg-slate-500 h-[3.5rem]  px-3 flex items-center cursor-pointer"
-          onClick={() => setShowMenu(true)}
+          onClick={() => setShowMenu(!showMenu)}
         >
           <img src="/menu.png" className="w-7" />
         </div>
@@ -37,17 +52,21 @@ const MenuBar = () => {
 
       {showMenu && (
         <div
-          className="w-[100%] left-0  flex flex-col h-[16rem] bg-white absolute -bottom-[16rem] z-[100]"
+          className="w-[100%] left-0  flex flex-col border-b border-slate-300 h-[16rem] bg-white absolute -bottom-[16rem] z-[100]"
           onMouseEnter={() => setShowMenu(true)}
           onMouseLeave={() => setShowMenu(false)}
         >
-          {links.map((item, index) => (
-            <Link key={index} to={item.link}>
-              <div className="px-[5%] cursor-pointer py-3 border border-white border-t-gray-500">
-                {item.name}
-              </div>
-            </Link>
-          ))}
+          {links.map((item, index) => {
+            // console.log(item.link.split("/")[1])
+            // currentPath == item.link.split("/")[1]
+            return (
+              <Link key={index} to={item.link} className='border-t-gray-300 border-t'>
+                <div className={`px-[5%] cursor-pointer py-3 hover:bg-gray-200 ${currentPath == item.link.split("/")[1] ? "bg-slate-200 rounded-md m-1" : ""}`}>
+                  {item.name}
+                </div>
+              </Link>
+            )
+          })}
         </div>
       )}
     </div>

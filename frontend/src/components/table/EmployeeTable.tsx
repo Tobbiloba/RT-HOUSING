@@ -239,8 +239,8 @@ export function EmployeeTable({ data }) {
                     {row.getVisibleCells().map(cell => (
                       <TableCell
                         key={cell.id}
-                        className={`mt-3 text-slate-600 ${
-                          index % 2 === 0 ? 'text-white' : 'text-slate-400'
+                        className={`mt-3 text-white ${
+                          index % 2 === 0 ? '' : ''
                         } bg-black`}
                       >
                         {flexRender(
@@ -306,7 +306,7 @@ export function EmployeeTable({ data }) {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4 px-[1rem]">
-        <div className="flex-1 text-sm text-muted-foreground">
+        <div className="flex-1 text-sm text-white">
           {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>

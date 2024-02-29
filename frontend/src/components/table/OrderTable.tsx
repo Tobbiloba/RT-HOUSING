@@ -118,7 +118,7 @@ export const columns: ColumnDef<Payment>[] = [
         className={`capitalize text-[12px] min-w-24 ${
           row.getValue('bookingStatus') === 'active' ||
           row.getValue('bookingStatus') === 'ongoing'
-            ? 'text-green-500'
+            ? 'text-green-700'
             : row.getValue('bookingStatus') === 'pending'
               ? 'text-yellow-500'
               : row.getValue('bookingStatus') === 'expired' ||
@@ -138,7 +138,7 @@ export const columns: ColumnDef<Payment>[] = [
           className={`capitalize text-[12px] ${
             row.getValue('bookingStatus') === 'active' ||
             row.getValue('bookingStatus') === 'ongoing'
-              ? 'text-green-500'
+              ? 'text-green-700'
               : row.getValue('bookingStatus') === 'pending'
                 ? 'text-yellow-500'
                 : row.getValue('bookingStatus') === 'expired' ||
@@ -161,7 +161,7 @@ export const columns: ColumnDef<Payment>[] = [
           className={`capitalize text-[12px] ${
             row.getValue('bookingStatus') === 'active' ||
             row.getValue('bookingStatus') === 'ongoing'
-              ? 'text-green-500'
+              ? 'text-green-700'
               : row.getValue('bookingStatus') === 'pending'
                 ? 'text-yellow-500'
                 : row.getValue('bookingStatus') === 'expired' ||
@@ -187,7 +187,7 @@ export const columns: ColumnDef<Payment>[] = [
             className={`capitalize text-[12px] min-w-24 ${
               row.getValue('bookingStatus') === 'active' ||
               row.getValue('bookingStatus') === 'ongoing'
-                ? 'text-green-500'
+                ? 'text-green-700'
                 : row.getValue('bookingStatus') === 'pending'
                   ? 'text-yellow-500'
                   : row.getValue('bookingStatus') === 'expired' ||
@@ -230,7 +230,7 @@ export const columns: ColumnDef<Payment>[] = [
           className={`capitalize text-[12px] min-w-24 ${
             row.getValue('bookingStatus') === 'active' ||
             row.getValue('bookingStatus') === 'ongoing'
-              ? 'text-green-500'
+              ? 'text-green-700'
               : row.getValue('bookingStatus') === 'pending'
                 ? 'text-yellow-500'
                 : row.getValue('bookingStatus') === 'expired' ||
@@ -274,7 +274,7 @@ console.log(promotions)
           className={`capitalize text-[12px] min-w-24 ${
             row.getValue('bookingStatus') === 'active' ||
             row.getValue('bookingStatus') === 'ongoing'
-              ? 'text-green-500'
+              ? 'text-green-700'
               : row.getValue('bookingStatus') === 'pending'
                 ? 'text-yellow-500'
                 : row.getValue('bookingStatus') === 'expired' ||
@@ -358,7 +358,7 @@ export function OrderTable({ orders }: { orders: Payment[] }) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className={`${index % 2 === 0 ? 'bg-slate-800 text-slate-50 hover:text-slate-800' : 'bg-slate-950'} border-0 py-8`}
+                  className={`${index % 2 === 0 ? 'bg-slate-400 hover:bg-slate-600 hover:text-white text-slate-50' : 'bg-slate-500 hover:bg-slate-600 text-white'} border-0 py-8`}
                 >
                   {row.getVisibleCells().map(cell => (
                     <TableCell
@@ -387,7 +387,7 @@ export function OrderTable({ orders }: { orders: Payment[] }) {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
+        <div className="flex-1 text-sm text-slate-700 ">
           {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
