@@ -42,9 +42,11 @@ import { createOrderSchema } from '@/schemas'
 import { verifyCouponCode } from '@/action/coupon'
 import Spinner from '../spinner/Spinner'
 import { addCommasToNumber } from '@/components/utils'
+import { getDateAfterDays } from '@/utils'
 const PropertyOptionCard = ({ items }) => {
   let today = startOfToday()
   let tomorrow = startOfTomorrow()
+  console.log(getDateAfterDays(3))
   const [showCheckInCalendar, setShowCheckInCalendar] = useState(false)
   const [showCheckOutCalendar, setShowCheckOutCalendar] = useState(false)
 

@@ -27,6 +27,17 @@ const handleAgentsCheckboxChange = ({ item, setFieldValue, values }) => {
     setFieldValue('agent', { ...item })
   }
 }
+const getDateAfterDays = (daysToAdd) => {
+  const today = new Date();
+  const futureDate = new Date(today);
+  futureDate.setDate(today.getDate() + daysToAdd);
+
+  const day = String(futureDate.getDate()).padStart(2, '0');
+  const month = String(futureDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const year = futureDate.getFullYear();
+
+  return `${day}/${month}/${year}`;
+}
 
 // const handleAgentsCheckboxChange = ({ item, setFieldValue, values }) => {
 //   const currentAgents = values || []
@@ -56,4 +67,4 @@ const handleAgentsCheckboxChange = ({ item, setFieldValue, values }) => {
 //   // }
 // }
 
-export { handleAmmenitiesCheckboxChange, handleAgentsCheckboxChange }
+export { handleAmmenitiesCheckboxChange, handleAgentsCheckboxChange, getDateAfterDays }
