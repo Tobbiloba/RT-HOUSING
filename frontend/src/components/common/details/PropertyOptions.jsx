@@ -169,7 +169,7 @@ const PropertyOptionCard = ({ items }) => {
   }, [coupon])
 
 
-  console.log(values.checkinDate.toLocaleDateString())
+  console.log(values.checkinDate.toLocaleDateString('en-GB', options))
   return (
     <form onSubmit={onSubmit} className="">
       <div className="w-[20.5rem] md:w-[24rem] exo mb-6 h-fit overflow-hidden">
@@ -181,8 +181,8 @@ const PropertyOptionCard = ({ items }) => {
                 <span className="text-[12px] text-slate-500 font-[500]">
                   /{' '}
                   {addCommasToNumber(calculateDayDifference(
-                    values.checkinDate.toLocaleDateString(),
-                    values.checkoutDate.toLocaleDateString(),
+                    values.checkinDate.toLocaleDateString('en-GB', options),
+                    values.checkoutDate.toLocaleDateString('en-GB', options),
                   ))}{' '}
                   night
                 </span>
@@ -192,8 +192,8 @@ const PropertyOptionCard = ({ items }) => {
                 <p className="text-slate-600 text-[13px]">
                   {items.price} x{' '}
                   {calculateDayDifference(
-                    values.checkinDate.toLocaleDateString(),
-                    values.checkoutDate.toLocaleDateString(),
+                    values.checkinDate.toLocaleDateString('en-GB', options),
+                    values.checkoutDate.toLocaleDateString('en-GB', options),
                   )}{' '}
                   nights
                 </p>
@@ -202,8 +202,8 @@ const PropertyOptionCard = ({ items }) => {
                   ₦
                   {addCommasToNumber(items.pricing *
                     calculateDayDifference(
-                      values.checkinDate.toLocaleDateString(),
-                      values.checkoutDate.toLocaleDateString(),
+                      values.checkinDate.toLocaleDateString('en-GB', options),
+                      values.checkoutDate.toLocaleDateString('en-GB', options),
                     ))}
                 </p>
               </div>
