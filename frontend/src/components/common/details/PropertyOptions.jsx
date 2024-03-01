@@ -286,7 +286,7 @@ const PropertyOptionCard = ({ items }) => {
                 >
                   <p className="text-[12px] text-slate-500">Check-Out:</p>
                   <h1 className="text-[13px] text-slate-800 cursor-text">
-                    {values.checkoutDate.toLocaleDateString()}
+                    {values.checkoutDate.toLocaleDateString('en-GB', options)}
                   </h1>
                 </div>
               </div>
